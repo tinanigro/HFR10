@@ -15,6 +15,11 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using HFR4WinRT.Helpers;
+using HFR4WinRT.Services;
+using HFR4WinRT.Services.Classes;
+using HFR4WinRT.ViewModel;
+using HFR4WinRT.Views;
 
 namespace HFR4WinRT
 {
@@ -43,6 +48,9 @@ namespace HFR4WinRT
             if (rootFrame == null)
             {
                 rootFrame = new Frame();
+                Locator.NavigationService.Initialize(rootFrame);
+                ThreadUI.setDispatcher(rootFrame.Dispatcher);
+                Locator.Main.AccountManager = new AccountManager();
                 rootFrame.CacheSize = 1;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
@@ -68,10 +76,6 @@ namespace HFR4WinRT
                 rootFrame.ContentTransitions = null;
                 rootFrame.Navigated += this.RootFrame_FirstNavigated;
 #endif
-                if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
-                {
-                    throw new Exception("Failed to create initial page");
-                }
             }
 
             // Ensure the current window is active

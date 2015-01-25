@@ -15,16 +15,42 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\ConnectCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Database\AccountDataRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Database\IDataRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ConnectHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ThreadUI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Account.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Page.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\AccountManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Classes\NavigationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SQLite.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)SQLiteAsync.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\Command.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MainViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ViewModelLocator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ConnectPage.xaml.cs">
+      <DependentUpon>ConnectPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Views\ConnectPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Services\Interface\" />
   </ItemGroup>
 </Project>

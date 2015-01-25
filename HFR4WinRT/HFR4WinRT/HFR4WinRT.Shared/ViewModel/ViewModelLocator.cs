@@ -14,13 +14,14 @@
 
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using HFR4WinRT.Services.Classes;
 using Microsoft.Practices.ServiceLocation;
 
 namespace HFR4WinRT.ViewModel
 {
-    public class ViewModelLocator
+    public class Locator
     {
-        public ViewModelLocator()
+        public Locator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
@@ -34,18 +35,24 @@ namespace HFR4WinRT.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
-
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<NavigationService>();
         }
 
-        public MainViewModel Main
+
+        public static MainViewModel Main
         {
             get
             {
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
+        public static NavigationService NavigationService
+        {
+            get { return ServiceLocator.Current.GetInstance<NavigationService>(); }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
