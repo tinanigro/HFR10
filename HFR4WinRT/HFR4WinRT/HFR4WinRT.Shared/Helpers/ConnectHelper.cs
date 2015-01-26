@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using HFR4WinRT.Model;
+using HFR4WinRT.ViewModel;
 
 namespace HFR4WinRT.Helpers
 {
     public static class ConnectHelper
     {
-        public static Task BeginAuthentication(this Account account)
+        public static async Task<bool> BeginAuthentication(this Account account)
         {
             Debug.WriteLine("Begin connection");
+            var tcs = new TaskCompletionSource<bool>();
             var pseudo = account.Pseudo;
             var pseudoEncoded = WebUtility.UrlEncode(pseudo);
             var password = account.Password;
@@ -40,14 +43,17 @@ namespace HFR4WinRT.Helpers
                     switch (cookieContainer.Count)
                     {
                         case 1:
+                            tcs.SetResult(false);
                             break;
                         case 4:
                             account.CookieContainer = cookieContainer;
                             Debug.WriteLine("Connection succeed");
+                            tcs.SetResult(true);
                             break;
                     }
                 }, request);
             }, request);
+            return await tcs.Task;
         }
     }
 }
