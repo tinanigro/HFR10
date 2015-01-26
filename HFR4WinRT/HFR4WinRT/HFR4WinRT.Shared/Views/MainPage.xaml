@@ -11,6 +11,28 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ListView ItemsSource="{Binding Drapeaux}"
                   ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}">
+            <ListView.Header>
+                <Grid Background="{ThemeResource ApplicationHeaderBackgroundThemeBrush}"
+                      Height="150"
+                      DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Ellipse Stretch="Uniform"
+                             Height="60"
+                             Width="60"
+                             Stroke="DimGray"
+                             StrokeThickness="1">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBlock Grid.Column="1"
+                               Text="{Binding AccountManager.CurrentAccount.Pseudo}"
+                               Style="{StaticResource SubheaderTextBlockStyle}" />
+                </Grid>
+            </ListView.Header>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -20,19 +42,19 @@
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
-                            <ColumnDefinition Width="12"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding TopicName}" 
-                                   Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock Text="{Binding TopicName}"
+                                   Style="{StaticResource TitleTextBlockStyle}" />
                         <TextBlock Grid.Row="1"
                                    Text="{Binding TopicLastPost}" />
                         <TextBlock Grid.Column="2"
-                                   Text="{Binding TopicCurrentPage}"/>
+                                   Text="{Binding TopicCurrentPage}" />
                         <TextBlock Grid.Column="2"
                                    Grid.Row="1"
-                                   Text="{Binding TopicNbPage}"/>
-                        
+                                   Text="{Binding TopicNbPage}" />
+
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
