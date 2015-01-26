@@ -13,7 +13,7 @@ namespace HFR4WinRT.Commands
         public override async void Execute(object parameter)
         {
             if (Locator.Main.AccountManager.Accounts.FirstOrDefault(x => x.Pseudo == Locator.Main.AccountManager.CurrentAccount.Pseudo) != null) return;
-            bool success = await Locator.Main.AccountManager.CurrentAccount.BeginAuthentication();
+            bool success = await Locator.Main.AccountManager.CurrentAccount.BeginAuthentication(true);
             if (success)
             {
                 Locator.Main.AccountManager.Accounts.Add(Locator.Main.AccountManager.CurrentAccount);

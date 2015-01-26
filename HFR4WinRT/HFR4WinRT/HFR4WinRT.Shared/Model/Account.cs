@@ -9,6 +9,7 @@ namespace HFR4WinRT.Model
         private string pseudo;
         private string password;
         private int userId;
+        private string _avatarId;
 
         //TODO: Prevent two accounts with same pseudo in database
         [PrimaryKey]
@@ -35,6 +36,13 @@ namespace HFR4WinRT.Model
                 Set(ref userId, value);
             }
         }
+
+        public string AvatarId
+        {
+            get { return _avatarId; }
+            set { Set(ref _avatarId, value); }
+        }
+
         [Ignore]
         public CookieContainer CookieContainer { get; set; }
     }

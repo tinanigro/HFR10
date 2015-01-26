@@ -33,7 +33,7 @@ namespace HFR4WinRT.Services
                 if (accounts.Count == 1)
                 {
                     CurrentAccount = accounts[0];
-                    bool success = await CurrentAccount.BeginAuthentication();
+                    bool success = await CurrentAccount.BeginAuthentication(false);
                     if (success)
                     {
                         await ThreadUI.Invoke(() =>

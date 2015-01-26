@@ -5,13 +5,15 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using HFR4WinRT.Model;
+using HFR4WinRT.Utilities;
 using HFR4WinRT.ViewModel;
+using HtmlAgilityPack;
 
 namespace HFR4WinRT.Helpers
 {
     public static class ConnectHelper
     {
-        public static async Task<bool> BeginAuthentication(this Account account)
+        public static async Task<bool> BeginAuthentication(this Account account, bool firstConnection)
         {
             Debug.WriteLine("Begin connection");
             var tcs = new TaskCompletionSource<bool>();
@@ -20,8 +22,8 @@ namespace HFR4WinRT.Helpers
             var password = account.Password;
             var cookieContainer = new CookieContainer();
             cookieContainer.Add(new Uri("http://forum.hardware.fr/"), new Cookie("name", "value"));
-            
-            var request = WebRequest.CreateHttp("http://forum.hardware.fr/login_validation.php?config=hfr.inc");
+
+            var request = WebRequest.CreateHttp(HFRUrl.ConnectUrl);
             request.ContentType = "application/x-www-form-urlencoded";
             request.Method = "POST";
             request.Headers["Set-Cookie"] = "name=value";
@@ -37,7 +39,7 @@ namespace HFR4WinRT.Helpers
                 postStream.Flush();
                 postStream.Dispose();
 
-                request.BeginGetResponse(result =>
+                request.BeginGetResponse(async result =>
                 {
                     var response = (HttpWebResponse)request.EndGetResponse(result);
                     switch (cookieContainer.Count)
@@ -48,12 +50,28 @@ namespace HFR4WinRT.Helpers
                         case 4:
                             account.CookieContainer = cookieContainer;
                             Debug.WriteLine("Connection succeed");
+                            if (firstConnection)
+                                await GetAvatar(account);
                             tcs.SetResult(true);
                             break;
                     }
                 }, request);
             }, request);
             return await tcs.Task;
+        }
+
+        static async Task GetAvatar(Account account)
+        {
+            var html = await HttpClientHelper.Get(HFRUrl.ProfilePageUrl, Locator.Main.AccountManager.CurrentAccount.CookieContainer);
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+
+            string[] userAvatarFileArray = htmlDoc.DocumentNode.Descendants("img").Where(x => x.GetAttributeValue("src", "").Contains("http://forum-images.hardware.fr/images/mesdiscussions-")).Select(y => y.GetAttributeValue("src", "")).ToArray();
+
+            if (userAvatarFileArray.Length != 0)
+            {
+                await ThreadUI.Invoke(() => account.AvatarId = userAvatarFileArray[0].Split('/')[4].Replace(".jpg", "").Replace("mesdiscussions-", ""));
+            }
         }
     }
 }

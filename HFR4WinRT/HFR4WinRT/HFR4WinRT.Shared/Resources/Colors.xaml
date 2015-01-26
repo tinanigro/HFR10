@@ -2,12 +2,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="using:HFR4WinRT.Resources">
 
+    <Color x:Key="MainColor">#EB9532</Color>
+    <SolidColorBrush x:Key="MainBrush"
+                     Color="{StaticResource MainColor}" />
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Dark">
+            <SolidColorBrush x:Key="ApplicationHeaderBackgroundThemeBrush"
+                             Color="#C8C8C8" />
         </ResourceDictionary>
         <ResourceDictionary x:Key="Light">
-            <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush"
-                             Color="#C8C8C8"/>
+            <SolidColorBrush x:Key="ApplicationHeaderBackgroundThemeBrush"
+                             Color="{StaticResource MainColor}"/>
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>
