@@ -20,7 +20,11 @@ namespace HFR4WinRT.Helpers
             Debug.WriteLine("Fetching Drapeaux");
             var draps = await Fetch();
             Debug.WriteLine("Updating UI with new Drapeaux list");
-            await ThreadUI.Invoke(() => Locator.Main.Drapeaux = draps);
+            await ThreadUI.Invoke(() =>
+            {
+                Locator.Main.Drapeaux = draps;
+                Locator.Main.DrapsGrouped = draps.GroupBy(x => x.TopicCatName);
+            });
         }
 
         public static async Task<ObservableCollection<Topic>> Fetch()
