@@ -16,7 +16,6 @@ namespace HFR4WinRT.Database
             Initialize();
         }
 
-
         public void Initialize()
         {
             connection = new SQLiteAsyncConnection(_dbPath);
