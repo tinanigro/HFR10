@@ -19,9 +19,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Database\AccountDataRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\IDataRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ConnectHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\DrapFetcher.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\HttpClientHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ThreadUI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\TopicNameHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Account.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Page.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Topic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\AccountManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Classes\NavigationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLite.cs">
@@ -31,6 +35,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Command.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\HFRCats.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\HFRUrl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MainViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ViewModelLocator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ConnectPage.xaml.cs">
