@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using HFR4WinRT.Commands;
@@ -25,13 +26,25 @@ namespace HFR4WinRT.Services
 
         async Task Initialize()
         {
-            var accounts = accountDataRepository.GetAccounts();
+            var accounts = await accountDataRepository.GetAccounts();
             if (accounts != null && accounts.Any())
             {
+                Accounts = accounts;
                 if (accounts.Count == 1)
                 {
                     CurrentAccount = accounts[0];
-                    await CurrentAccount.BeginAuthentication();
+                    bool success = await CurrentAccount.BeginAuthentication();
+                    if (success)
+                    {
+                        await ThreadUI.Invoke(() =>
+                        {
+                            Locator.NavigationService.Navigate(Page.Main);
+                        });
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Login failed");
+                    }
                 }
                 else
                 {
@@ -44,10 +57,19 @@ namespace HFR4WinRT.Services
                 await ThreadUI.Invoke(() =>
                 {
                     CurrentAccount = new Account();
-                    Accounts.Add(CurrentAccount);
                     Locator.NavigationService.Navigate(Page.Connect);
                 });
             }
+        }
+
+        public void UpdateCurrentAccountInDB()
+        {
+            accountDataRepository.Update(CurrentAccount);
+        }
+
+        internal void AddCurrentAccountInDB()
+        {
+            accountDataRepository.Add(CurrentAccount);
         }
     }
 }

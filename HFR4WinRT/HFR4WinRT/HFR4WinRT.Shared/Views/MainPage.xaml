@@ -9,8 +9,15 @@
     DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ListView >
-            
+        <ListView ItemsSource="{Binding Drapeaux}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock Text="{Binding TopicName}"
+                                   Foreground="Red"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </Grid>
 </Page>
