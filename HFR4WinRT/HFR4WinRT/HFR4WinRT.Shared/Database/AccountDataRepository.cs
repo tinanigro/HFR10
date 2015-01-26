@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using HFR4WinRT.Model;
 using SQLite;
 
@@ -9,7 +10,7 @@ namespace HFR4WinRT.Database
     public class AccountDataRepository : IDataRepository
     {
         private static readonly string _dbPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "accounts.sqlite");
-        private SQLiteConnection connection;
+        private SQLiteAsyncConnection connection;
         public AccountDataRepository()
         {
             Initialize();
@@ -18,40 +19,33 @@ namespace HFR4WinRT.Database
 
         public void Initialize()
         {
-            connection = new SQLiteConnection(_dbPath);
-            connection.CreateTable<Account>();
+            connection = new SQLiteAsyncConnection(_dbPath);
+            connection.CreateTableAsync<Account>();
         }
 
         public void Drop()
         {
-            using (connection)
-            {
-                connection.DropTable<Account>();
-            }
+            connection.DropTableAsync<Account>();
         }
 
         public void Clear()
         {
-            using (connection)
-            {
-                connection.DeleteAll<Account>();
-            }
+            connection.QueryAsync<Account>("DELETE * FROM ACCOUNT");
         }
 
-        public List<Account> GetAccounts()
+        public Task<List<Account>> GetAccounts()
         {
-            using (connection)
-            {
-                return connection.Table<Account>().ToList();
-            }
+            return connection.Table<Account>().ToListAsync();
         }
 
         public void Add(Account acc)
         {
-            using (connection)
-            {
-                connection.Insert(acc);
-            }
+            connection.InsertAsync(acc);
+        }
+
+        public void Update(Account currentAccount)
+        {
+            connection.UpdateAsync(currentAccount);
         }
     }
 }
