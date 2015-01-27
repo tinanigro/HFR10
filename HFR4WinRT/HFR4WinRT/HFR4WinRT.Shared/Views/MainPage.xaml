@@ -9,30 +9,85 @@
       RequestedTheme="Light">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ListView ItemsSource="{Binding Drapeaux}"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border Background="LightGray"
+                Padding="12,0">
+            <Grid VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button Content="Favoris"
+                        Style="{StaticResource TextBlockButtonStyle}" 
+                        Margin="0,0,12,0"/>
+                <Button Grid.Column="1"
+                        Content="Drapeaux rouges"
+                        Style="{StaticResource TextBlockButtonStyle}"
+                        Margin="0,0,12,0"/>
+                <Button Grid.Column="2"
+                        Content="Catégories"
+                        Style="{StaticResource TextBlockButtonStyle}" 
+                        Margin="0,0,12,0"/>
+                <Button Grid.Column="4"
+                        Style="{StaticResource TextBlockButtonStyle}"
+                        Margin="0,0,12,0">
+                    <TextBlock>
+                    <Run Text="4"
+                         Foreground="{StaticResource MainBrush}" 
+                         FontSize="28"
+                         FontWeight="Light"/>
+                    <Run Text=""
+                         FontFamily="Segoe UI Symbol" 
+                         FontWeight="Normal"/>
+                    </TextBlock>
+                </Button>
+                <Button Grid.Column="5"
+                        Style="{StaticResource TextBlockButtonStyle}"
+                        Margin="0,0,12,0">
+                    <Button.Content>
+                        <SymbolIcon Symbol="Setting" />
+                    </Button.Content>
+                </Button>
+                <Button Grid.Column="6"
+                      Style="{StaticResource TextBlockButtonStyle}"
+                      Margin="0,0,12,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Ellipse Stretch="Uniform"
+                                 Height="30"
+                                 Width="30"
+                                 Stroke="DimGray"
+                                 StrokeThickness="1">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock Grid.Column="2"
+                                   Text="{Binding AccountManager.CurrentAccount.Pseudo}"
+                                   Style="{StaticResource TitleTextBlockStyle}" />
+                    </Grid>
+                </Button>
+                <SearchBox Grid.Column="7"
+                           Width="180" 
+                           Margin="0,3"/>
+            </Grid>
+        </Border>
+        <ListView Grid.Row="1"
+                  ItemsSource="{Binding Drapeaux}"
                   ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}">
-            <ListView.Header>
-                <Grid Background="{ThemeResource ApplicationHeaderBackgroundThemeBrush}"
-                      Height="150"
-                      DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Ellipse Stretch="Uniform"
-                             Height="60"
-                             Width="60"
-                             Stroke="DimGray"
-                             StrokeThickness="1">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="{Binding AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <TextBlock Grid.Column="1"
-                               Text="{Binding AccountManager.CurrentAccount.Pseudo}"
-                               Style="{StaticResource SubheaderTextBlockStyle}" />
-                </Grid>
-            </ListView.Header>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
