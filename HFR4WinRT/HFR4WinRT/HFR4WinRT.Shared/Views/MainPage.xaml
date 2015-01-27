@@ -9,110 +9,270 @@
       RequestedTheme="Light">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Border Background="LightGray"
-                Padding="12,0">
-            <Grid VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Button Content="Favoris"
-                        Style="{StaticResource TextBlockButtonStyle}" 
-                        Margin="0,0,12,0"/>
-                <Button Grid.Column="1"
-                        Content="Drapeaux rouges"
-                        Style="{StaticResource TextBlockButtonStyle}"
-                        Margin="0,0,12,0"/>
-                <Button Grid.Column="2"
-                        Content="Catégories"
-                        Style="{StaticResource TextBlockButtonStyle}" 
-                        Margin="0,0,12,0"/>
-                <Button Grid.Column="4"
-                        Style="{StaticResource TextBlockButtonStyle}"
-                        Margin="0,0,12,0">
-                    <TextBlock>
-                    <Run Text="4"
-                         Foreground="{StaticResource MainBrush}" 
-                         FontSize="28"
-                         FontWeight="Light"/>
-                    <Run Text=""
-                         FontFamily="Segoe UI Symbol" 
-                         FontWeight="Normal"/>
-                    </TextBlock>
-                </Button>
-                <Button Grid.Column="5"
-                        Style="{StaticResource TextBlockButtonStyle}"
-                        Margin="0,0,12,0">
-                    <Button.Content>
-                        <SymbolIcon Symbol="Setting" />
-                    </Button.Content>
-                </Button>
-                <Button Grid.Column="6"
-                      Style="{StaticResource TextBlockButtonStyle}"
-                      Margin="0,0,12,0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="30" />
-                            <ColumnDefinition Width="12" />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Ellipse Stretch="Uniform"
-                                 Height="30"
-                                 Width="30"
-                                 Stroke="DimGray"
-                                 StrokeThickness="1">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="{Binding AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}" />
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <TextBlock Grid.Column="2"
-                                   Text="{Binding AccountManager.CurrentAccount.Pseudo}"
-                                   Style="{StaticResource TitleTextBlockStyle}" />
-                    </Grid>
-                </Button>
-                <SearchBox Grid.Column="7"
-                           Width="180" 
-                           Margin="0,3"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="450" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Background="#353535"
+                  Grid.Row="0"
+                  Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="80" />
+                </Grid.RowDefinitions>
+                <Path Data="{StaticResource HamburgerPath}"
+                      Height="30"
+                      Width="30"
+                      Stretch="Uniform"
+                      Fill="WhiteSmoke" />
+                <Grid Grid.Row="1"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Center">
+                    <Path Data="{StaticResource FlagPath}"
+                          Height="30"
+                          Width="30"
+                          Stretch="Uniform"
+                          Fill="CornflowerBlue" />
+                    <Path Data="{StaticResource StarPath}"
+                          Height="15"
+                          Width="15"
+                          Stretch="Uniform"
+                          Fill="Yellow"
+                          VerticalAlignment="Bottom"
+                          HorizontalAlignment="Right" />
+                </Grid>
+                <Grid Grid.Row="2"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Center">
+                    <Path Data="{StaticResource FlagPath}"
+                          Height="30"
+                          Width="30"
+                          Stretch="Uniform"
+                          Fill="Red" />
+                </Grid>
+                <Grid Grid.Row="3"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Center">
+                    <Path Data="{StaticResource SearchPath}"
+                          Height="30"
+                          Width="30"
+                          Stretch="Uniform"
+                          Fill="WhiteSmoke" />
+                </Grid>
+                <Path Grid.Row="5"
+                      Data="{StaticResource SettingsPath}"
+                      Height="30"
+                      Width="30"
+                      Stretch="Uniform"
+                      Fill="WhiteSmoke" />
+                <Ellipse Grid.Row="6"
+                         Stretch="Uniform"
+                         Height="60"
+                         Width="60"
+                         Stroke="DimGray"
+                         StrokeThickness="1">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}" />
+                    </Ellipse.Fill>
+                </Ellipse>
             </Grid>
-        </Border>
-        <ListView Grid.Row="1"
-                  ItemsSource="{Binding Drapeaux}"
-                  ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="12" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding TopicName}"
-                                   Style="{StaticResource TitleTextBlockStyle}" />
-                        <TextBlock Grid.Row="1"
-                                   Text="{Binding TopicLastPost}" />
-                        <TextBlock Grid.Column="2"
-                                   Text="{Binding TopicCurrentPage}" />
-                        <TextBlock Grid.Column="2"
-                                   Grid.Row="1"
-                                   Text="{Binding TopicNbPage}" />
+            <Grid Grid.Column="1"
+                  Grid.Row="1"
+                  Background="WhiteSmoke">
+                <ListView ItemsSource="{Binding Drapeaux}"
+                          ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}">
+                    <ListView.ItemContainerTransitions>
+                        <TransitionCollection>
+                            <EntranceThemeTransition />
+                        </TransitionCollection>
+                    </ListView.ItemContainerTransitions>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsStackPanel />
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="12,6,24,6">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="12" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding TopicName}"
+                                           Style="{StaticResource TitleTextBlockStyle}" />
+                                <TextBlock Grid.Row="1"
+                                           Text="{Binding TopicLastPost}"
+                                           Foreground="DimGray" />
+                                <TextBlock Grid.Column="2"
+                                           Text="{Binding TopicCurrentPage}" />
+                                <TextBlock Grid.Column="2"
+                                           Grid.Row="1"
+                                           Text="{Binding TopicNbPage}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            <Grid Grid.Column="1"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="55" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <ListView Grid.Row="0"
+                          ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsStackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.Items>
+                        <ListViewItem>
+                            <Border Background="WhiteSmoke"
+                                    Height="55"
+                                    Width="230">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="30" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid VerticalAlignment="Center"
+                                          HorizontalAlignment="Center">
+                                        <Path Data="{StaticResource FlagPath}"
+                                              Height="30"
+                                              Width="30"
+                                              Stretch="Uniform"
+                                              Fill="CornflowerBlue" />
+                                        <Path Data="{StaticResource StarPath}"
+                                              Height="15"
+                                              Width="15"
+                                              Stretch="Uniform"
+                                              Fill="Yellow"
+                                              VerticalAlignment="Bottom"
+                                              HorizontalAlignment="Right" />
+                                    </Grid>
+                                    <TextBlock Grid.Column="1"
+                                               Text="DRAPEAUX + FAVORIS"
+                                               Margin="0,-14,0,0"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Style="{StaticResource TitleTextBlockStyle}" />
+                                </Grid>
+                            </Border>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <Border Background="Gray"
+                                    Height="55"
+                                    Width="230">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="30" />
+                                    </Grid.ColumnDefinitions>
+                                    <SymbolIcon Symbol="Page"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Margin="0,-10,0,0" />
+                                    <TextBlock Grid.Column="1"
+                                               Text="[T.U] HFR4WINRT ..."
+                                               Margin="0,-14,0,0"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Style="{StaticResource TitleTextBlockStyle}" />
+                                    <TextBlock Grid.Column="2"
+                                               Text="x"
+                                               FontSize="22"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Margin="0,-10,0,0" />
+                                </Grid>
+                            </Border>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <Border Background="Gray"
+                                    Height="55"
+                                    Width="230">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="30" />
+                                    </Grid.ColumnDefinitions>
+                                    <SymbolIcon Symbol="Page"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Margin="0,-10,0,0" />
+                                    <TextBlock Grid.Column="1"
+                                               Text="[T.U] TOPIKU"
+                                               Margin="0,-14,0,0"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Style="{StaticResource TitleTextBlockStyle}" />
+                                    <TextBlock Grid.Column="2"
+                                               Text="x"
+                                               FontSize="22"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Margin="0,-10,0,0" />
+                                </Grid>
+                            </Border>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <Border Background="Gray"
+                                    Height="55"
+                                    Width="230">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="30" />
+                                    </Grid.ColumnDefinitions>
+                                    <SymbolIcon Symbol="Page"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Margin="0,-10,0,0" />
+                                    <TextBlock Grid.Column="1"
+                                               Text="W8 C NUL VIVE 7"
+                                               Margin="0,-14,0,0"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Style="{StaticResource TitleTextBlockStyle}" />
+                                    <TextBlock Grid.Column="2"
+                                               Text="x"
+                                               FontSize="22"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Margin="0,-10,0,0" />
+                                </Grid>
+                            </Border>
+                        </ListViewItem>
+                    </ListView.Items>
+                </ListView>
+            </Grid>
+            <Grid Grid.Column="2"
+                  Grid.Row="1"
+                  Background="White">
 
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
