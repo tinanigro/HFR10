@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Windows.UI.Xaml.Controls;
 using HFR4WinRT.Model;
@@ -16,7 +17,9 @@ namespace HFR4WinRT.Commands
             if (itemClick != null)
             {
                 var topic = itemClick.ClickedItem as Topic;
-                Locator.Main.Topics[0] = topic;
+                if (!Locator.Main.Topics.Any())
+                    Locator.Main.Topics.Add(topic);
+                else Locator.Main.Topics[0] = topic;
                 Locator.Main.SelectedTopic = 0;
             }
         }
