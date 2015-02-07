@@ -26,7 +26,7 @@ namespace HFR4WinRT.Services
 
         async Task Initialize()
         {
-            var accounts = await accountDataRepository.GetAccounts();
+            var accounts = accountDataRepository.GetAccounts();
             if (accounts != null && accounts.Any())
             {
                 Accounts = accounts;

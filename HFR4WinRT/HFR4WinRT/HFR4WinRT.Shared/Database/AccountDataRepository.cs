@@ -10,7 +10,6 @@ namespace HFR4WinRT.Database
     public class AccountDataRepository : IDataRepository
     {
         private static readonly string _dbPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "accounts.sqlite");
-        private SQLiteAsyncConnection connection;
         public AccountDataRepository()
         {
             Initialize();
@@ -18,33 +17,50 @@ namespace HFR4WinRT.Database
 
         public void Initialize()
         {
-            connection = new SQLiteAsyncConnection(_dbPath);
-            connection.CreateTableAsync<Account>();
+            using (var connection = new SQLiteConnection(_dbPath))
+            {
+                connection.CreateTable<Account>();
+            }
         }
 
         public void Drop()
         {
-            connection.DropTableAsync<Account>();
+            using (var connection = new SQLiteConnection(_dbPath))
+            {
+                connection.DropTable<Account>();
+            }
         }
 
         public void Clear()
         {
-            connection.QueryAsync<Account>("DELETE * FROM ACCOUNT");
+            using (var connection = new SQLiteConnection(_dbPath))
+            {
+                connection.Query<Account>("DELETE * FROM ACCOUNT");
+            }
         }
 
-        public Task<List<Account>> GetAccounts()
+        public List<Account> GetAccounts()
         {
-            return connection.Table<Account>().ToListAsync();
+            using (var connection = new SQLiteConnection(_dbPath))
+            {
+                return connection.Table<Account>().ToList();
+            }
         }
 
         public void Add(Account acc)
         {
-            connection.InsertAsync(acc);
+            using (var connection = new SQLiteConnection(_dbPath))
+            {
+                connection.Insert(acc);
+            }
         }
 
         public void Update(Account currentAccount)
         {
-            connection.UpdateAsync(currentAccount);
+            using (var connection = new SQLiteConnection(_dbPath))
+            {
+                connection.Update(currentAccount);
+            }
         }
     }
 }
