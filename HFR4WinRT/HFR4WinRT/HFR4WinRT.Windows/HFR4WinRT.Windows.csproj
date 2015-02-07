@@ -139,6 +139,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\SQLitePCL.raw_basic.0.7.1\lib\netcore451\SQLitePCL.raw.dll</HintPath>
     </Reference>
+    <Reference Include="WinRT.Triggers">
+      <HintPath>..\..\packages\WinRTTriggers.1.6.0\lib\winrt45\WinRT.Triggers.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="Microsoft.VCLibs, version=12.0">
