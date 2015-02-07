@@ -30,32 +30,40 @@ namespace HFR4WinRT.Helpers
             request.CookieContainer = cookieContainer;
             request.BeginGetRequestStream(ar =>
             {
-                var postStream = request.EndGetRequestStream(ar);
-                var postData = "&pseudo=" + pseudoEncoded + "&password=" + password;
-
-                var byteArray = Encoding.UTF8.GetBytes(postData);
-
-                postStream.Write(byteArray, 0, postData.Length);
-                postStream.Flush();
-                postStream.Dispose();
-
-                request.BeginGetResponse(async result =>
+                try
                 {
-                    var response = (HttpWebResponse)request.EndGetResponse(result);
-                    switch (cookieContainer.Count)
+                    var postStream = request.EndGetRequestStream(ar);
+                    var postData = "&pseudo=" + pseudoEncoded + "&password=" + password;
+
+                    var byteArray = Encoding.UTF8.GetBytes(postData);
+
+                    postStream.Write(byteArray, 0, postData.Length);
+                    postStream.Flush();
+                    postStream.Dispose();
+
+                    request.BeginGetResponse(async result =>
                     {
-                        case 1:
-                            tcs.SetResult(false);
-                            break;
-                        case 4:
-                            account.CookieContainer = cookieContainer;
-                            Debug.WriteLine("Connection succeed");
-                            if (firstConnection)
-                                await GetAvatar(account);
-                            tcs.SetResult(true);
-                            break;
-                    }
-                }, request);
+                        var response = (HttpWebResponse) request.EndGetResponse(result);
+                        switch (cookieContainer.Count)
+                        {
+                            case 1:
+                                tcs.SetResult(false);
+                                break;
+                            case 4:
+                                account.CookieContainer = cookieContainer;
+                                Debug.WriteLine("Connection succeed");
+                                if (firstConnection)
+                                    await GetAvatar(account);
+                                tcs.SetResult(true);
+                                break;
+                        }
+                    }, request);
+                }
+                catch (WebException exception)
+                {
+                    Debug.WriteLine("Failed to connect. WebException error");
+                    tcs.SetResult(false);
+                }
             }, request);
             return await tcs.Task;
         }
