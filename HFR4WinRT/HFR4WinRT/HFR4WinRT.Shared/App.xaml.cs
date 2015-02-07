@@ -79,6 +79,8 @@ namespace HFR4WinRT
             }
 
             // Ensure the current window is active
+            AppViewHelper.SetAppView();
+            AppViewHelper.SetBackgroundButtonColor();
             Window.Current.Activate();
         }
 
