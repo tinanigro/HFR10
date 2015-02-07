@@ -16,16 +16,20 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Commands\ConnectCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\OpenTopicCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\AvatarIdToUrlConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\AccountDataRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\IDataRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\AppViewHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ConnectHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DrapFetcher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\HttpClientHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ThreadUI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\TopicFetcher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\TopicNameHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Account.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Page.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Post.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Topic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\AccountManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Classes\NavigationService.cs" />
