@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using System;
+using Windows.UI.Xaml.Controls;
 using HFR4WinRT.Views;
 using Page = HFR4WinRT.Model.Page;
 
@@ -22,7 +23,7 @@ namespace HFR4WinRT.Services.Classes
                     break;
             }
         }
-
+        public Windows.UI.Xaml.Controls.Page CurrentPage { get { return _navigationFrame.Content as Windows.UI.Xaml.Controls.Page; } }
         public void Initialize(Frame rootFrame)
         {
             _navigationFrame = rootFrame;
