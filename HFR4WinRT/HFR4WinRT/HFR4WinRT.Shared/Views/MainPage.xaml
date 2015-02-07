@@ -4,6 +4,7 @@
       xmlns:local="using:HFR4WinRT.Views"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:triggers="using:WinRT.Triggers"
       mc:Ignorable="d"
       DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
       RequestedTheme="Light">
@@ -90,8 +91,23 @@
             <Grid Grid.Column="1"
                   Grid.Row="1"
                   Background="WhiteSmoke">
-                <ListView ItemsSource="{Binding Drapeaux}"
-                          ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBox PlaceholderText="entrez un mot clé ..."
+                         Margin="12,6,24,6" />
+                <ListView Grid.Row="1"
+                          ItemsSource="{Binding Drapeaux}"
+                          ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}"
+                          SelectionMode="None"
+                          IsItemClickEnabled="True">
+                    <triggers:Interactions.Triggers>
+                        <triggers:EventTrigger EventName="ItemClick">
+                            <triggers:InvokeCommandAction Command="{Binding OpenTopicCommand}"
+                                                          PassEventArgsToCommand="True" />
+                        </triggers:EventTrigger>
+                    </triggers:Interactions.Triggers>
                     <ListView.ItemContainerTransitions>
                         <TransitionCollection>
                             <EntranceThemeTransition />
@@ -120,10 +136,15 @@
                                            Text="{Binding TopicLastPost}"
                                            Foreground="DimGray" />
                                 <TextBlock Grid.Column="2"
-                                           Text="{Binding TopicCurrentPage}" />
-                                <TextBlock Grid.Column="2"
-                                           Grid.Row="1"
-                                           Text="{Binding TopicNbPage}" />
+                                           Grid.Row="0"
+                                           Grid.RowSpan="2"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource MainBrush}">
+                                    <Run Text="{Binding TopicCurrentPage}" />
+                                    <Run Text="{Binding TopicNbPage}"
+                                         FontSize="22"
+                                         FontWeight="Light" />
+                                </TextBlock>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -131,20 +152,55 @@
             </Grid>
             <Grid Grid.Column="1"
                   Grid.ColumnSpan="2"
-                  Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="55" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <ListView Grid.Row="0"
-                          ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}">
+                  Grid.Row="0"
+                  Margin="0,0,215,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="230"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Border Background="WhiteSmoke"
+                        Height="55"
+                        Width="230">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="30" />
+                        </Grid.ColumnDefinitions>
+                        <Grid VerticalAlignment="Center"
+                              HorizontalAlignment="Center">
+                            <Path Data="{StaticResource FlagPath}"
+                                  Height="30"
+                                  Width="30"
+                                  Stretch="Uniform"
+                                  Fill="CornflowerBlue" />
+                            <Path Data="{StaticResource StarPath}"
+                                  Height="15"
+                                  Width="15"
+                                  Stretch="Uniform"
+                                  Fill="Yellow"
+                                  VerticalAlignment="Bottom"
+                                  HorizontalAlignment="Right" />
+                        </Grid>
+                        <TextBlock Grid.Column="1"
+                                   Text="DRAPEAUX + FAVORIS"
+                                   Margin="0,-14,0,0"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Style="{StaticResource TitleTextBlockStyle}" />
+                    </Grid>
+                </Border>
+                <ListView Grid.Column="1"
+                          ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}"
+                          ItemsSource="{Binding Topics}">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <ItemsStackPanel Orientation="Horizontal" />
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
-                    <ListView.Items>
-                        <ListViewItem>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
                             <Border Background="WhiteSmoke"
                                     Height="55"
                                     Width="230">
@@ -170,108 +226,24 @@
                                               HorizontalAlignment="Right" />
                                     </Grid>
                                     <TextBlock Grid.Column="1"
-                                               Text="DRAPEAUX + FAVORIS"
+                                               Text="{Binding TopicName}"
                                                Margin="0,-14,0,0"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"
                                                Style="{StaticResource TitleTextBlockStyle}" />
                                 </Grid>
                             </Border>
-                        </ListViewItem>
-                        <ListViewItem>
-                            <Border Background="Gray"
-                                    Height="55"
-                                    Width="230">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50" />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition Width="30" />
-                                    </Grid.ColumnDefinitions>
-                                    <SymbolIcon Symbol="Page"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Center"
-                                                Margin="0,-10,0,0" />
-                                    <TextBlock Grid.Column="1"
-                                               Text="[T.U] HFR4WINRT ..."
-                                               Margin="0,-14,0,0"
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Center"
-                                               Style="{StaticResource TitleTextBlockStyle}" />
-                                    <TextBlock Grid.Column="2"
-                                               Text="x"
-                                               FontSize="22"
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Left"
-                                               Margin="0,-10,0,0" />
-                                </Grid>
-                            </Border>
-                        </ListViewItem>
-                        <ListViewItem>
-                            <Border Background="Gray"
-                                    Height="55"
-                                    Width="230">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50" />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition Width="30" />
-                                    </Grid.ColumnDefinitions>
-                                    <SymbolIcon Symbol="Page"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Center"
-                                                Margin="0,-10,0,0" />
-                                    <TextBlock Grid.Column="1"
-                                               Text="[T.U] TOPIKU"
-                                               Margin="0,-14,0,0"
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Left"
-                                               Style="{StaticResource TitleTextBlockStyle}" />
-                                    <TextBlock Grid.Column="2"
-                                               Text="x"
-                                               FontSize="22"
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Center"
-                                               Margin="0,-10,0,0" />
-                                </Grid>
-                            </Border>
-                        </ListViewItem>
-                        <ListViewItem>
-                            <Border Background="Gray"
-                                    Height="55"
-                                    Width="230">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50" />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition Width="30" />
-                                    </Grid.ColumnDefinitions>
-                                    <SymbolIcon Symbol="Page"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Center"
-                                                Margin="0,-10,0,0" />
-                                    <TextBlock Grid.Column="1"
-                                               Text="W8 C NUL VIVE 7"
-                                               Margin="0,-14,0,0"
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Left"
-                                               Style="{StaticResource TitleTextBlockStyle}" />
-                                    <TextBlock Grid.Column="2"
-                                               Text="x"
-                                               FontSize="22"
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Center"
-                                               Margin="0,-10,0,0" />
-                                </Grid>
-                            </Border>
-                        </ListViewItem>
-                    </ListView.Items>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
             </Grid>
             <Grid Grid.Column="2"
                   Grid.Row="1"
                   Background="White">
+                <WebView x:Name="WebView"
+                         x:FieldModifier="public">
 
+                </WebView>
             </Grid>
         </Grid>
     </Grid>
