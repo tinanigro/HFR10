@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
 
 namespace HFR4WinRT.Model
 {
     public class Topic : ViewModelBase
     {
+        private string _html;
         public string TopicName { get; set; }
         public int TopicCatId { get; set; }
         public string TopicSubCatId { get; set; }
@@ -19,5 +19,13 @@ namespace HFR4WinRT.Model
         public int TopicCurrentPage { get; set; }
         public string TopicReponseId { get; set; }
         public int TopicIndexCategory { get; set; }
+
+        public ObservableCollection<Post> Posts { get; set; }
+
+        public string Html
+        {
+            get { return _html; }
+            set { Set(ref _html, value); }
+        }
     }
 }
