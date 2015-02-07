@@ -448,7 +448,7 @@
                                                Stroke="{ThemeResource ListViewItemFocusBorderThemeBrush}" />
                                     <Rectangle x:Name="SelectionBackground"
                                                Margin="4"
-                                               Fill="{ThemeResource ListViewItemSelectedBackgroundThemeBrush}"
+                                               Fill="{ThemeResource MainBrush}"
                                                Opacity="0" />
                                     <Border x:Name="ContentBorder"
                                             Background="{TemplateBinding Background}"
@@ -491,7 +491,7 @@
                                     <Rectangle x:Name="SelectedBorder"
                                                IsHitTestVisible="False"
                                                Opacity="0"
-                                               Stroke="{ThemeResource ListViewItemSelectedBackgroundThemeBrush}"
+                                               Stroke="{ThemeResource MainBrush}"
                                                StrokeThickness="{ThemeResource ListViewItemSelectedBorderThemeThickness}"
                                                Margin="4" />
                                     <Border x:Name="SelectedCheckMarkOuter"
