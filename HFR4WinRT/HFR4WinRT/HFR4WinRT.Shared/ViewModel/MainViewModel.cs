@@ -79,8 +79,16 @@ namespace HFR4WinRT.ViewModel
         {
             get
             {
-                if (SelectedTopic > -1 && SelectedTopic < Topics.Count)
-                    return Topics[(int) SelectedTopic];
+                if (IsInDesignMode)
+                {
+                    return new Topic()
+                    {
+                        TopicName = "TU DesignTime"
+                    };
+                }
+                if (!Topics.Any()) return null;
+                else if (SelectedTopic > -1 && SelectedTopic < Topics.Count)
+                    return Topics[(int)SelectedTopic];
                 else
                 {
                     SelectedTopic = 0;
