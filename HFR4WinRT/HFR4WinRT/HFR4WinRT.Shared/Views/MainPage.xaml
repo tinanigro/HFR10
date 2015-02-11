@@ -8,8 +8,53 @@
       mc:Ignorable="d"
       DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
       RequestedTheme="Light">
-
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="FullTwoColumns">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TopicList"
+                                                       Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                    Value="Visible" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TopicView"
+                                                       Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                    Value="Visible" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="SnapTopicView">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TopicList"
+                                                       Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                    Value="Collapsed" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TopicView"
+                                                       Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                    Value="Visible" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="SnapTopicList">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TopicList"
+                                                       Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                    Value="Visible" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TopicView"
+                                                       Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                    Value="Collapsed" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
@@ -17,7 +62,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="450" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid Background="#353535"
@@ -88,8 +133,10 @@
                     </Ellipse.Fill>
                 </Ellipse>
             </Grid>
-            <Grid Grid.Column="1"
+            <Grid x:Name="TopicList"
+                  Grid.Column="1"
                   Grid.Row="1"
+                  Width="450"
                   Background="WhiteSmoke">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="45" />
@@ -101,7 +148,8 @@
                           ItemsSource="{Binding Drapeaux}"
                           ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}"
                           SelectionMode="None"
-                          IsItemClickEnabled="True">
+                          IsItemClickEnabled="True"
+                          ItemClick="Drapeaux_ItemClick">
                     <triggers:Interactions.Triggers>
                         <triggers:EventTrigger EventName="ItemClick">
                             <triggers:InvokeCommandAction Command="{Binding OpenTopicCommand}"
@@ -154,44 +202,7 @@
                   Grid.ColumnSpan="2"
                   Grid.Row="0"
                   Margin="0,0,215,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="230"/>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-
-                <Border Background="WhiteSmoke"
-                        Height="55"
-                        Width="230">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50" />
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="30" />
-                        </Grid.ColumnDefinitions>
-                        <Grid VerticalAlignment="Center"
-                              HorizontalAlignment="Center">
-                            <Path Data="{StaticResource FlagPath}"
-                                  Height="30"
-                                  Width="30"
-                                  Stretch="Uniform"
-                                  Fill="CornflowerBlue" />
-                            <Path Data="{StaticResource StarPath}"
-                                  Height="15"
-                                  Width="15"
-                                  Stretch="Uniform"
-                                  Fill="Yellow"
-                                  VerticalAlignment="Bottom"
-                                  HorizontalAlignment="Right" />
-                        </Grid>
-                        <TextBlock Grid.Column="1"
-                                   Text="DRAPEAUX + FAVORIS"
-                                   Margin="0,-14,0,0"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"
-                                   Style="{StaticResource TitleTextBlockStyle}" />
-                    </Grid>
-                </Border>
-                <ListView Grid.Column="1"
+                <ListView Grid.Column="0"
                           ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}"
                           ItemsSource="{Binding Topics}">
                     <ListView.ItemsPanel>
@@ -237,11 +248,51 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </Grid>
-            <Grid Grid.Column="2"
+            <Grid x:Name="TopicView"
+                  Grid.Column="2"
                   Grid.Row="1"
                   Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="50" />
+                    </Grid.ColumnDefinitions>
+                    <AppBarButton x:Name="GoBack"
+                                  Click="GoBack_OnClick">
+                        <AppBarButton.Icon>
+                            <FontIcon FontFamily="ms-appx:/Fonts/SEGMDL2.TTF#Segoe MDL2 Assets"
+                                      Glyph="" />
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                    <TextBlock Grid.Column="1"
+                               Text="{Binding CurrentTopic.TopicName}"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               VerticalAlignment="Center"
+                               Margin="0" />
+                    <AppBarButton Grid.Column="2">
+                        <AppBarButton.Icon>
+                            <FontIcon FontFamily="ms-appx:/Fonts/SEGMDL2.TTF#Segoe MDL2 Assets"
+                                      Glyph="" />
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                    <AppBarButton Grid.Column="3">
+                        <AppBarButton.Icon>
+                            <FontIcon FontFamily="ms-appx:/Fonts/SEGMDL2.TTF#Segoe MDL2 Assets"
+                                      Glyph="" />
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                </Grid>
                 <WebView x:Name="WebView"
-                         x:FieldModifier="public">
+                         x:FieldModifier="public"
+                         Grid.Row="1">
 
                 </WebView>
             </Grid>
