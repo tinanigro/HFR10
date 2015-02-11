@@ -37,10 +37,30 @@ namespace HFR4WinRT.Helpers
                          .Where(x => x.GetAttributeValue("id", "").Contains("para"))
                          .
                          Select(y => y.InnerHtml).ToArray();
+
+                 var messCase1 = htmlDoc.DocumentNode.Descendants("td").Where(x =>
+                             x.GetAttributeValue("class", "").Contains("messCase1") &&
+                             x.InnerHtml.Contains("<div><b class=\"s2\">Publicité</b></div>") == false &&
+                             x.InnerHtml.Contains("Auteur") == false)
+                             .Select(x => x.InnerHtml).ToArray();
+
                  int i = 0;
                  string posts = "";
+                 // This is absolutely quick and dirty code
+                 var body = "<html><head><link type=\"text/css\" rel=\"stylesheet\" href=\"http://files.thomasnigro.fr/hfr/hfr4winrt/styletopic.css\"</link></head><body>";
+                 posts += body;
                  foreach (var post in topicText)
                  {
+                     var div = "<div>";
+                     // pseudo
+                     int firstPseudo = messCase1[i].IndexOf("<b class=\"s2\">", StringComparison.Ordinal) +
+                                       "<b class=\"s2\">".Length;
+                     int lastPseudo = messCase1[i].LastIndexOf("</b>", StringComparison.Ordinal);
+                     var posterPseudo = messCase1[i].Substring(firstPseudo, lastPseudo - firstPseudo);
+                     posterPseudo = posterPseudo.Replace(((char)8203).ToString(), ""); // char seperator (jocebug)
+
+
+                     // post text
                      int lastPostText = topicText[i].IndexOf("<div style=\"clear: both;\"> </div>", StringComparison.Ordinal);
                      if (lastPostText == -1)
                      {
@@ -49,9 +69,13 @@ namespace HFR4WinRT.Helpers
                      var postText = topicText[i].Substring(0, lastPostText);
                      postText = Regex.Replace(WebUtility.HtmlDecode(postText), " target=\"_blank\"", "");
                      Debug.WriteLine(postText);
+                     posts += div;
+                     posts += "<h2>" + posterPseudo + "</h2>";
                      posts += postText;
+                     posts += "</div>";
                      i++;
                  }
+                 posts += "</body>";
 
                  (Locator.NavigationService.CurrentPage as MainPage).WebView.NavigateToString(posts);
              });
