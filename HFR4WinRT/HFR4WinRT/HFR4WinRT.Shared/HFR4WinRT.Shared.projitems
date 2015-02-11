@@ -80,4 +80,9 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Services\Interface\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Fonts\SEGMDL2.TTF">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
