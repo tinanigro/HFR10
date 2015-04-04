@@ -231,7 +231,7 @@
       <HintPath>..\packages\SQLitePCL.raw_basic.0.8.0-pre3\lib\netcore451\SQLitePCL.raw.dll</HintPath>
     </Reference>
     <Reference Include="WinRT.Triggers">
-      <HintPath>..\..\HFR4WinRT\packages\WinRTTriggers.1.6.0\lib\winrt45\WinRT.Triggers.dll</HintPath>
+      <HintPath>..\..\..\vlc\winrt\app\packages\WinRTTriggers.1.6.0\lib\winrt45\WinRT.Triggers.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup />

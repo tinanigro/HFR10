@@ -3,8 +3,15 @@
                     xmlns:local="using:Hfr.Resources">
 
     <Color x:Key="MainColor">#EB9532</Color>
+    <Color x:Key="DarkMainColor">#d57c15</Color>
     <SolidColorBrush x:Key="MainBrush"
                      Color="{StaticResource MainColor}" />
+    <SolidColorBrush x:Key="DarkMainBrush"
+                     Color="{StaticResource DarkMainColor}" />
+    <SolidColorBrush x:Key="DarkerWhiteBrush" 
+                     Color="#EEEEEE"/>
+    <SolidColorBrush x:Key="SemiDarkBrush"
+                     Color="WhiteSmoke" />
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Dark">
             <SolidColorBrush x:Key="ApplicationHeaderBackgroundThemeBrush"

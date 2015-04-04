@@ -7,20 +7,121 @@
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="400">
-    <SplitView DisplayMode="CompactInline"
-               IsPaneOpen="True"
-               PaneBackground="Red"
-               OpenPaneLength="250">
+    <SplitView x:Name="SplitView"
+               PaneBackground="{ThemeResource DarkerWhiteBrush}"
+               OpenPaneLength="250"
+               CompactPaneLength="70">
         <SplitView.Pane>
             <Grid HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
-                  Background="Blue">
-                <TextBlock Text="test" />
+                  DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="80" />
+                </Grid.RowDefinitions>
+                <Grid Background="{ThemeResource DarkMainBrush}"
+                      RequestedTheme="Dark">
+                    <AppBarButton>
+                        <AppBarButton.Icon>
+                            <FontIcon FontFamily="Segoe MDL2 Assets"
+                                      Glyph=""
+                                      FontSize="28" />
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Path Data="{StaticResource FlagPath}"
+                          Height="30"
+                          Width="30"
+                          Stretch="Uniform"
+                          Fill="CornflowerBlue" />
+                    <Path Data="{StaticResource StarPath}"
+                          Height="15"
+                          Width="15"
+                          Stretch="Uniform"
+                          Fill="Yellow"
+                          VerticalAlignment="Bottom"
+                          HorizontalAlignment="Right" />
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Path Data="{StaticResource FlagPath}"
+                          Height="30"
+                          Width="30"
+                          Stretch="Uniform"
+                          Fill="Red" />
+                </Grid>
+                <Grid Grid.Row="3">
+                    <Path Data="{StaticResource SearchPath}"
+                          Height="30"
+                          Width="30"
+                          Stretch="Uniform"
+                          Fill="WhiteSmoke" />
+                </Grid>
+                <Path Grid.Row="5"
+                      Data="{StaticResource SettingsPath}"
+                      Height="30"
+                      Width="30"
+                      Stretch="Uniform"
+                      Fill="WhiteSmoke" />
+                <Ellipse Grid.Row="6"
+                         Stretch="Uniform"
+                         Height="60"
+                         Width="60"
+                         Stroke="DimGray"
+                         StrokeThickness="1"
+                         HorizontalAlignment="Left">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}" />
+                    </Ellipse.Fill>
+                </Ellipse>
             </Grid>
         </SplitView.Pane>
         <SplitView.Content>
             <Frame x:Name="NavigationFrame"
                    x:FieldModifier="public" />
         </SplitView.Content>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="ExtraNarrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SplitView.DisplayMode"
+                                Value="Overlay" />
+                        <Setter Target="SplitView.IsPaneOpen"
+                                Value="False" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="550" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SplitView.DisplayMode"
+                                Value="CompactInline" />
+                        <Setter Target="SplitView.IsPaneOpen"
+                                Value="False" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Standard">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SplitView.DisplayMode"
+                                Value="Inline" />
+                        <Setter Target="SplitView.IsPaneOpen"
+                                Value="True" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </SplitView>
+
 </UserControl>

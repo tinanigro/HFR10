@@ -75,7 +75,7 @@ namespace Hfr.Helpers
                 }
                 posts += "</body>";
 
-                //(Loc.NavigationService.CurrentPage as MainPage).WebView.NavigateToString(posts);
+                (Loc.NavigationService.CurrentPage as MainPage).TopicWebView.NavigateToString(posts);
             });
         }
     }
