@@ -8,37 +8,96 @@
       DataContext="{Binding Source={StaticResource Locator}, Path=Main.AccountManager}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="12" />
-            <ColumnDefinition />
-            <ColumnDefinition Width="12" />
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="12" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="12" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="12" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="50" />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="1"
-                   Grid.Column="1"
-                   Text="Bienvenue"
-                   Style="{StaticResource HeaderTextBlockStyle}" 
-                   Foreground="{ThemeResource MainBrush}"/>
-        <TextBox Grid.Row="3"
-                 Grid.Column="1"
-                 PlaceholderText="pseudo"
-                 Text="{Binding CurrentAccount.Pseudo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        <PasswordBox Grid.Row="5"
+        <Image Grid.Row="1"
+               Source="ms-appx:///Assets/Wallpapers/hero.jpg"
+               Stretch="UniformToFill"
+               Opacity="0.35" />
+        
+        <Grid Background="{ThemeResource MainBrush}"
+              RequestedTheme="Dark">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <AppBarButton x:Name="HamburgerButton"
+                          DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
+                          Command="{Binding OpenSplitViewPaneCommand}">
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="Segoe MDL2 Assets"
+                              Glyph=""
+                              FontSize="28" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <TextBlock Grid.Column="1"
+                       Text="//Universal HFR build pre-alpha. Destinée à l'élite HFRienne uniquement."
+                       Margin="12,6"
+                       VerticalAlignment="Center" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="12" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="12" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="12" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="12" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="1"
+                       Grid.Column="1"
+                       Text="Bienvenue"
+                       Style="{StaticResource HeaderTextBlockStyle}"
+                       Foreground="{ThemeResource MainBrush}"
+                       HorizontalAlignment="Center" />
+            <TextBox Grid.Row="3"
                      Grid.Column="1"
-                     PlaceholderText="password"
-                     Password="{Binding CurrentAccount.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        <Button Grid.Row="7"
-                Grid.Column="1"
-                Content="connexion"
-                Command="{Binding ConnectCommand}" />
+                     PlaceholderText="pseudo"
+                     Text="{Binding CurrentAccount.Pseudo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     MaxWidth="350" />
+            <PasswordBox Grid.Row="5"
+                         Grid.Column="1"
+                         PlaceholderText="password"
+                         Password="{Binding CurrentAccount.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         MaxWidth="350" />
+            <Button Grid.Row="7"
+                    Grid.Column="1"
+                    Content="connexion"
+                    Command="{Binding ConnectCommand}"
+                    HorizontalAlignment="Center" 
+                    Width="150"
+                    Height="60"/>
+        </Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="HamburgerStates">
+                <VisualState x:Name="YesHamburger">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="HamburgerButton.Visibility"
+                                Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NoHamburger">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="550" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="HamburgerButton.Visibility"
+                                Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>
