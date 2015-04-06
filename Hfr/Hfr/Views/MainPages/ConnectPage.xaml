@@ -57,7 +57,7 @@
                        Grid.Column="1"
                        Text="Bienvenue"
                        Style="{StaticResource HeaderTextBlockStyle}"
-                       Foreground="{ThemeResource MainBrush}"
+                       Foreground="Black"
                        HorizontalAlignment="Center" />
             <TextBox Grid.Row="3"
                      Grid.Column="1"
@@ -75,7 +75,10 @@
                     Command="{Binding ConnectCommand}"
                     HorizontalAlignment="Center" 
                     Width="150"
-                    Height="60"/>
+                    Height="60"
+                    FontSize="22"
+                    FontWeight="Light"
+                    Background="#80F5F5F5"/>
         </Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="HamburgerStates">
