@@ -12,6 +12,8 @@
                      Color="{StaticResource DarkMainColor}" />
     <SolidColorBrush x:Key="DarkerWhiteBrush" 
                      Color="#EEEEEE"/>
+    <SolidColorBrush x:Key="DarkerGrayBrush" 
+                     Color="LightGray"/>
     <SolidColorBrush x:Key="SemiDarkBrush"
                      Color="WhiteSmoke" />
     <ResourceDictionary.ThemeDictionaries>
