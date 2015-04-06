@@ -14,9 +14,10 @@
           DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="80" />
-            <RowDefinition Height="80" />
+            <RowDefinition Height="12" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="60" />
             <RowDefinition />
             <RowDefinition Height="80" />
             <RowDefinition Height="80" />
@@ -31,21 +32,67 @@
                 </AppBarButton.Icon>
             </AppBarButton>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="70" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <SymbolIcon Symbol="Flag" />
+            <Viewbox Height="36"
+                     Width="36"
+                     HorizontalAlignment="Center">
+                <SymbolIcon Symbol="Flag" />
+            </Viewbox>
             <TextBlock Grid.Column="1"
-                       Text="topics"
+                       Text="drapeaux"
                        FontSize="26"
-                       FontWeight="Light" />
+                       FontWeight="Light" 
+                       VerticalAlignment="Center"/>
         </Grid>
-        <AppBarButton Grid.Row="5"
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Viewbox Height="36"
+                     Width="36"
+                     HorizontalAlignment="Center">
+                <SymbolIcon Symbol="Mail" />
+            </Viewbox>
+            <TextBlock Grid.Column="1"
+                       Text="messages privés"
+                       FontSize="26"
+                       FontWeight="Light" 
+                       VerticalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Viewbox Height="36"
+                     Width="36"
+                     HorizontalAlignment="Center">
+                <SymbolIcon Symbol="List" />
+            </Viewbox>
+            <TextBlock Grid.Column="1"
+                       Text="catégories"
+                       FontSize="26"
+                       FontWeight="Light" 
+                       VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="3" 
+                       Text=""
+                       FontFamily="Segoe MDL2 Assets"
+                       FontSize="22"
+                       Foreground="{ThemeResource MainBrush}"
+                       VerticalAlignment="Center"/>
+        </Grid>
+        <AppBarButton Grid.Row="6"
                       Icon="Setting"
                       Label="paramètres" />
-        <Button Grid.Row="6"
+        
+        <Button Grid.Row="7"
                 HorizontalAlignment="Left"
                 Style="{StaticResource TextBlockButtonStyle}">
             <Grid HorizontalAlignment="Left">
