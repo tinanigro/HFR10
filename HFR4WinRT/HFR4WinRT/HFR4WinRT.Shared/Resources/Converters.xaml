@@ -1,7 +1,0 @@
-﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:HFR4WinRT.Resources"
-    xmlns:converters="using:HFR4WinRT.Converters">
-    <converters:AvatarIdToUrlConverter x:Key="AvatarIdToUrlConverter"/>
-</ResourceDictionary>
