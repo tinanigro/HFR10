@@ -61,6 +61,7 @@ namespace Hfr
                     //TODO: Load state from previously suspended application
                 }
             }
+            AppViewHelper.SetAppView();
             AppShell.NavigationFrame.Navigate(typeof(MainPage), e.Arguments);
             Window.Current.Activate();
         }

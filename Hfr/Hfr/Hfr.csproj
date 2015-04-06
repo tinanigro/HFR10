@@ -115,9 +115,11 @@
     </Compile>
     <Compile Include="Commands\ConnectCommand.cs" />
     <Compile Include="Commands\OpenTopicCommand.cs" />
+    <Compile Include="Commands\UI\OpenSplitViewPaneCommand.cs" />
     <Compile Include="Converters\AvatarIdToUrlConverter.cs" />
     <Compile Include="Databases\AccountDataRepository.cs" />
     <Compile Include="Databases\IDataRepository.cs" />
+    <Compile Include="Helpers\AppViewHelper.cs" />
     <Compile Include="Helpers\ConnectHelper.cs" />
     <Compile Include="Helpers\DrapFetcher.cs" />
     <Compile Include="Helpers\HttpClientHelper.cs" />
