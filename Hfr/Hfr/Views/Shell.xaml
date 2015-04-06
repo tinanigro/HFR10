@@ -12,7 +12,7 @@
                x:FieldModifier="public"
                Background="{ThemeResource DarkerWhiteBrush}"
                PaneBackground="{ThemeResource DarkerWhiteBrush}"
-               OpenPaneLength="250"
+               OpenPaneLength="300"
                CompactPaneLength="70">
         <SplitView.Pane>
             <shellControls:Sidebar/>
