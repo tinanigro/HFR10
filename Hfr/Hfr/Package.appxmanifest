@@ -32,10 +32,10 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="Hfr.App">
       <uap:VisualElements
-        DisplayName="Hfr"
+        DisplayName="HFR"
         Square150x150Logo="Assets\Logo.png"
         Square44x44Logo="Assets\SmallLogo.png"
-        Description="Hfr"
+        Description="HFR"
         ForegroundText="light"
         BackgroundColor="#464646">
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
