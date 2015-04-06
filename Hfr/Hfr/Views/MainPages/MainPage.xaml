@@ -40,7 +40,8 @@
                                   FontSize="28" />
                     </AppBarButton.Icon>
                 </AppBarButton>
-                <TextBox Grid.Column="1"
+                <TextBox x:Name="SearchBox"
+                         Grid.Column="1"
                          PlaceholderText="entrez un mot clé ..."
                          Margin="12,6"
                          VerticalAlignment="Center" />
