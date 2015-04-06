@@ -47,7 +47,7 @@
                 </VisualState>
                 <VisualState x:Name="Standard">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="800" />
+                        <AdaptiveTrigger MinWindowWidth="1000" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="SplitView.DisplayMode"
