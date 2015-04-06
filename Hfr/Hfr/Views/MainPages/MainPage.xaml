@@ -26,7 +26,9 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <AppBarButton x:Name="HamburgerButton">
+                <AppBarButton x:Name="HamburgerButton"
+                              DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
+                              Command="{Binding OpenSplitViewPaneCommand}">
                     <AppBarButton.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets"
                                   Glyph=""
@@ -75,8 +77,8 @@
                             <TextBlock Text="{Binding TopicName}"
                                        TextWrapping="NoWrap"
                                        TextTrimming="CharacterEllipsis"
-                                       FontWeight="Medium"
-                                       FontSize="18"/>
+                                       FontWeight="Normal"
+                                       FontSize="18" />
                             <TextBlock Grid.Row="1"
                                        Text="{Binding TopicLastPost}"
                                        Foreground="DimGray" />
@@ -103,13 +105,17 @@
             <Grid Background="{ThemeResource MainBrush}"
                   RequestedTheme="Dark">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <AppBarButton Icon="Back" />
+                <TextBlock Grid.Column="1"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Text="{Binding CurrentTopic.TopicName}" />
                 <AppBarButton Grid.Column="2"
                               Icon="Add" />
                 <AppBarButton Grid.Column="3"

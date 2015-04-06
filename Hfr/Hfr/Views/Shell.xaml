@@ -4,82 +4,18 @@
              xmlns:local="using:Hfr.Views"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shellControls="using:Hfr.Views.ShellControls"
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="400">
     <SplitView x:Name="SplitView"
+               x:FieldModifier="public"
+               Background="{ThemeResource DarkerWhiteBrush}"
                PaneBackground="{ThemeResource DarkerWhiteBrush}"
                OpenPaneLength="250"
                CompactPaneLength="70">
         <SplitView.Pane>
-            <Grid HorizontalAlignment="Stretch"
-                  VerticalAlignment="Stretch"
-                  DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="80" />
-                    <RowDefinition Height="80" />
-                    <RowDefinition Height="80" />
-                    <RowDefinition />
-                    <RowDefinition Height="80" />
-                    <RowDefinition Height="80" />
-                </Grid.RowDefinitions>
-                <Grid Background="{ThemeResource DarkMainBrush}"
-                      RequestedTheme="Dark">
-                    <AppBarButton>
-                        <AppBarButton.Icon>
-                            <FontIcon FontFamily="Segoe MDL2 Assets"
-                                      Glyph=""
-                                      FontSize="28" />
-                        </AppBarButton.Icon>
-                    </AppBarButton>
-                </Grid>
-                <Grid Grid.Row="1">
-                    <Path Data="{StaticResource FlagPath}"
-                          Height="30"
-                          Width="30"
-                          Stretch="Uniform"
-                          Fill="CornflowerBlue" />
-                    <Path Data="{StaticResource StarPath}"
-                          Height="15"
-                          Width="15"
-                          Stretch="Uniform"
-                          Fill="Yellow"
-                          VerticalAlignment="Bottom"
-                          HorizontalAlignment="Right" />
-                </Grid>
-                <Grid Grid.Row="2">
-                    <Path Data="{StaticResource FlagPath}"
-                          Height="30"
-                          Width="30"
-                          Stretch="Uniform"
-                          Fill="Red" />
-                </Grid>
-                <Grid Grid.Row="3">
-                    <Path Data="{StaticResource SearchPath}"
-                          Height="30"
-                          Width="30"
-                          Stretch="Uniform"
-                          Fill="WhiteSmoke" />
-                </Grid>
-                <Path Grid.Row="5"
-                      Data="{StaticResource SettingsPath}"
-                      Height="30"
-                      Width="30"
-                      Stretch="Uniform"
-                      Fill="WhiteSmoke" />
-                <Ellipse Grid.Row="6"
-                         Stretch="Uniform"
-                         Height="60"
-                         Width="60"
-                         Stroke="DimGray"
-                         StrokeThickness="1"
-                         HorizontalAlignment="Left">
-                    <Ellipse.Fill>
-                        <ImageBrush ImageSource="{Binding AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}" />
-                    </Ellipse.Fill>
-                </Ellipse>
-            </Grid>
+            <shellControls:Sidebar/>
         </SplitView.Pane>
         <SplitView.Content>
             <Frame x:Name="NavigationFrame"
