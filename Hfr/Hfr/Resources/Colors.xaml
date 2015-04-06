@@ -4,6 +4,8 @@
 
     <Color x:Key="MainColor">#EB9532</Color>
     <Color x:Key="DarkMainColor">#d57c15</Color>
+    <Color x:Key="DarkTitleBar">#252525</Color>
+    <Color x:Key="InactiveDarkTitleBar">#999999</Color>
     <SolidColorBrush x:Key="MainBrush"
                      Color="{StaticResource MainColor}" />
     <SolidColorBrush x:Key="DarkMainBrush"
