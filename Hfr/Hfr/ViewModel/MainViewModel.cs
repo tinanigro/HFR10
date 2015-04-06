@@ -8,6 +8,7 @@ using Hfr.Helpers;
 using Hfr.Model;
 using Hfr.Services;
 using Hfr.Services.Classes;
+using Hfr.Commands.UI;
 
 namespace Hfr.ViewModel
 {
@@ -20,8 +21,6 @@ namespace Hfr.ViewModel
         private IEnumerable<IGrouping<string, Topic>> _favorisGrouped;
         private ObservableCollection<Topic> _topics = new ObservableCollection<Topic>();
         private uint _selectedTopic;
-        private OpenTopicCommand _openTopicCommand;
-
         #endregion
 
         #region public fields
@@ -97,10 +96,10 @@ namespace Hfr.ViewModel
             }
         }
 
-        public OpenTopicCommand OpenTopicCommand
-        {
-            get { return _openTopicCommand ?? (_openTopicCommand = new OpenTopicCommand()); }
-        }
+        #endregion
+        #region commands
+        public OpenTopicCommand OpenTopicCommand { get; } = new OpenTopicCommand();
+        public OpenSplitViewPaneCommand OpenSplitViewPaneCommand { get; } = new OpenSplitViewPaneCommand();
         #endregion
         #endregion
         public MainViewModel()
