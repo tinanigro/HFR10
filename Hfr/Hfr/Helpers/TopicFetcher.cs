@@ -45,7 +45,7 @@ namespace Hfr.Helpers
                 int i = 0;
                 string posts = "";
                 // This is absolutely quick and dirty code
-                var body = "<html><head><link type=\"text/css\" rel=\"stylesheet\" href=\"http://files.thomasnigro.fr/hfr/Hfr/styletopic.css\"</link></head><body>";
+                var body = "<!DOCTYPE html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\"><html><head><meta charset=\"utf - 8\" /><link type=\"text/css\" rel=\"stylesheet\" href=\"http://files.thomasnigro.fr/hfr/hfr4winrt/styletopic.css\"</link></head><body>";
                 posts += body;
                 foreach (var post in topicText)
                 {
@@ -73,7 +73,7 @@ namespace Hfr.Helpers
                     posts += "</div>";
                     i++;
                 }
-                posts += "</body>";
+                posts += "</body></html>";
 
                 (Loc.NavigationService.CurrentPage as MainPage).TopicWebView.NavigateToString(posts);
             });
