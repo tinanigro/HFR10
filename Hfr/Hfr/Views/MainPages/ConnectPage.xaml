@@ -15,7 +15,7 @@
         <Image Grid.Row="1"
                Source="ms-appx:///Assets/Wallpapers/hero.jpg"
                Stretch="UniformToFill"
-               Opacity="0.35" />
+               Opacity="0.7" />
         
         <Grid Background="{ThemeResource MainBrush}"
               RequestedTheme="Dark">
