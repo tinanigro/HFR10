@@ -30,11 +30,6 @@ namespace Hfr.ViewModel
         {
             get
             {
-                if (drapeaux == null && !isDrapeauxLoaded)
-                {
-                    isDrapeauxLoaded = true;
-                    Task.Run(async () => await DrapFetcher.GetDraps());
-                }
                 return drapeaux;
             }
             set
@@ -47,11 +42,18 @@ namespace Hfr.ViewModel
         {
             get
             {
+                if (_favorisGrouped == null || !isDrapeauxLoaded)
+                {
+                    isDrapeauxLoaded = true;
+                    Task.Run(async () => await DrapFetcher.GetDraps());
+                }
                 return _favorisGrouped;
             }
-            set { Set(ref _favorisGrouped, value); }
+            set
+            {
+                Set(ref _favorisGrouped, value);
+            }
         }
-
         #region posts
 
         public ObservableCollection<Topic> Topics
