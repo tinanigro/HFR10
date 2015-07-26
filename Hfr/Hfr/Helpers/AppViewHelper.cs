@@ -12,7 +12,7 @@ namespace Hfr.Helpers
         public static void SetAppView()
         {
             var v = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView();
-            v.TitleBar.ExtendViewIntoTitleBar = true;
+            //v.TitleBar.ExtendViewIntoTitleBar = true;
 
             v.TitleBar.ButtonBackgroundColor = (Color)App.Current.Resources["MainColor"];
             v.TitleBar.ButtonForegroundColor = Colors.WhiteSmoke;
