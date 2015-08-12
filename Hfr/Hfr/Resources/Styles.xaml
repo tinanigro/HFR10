@@ -50,6 +50,10 @@
     <x:String x:Key="StarPath">M 49.144 18.314 l -17.748 -0.957 L 25 0.774 l -6.396 16.583 L 0.856 18.314 l 13.797 11.207 l -4.575 17.175 L 25 37.039 l 14.921 9.656 l -4.574 -17.175 L 49.144 18.314 Z M 36.653 42.199 L 25 34.656 l -11.654 7.543 l 3.573 -13.415 L 6.144 20.032 l 13.861 -0.747 L 25 6.333 l 4.995 12.952 l 13.861 0.747 l -10.775 8.752 L 36.653 42.199 Z</x:String>
     <x:String x:Key="SearchPath">M 46.914 44.086 L 33.886 31.058 C 36.443 28.082 38 24.223 38 20 c 0 -9.374 -7.626 -17 -17 -17 S 4 10.626 4 20 s 7.626 17 17 17 c 3.711 0 7.138 -1.209 9.937 -3.235 l 13.149 13.149 L 46.914 44.086 Z M 6 20 c 0 -8.271 6.729 -15 15 -15 c 8.271 0 15 6.729 15 15 c 0 8.271 -6.729 15 -15 15 C 12.729 35 6 28.271 6 20 Z</x:String>
     
+    <!-- Redefinitions -->
+    <x:Double x:Key="TextControlBackgroundRestOpacity">0.1</x:Double>
+    <SolidColorBrush x:Key="SystemControlPageTextBaseMediumBrush" Color="White"/>
+    
     <Style x:Key="HorizontalListViewContainerStyle"
            TargetType="ListViewItem">
         <Setter Property="HorizontalContentAlignment"
