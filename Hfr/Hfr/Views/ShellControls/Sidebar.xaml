@@ -18,53 +18,53 @@
             <RowDefinition Height="60" />
             <RowDefinition Height="60" />
             <RowDefinition Height="60" />
+            <RowDefinition Height="60" />
             <RowDefinition />
             <RowDefinition Height="80" />
             <RowDefinition Height="80" />
         </Grid.RowDefinitions>
         <Grid Background="{ThemeResource DarkMainBrush}"
               RequestedTheme="Dark">
-            <AppBarButton>
+            <AppBarButton Style="{StaticResource AppBarButtonStyleHorizontal}">
                 <AppBarButton.Icon>
-                    <FontIcon FontFamily="Segoe MDL2 Assets"
-                              Glyph=""
-                              FontSize="28" />
+                    <FontIcon Glyph="{StaticResource Hamburger}"
+                              FontSize="26"
+                              FontFamily="Segoe MDL2 Assets" />
                 </AppBarButton.Icon>
             </AppBarButton>
         </Grid>
         <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Viewbox Height="36"
-                     Width="36"
-                     HorizontalAlignment="Center">
-                <SymbolIcon Symbol="Flag" />
-            </Viewbox>
-            <TextBlock Grid.Column="1"
-                       Text="drapeaux"
-                       FontSize="26"
-                       FontWeight="Light" 
-                       VerticalAlignment="Center"/>
+            <AppBarButton Label="Nouveau ..."
+                          Foreground="{StaticResource MainBrush}"
+                          Style="{StaticResource AppBarButtonStyleHorizontal}">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="{StaticResource AddSymbol}"
+                              FontSize="26"
+                              FontFamily="Segoe MDL2 Assets" />
+                </AppBarButton.Icon>
+            </AppBarButton>
         </Grid>
         <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Viewbox Height="36"
-                     Width="36"
-                     HorizontalAlignment="Center">
-                <SymbolIcon Symbol="Mail" />
-            </Viewbox>
-            <TextBlock Grid.Column="1"
-                       Text="messages privés"
-                       FontSize="26"
-                       FontWeight="Light" 
-                       VerticalAlignment="Center"/>
+            <AppBarButton Label="Drapeaux"
+                          Style="{StaticResource AppBarButtonStyleHorizontal}">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="{StaticResource Flag}"
+                              FontSize="26"
+                              FontFamily="Segoe MDL2 Assets" />
+                </AppBarButton.Icon>
+            </AppBarButton>
         </Grid>
         <Grid Grid.Row="4">
+            <AppBarButton Label="Messages privés"
+                          Style="{StaticResource AppBarButtonStyleHorizontal}">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="{StaticResource Message}"
+                              FontSize="26"
+                              FontFamily="Segoe MDL2 Assets" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </Grid>
+        <Grid Grid.Row="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="70" />
                 <ColumnDefinition Width="Auto" />
@@ -79,20 +79,23 @@
             <TextBlock Grid.Column="1"
                        Text="catégories"
                        FontSize="26"
-                       FontWeight="Light" 
-                       VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="3" 
+                       FontWeight="Light"
+                       VerticalAlignment="Center" />
+            <TextBlock Grid.Column="3"
                        Text=""
                        FontFamily="Segoe MDL2 Assets"
                        FontSize="22"
                        Foreground="{ThemeResource MainBrush}"
-                       VerticalAlignment="Center"/>
+                       VerticalAlignment="Center" />
         </Grid>
-        <AppBarButton Grid.Row="6"
-                      Icon="Setting"
-                      Label="paramètres" />
         
-        <Button Grid.Row="7"
+        <AppBarButton Grid.Row="7"
+                      Style="{StaticResource AppBarButtonStyleHorizontal}"
+                      Icon="Setting"
+                      Label="Paramètres"/>
+
+
+        <Button Grid.Row="8"
                 HorizontalAlignment="Left"
                 Style="{StaticResource TextBlockButtonStyle}">
             <Grid HorizontalAlignment="Left">
