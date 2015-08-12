@@ -24,8 +24,14 @@ namespace Hfr.Helpers
             Debug.WriteLine("Updating UI with new Drapeaux list");
             await ThreadUI.Invoke(() =>
             {
-                Loc.Main.Drapeaux = draps;
-                Loc.Main.DrapsGrouped = draps.GroupBy(x => x.TopicCatName);
+                try {
+                    Loc.Main.Drapeaux = draps;
+                    Loc.Main.DrapsGrouped = draps.GroupBy(x => x.TopicCatName);
+                }
+                catch (Exception exception)
+                {
+                    Debug.WriteLine("GetDraps Exception " + exception.ToString());
+                }
             });
         }
 
