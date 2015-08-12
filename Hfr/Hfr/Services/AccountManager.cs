@@ -33,18 +33,7 @@ namespace Hfr.Services
                 if (accounts.Count == 1)
                 {
                     CurrentAccount = accounts[0];
-                    bool success = await CurrentAccount.BeginAuthentication(false);
-                    if (success)
-                    {
-                        await ThreadUI.Invoke(() =>
-                        {
-                            Loc.NavigationService.Navigate(Page.Main);
-                        });
-                    }
-                    else
-                    {
-                        Debug.WriteLine("Login failed");
-                    }
+#warning "Optimistic: any account/cookies is supposed valid, proper implementation needed (cookies timeout check)"
                 }
                 else
                 {

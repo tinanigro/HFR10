@@ -10,6 +10,7 @@ namespace Hfr.Model
         private string password;
         private int userId;
         private string _avatarId;
+        private string cookieContainer;
 
         //TODO: Prevent two accounts with same pseudo in database
         [PrimaryKey]
@@ -43,7 +44,6 @@ namespace Hfr.Model
             set { Set(ref _avatarId, value); }
         }
 
-        [Ignore]
-        public CookieContainer CookieContainer { get; set; }
+        public string CookieContainer { get; set; }
     }
 }

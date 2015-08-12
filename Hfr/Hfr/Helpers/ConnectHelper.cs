@@ -2,6 +2,7 @@
 using Hfr.Utilities;
 using Hfr.ViewModel;
 using HtmlAgilityPack;
+using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -17,16 +18,25 @@ namespace Hfr.Helpers
         {
             Debug.WriteLine("Begin connection");
             var tcs = new TaskCompletionSource<bool>();
+
+            //Remove cookies before anything
+            Windows.Web.Http.Filters.HttpBaseProtocolFilter myFilter = new Windows.Web.Http.Filters.HttpBaseProtocolFilter();
+            var cookieManager = myFilter.CookieManager;
+            Windows.Web.Http.HttpCookieCollection myCookieJar = cookieManager.GetCookies(new Uri("http://forum.hardware.fr"));
+            foreach (Windows.Web.Http.HttpCookie cookie in myCookieJar)
+            {
+                cookieManager.DeleteCookie(cookie);
+            }
+            //--
+
             var pseudo = account.Pseudo;
             var pseudoEncoded = WebUtility.UrlEncode(pseudo);
             var password = account.Password;
             var cookieContainer = new CookieContainer();
-            cookieContainer.Add(new Uri("http://forum.hardware.fr/"), new Cookie("name", "value"));
 
             var request = WebRequest.CreateHttp(HFRUrl.ConnectUrl);
             request.ContentType = "application/x-www-form-urlencoded";
             request.Method = "POST";
-            request.Headers["Set-Cookie"] = "name=value";
             request.CookieContainer = cookieContainer;
             request.BeginGetRequestStream(ar =>
             {
@@ -44,14 +54,19 @@ namespace Hfr.Helpers
                     request.BeginGetResponse(async result =>
                     {
                         var response = (HttpWebResponse)request.EndGetResponse(result);
+                        Debug.WriteLine("cookieCount :"+ cookieContainer.Count);
+
                         switch (cookieContainer.Count)
                         {
-                            case 1:
+                            case 0:
+                                #warning "no UI feedback to warn user that something went wrong"
                                 tcs.SetResult(false);
                                 break;
-                            case 4:
-                                account.CookieContainer = cookieContainer;
+
+                            case 3:
                                 Debug.WriteLine("Connection succeed");
+                                account.CookieContainer = JsonConvert.SerializeObject(cookieContainer.GetCookies(new Uri("http://forum.hardware.fr")).OfType<Cookie>().ToList());
+                                
                                 if (firstConnection)
                                     await GetAvatar(account);
                                 tcs.SetResult(true);
@@ -81,5 +96,7 @@ namespace Hfr.Helpers
                 await ThreadUI.Invoke(() => account.AvatarId = userAvatarFileArray[0].Split('/')[4].Replace(".jpg", "").Replace("mesdiscussions-", ""));
             }
         }
+
+
     }
 }
