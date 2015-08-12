@@ -6,7 +6,7 @@
         <Grid Background="{ThemeResource DarkerGrayBrush}">
             <TextBlock Text="{Binding Key}"
                        Style="{StaticResource BodyTextBlockStyle}"
-                       Margin="12,6" />
+                       Margin="12" />
         </Grid>
     </DataTemplate>
 
