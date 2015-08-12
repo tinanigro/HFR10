@@ -13,7 +13,7 @@ namespace Hfr.Services
 {
     public class AccountManager
     {
-        private AccountDataRepository accountDataRepository;
+        private AccountDataRepository accountDataRepository = new AccountDataRepository();
         private ConnectCommand connectCommand = new ConnectCommand();
         public List<Account> Accounts = new List<Account>();
         public Account CurrentAccount { get; set; }
