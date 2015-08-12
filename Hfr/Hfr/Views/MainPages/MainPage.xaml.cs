@@ -64,5 +64,9 @@ namespace Hfr.Views.MainPages
                 VisualStateManager.GoToState(this, "FullTwoColumns", false);
             }
         }
+        private void SemanticZoom_OnViewChangeCompleted(object sender, SemanticZoomViewChangedEventArgs e)
+        {
+            DrapsZoomeOutListView.ItemsSource = DrapsCvs.View.CollectionGroups;
+        }
     }
 }

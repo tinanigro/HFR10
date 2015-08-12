@@ -9,6 +9,7 @@
       mc:Ignorable="d">
     <Page.Resources>
         <CollectionViewSource x:Key="DrapsCvs"
+                              x:Name="DrapsCvs"
                               IsSourceGrouped="True"
                               Source="{Binding DrapsGrouped}" />
     </Page.Resources>
@@ -43,45 +44,70 @@
                 <TextBox x:Name="SearchBox"
                          Grid.Column="1"
                          PlaceholderText="entrez un mot clé ..."
-                         Margin="12,6"
-                         VerticalAlignment="Center" />
+                         Style="{StaticResource BorderlessTextBoxStyle}" />
             </Grid>
-            <ListView Grid.Row="1"
-                      ItemsSource="{Binding Source={StaticResource DrapsCvs}}"
-                      ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}"
-                      SelectionMode="None"
-                      IsItemClickEnabled="True"
-                      ItemClick="Drapeaux_ItemClick"
-                      ItemTemplate="{StaticResource FlagItemTemplate}">
-                <triggers:Interactions.Triggers>
-                    <triggers:EventTrigger EventName="ItemClick">
-                        <triggers:InvokeCommandAction Command="{Binding OpenTopicCommand}"
-                                                      PassEventArgsToCommand="True" />
-                    </triggers:EventTrigger>
-                </triggers:Interactions.Triggers>
-                <ListView.GroupStyle>
-                    <GroupStyle HeaderTemplate="{StaticResource CategoriesHeaderTemplate}">
-                        <GroupStyle.HeaderContainerStyle>
-                            <Style TargetType="ListViewHeaderItem">
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Stretch" />
-                                <Setter Property="Padding"
-                                        Value="-4" />
-                            </Style>
-                        </GroupStyle.HeaderContainerStyle>
-                    </GroupStyle>
-                </ListView.GroupStyle>
-                <ListView.ItemContainerTransitions>
-                    <TransitionCollection>
-                        <EntranceThemeTransition />
-                    </TransitionCollection>
-                </ListView.ItemContainerTransitions>
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <ItemsStackPanel />
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-            </ListView>
+            <SemanticZoom Grid.Row="1"
+                          ViewChangeCompleted="SemanticZoom_OnViewChangeCompleted">
+                <SemanticZoom.ZoomedInView>
+                    <ListView ItemsSource="{Binding Source={StaticResource DrapsCvs}}"
+                              ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}"
+                              SelectionMode="None"
+                              IsItemClickEnabled="True"
+                              ItemClick="Drapeaux_ItemClick"
+                              ItemTemplate="{StaticResource FlagItemTemplate}">
+                        <triggers:Interactions.Triggers>
+                            <triggers:EventTrigger EventName="ItemClick">
+                                <triggers:InvokeCommandAction Command="{Binding OpenTopicCommand}"
+                                                              PassEventArgsToCommand="True" />
+                            </triggers:EventTrigger>
+                        </triggers:Interactions.Triggers>
+                        <ListView.GroupStyle>
+                            <GroupStyle HeaderTemplate="{StaticResource CategoriesHeaderTemplate}">
+                                <GroupStyle.HeaderContainerStyle>
+                                    <Style TargetType="ListViewHeaderItem">
+                                        <Setter Property="HorizontalContentAlignment"
+                                                Value="Stretch" />
+                                        <Setter Property="Padding"
+                                                Value="-4,0" />
+                                    </Style>
+                                </GroupStyle.HeaderContainerStyle>
+                            </GroupStyle>
+                        </ListView.GroupStyle>
+                        <ListView.ItemContainerTransitions>
+                            <TransitionCollection>
+                                <EntranceThemeTransition />
+                            </TransitionCollection>
+                        </ListView.ItemContainerTransitions>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel />
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </SemanticZoom.ZoomedInView>
+                <SemanticZoom.ZoomedOutView>
+                    <ListView x:Name="DrapsZoomeOutListView"
+                              ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}"
+                              SelectionMode="None"
+                              IsItemClickEnabled="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Group.Key}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemContainerTransitions>
+                            <TransitionCollection>
+                                <EntranceThemeTransition />
+                            </TransitionCollection>
+                        </ListView.ItemContainerTransitions>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel />
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </SemanticZoom.ZoomedOutView>
+            </SemanticZoom>
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
