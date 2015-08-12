@@ -1,6 +1,46 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="using:Hfr.Resources">
+    <!-- Icons -->
+    <x:String x:Key="HomeSymbol"></x:String>
+    <x:String x:Key="USBSymbol"></x:String>
+    <x:String x:Key="SDCardSymbol"></x:String>
+    <x:String x:Key="SearchSymbol"></x:String>
+    <x:String x:Key="SettingsSymbol"></x:String>
+    <x:String x:Key="RefreshSymbol"></x:String>
+    <x:String x:Key="BackSymbol"></x:String>
+    <x:String x:Key="AddSymbol"></x:String>
+    <x:String x:Key="PinSymbol"></x:String>
+    <x:String x:Key="UnpinSymbol"></x:String>
+    <x:String x:Key="PreviousPageSymbol"></x:String>
+    <x:String x:Key="FavoriteSymbol"></x:String>
+    <x:String x:Key="UnfavoriteSymbol"></x:String>
+    <x:String x:Key="CalendarSymbol"></x:String>
+    <x:String x:Key="ShareSymbol"></x:String>
+    <x:String x:Key="OpenFileSymbol"></x:String>
+    <x:String x:Key="CheckSymbol"></x:String>
+    <x:String x:Key="BuddySymbol"></x:String>
+    <x:String x:Key="ConversationSymbol"></x:String>
+    <x:String x:Key="KeySymbol"></x:String>
+    <x:String x:Key="DropdownSymbol"></x:String>
+    <x:String x:Key="UnlockedSymbol"></x:String>
+    <x:String x:Key="LockedSymbol"></x:String>
+    <x:String x:Key="FolderSymbol"></x:String>
+    <x:String x:Key="FileSymbol"></x:String>
+    <x:String x:Key="DeleteSymbol"></x:String>
+    <x:String x:Key="ThumbsupSymbol"></x:String>
+    <x:String x:Key="CloseSymbol"></x:String>
+    <x:String x:Key="ChevronToBottomSymbol"></x:String>
+    <x:String x:Key="ChevronToTopSymbol"></x:String>
+    <x:String x:Key="ChevronToRightSymbol"></x:String>
+    <x:String x:Key="FileExplorerSymbol"></x:String>
+    <x:String x:Key="MultimediaFileSymbol"></x:String>
+    <x:String x:Key="ExpandWindow"></x:String>
+    <x:String x:Key="ReduceWindow"></x:String>
+    <x:String x:Key="Hamburger"></x:String>
+    <x:String x:Key="Flag"></x:String>
+    <x:String x:Key="Message"></x:String>
+    
     <x:String x:Key="HamburgerPath">M0,21.388L30.408001, 21.388 30.408001, 23.414    0,23.414z 
                         M0,10.695L30.408001, 10.695 30.408001, 12.721    0,12.721z 
                         M0,0     L30.408001, 0      30.408001, 2.0259995 0,2.0259995z</x:String>
