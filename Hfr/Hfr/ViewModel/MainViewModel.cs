@@ -8,7 +8,7 @@ using Hfr.Helpers;
 using Hfr.Model;
 using Hfr.Services;
 using Hfr.Services.Classes;
-using Hfr.Commands.UI;
+using Windows.UI.Xaml;
 
 namespace Hfr.ViewModel
 {
@@ -17,10 +17,11 @@ namespace Hfr.ViewModel
         #region private fields
         private AccountManager _accountManager;
         private ObservableCollection<Topic> drapeaux;
+        private bool isDrapeauxLoading;
         private bool isDrapeauxLoaded;
         private IEnumerable<IGrouping<string, Topic>> _favorisGrouped;
         private ObservableCollection<Topic> _topics = new ObservableCollection<Topic>();
-        private uint _selectedTopic;
+        private int _selectedTopic;
         #endregion
 
         #region public fields
@@ -42,9 +43,9 @@ namespace Hfr.ViewModel
         {
             get
             {
-                if (_favorisGrouped == null || !isDrapeauxLoaded)
+                if (_favorisGrouped == null || !isDrapeauxLoading)
                 {
-                    isDrapeauxLoaded = true;
+                    isDrapeauxLoading = true;
                     Task.Run(async () => await DrapFetcher.GetDraps());
                 }
                 return _favorisGrouped;
@@ -52,7 +53,14 @@ namespace Hfr.ViewModel
             set
             {
                 Set(ref _favorisGrouped, value);
+                isDrapeauxLoaded = true;
+                RaisePropertyChanged(nameof(LoadingScreenDraps));
             }
+        }
+
+        public Visibility LoadingScreenDraps
+        {
+            get { return isDrapeauxLoaded ? Visibility.Collapsed : Visibility.Visible; }
         }
         #region posts
 
@@ -62,17 +70,22 @@ namespace Hfr.ViewModel
             set { Set(ref _topics, value); }
         }
 
-        public uint SelectedTopic
+        public int SelectedTopic
         {
             get { return _selectedTopic; }
             set
             {
                 Set(ref _selectedTopic, value);
-                RaisePropertyChanged("CurrentTopic");
-                var topicCatid = CurrentTopic.TopicCatId;
-                var topicId = CurrentTopic.TopicId;
-                var nbPage = CurrentTopic.TopicNbPage;
-                Task.Run(async () => await TopicFetcher.GetPosts(topicCatid, topicId, nbPage));
+                RaisePropertyChanged(nameof(CurrentTopic));
+                RaisePropertyChanged(nameof(TopicVisible));
+                Loc.NavigationService.ShowBackButtonIfCanGoBack();
+                if (CurrentTopic != null)
+                {
+                    var topicCatid = CurrentTopic.TopicCatId;
+                    var topicId = CurrentTopic.TopicId;
+                    var nbPage = CurrentTopic.TopicNbPage;
+                    Task.Run(async () => await TopicFetcher.GetPosts(topicCatid, topicId, nbPage));
+                }
             }
         }
 
@@ -87,7 +100,7 @@ namespace Hfr.ViewModel
                         TopicName = "TU DesignTime"
                     };
                 }
-                if (!Topics.Any()) return null;
+                if (!Topics.Any() || SelectedTopic == -1) return null;
                 else if (SelectedTopic > -1 && SelectedTopic < Topics.Count)
                     return Topics[(int)SelectedTopic];
                 else
