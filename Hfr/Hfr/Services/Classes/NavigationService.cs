@@ -1,33 +1,98 @@
 ﻿using System;
 using Windows.UI.Xaml.Controls;
-using Hfr.Views;
-using Page = Hfr.Model.Page;
 using Hfr.Views.MainPages;
+using Windows.UI.Core;
+using Hfr.Model;
+using Hfr.ViewModel;
 
 namespace Hfr.Services.Classes
 {
     public class NavigationService
     {
         private Frame _navigationFrame;
+        public View CurrentView;
+        public bool CanGoBack
+        {
+            get { return CanGoBackCompute(); }
+        }
 
-        public void Navigate(Page page)
+        public void Initialize(Frame rootFrame)
+        {
+            _navigationFrame = rootFrame;
+            SystemNavigationManager.GetForCurrentView().BackRequested += (s, e) =>
+            {
+                if (CanGoBack)
+                {
+                    e.Handled = true;
+                    GoBack();
+                }
+            };
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+            {
+                Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            }
+        }
+
+        private void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
+        {
+            if (CanGoBack)
+            {
+                e.Handled = true;
+                GoBack();
+            }
+        }
+
+        public void ShowBackButtonIfCanGoBack()
+        {
+            if (CanGoBack)
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            else
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+        }
+
+
+        public void GoBack()
+        {
+            switch (CurrentView)
+            {
+                case View.Main:
+                    if (Loc.Main.TopicVisible)
+                    {
+                        Loc.Main.SelectedTopic = -1;
+                    }
+                    break;
+            }
+            ShowBackButtonIfCanGoBack();
+        }
+
+        bool CanGoBackCompute()
+        {
+            switch (CurrentView)
+            {
+                case View.Main:
+                    return Loc.Main.TopicVisible;
+                default:
+                    return _navigationFrame.CanGoBack;
+            }            
+        }
+
+
+        public void Navigate(View page)
         {
             switch (page)
             {
-                case Page.Connect:
+                case View.Connect:
                     _navigationFrame.Navigate(typeof(ConnectPage));
                     break;
-                case Page.Main:
+                case View.Main:
                     _navigationFrame.Navigate(typeof(MainPage));
                     break;
                 default:
                     break;
             }
+            CurrentView = page;
         }
-        public Windows.UI.Xaml.Controls.Page CurrentPage { get { return _navigationFrame.Content as Windows.UI.Xaml.Controls.Page; } }
-        public void Initialize(Frame rootFrame)
-        {
-            _navigationFrame = rootFrame;
-        }
+
+        public Page CurrentPage { get { return _navigationFrame.Content as Page; } }
     }
 }

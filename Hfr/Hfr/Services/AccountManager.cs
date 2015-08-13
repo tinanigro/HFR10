@@ -46,7 +46,7 @@ namespace Hfr.Services
                 await ThreadUI.Invoke(() =>
                 {
                     CurrentAccount = new Account();
-                    Loc.NavigationService.Navigate(Page.Connect);
+                    Loc.NavigationService.Navigate(View.Connect);
                 });
             }
         }
