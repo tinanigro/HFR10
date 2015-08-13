@@ -111,6 +111,11 @@ namespace Hfr.ViewModel
             }
         }
 
+        public bool TopicVisible
+        {
+            get { return CurrentTopic != null; }
+        }
+
         #endregion
         #region commands
         public OpenTopicCommand OpenTopicCommand { get; } = new OpenTopicCommand();
