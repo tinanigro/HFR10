@@ -4,4 +4,5 @@
     xmlns:local="using:Hfr.Resources"
     xmlns:converters="using:Hfr.Converters">
     <converters:AvatarIdToUrlConverter x:Key="AvatarIdToUrlConverter"/>
+    <converters:NegatedBooleanConverter x:Key="NegatedBooleanConverter"/>
 </ResourceDictionary>
