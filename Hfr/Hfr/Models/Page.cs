@@ -1,6 +1,6 @@
 ﻿namespace Hfr.Model
 {
-    public enum Page
+    public enum View
     {
         Connect,
         Main

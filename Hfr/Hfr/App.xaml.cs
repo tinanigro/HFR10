@@ -12,6 +12,7 @@ using Hfr.Views.MainPages;
 using Hfr.ViewModel;
 using Hfr.Helpers;
 using Hfr.Services;
+using Hfr.Model;
 
 namespace Hfr
 {
@@ -62,7 +63,7 @@ namespace Hfr
                 }
             }
             AppViewHelper.SetAppView();
-            AppShell.NavigationFrame.Navigate(typeof(MainPage), e.Arguments);
+            Loc.NavigationService.Navigate(View.Main);
             Window.Current.Activate();
         }
 
