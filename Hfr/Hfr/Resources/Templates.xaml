@@ -3,11 +3,10 @@
                     xmlns:local="using:Hfr.Resources">
     <!-- Headers -->
     <DataTemplate x:Key="CategoriesHeaderTemplate">
-        <Grid Background="{ThemeResource DarkerGrayBrush}">
-            <TextBlock Text="{Binding Key}"
-                       Style="{StaticResource BodyTextBlockStyle}"
-                       Margin="12" />
-        </Grid>
+        <TextBlock Text="{Binding Key}"
+                   Style="{StaticResource SubheaderTextBlockStyle}"
+                   Foreground="{StaticResource MainBrush}"
+                   Margin="0,12" />
     </DataTemplate>
 
     <!-- Item Templates -->
