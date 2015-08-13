@@ -119,7 +119,6 @@ namespace Hfr.ViewModel
         #endregion
         #region commands
         public OpenTopicCommand OpenTopicCommand { get; } = new OpenTopicCommand();
-        public OpenSplitViewPaneCommand OpenSplitViewPaneCommand { get; } = new OpenSplitViewPaneCommand();
         #endregion
         #endregion
         public MainViewModel()
