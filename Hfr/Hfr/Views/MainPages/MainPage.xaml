@@ -14,6 +14,22 @@
                               Source="{Binding DrapsGrouped}" />
     </Page.Resources>
 
+    <!--<Page.BottomAppBar>
+        <AppBar ClosedDisplayMode="Compact">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Home" Width="140" Height="80" />
+                    <Button Content="Page 1" Width="140" Height="80"/>
+                    <Button Content="Page 2" Width="140" Height="80"/>
+                </StackPanel>
+                <AutoSuggestBox Grid.Column="1" Width="300" Height="50" HorizontalAlignment="Right"/>
+            </Grid>
+        </AppBar>
+    </Page.BottomAppBar>-->
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="TopicsColumnDefinition" />
@@ -28,7 +44,11 @@
             </Grid.RowDefinitions>
             <Pivot Grid.Row="0"
                    Background="{StaticResource MainBrush}">
-                <PivotItem Header="favoris">
+                <PivotItem>
+                    <PivotItem.Header>
+                        <SymbolIcon Symbol="Favorite"/>
+
+                    </PivotItem.Header>
                     <PivotItem.Content>
                         <Grid>
                             <SemanticZoom ViewChangeCompleted="SemanticZoom_OnViewChangeCompleted">
@@ -110,11 +130,18 @@
                         </Grid>
                     </PivotItem.Content>
                 </PivotItem>
-                <PivotItem Header="cats">
+                <PivotItem>
+                    <PivotItem.Header>
+                        <SymbolIcon Symbol="List" VerticalAlignment="Center" Margin="0,3,0,0"/>
+
+                    </PivotItem.Header>
 
                 </PivotItem>
-                <PivotItem Header="messages">
+                <PivotItem >
+                    <PivotItem.Header>
+                        <SymbolIcon Symbol="Mail" VerticalAlignment="Center"  Margin="0,3,0,0"/>
 
+                    </PivotItem.Header>
                 </PivotItem>
             </Pivot>
             <TextBox x:Name="SearchBox"
@@ -156,9 +183,9 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="TopicsColumnDefinition.Width"
-                                Value="*" />
+        					Value="*" />
                         <Setter Target="TopicContentColumnDefinition.Width"
-                                Value="0" />
+        					Value="0" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="NarrowTopicVisible">
@@ -168,9 +195,9 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="TopicsColumnDefinition.Width"
-                                Value="0" />
+        					Value="0" />
                         <Setter Target="TopicContentColumnDefinition.Width"
-                                Value="*" />
+        					Value="*" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Medium">
@@ -180,9 +207,9 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="TopicsColumnDefinition.Width"
-                                Value="150" />
+        					Value="150" />
                         <Setter Target="TopicContentColumnDefinition.Width"
-                                Value="*" />
+        					Value="*" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
