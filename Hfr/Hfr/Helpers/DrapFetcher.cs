@@ -40,6 +40,13 @@ namespace Hfr.Helpers
             var html = await HttpClientHelper.Get(HFRUrl.DrapFavUrl, Loc.Main.AccountManager.CurrentAccount.CookieContainer);
             if (string.IsNullOrEmpty(html)) return null;
 
+            /* DG */
+            Stopwatch stopwatch = new Stopwatch();
+            Debug.WriteLine("Start Bench");
+            stopwatch.Reset();
+            stopwatch.Start();
+            /* DG */
+
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
             string[] userIdArray = htmlDoc.DocumentNode.Descendants("a")
@@ -66,6 +73,8 @@ namespace Hfr.Helpers
                     x.GetAttributeValue("class", "") == "cCatTopic" &&
                     x.GetAttributeValue("title", "").Contains("Sujet"))
                     .Select(y => y.GetAttributeValue("href", "")).ToArray();
+            
+            //Debug.WriteLine(string.Join("\n\r", favorisTopicUri));
 
             string[] favorisLastPost = htmlDoc.DocumentNode.Descendants("td")
                 .Where(x => x.GetAttributeValue("class", "").Contains("sujetCase9"))
@@ -80,9 +89,20 @@ namespace Hfr.Helpers
                 .Where(x => x.GetAttributeValue("href", "").Contains("#t"))
                 .Select(y => y.GetAttributeValue("href", "")).ToArray();
 
+            //Debug.WriteLine(string.Join("\n\r", favorisBalise));
+
             string[] mpArray =
                 htmlDoc.DocumentNode.Descendants("a").Where(x => x.GetAttributeValue("class", "") == "red")
                 .Select(y => y.InnerText).ToArray();
+
+
+            /* DG */
+            stopwatch.Stop();
+            Debug.WriteLine("Bench Middle: " + stopwatch.ElapsedTicks +
+            " mS: " + stopwatch.ElapsedMilliseconds);
+            stopwatch.Reset();
+            stopwatch.Start();
+            /* DG */
 
             int j = 0;
             var topics = new ObservableCollection<Topic>();
@@ -179,6 +199,13 @@ namespace Hfr.Helpers
                 }
                 i++;
             }
+
+            /* DG */
+            stopwatch.Stop();
+            Debug.WriteLine("Bench End: " + stopwatch.ElapsedTicks +
+            " mS: " + stopwatch.ElapsedMilliseconds);
+            /* DG */
+
             Debug.WriteLine("Drapeaux fetched");
             return topics;
         }
