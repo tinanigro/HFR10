@@ -1,8 +1,10 @@
-﻿using Hfr.Model;
+﻿using Hfr.Helpers;
+using Hfr.Model;
 using Hfr.Utilities;
 using Hfr.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,4 +27,14 @@ namespace Hfr.Commands
             }
         }
     }
+
+    public class RefreshDrapsCommand : Command
+    {
+        public override void Execute(object parameter)
+        {
+            Loc.Main.RefreshDraps();
+        }
+    }
+
+    
 }

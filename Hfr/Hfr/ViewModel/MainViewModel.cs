@@ -9,6 +9,7 @@ using Hfr.Model;
 using Hfr.Services;
 using Hfr.Services.Classes;
 using Windows.UI.Xaml;
+using System.Diagnostics;
 
 namespace Hfr.ViewModel
 {
@@ -17,8 +18,39 @@ namespace Hfr.ViewModel
         #region private fields
         private AccountManager _accountManager;
         private ObservableCollection<Topic> drapeaux;
-        private bool isDrapeauxLoading;
-        private bool isDrapeauxLoaded;
+        private bool _drapeauxLoading;
+        private bool _drapeauxLoaded;
+        private bool isDrapeauxLoading
+        {
+            get
+            {
+                return _drapeauxLoading;
+            }
+            set
+            {
+                Set(ref _drapeauxLoading, value);
+                if (value)
+                {
+                    Set(ref _drapeauxLoaded, false);
+                }
+            }
+        }
+        private bool isDrapeauxLoaded
+        {
+            get
+            {
+                return _drapeauxLoaded;
+            }
+            set
+            {
+                Set(ref _drapeauxLoaded, value);
+                if (value)
+                {
+                    Set(ref _drapeauxLoading, false);
+                }
+            }
+        }
+
         private IEnumerable<IGrouping<string, Topic>> _favorisGrouped;
         private ObservableCollection<Topic> _topics = new ObservableCollection<Topic>();
         private int _selectedTopic;
@@ -43,10 +75,9 @@ namespace Hfr.ViewModel
         {
             get
             {
-                if (_favorisGrouped == null || !isDrapeauxLoading)
+                if (_favorisGrouped == null)
                 {
-                    isDrapeauxLoading = true;
-                    Task.Run(async () => await DrapFetcher.GetDraps());
+                    RefreshDraps();
                 }
                 return _favorisGrouped;
             }
@@ -117,8 +148,21 @@ namespace Hfr.ViewModel
         }
 
         #endregion
+
+        #region methods
+        public void RefreshDraps()
+        {
+            if (!isDrapeauxLoading)
+            {
+                isDrapeauxLoading = true;
+                Task.Run(async () => await DrapFetcher.GetDraps());
+            }
+        }
+        #endregion
+
         #region commands
         public OpenTopicCommand OpenTopicCommand { get; } = new OpenTopicCommand();
+        public RefreshDrapsCommand RefreshDrapsCommand { get; } = new RefreshDrapsCommand();
         #endregion
         #endregion
         public MainViewModel()
