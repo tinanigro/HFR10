@@ -104,7 +104,7 @@
     <Compile Include="Helpers\ConnectHelper.cs" />
     <Compile Include="Helpers\DrapFetcher.cs" />
     <Compile Include="Helpers\HttpClientHelper.cs" />
-    <Compile Include="Helpers\ThraedUI.cs" />
+    <Compile Include="Helpers\ThreadUI.cs" />
     <Compile Include="Helpers\TopicFetcher.cs" />
     <Compile Include="Helpers\TopicNameHelper.cs" />
     <Compile Include="Models\Account.cs" />
