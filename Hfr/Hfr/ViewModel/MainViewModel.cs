@@ -112,10 +112,7 @@ namespace Hfr.ViewModel
                 Loc.NavigationService.ShowBackButtonIfCanGoBack();
                 if (CurrentTopic != null)
                 {
-                    var topicCatid = CurrentTopic.TopicCatId;
-                    var topicId = CurrentTopic.TopicId;
-                    var nbPage = CurrentTopic.TopicNbPage;
-                    Task.Run(async () => await TopicFetcher.GetPosts(topicCatid, topicId, nbPage));
+                    Task.Run(async () => await TopicFetcher.GetPosts(CurrentTopic));
                 }
             }
         }

@@ -156,6 +156,9 @@ namespace Hfr.Helpers
                     var pageNumber = int.Parse(WebUtility.HtmlDecode(favorisBalise[j])
                         .Substring(firstPageNumber, lastPageNumber - firstPageNumber));
 
+                    // URL du flag
+                    var drapURI = WebUtility.HtmlDecode(favorisBalise[j]);
+
                     // Formatage topic name
                     string topicNameFav = TopicNameHelper.Shorten(WebUtility.HtmlDecode(line));
 
@@ -194,6 +197,7 @@ namespace Hfr.Helpers
                         TopicCurrentPage = pageNumber,
                         TopicReponseId = reponseId,
                         TopicIndexCategory = HFRCats.GetHFRIndexFromId(topicCatId),
+                        TopicDrapURI = drapURI,
                     });
                     j++;
                 }

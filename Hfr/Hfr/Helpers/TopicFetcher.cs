@@ -1,4 +1,6 @@
-﻿using Hfr.ViewModel;
+﻿using Hfr.Model;
+using Hfr.Utilities;
+using Hfr.ViewModel;
 using Hfr.Views.MainPages;
 using HtmlAgilityPack;
 using System;
@@ -14,16 +16,16 @@ namespace Hfr.Helpers
 {
     public static class TopicFetcher
     {
-        public static async Task GetPosts(int catId, string topicId, int topicNbPage)
+        public static async Task GetPosts(Topic currentTopic)
         {
             Debug.WriteLine("Fetching Posts");
-            await Fetch(catId, topicId, topicNbPage);
+            await Fetch(currentTopic);
             Debug.WriteLine("Updating UI with new Posts list");
         }
 
-        public static async Task Fetch(int catId, string topicId, int topicNbPage)
+        public static async Task Fetch(Topic currentTopic)
         {
-            var html = await HttpClientHelper.Get("http://forum.hardware.fr/forum2.php?config=hfr.inc&cat=" + catId + "&post=" + topicId + "&page=" + topicNbPage + "&sondage=1&owntopic=1", Loc.Main.AccountManager.CurrentAccount.CookieContainer);
+            var html = await HttpClientHelper.Get(currentTopic.TopicDrapURI);
             if (string.IsNullOrEmpty(html)) return;
 
             var htmlDoc = new HtmlDocument();
