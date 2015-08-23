@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Hfr.ViewModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -28,6 +29,11 @@ namespace Hfr.Helpers
             //--
         }
 
+        public static async Task<string> Get(string url)
+        {
+            return await Get(url, Loc.Main.AccountManager.CurrentAccount.CookieContainer);
+        }
+
         public static async Task<string> Get(string url, string cookieContainer)
         {
             string result = "";
@@ -37,6 +43,7 @@ namespace Hfr.Helpers
                 try
                 {
                     cleanCookies();
+                    Debug.WriteLine("Get Helper url = " + url);
 
                     var baseAddress = new Uri("http://forum.hardware.fr");
                     var cookieContainr = new CookieContainer();
