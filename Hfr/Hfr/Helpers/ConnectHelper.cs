@@ -34,6 +34,8 @@ namespace Hfr.Helpers
             var password = account.Password;
             var cookieContainer = new CookieContainer();
 
+#warning "this must be rewritten using HttpClientHelper"
+
             var request = WebRequest.CreateHttp(HFRUrl.ForumUrl + HFRUrl.ConnectUrl);
             request.ContentType = "application/x-www-form-urlencoded";
             request.Method = "POST";
