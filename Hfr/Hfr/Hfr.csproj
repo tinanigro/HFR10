@@ -149,7 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\HTML\Message.tpl.html" />
-    <Content Include="Assets\HTML\Topic.css" />
+    <Content Include="Assets\HTML\Style.css" />
     <EmbeddedResource Include="Assets\HTML\Topic.tpl.html" />
     <Content Include="Assets\Wallpapers\hero.jpg" />
     <Content Include="Assets\Wallpapers\wallpaper.jpg" />

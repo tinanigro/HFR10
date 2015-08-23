@@ -1,0 +1,57 @@
+﻿*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding:0;
+	margin:0;
+}
+
+body {
+    font-family:Segoe UI !important;
+    background-color:white;
+}
+
+.clear {
+	clear:both;
+}
+
+/* Message Template */
+.message .header {
+    background-color:lightgrey;
+    padding:8px;
+}
+
+.message .header .avatar, .message .header .infos {
+    float:left;
+}
+.message .header .action {
+    float:right;
+}
+.message .header .infos {
+    margin-left:8px
+}
+.message .header .infos * {
+    width:100%;
+    line-height:30px;
+}
+.message .header .avatar {
+	text-align:left;
+	
+	width:56px;
+	height:60px;
+	margin-top:1px !important;
+	
+	border:1px solid #717d85;
+
+	background-size: cover;
+	background-color: white;
+	background-repeat: no-repeat;
+	background-position:center;
+}
+.message .header .avatar.noavatar {
+    background-image:url('avatar_male_gray_on_light_48x48.png');
+}
+
+.message .content {
+    overflow: hidden;
+}
