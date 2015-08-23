@@ -122,6 +122,7 @@
     </Compile>
     <Compile Include="Utilities\Command.cs" />
     <Compile Include="Utilities\HFRCats.cs" />
+    <Compile Include="Utilities\HFRRessources.cs" />
     <Compile Include="Utilities\HFRUrl.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -147,6 +148,9 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Assets\HTML\Message.tpl.html" />
+    <Content Include="Assets\HTML\Topic.css" />
+    <EmbeddedResource Include="Assets\HTML\Topic.tpl.html" />
     <Content Include="Assets\Wallpapers\hero.jpg" />
     <Content Include="Assets\Wallpapers\wallpaper.jpg" />
     <Content Include="Properties\Default.rd.xml" />
