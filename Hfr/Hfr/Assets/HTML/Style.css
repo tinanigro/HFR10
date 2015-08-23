@@ -16,6 +16,9 @@ body {
 }
 
 /* Message Template */
+.message .anchorlink {
+	display:block;
+}
 .message .header {
     background-color:lightgrey;
     padding:8px;
@@ -36,22 +39,87 @@ body {
 }
 .message .header .avatar {
 	text-align:left;
-	
-	width:56px;
-	height:60px;
-	margin-top:1px !important;
-	
-	border:1px solid #717d85;
 
 	background-size: cover;
 	background-color: transparent;
 	background-repeat: no-repeat;
 	background-position:center;
+
+    width: 60px;
+	height: 60px;
+	border-radius: 30px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	
+	/*box-shadow: 0 0 2px rgba(0, 0, 0, .8);
+	-webkit-box-shadow: 0 0 2px rgba(0, 0, 0, .8);
+	-moz-box-shadow: 0 0 2px rgba(0, 0, 0, .8);*/
 }
-.message .header .avatar.noavatar {
-    background-image:url('avatar_male_gray_on_light_48x48.png');
+.message .header .avatar.no_avatar {
+    
 }
 
 .message .content {
     overflow: hidden;
+    padding:8px;
+}
+
+
+/* HFR content > * */
+.message .content table 
+{ 
+	border: 1px solid silver;
+	padding: 4px !important;
+	width:100%;
+	
+	margin-bottom:5px !important;
+}
+.message .content table p
+{
+	
+	overflow-x:hidden;
+}
+
+.message .content img, .message .content table, .message .content table p, .message .content table p img {
+    max-width:100%;
+}
+
+.message .content img[onload] {
+    margin:0 !important;
+}
+
+.message .content table .s1 a {
+	font-weight:bold !important;
+	text-decoration:underline !important;
+	color:black !important;
+}
+
+.message .content div.masque {
+	visibility:hidden;
+}
+
+.message .content ol, .message .content ul
+{
+	margin:1em 0px !important;
+	padding-left:2em !important
+}
+
+.message .content table.code td {
+	font-size:0.8em !important;
+}
+
+.message .content table.code, .message .content table.fixed, .message .content table.quote, .message .content table.citation {
+    table-layout:fixed;
+    border: none;
+    border-left: 3px solid  silver;
+}
+
+.message .content table.code p, .message .content table.fixed p {
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+    white-space:nowrap;
+}
+
+.message .content table.code *, .message .content table.fixed * {
+    font-family: monospace !important;
 }

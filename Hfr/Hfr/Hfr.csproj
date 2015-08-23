@@ -151,6 +151,8 @@
     <EmbeddedResource Include="Assets\HTML\Message.tpl.html" />
     <Content Include="Assets\HTML\Style.css" />
     <EmbeddedResource Include="Assets\HTML\Topic.tpl.html" />
+    <Content Include="Assets\HTML\UI\no_avatar.png" />
+    <Content Include="Assets\HTML\UI\rsz_no_avatar.png" />
     <Content Include="Assets\Wallpapers\hero.jpg" />
     <Content Include="Assets\Wallpapers\wallpaper.jpg" />
     <Content Include="Properties\Default.rd.xml" />

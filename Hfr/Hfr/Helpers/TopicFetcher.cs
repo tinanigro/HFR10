@@ -105,17 +105,24 @@ namespace Hfr.Helpers
 
                     // Affichage des avatars
                     var avatarUri = "";
+                    var avatarClass = "";
+
                     if (messCase1[i].Contains("avatar_center"))
                     {
                         int firstAvatar = messCase1[i].IndexOf("<div class=\"avatar_center\" style=\"clear:both\"><img src=\"") + "<div class=\"avatar_center\" style=\"clear:both\"><img src=\"".Length;
                         int lastAvatar = messCase1[i].LastIndexOf("\" alt=\"");
                         avatarUri = messCase1[i].Substring(firstAvatar, lastAvatar - firstAvatar);
                     }
+                    else
+                    {
+                        avatarUri = "ms-appx-web:///Assets/HTML/UI/rsz_no_avatar.png";
+                        avatarClass = "no_avatar";
+                    }
 
                     TempHTMLMessage = TempHTMLMessage.Replace("%%ID%%", i.ToString());
                     TempHTMLMessage = TempHTMLMessage.Replace("%%POSTID%%", reponseId);
 
-                    TempHTMLMessage = TempHTMLMessage.Replace("%%no_avatar_class%%", "");
+                    TempHTMLMessage = TempHTMLMessage.Replace("%%no_avatar_class%%", avatarClass);
                     TempHTMLMessage = TempHTMLMessage.Replace("%%AUTEUR_AVATAR%%", avatarUri);
                     TempHTMLMessage = TempHTMLMessage.Replace("%%AUTEUR_PSEUDO%%", Pseudo);
                     TempHTMLMessage = TempHTMLMessage.Replace("%%MESSAGE_DATE%%", dateHeure);
