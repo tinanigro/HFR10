@@ -3,6 +3,7 @@
     public enum View
     {
         Connect,
-        Main
+        Main,
+        Editor
     }
 }

@@ -160,6 +160,8 @@ namespace Hfr.ViewModel
         #region commands
         public OpenTopicCommand OpenTopicCommand { get; } = new OpenTopicCommand();
         public RefreshDrapsCommand RefreshDrapsCommand { get; } = new RefreshDrapsCommand();
+#warning "for debugging purpose"
+        public ShowEditorCommand ShowEditorCommand { get; } = new ShowEditorCommand();
         #endregion
         #endregion
         public MainViewModel()

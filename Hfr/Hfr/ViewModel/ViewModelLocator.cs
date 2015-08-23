@@ -44,6 +44,7 @@ namespace Hfr.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<EditorViewModel>();
             SimpleIoc.Default.Register<NavigationService>();
         }
 
@@ -52,6 +53,14 @@ namespace Hfr.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
+            }
+        }
+
+        public static EditorViewModel Editor
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<EditorViewModel>();
             }
         }
 

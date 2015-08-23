@@ -4,6 +4,8 @@ using Hfr.Views.MainPages;
 using Windows.UI.Core;
 using Hfr.Model;
 using Hfr.ViewModel;
+using System.Diagnostics;
+using Windows.UI.Xaml;
 
 namespace Hfr.Services.Classes
 {
@@ -61,6 +63,10 @@ namespace Hfr.Services.Classes
                         Loc.Main.SelectedTopic = -1;
                     }
                     break;
+                case View.Editor:
+                    _navigationFrame.GoBack();
+                    CurrentView = View.Main;
+                    break;
             }
             ShowBackButtonIfCanGoBack();
         }
@@ -71,13 +77,14 @@ namespace Hfr.Services.Classes
             {
                 case View.Main:
                     return Loc.Main.TopicVisible;
+                case View.Editor:
+                    return true;
                 default:
                     return _navigationFrame.CanGoBack;
             }            
         }
 
-
-        public void Navigate(View page)
+        public void Navigate(View page, object parameter)
         {
             switch (page)
             {
@@ -87,10 +94,18 @@ namespace Hfr.Services.Classes
                 case View.Main:
                     _navigationFrame.Navigate(typeof(MainPage));
                     break;
+                case View.Editor:
+                    _navigationFrame.Navigate(typeof(Editor), parameter);
+                    break;
                 default:
                     break;
             }
             CurrentView = page;
+            ShowBackButtonIfCanGoBack();
+        }
+        public void Navigate(View page)
+        {
+            Navigate(page, null);
         }
 
         public Page CurrentPage { get { return _navigationFrame.Content as Page; } }

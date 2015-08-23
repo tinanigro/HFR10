@@ -1,0 +1,15 @@
+﻿<Page
+    x:Class="Hfr.Views.MainPages.Editor"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Hfr.Views.MainPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    DataContext="{Binding Source={StaticResource Locator}, Path=Editor}"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource DarkerWhiteBrush}">
+        <TextBox x:Name="textBlock" Margin="0" TextWrapping="Wrap" Text="{Binding CurrentEditor.Text}" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+    </Grid>
+</Page>

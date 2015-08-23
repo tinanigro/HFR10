@@ -95,6 +95,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\ConnectCommand.cs" />
+    <Compile Include="Commands\EditorCommands.cs" />
     <Compile Include="Commands\TopicsCommands.cs" />
     <Compile Include="Converters\AvatarIdToUrlConverter.cs" />
     <Compile Include="Converters\NegatedBooleanConverter.cs" />
@@ -103,11 +104,13 @@
     <Compile Include="Helpers\AppViewHelper.cs" />
     <Compile Include="Helpers\ConnectHelper.cs" />
     <Compile Include="Helpers\DrapFetcher.cs" />
+    <Compile Include="Helpers\FormFetcher.cs" />
     <Compile Include="Helpers\HttpClientHelper.cs" />
     <Compile Include="Helpers\ThreadUI.cs" />
     <Compile Include="Helpers\TopicFetcher.cs" />
     <Compile Include="Helpers\TopicNameHelper.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Editor.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Topic.cs" />
@@ -124,10 +127,14 @@
     <Compile Include="Utilities\HFRCats.cs" />
     <Compile Include="Utilities\HFRRessources.cs" />
     <Compile Include="Utilities\HFRUrl.cs" />
+    <Compile Include="ViewModel\EditorViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\MainPages\ConnectPage.xaml.cs">
       <DependentUpon>ConnectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainPages\EditorPage.xaml.cs">
+      <DependentUpon>EditorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -184,6 +191,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MainPages\ConnectPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainPages\EditorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

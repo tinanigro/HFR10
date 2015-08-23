@@ -20,6 +20,9 @@
                 <AppBarButton x:Name="appBarButton" HorizontalAlignment="Stretch" Icon="Sync" Label="" VerticalAlignment="Stretch" Command="{Binding RefreshDrapsCommand}">
 
                 </AppBarButton>
+                <AppBarButton x:Name="appBarButton1" HorizontalAlignment="Stretch" Icon="Add" Label="" VerticalAlignment="Stretch" Command="{Binding ShowEditorCommand}" CommandParameter="{Binding Source='http://foobar'}">
+
+                </AppBarButton>
             </StackPanel>
             <!--<AutoSuggestBox Grid.Column="1" Width="300" Height="50" HorizontalAlignment="Right"/>-->
         </AppBar>
