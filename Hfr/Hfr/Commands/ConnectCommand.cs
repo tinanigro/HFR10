@@ -5,6 +5,7 @@ using Hfr.ViewModel;
 using System.Diagnostics;
 using System.Linq;
 using System;
+using Windows.UI.Xaml.Input;
 
 namespace Hfr.Commands
 {
@@ -12,6 +13,17 @@ namespace Hfr.Commands
     {
         public override async void Execute(object parameter)
         {
+
+            /* Connect when ENTER key is pressed */
+            var keyStroke = parameter as KeyRoutedEventArgs;
+            if (keyStroke != null)
+            {
+                if (keyStroke.Key == Windows.System.VirtualKey.Enter)
+                    keyStroke.Handled = true;
+                else
+                    return;
+            }
+            
             if (Loc.Main.AccountManager.Accounts.FirstOrDefault(x => x.Pseudo == Loc.Main.AccountManager.CurrentAccount.Pseudo) != null) return;
             await ThreadUI.Invoke(() =>
             {

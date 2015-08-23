@@ -4,6 +4,7 @@
       xmlns:local="using:Hfr.Views.MainPages"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:triggers="using:WinRT.Triggers"
       mc:Ignorable="d"
       DataContext="{Binding Source={StaticResource Locator}, Path=Main.AccountManager}">
 
@@ -38,18 +39,25 @@
                    HorizontalAlignment="Center" />
         <TextBox Grid.Row="3"
                  Grid.Column="1"
-                 PlaceholderText="pseudo"
+                 PlaceholderText="Pseudo"
                  Style="{StaticResource BorderlessTextBoxStyle}"
                  Text="{Binding CurrentAccount.Pseudo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  MaxWidth="350"
                  IsEnabled="{Binding CurrentAccount.IsConnecting, Converter={StaticResource NegatedBooleanConverter}}" />
         <PasswordBox Grid.Row="5"
                      Grid.Column="1"
-                     PlaceholderText="password"
+                     PlaceholderText="Mot de passe"
                      Style="{StaticResource BorderlessPasswordBoxStyle}"
                      Password="{Binding CurrentAccount.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      MaxWidth="350"
-                     IsEnabled="{Binding CurrentAccount.IsConnecting, Converter={StaticResource NegatedBooleanConverter}}" />
+                     IsEnabled="{Binding CurrentAccount.IsConnecting, Converter={StaticResource NegatedBooleanConverter}}">
+            <triggers:Interactions.Triggers>
+                <triggers:EventTrigger EventName="KeyDown">
+                    <triggers:InvokeCommandAction Command="{Binding ConnectCommand}"
+                                                                              PassEventArgsToCommand="True" />
+                </triggers:EventTrigger>
+            </triggers:Interactions.Triggers>
+        </PasswordBox>
         <TextBlock Grid.Row="7"
                    Grid.Column="1"
                    Text="{Binding CurrentAccount.ConnectionErrorStatus, UpdateSourceTrigger=PropertyChanged}"
@@ -57,7 +65,7 @@
                    HorizontalAlignment="Center" />
         <Button Grid.Row="9"
                 Grid.Column="1"
-                Content="connexion"
+                Content="Connexion"
                 Command="{Binding ConnectCommand}"
                 HorizontalAlignment="Center"
                 Width="160"
