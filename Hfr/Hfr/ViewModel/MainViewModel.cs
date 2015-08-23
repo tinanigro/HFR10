@@ -68,6 +68,8 @@ namespace Hfr.ViewModel
             set
             {
                 Set(ref drapeaux, value);
+                isDrapeauxLoaded = true;
+                RaisePropertyChanged(nameof(LoadingScreenDraps));
             }
         }
 
@@ -84,8 +86,6 @@ namespace Hfr.ViewModel
             set
             {
                 Set(ref _favorisGrouped, value);
-                isDrapeauxLoaded = true;
-                RaisePropertyChanged(nameof(LoadingScreenDraps));
             }
         }
 

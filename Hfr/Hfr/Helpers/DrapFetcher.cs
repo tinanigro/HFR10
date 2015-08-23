@@ -24,20 +24,18 @@ namespace Hfr.Helpers
             Debug.WriteLine("Updating UI with new Drapeaux list");
             await ThreadUI.Invoke(() =>
             {
-                try {
-                    Loc.Main.Drapeaux = draps;
+                Loc.Main.Drapeaux = draps;
+                if (draps != null)
+                {
                     Loc.Main.DrapsGrouped = draps.GroupBy(x => x.TopicCatName);
                 }
-                catch (Exception exception)
-                {
-                    Debug.WriteLine("GetDraps Exception " + exception.ToString());
-                }
+                
             });
         }
 
         public static async Task<ObservableCollection<Topic>> Fetch()
         {
-            var html = await HttpClientHelper.Get(HFRUrl.DrapFavUrl, Loc.Main.AccountManager.CurrentAccount.CookieContainer);
+            var html = await HttpClientHelper.Get(HFRUrl.DrapFavUrl);
             if (string.IsNullOrEmpty(html)) return null;
 
             /* DG */

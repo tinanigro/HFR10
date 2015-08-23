@@ -31,7 +31,14 @@ namespace Hfr.Helpers
 
         public static async Task<string> Get(string url)
         {
-            return await Get(url, Loc.Main.AccountManager.CurrentAccount.CookieContainer);
+            if (Loc.Main.AccountManager.CurrentAccount != null)
+            {
+                return await Get(url, Loc.Main.AccountManager.CurrentAccount.CookieContainer);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public static async Task<string> Get(string url, string cookieContainer)
@@ -66,7 +73,7 @@ namespace Hfr.Helpers
                         result = await resultObj.Content.ReadAsStringAsync();
                         cleanCookies();
 
-                        //Debug.WriteLine("result =" + result);
+                        Debug.WriteLine("Get Helper url complete = " + url);
                     }
 
                 }
