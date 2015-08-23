@@ -19,6 +19,7 @@ namespace Hfr.Model
         public int TopicCurrentPage { get; set; }
         public string TopicReponseId { get; set; }
         public int TopicIndexCategory { get; set; }
+        public string TopicDrapURI { get; set; }
 
         public ObservableCollection<Post> Posts { get; set; }
 
