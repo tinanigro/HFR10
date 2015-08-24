@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Hfr.Models;
 using System.Diagnostics;
 using Hfr.ViewModel;
+using HtmlAgilityPack;
+using System.Net;
 
 namespace Hfr.Helpers
 {
@@ -27,12 +29,18 @@ namespace Hfr.Helpers
         {
             var html = await HttpClientHelper.Get(FormUrl);
 
-            /* Parsing */
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            
+            string[] editText = htmlDoc.DocumentNode.Descendants("textarea").Where(x => (string)x.GetAttributeValue("name", "") == "content_form").
+            Select(y => y.InnerText).ToArray();
 
+            var content = WebUtility.HtmlDecode(editText[0]) + Environment.NewLine;
+         
             return new Editor()
             {
                 FromUrl = FormUrl,
-                Text = "dummy text",
+                Text = content,
                 idxTopic = 0,
             };
 

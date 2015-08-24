@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Ioc;
+using Hfr.Utilities;
 
 namespace Hfr.ViewModel
 {
@@ -22,7 +23,6 @@ namespace Hfr.ViewModel
             set
             {
                 Set(ref _currentEditor, value);
-                RaisePropertyChanged(nameof(CurrentEditor));
             }
         }
 
@@ -36,17 +36,12 @@ namespace Hfr.ViewModel
         #region navigation
         public void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
-            Debug.WriteLine("EditorViewModel OnNavigatedTo");
+            var url = e.Parameter as string;
+            Debug.WriteLine("EditorViewModel OnNavigatedTo " + url);
 
-            var parameter = e.Parameter as string;
-            Debug.WriteLine(parameter);
+            if (url == "http://debug") url = HFRUrl.Dbg_Form_QuoteSingleMPFLKURL;
 
-            CurrentEditor = new Editor()
-            {
-                FromUrl = "http://",
-                Text = "Dummy\r\n\r\nFoobar",
-                idxTopic = 0,
-            };
+            LoadEditor(url);
 
         }
         #endregion
