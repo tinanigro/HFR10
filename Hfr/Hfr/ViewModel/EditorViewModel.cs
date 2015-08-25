@@ -7,9 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using Windows.Networking.Connectivity;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Ioc;
 using Hfr.Utilities;
+using Hfr.Commands;
 
 namespace Hfr.ViewModel
 {
@@ -31,6 +33,28 @@ namespace Hfr.ViewModel
         {
             Task.Run(async () => await FormFetcher.GetEditor(url));
         }
+
+        public async void SubmitEditor()
+        {
+            CurrentEditor.PrepareForSubmit(); //Required!!!
+            var result = await HttpClientHelper.Post(CurrentEditor.SubmitUrl, CurrentEditor.Data);
+
+#warning "no feedback on submit"
+            Debug.WriteLine(result);
+            if (result.Length > 0)
+            {
+                await ThreadUI.Invoke(() =>
+                {
+                    Loc.NavigationService.GoBack();
+                });
+            }
+            else
+            {
+                await ThreadUI.Invoke(() =>
+                {
+                });
+            }
+        }
         #endregion
 
         #region navigation
@@ -39,11 +63,14 @@ namespace Hfr.ViewModel
             var url = e.Parameter as string;
             Debug.WriteLine("EditorViewModel OnNavigatedTo " + url);
 
-            if (url == "http://debug") url = HFRUrl.Dbg_Form_QuoteSingleMPFLKURL;
+            if (url == "http://debug") url = HFRUrl.Dbg_Form_QuoteSingleURL;
 
             LoadEditor(url);
-
         }
+        #endregion
+
+        #region commands
+        public SubmitEditorCommand SubmitEditorCommand { get; } = new SubmitEditorCommand();
         #endregion
 
     }

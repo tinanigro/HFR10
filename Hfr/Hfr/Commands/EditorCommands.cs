@@ -21,4 +21,13 @@ namespace Hfr.Commands
             Loc.NavigationService.ShowBackButtonIfCanGoBack();
         }
     }
+
+    public class SubmitEditorCommand : Command
+    {
+        public override void Execute(object parameter)
+        {
+            Loc.Editor.SubmitEditor();
+        }
+    }
+    
 }

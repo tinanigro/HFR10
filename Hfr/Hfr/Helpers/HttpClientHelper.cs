@@ -85,11 +85,11 @@ namespace Hfr.Helpers
             return result;
         }
 
-        public static async Task<string> Post(string url, Dictionary<String, String> data)
+        public static async Task<string> Post(string url, Dictionary<String, String> formData)
         {
             if (Loc.Main.AccountManager.CurrentAccount != null)
             {
-                return await Post(url, data, Loc.Main.AccountManager.CurrentAccount.CookieContainer);
+                return await Post(url, formData, Loc.Main.AccountManager.CurrentAccount.CookieContainer);
             }
             else
             {
@@ -97,7 +97,7 @@ namespace Hfr.Helpers
             }
         }
 
-        public static async Task<string> Post(string url, Dictionary<String, String> data, string cookieContainer)
+        public static async Task<string> Post(string url, Dictionary<String, String> formData, string cookieContainer)
         {
             string result = "";
 
@@ -124,18 +124,18 @@ namespace Hfr.Helpers
                             cookieContainr.Add(baseAddress, new Cookie(entity.Name, entity.Value));
                         }
 
-                        var content = new FormUrlEncodedContent(new[]
-                        {
-                            new KeyValuePair<string, string>("", "login")
-                        });
-                        Debug.WriteLine("content = " + content);
+                        var content = new FormUrlEncodedContent(formData);
 
                         var resultObj = client.PostAsync(url, content).Result;
-                        resultObj.EnsureSuccessStatusCode();
-                        result = await resultObj.Content.ReadAsStringAsync();
-                        cleanCookies();
 
-                        Debug.WriteLine("Post Helper result = " + result);
+#warning "response status code not used"
+                        if (resultObj.StatusCode == HttpStatusCode.NotFound)
+                            result = "";
+                        else
+                            result = await resultObj.Content.ReadAsStringAsync();
+
+                        cleanCookies();
+                        //Debug.WriteLine("Post Helper result = " + result);
                     }
 
                 }

@@ -7,9 +7,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     DataContext="{Binding Source={StaticResource Locator}, Path=Editor}"
     mc:Ignorable="d">
+    <Page.BottomAppBar>
+        <AppBar ClosedDisplayMode="Compact" Style="{StaticResource AppBarStyleNoExpandBtn}">
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
+                <AppBarButton x:Name="EditorAppBarButtonSend" HorizontalAlignment="Stretch" Icon="Send" Label="" VerticalAlignment="Stretch" Command="{Binding SubmitEditorCommand}">
+
+                </AppBarButton>
+            </StackPanel>
+            <!--<AutoSuggestBox Grid.Column="1" Width="300" Height="50" HorizontalAlignment="Right"/>-->
+        </AppBar>
+    </Page.BottomAppBar>
 
     <Grid Background="{StaticResource DarkerWhiteBrush}">
-        <TextBox x:Name="textBlock" Margin="0" TextWrapping="Wrap" Text="{Binding CurrentEditor.Text}" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <TextBox x:Name="textBlock" Margin="0" TextWrapping="Wrap" Text="{Binding CurrentEditor.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 
     </Grid>
 </Page>
