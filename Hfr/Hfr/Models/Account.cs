@@ -1,5 +1,4 @@
-﻿using System.Net;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using SQLite;
 using Windows.UI.Xaml;
 

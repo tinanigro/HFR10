@@ -2,14 +2,8 @@
 using Hfr.Models;
 using Hfr.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
-using Windows.Networking.Connectivity;
-using GalaSoft.MvvmLight.Messaging;
-using GalaSoft.MvvmLight.Ioc;
 using Hfr.Utilities;
 using Hfr.Commands;
 

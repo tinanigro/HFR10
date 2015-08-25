@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Hfr.Models;
 using System.Diagnostics;
 using Hfr.ViewModel;
 using HtmlAgilityPack;
 using System.Net;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace Hfr.Helpers
 {

@@ -7,9 +7,7 @@ using Hfr.Commands;
 using Hfr.Helpers;
 using Hfr.Model;
 using Hfr.Services;
-using Hfr.Services.Classes;
 using Windows.UI.Xaml;
-using System.Diagnostics;
 
 namespace Hfr.ViewModel
 {

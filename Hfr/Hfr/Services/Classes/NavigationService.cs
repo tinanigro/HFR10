@@ -1,11 +1,8 @@
-﻿using System;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
 using Hfr.Views.MainPages;
 using Windows.UI.Core;
 using Hfr.Model;
 using Hfr.ViewModel;
-using System.Diagnostics;
-using Windows.UI.Xaml;
 
 namespace Hfr.Services.Classes
 {

@@ -8,7 +8,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.ApplicationInsights;
 using Hfr.Views;
-using Hfr.Views.MainPages;
 using Hfr.ViewModel;
 using Hfr.Helpers;
 using Hfr.Services;
