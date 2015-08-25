@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using GalaSoft.MvvmLight;
 
-namespace Hfr.Models
+namespace Hfr.Model
 {
     public class Editor : ViewModelBase
     {
         public string FromUrl { get; set; }
         public string SubmitUrl { get; set; }
-
-        private string _text;
 
         public string Title; //MP & New Topic.
         public string To; //MP only, recipient.

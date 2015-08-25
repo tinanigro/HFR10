@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Hfr.Models;
+using Hfr.Model;
 using System.Diagnostics;
 using Hfr.ViewModel;
 using HtmlAgilityPack;

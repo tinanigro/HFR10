@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Hfr.Views.MainPages.Editor"
+    x:Class="Hfr.Views.MainPages.EditorPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Hfr.Views.MainPages"

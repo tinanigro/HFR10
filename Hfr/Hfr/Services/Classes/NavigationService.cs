@@ -1,8 +1,8 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Hfr.Views.MainPages;
 using Windows.UI.Core;
-using Hfr.Model;
 using Hfr.ViewModel;
+using Hfr.Model;
 
 namespace Hfr.Services.Classes
 {
@@ -92,7 +92,7 @@ namespace Hfr.Services.Classes
                     _navigationFrame.Navigate(typeof(MainPage));
                     break;
                 case View.Editor:
-                    _navigationFrame.Navigate(typeof(Editor), parameter);
+                    _navigationFrame.Navigate(typeof(EditorPage), parameter);
                     break;
                 default:
                     break;

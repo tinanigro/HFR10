@@ -1,5 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
-using Hfr.Models;
+using Hfr.Model;
 using Hfr.Helpers;
 using System;
 using System.Threading.Tasks;

@@ -8,11 +8,11 @@ namespace Hfr.Views.MainPages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Editor : Page
+    public sealed partial class EditorPage : Page
     {
         private EditorViewModel viewModel;
 
-        public Editor()
+        public EditorPage()
         {
             this.InitializeComponent();
         }
