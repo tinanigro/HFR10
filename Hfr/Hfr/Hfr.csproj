@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="Commands\ConnectCommand.cs" />
     <Compile Include="Commands\EditorCommands.cs" />
+    <Compile Include="Commands\MessagesCommands.cs" />
     <Compile Include="Commands\TopicsCommands.cs" />
     <Compile Include="Converters\AvatarIdToUrlConverter.cs" />
     <Compile Include="Converters\NegatedBooleanConverter.cs" />

@@ -1,7 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.Foundation;
+using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using Hfr.Commands;
 using Hfr.Helpers;
@@ -15,6 +20,32 @@ namespace Hfr.ViewModel
     {
         #region private fields
         private AccountManager _accountManager;
+
+        internal void ShowContextForMessage(object parameter)
+        {
+            Debug.WriteLine("VM ContextMessageCommand param=" + parameter);
+
+            ShowPopup(parameter.ToString());
+        }
+
+        private async void ShowPopup(string parameter)
+        {
+            WwwFormUrlDecoder decoder = new WwwFormUrlDecoder(parameter);
+            Debug.WriteLine(decoder.GetFirstValueByName("num"));
+            Debug.WriteLine(decoder.GetFirstValueByName("offset"));
+            var menu = new PopupMenu();
+            menu.Commands.Add(new UICommand("Citer", (command) =>
+            {
+                Debug.WriteLine("VM Open param=" + parameter);
+            }));
+
+            var chosenCommand = await menu.ShowAsync(new Point(100, Convert.ToDouble(decoder.GetFirstValueByName("offset")) + 44.0));
+            if (chosenCommand == null)
+            {
+                Debug.WriteLine("VM Dismiss param=" + parameter);
+            }
+        }
+
         private ObservableCollection<Topic> drapeaux;
         private bool _drapeauxLoading;
         private bool _drapeauxLoaded;
@@ -158,6 +189,8 @@ namespace Hfr.ViewModel
         #region commands
         public OpenTopicCommand OpenTopicCommand { get; } = new OpenTopicCommand();
         public RefreshDrapsCommand RefreshDrapsCommand { get; } = new RefreshDrapsCommand();
+        public ContextMessageCommand ContextMessageCommand { get; } = new ContextMessageCommand();
+        
 #warning "for debugging purpose"
         public ShowEditorCommand ShowEditorCommand { get; } = new ShowEditorCommand();
         #endregion

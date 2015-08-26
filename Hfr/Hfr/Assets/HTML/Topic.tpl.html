@@ -17,6 +17,25 @@
         //from HFR
         //1- Spoiler
         function swap_spoiler_states(obj) { var div = obj.getElementsByTagName('div'); if (div[0]) { if (div[0].style.visibility == "visible") { div[0].style.visibility = 'hidden'; } else if (div[0].style.visibility == "hidden" || !div[0].style.visibility) { div[0].style.visibility = 'visible'; } } }
+        function md_verif_size(which, aaa, aab) { }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            //window.location.hash = "#bas";
+        }, false);
+
+        function contextMenu(event, el, string) {
+            console.log(event);
+            console.log(string);
+            console.log(el);
+            console.log(el.offsetTop + " scroll= " + el.scrollTop);
+            console.log(Math.floor(el.getBoundingClientRect().top) + " scroll= " + window.pageYOffset);
+            
+            //window.location = "http://local/popup/?" + el;
+            window.location = "http://local/popup/?" + string;
+            //event.stopPropagation();
+            return false;
+        }
+        
     </script>
 
 </body>

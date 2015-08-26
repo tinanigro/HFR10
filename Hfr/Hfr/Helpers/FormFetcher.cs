@@ -104,14 +104,14 @@ namespace Hfr.Helpers
             {
                 formInputs.Add(node.GetAttributeValue("name", ""), WebUtility.HtmlDecode(node.InnerText) + Environment.NewLine);
             }
-
-            //Debug.WriteLine("Parsing OK");
             
+            //Debug.WriteLine("Parsing OK");
+
             //foreach (KeyValuePair<string, string> entry in formInputs)
             //{
             //    Debug.WriteLine("inputs = " + entry.Key + " " + entry.Value);
             //}
-            
+
             return new Editor
             {
                 FromUrl = formUrl,

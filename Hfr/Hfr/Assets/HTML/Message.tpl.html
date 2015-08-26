@@ -3,7 +3,7 @@
     
     <div class="header">
         <div class="avatar %%no_avatar_class%%" style="background-image:url('%%AUTEUR_AVATAR%%')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+        <div class="action"><a href="#" onclick="contextMenu(event, this, 'num=' +this.parentNode.parentNode.parentNode.id + '&offset=' + Math.floor(this.getBoundingClientRect().top)); return false;"> Citer </a></div>
         <div class="infos">
             <div class="auteur_pseudo">%%AUTEUR_PSEUDO%%</div>
             <div class="message_date">%%MESSAGE_DATE%%</div>

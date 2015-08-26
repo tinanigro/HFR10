@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:triggers="using:WinRT.Triggers"
+
       DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
       mc:Ignorable="d">
     <Page.Resources>
@@ -169,7 +170,8 @@
             </Grid>
             <WebView x:Name="TopicWebView"
                      x:FieldModifier="public"
-                     Grid.Row="1" />
+                     Grid.Row="1" NavigationStarting="TopicWebView_OnNavigationStarting" >
+            </WebView>
         </Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
