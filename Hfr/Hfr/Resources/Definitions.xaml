@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:Hfr.Resources">
+    <GridLength x:Key="DefaultMarginGridLength">12</GridLength>
+
+    <Thickness x:Key="DefaultMarginVertical">0,12</Thickness>
+    <Thickness x:Key="DefaultMarginTop">0,12,0,0</Thickness>
+    <Thickness x:Key="DefaultMarginLeft">12,0,0,0</Thickness>
+
+    <x:Double x:Key="SidebarCompactWidth">70</x:Double>
+    <GridLength x:Key="SidebarCompactWidthGridLength">70</GridLength>
+</ResourceDictionary>

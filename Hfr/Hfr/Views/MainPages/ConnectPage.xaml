@@ -4,78 +4,140 @@
       xmlns:local="using:Hfr.Views.MainPages"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:shellControls="using:Hfr.Views.ShellControls"
       xmlns:triggers="using:WinRT.Triggers"
       mc:Ignorable="d"
       DataContext="{Binding Source={StaticResource Locator}, Path=Main.AccountManager}">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="12" />
-            <ColumnDefinition />
-            <ColumnDefinition Width="12" />
-        </Grid.ColumnDefinitions>
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="{StaticResource SeparatorGridLength}" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="{StaticResource SeparatorGridLength}" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="{StaticResource SeparatorGridLength}" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="{StaticResource SeparatorGridLength}" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <Image Grid.RowSpan="11"
-               Grid.ColumnSpan="3"
-               Source="ms-appx:///Assets/Wallpapers/wallpaper.jpg"
-               Opacity="0.8"
-               Stretch="UniformToFill" />
-        <TextBlock Grid.Row="1"
-                   Grid.Column="1"
-                   Text="Bienvenue"
-                   Style="{StaticResource HeaderTextBlockStyle}"
-                   HorizontalAlignment="Center" />
-        <TextBox Grid.Row="3"
-                 Grid.Column="1"
-                 PlaceholderText="Pseudo"
-                 Style="{StaticResource BorderlessTextBoxStyle}"
-                 Text="{Binding CurrentAccount.Pseudo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                 MaxWidth="350"
-                 IsEnabled="{Binding CurrentAccount.IsConnecting, Converter={StaticResource NegatedBooleanConverter}}" />
-        <PasswordBox Grid.Row="5"
-                     Grid.Column="1"
-                     PlaceholderText="Mot de passe"
-                     Style="{StaticResource BorderlessPasswordBoxStyle}"
-                     Password="{Binding CurrentAccount.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     MaxWidth="350"
-                     IsEnabled="{Binding CurrentAccount.IsConnecting, Converter={StaticResource NegatedBooleanConverter}}">
-            <triggers:Interactions.Triggers>
-                <triggers:EventTrigger EventName="KeyDown">
-                    <triggers:InvokeCommandAction Command="{Binding ConnectCommand}"
-                                                                              PassEventArgsToCommand="True" />
-                </triggers:EventTrigger>
-            </triggers:Interactions.Triggers>
-        </PasswordBox>
-        <TextBlock Grid.Row="7"
-                   Grid.Column="1"
-                   Text="{Binding CurrentAccount.ConnectionErrorStatus, UpdateSourceTrigger=PropertyChanged}"
-                   Visibility="{Binding CurrentAccount.ConnectionErrorTextVisible}"
-                   HorizontalAlignment="Center" />
-        <Button Grid.Row="9"
-                Grid.Column="1"
-                Content="Connexion"
-                Command="{Binding ConnectCommand}"
-                HorizontalAlignment="Center"
-                Width="160"
-                FontSize="22"
-                FontWeight="Light"
-                IsEnabled="{Binding CurrentAccount.IsConnecting, Converter={StaticResource NegatedBooleanConverter}}" />
-        <ProgressBar Grid.Row="7"
-                     Grid.Column="1"
-                     IsIndeterminate="True"
-                     VerticalAlignment="Top"
-                     Visibility="{Binding CurrentAccount.ConnectingVisible}" />
+
+        <shellControls:Header x:Name="Header"
+                              HeaderContent="Connexion" />
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <ImageBrush Stretch="UniformToFill"
+                            ImageSource="ms-appx:///Assets/Wallpapers/background.jpg" />
+            </Grid.Background>
+            <RelativePanel x:Name="FormPanel"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Width="250"
+                           Margin="0,-50,0,0">
+                <TextBlock x:Name="Logo"
+                           Margin="0,0,0,40"
+                           RelativePanel.AlignTopWithPanel="True"
+                           RelativePanel.AlignHorizontalCenterWithPanel="True">
+                    <Run Text="HFR"
+                         FontSize="88" />
+                    <LineBreak />
+                    <Run Text="Logo designer needed :o"
+                         Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                </TextBlock>
+                <TextBlock x:Name="PseudoHeaderTextBlock"
+                           Text="PSEUDO"
+                           Margin="{StaticResource DefaultMarginTop}"
+                           Style="{StaticResource TranslucentSubheaderTextBlockStyle}"
+                           RelativePanel.Below="Logo" />
+                <TextBox x:Name="PseudoTextBox"
+                         Style="{StaticResource TransparentTextBoxStyle}"
+                         Margin="{StaticResource DefaultMarginTop}"
+                         FontWeight="Medium"
+                         PlaceholderText="pseudo"
+                         Text="{Binding CurrentAccount.Pseudo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         MaxWidth="350"
+                         RelativePanel.Below="PseudoHeaderTextBlock"
+                         RelativePanel.AlignLeftWithPanel="True"
+                         RelativePanel.AlignRightWithPanel="True" />
+                <TextBlock x:Name="PasswordHeaderTextBlock"
+                           Text="MOT DE PASSE"
+                           Margin="{StaticResource DefaultMarginTop}"
+                           Style="{StaticResource TranslucentSubheaderTextBlockStyle}"
+                           RelativePanel.Below="PseudoTextBox" />
+                <PasswordBox x:Name="PasswordTextBox"
+                             PlaceholderText="mot de passe"
+                             Password="{Binding CurrentAccount.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             MaxWidth="350"
+                             Margin="{StaticResource DefaultMarginTop}"
+                             Style="{StaticResource TransparentPasswordStyle}"
+                             RelativePanel.Below="PasswordHeaderTextBlock"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True">
+                    <triggers:Interactions.Triggers>
+                        <triggers:EventTrigger EventName="KeyDown">
+                            <triggers:InvokeCommandAction Command="{Binding ConnectCommand}"
+                                                          PassEventArgsToCommand="True" />
+                        </triggers:EventTrigger>
+                    </triggers:Interactions.Triggers>
+                </PasswordBox>
+                <Button x:Name="ConnectButton"
+                        Content="Connexion"
+                        Command="{Binding ConnectCommand}"
+                        Margin="{StaticResource DefaultMarginTop}"
+                        HorizontalAlignment="Stretch"
+                        RelativePanel.Below="PasswordTextBox"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.AlignRightWithPanel="True" />
+            </RelativePanel>
+        </Grid>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="HamburgerStates">
+                <VisualState x:Name="YesHamburger">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Header.HamburgerVisible"
+                                Value="True" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NoHamburger">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1000" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Header.HamburgerVisible"
+                                Value="False" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+            <VisualStateGroup x:Name="WindowHeightStates">
+                <VisualState x:Name="Tall">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="450"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Logo.Visibility"
+                                Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Tiny">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="0"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Logo.Visibility"
+                                Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+            <VisualStateGroup x:Name="ConnectionStates">
+                <VisualState x:Name="Connecting">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{Binding CurrentAccount.IsConnecting}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ConnectButton.IsEnabled"
+                                Value="False" />
+                        <Setter Target="ConnectButton.Content"
+                                Value="Connecting" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>

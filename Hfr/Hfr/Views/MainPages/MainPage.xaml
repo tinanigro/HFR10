@@ -33,9 +33,7 @@
             <ColumnDefinition x:Name="TopicsColumnDefinition" />
             <ColumnDefinition x:Name="TopicContentColumnDefinition" />
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0"
-              Background="{ThemeResource SemiDarkBrush}"
-              RequestedTheme="Light">
+        <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Height="50" />
@@ -146,14 +144,67 @@
                      Grid.Row="1"
                      PlaceholderText="entrez un mot clé ..."
                      Style="{StaticResource BorderlessTextBoxStyle}" />
-        </Grid>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <AppBarButton x:Name="HamburgerButton"
+                              DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
+                              Command="{Binding OpenSplitViewPaneCommand}">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets"
+                                  Glyph=""
+                                  FontSize="28" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <TextBox x:Name="SearchBox"
+                         Grid.Column="1"
+                         PlaceholderText="entrez un mot clé ..."
+                         Margin="12,6"
+                         VerticalAlignment="Center" />
+            </Grid>
+            <ListView Grid.Row="1"
+                      ItemsSource="{Binding Source={StaticResource DrapsCvs}}"
+                      ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}"
+                      SelectionMode="None"
+                      IsItemClickEnabled="True"
+                      ItemClick="Drapeaux_ItemClick"
+                      ItemTemplate="{StaticResource FlagItemTemplate}">
+                <triggers:Interactions.Triggers>
+                    <triggers:EventTrigger EventName="ItemClick">
+                        <triggers:InvokeCommandAction Command="{Binding OpenTopicCommand}"
+                                                      PassEventArgsToCommand="True" />
+                    </triggers:EventTrigger>
+                </triggers:Interactions.Triggers>
+                <ListView.GroupStyle>
+                    <GroupStyle HeaderTemplate="{StaticResource CategoriesHeaderTemplate}">
+                        <GroupStyle.HeaderContainerStyle>
+                            <Style TargetType="ListViewHeaderItem">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Stretch" />
+                                <Setter Property="Padding"
+                                        Value="-4" />
+                            </Style>
+                        </GroupStyle.HeaderContainerStyle>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+                <ListView.ItemContainerTransitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition />
+                    </TransitionCollection>
+                </ListView.ItemContainerTransitions>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsStackPanel />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+
             <Grid Background="{ThemeResource DarkMainBrush}"
                   RequestedTheme="Dark">
+
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition Width="Auto" />

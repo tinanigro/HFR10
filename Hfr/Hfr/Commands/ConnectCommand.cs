@@ -23,13 +23,14 @@ namespace Hfr.Commands
                 else
                     return;
             }
-            
+
             if (Loc.Main.AccountManager.Accounts.FirstOrDefault(x => x.Pseudo == Loc.Main.AccountManager.CurrentAccount.Pseudo) != null) return;
             await ThreadUI.Invoke(() =>
             {
                 Loc.Main.AccountManager.CurrentAccount.ConnectionErrorStatus = "Connecting";
                 Loc.Main.AccountManager.CurrentAccount.IsConnecting = true;
             });
+
             bool success = await Loc.Main.AccountManager.CurrentAccount.BeginAuthentication(true);
             if (success)
             {

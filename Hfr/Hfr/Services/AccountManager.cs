@@ -33,6 +33,20 @@ namespace Hfr.Services
                 {
                     CurrentAccount = accounts[0];
 #warning "Optimistic: any account/cookies is supposed valid, proper implementation needed (cookies timeout check)"
+
+                    bool success = await CurrentAccount.BeginAuthentication(false);
+                    if (success)
+                    {
+                        await ThreadUI.Invoke(() =>
+                        {
+                            Loc.Main.AccountManager.CurrentAccount.IsConnected = false;
+                            Loc.NavigationService.Navigate(Page.Main);
+                        });
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Login failed");
+                    }
                 }
                 else
                 {

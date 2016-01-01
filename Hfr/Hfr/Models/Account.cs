@@ -11,8 +11,17 @@ namespace Hfr.Model
         private int userId;
         private string _avatarId;
         private string cookieContainer;
+
         private bool isConnecting;
         private string connectionErrorStatus;
+        private bool isConnected;
+
+        public Account()
+        {
+            IsConnecting = false;
+            IsConnected = false;
+            Pseudo = "Not connected";
+        }
 
         //TODO: Prevent two accounts with same pseudo in database
         [PrimaryKey]
@@ -71,5 +80,12 @@ namespace Hfr.Model
         }
 
         public string CookieContainer { get; set; }
+
+        [Ignore]
+        public bool IsConnected
+        {
+            get { return isConnected; }
+            set { Set(ref isConnected, value); }
+        }
     }
 }

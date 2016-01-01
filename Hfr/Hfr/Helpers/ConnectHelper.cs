@@ -14,7 +14,7 @@ namespace Hfr.Helpers
 {
     public static class ConnectHelper
     {
-        public static async Task<bool> BeginAuthentication(this Account account, bool firstConnection)
+        public static Task<bool> BeginAuthentication(this Account account, bool firstConnection)
         {
             Debug.WriteLine("Begin connection");
             var tcs = new TaskCompletionSource<bool>();
@@ -82,7 +82,7 @@ namespace Hfr.Helpers
                     tcs.SetResult(false);
                 }
             }, request);
-            return await tcs.Task;
+            return tcs.Task;
         }
 
         static async Task GetAvatar(Account account)

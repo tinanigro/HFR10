@@ -10,7 +10,6 @@
 
     <Grid HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch"
-          RequestedTheme="Light"
           DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
@@ -18,105 +17,87 @@
             <RowDefinition Height="60" />
             <RowDefinition Height="60" />
             <RowDefinition Height="60" />
-            <RowDefinition Height="60" />
             <RowDefinition />
             <RowDefinition Height="80" />
             <RowDefinition Height="80" />
         </Grid.RowDefinitions>
-        <Grid Background="{ThemeResource DarkMainBrush}"
-              RequestedTheme="Dark">
-            <AppBarButton Style="{StaticResource AppBarButtonStyleHorizontal}">
-                <AppBarButton.Icon>
-                    <FontIcon Glyph="{StaticResource Hamburger}"
-                              FontSize="26"
-                              FontFamily="Segoe MDL2 Assets" />
-                </AppBarButton.Icon>
-            </AppBarButton>
-        </Grid>
+        <local:Hamburger />
         <Grid Grid.Row="2">
-            <AppBarButton Label="Nouveau ..."
-                          Foreground="{StaticResource MainBrush}"
-                          Style="{StaticResource AppBarButtonStyleHorizontal}">
-                <AppBarButton.Icon>
-                    <FontIcon Glyph="{StaticResource AddSymbol}"
-                              FontSize="26"
-                              FontFamily="Segoe MDL2 Assets" />
-                </AppBarButton.Icon>
-            </AppBarButton>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource SidebarCompactWidthGridLength}" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Viewbox Height="28"
+                     Width="28"
+                     HorizontalAlignment="Center">
+                <SymbolIcon Symbol="Flag" />
+            </Viewbox>
+            <TextBlock Grid.Column="1"
+                       Text="Drapeaux"
+                       FontSize="22"
+                       FontWeight="SemiLight"
+                       VerticalAlignment="Center" />
         </Grid>
         <Grid Grid.Row="3">
-            <AppBarButton Label="Drapeaux"
-                          Style="{StaticResource AppBarButtonStyleHorizontal}">
-                <AppBarButton.Icon>
-                    <FontIcon Glyph="{StaticResource Flag}"
-                              FontSize="26"
-                              FontFamily="Segoe MDL2 Assets" />
-                </AppBarButton.Icon>
-            </AppBarButton>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource SidebarCompactWidthGridLength}" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Viewbox Height="28"
+                     Width="28"
+                     HorizontalAlignment="Center">
+                <SymbolIcon Symbol="Mail" />
+            </Viewbox>
+            <TextBlock Grid.Column="1"
+                       Text="Messages privés"
+                       FontSize="22"
+                       FontWeight="SemiLight"
+                       VerticalAlignment="Center" />
         </Grid>
         <Grid Grid.Row="4">
-            <AppBarButton Label="Messages privés"
-                          Style="{StaticResource AppBarButtonStyleHorizontal}">
-                <AppBarButton.Icon>
-                    <FontIcon Glyph="{StaticResource Message}"
-                              FontSize="26"
-                              FontFamily="Segoe MDL2 Assets" />
-                </AppBarButton.Icon>
-            </AppBarButton>
-        </Grid>
-        <Grid Grid.Row="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="{StaticResource SidebarCompactWidthGridLength}" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="12" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Viewbox Height="36"
-                     Width="36"
+            <Viewbox Height="28"
+                     Width="28"
                      HorizontalAlignment="Center">
                 <SymbolIcon Symbol="List" />
             </Viewbox>
             <TextBlock Grid.Column="1"
-                       Text="catégories"
-                       FontSize="26"
-                       FontWeight="Light"
+                       Text="Catégories"
+                       FontSize="22"
+                       FontWeight="SemiLight"
                        VerticalAlignment="Center" />
             <TextBlock Grid.Column="3"
                        Text=""
                        FontFamily="Segoe MDL2 Assets"
-                       FontSize="22"
-                       Foreground="{ThemeResource MainBrush}"
+                       FontSize="16"
                        VerticalAlignment="Center" />
         </Grid>
-        
-        <AppBarButton Grid.Row="7"
-                      Style="{StaticResource AppBarButtonStyleHorizontal}"
+        <AppBarButton Grid.Row="6"
                       Icon="Setting"
-                      Label="Paramètres"/>
+                      Label="paramètres"
+                      Style="{StaticResource HorizontalAppBarButton}"/>
 
-
-        <Button Grid.Row="8"
-                HorizontalAlignment="Left"
-                Style="{StaticResource TextBlockButtonStyle}">
-            <Grid HorizontalAlignment="Left">
+        <Button Grid.Row="7"
+                Style="{StaticResource TransparentButtonStyle}"
+                Height="{StaticResource SidebarCompactWidth}">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="6" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Ellipse Stretch="Uniform"
-                         Height="58"
-                         Width="58"
-                         Stroke="DimGray"
-                         StrokeThickness="1">
-                    <Ellipse.Fill>
-                        <ImageBrush ImageSource="{Binding AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}" />
-                    </Ellipse.Fill>
-                </Ellipse>
+                <Image Source="{Binding AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}"
+                       Stretch="UniformToFill" />
                 <TextBlock Grid.Column="2"
-                           Text="consulter le profil"
                            VerticalAlignment="Center"
-                           Style="{StaticResource BodyTextBlockStyle}" />
+                           Style="{StaticResource BodyTextBlockStyle}">
+                    <Run Text="{Binding AccountManager.CurrentAccount.Pseudo}" />
+                </TextBlock>
             </Grid>
         </Button>
     </Grid>
