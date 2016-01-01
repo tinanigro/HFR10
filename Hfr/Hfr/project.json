@@ -7,7 +7,6 @@
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
     "MvvmLightLibs": "5.1.1",
     "Newtonsoft.Json": "6.0.8",
-    "SQLitePCL.raw": "0.8.1",
     "WinRTTriggers": "1.6.0"
   },
   "frameworks": {

@@ -8,56 +8,6 @@
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="400">
-    <SplitView x:Name="SplitView"
-               x:FieldModifier="public"
-               Background="{ThemeResource DarkerWhiteBrush}"
-               PaneBackground="{ThemeResource DarkerWhiteBrush}"
-               OpenPaneLength="300"
-               CompactPaneLength="70">
-        <SplitView.Pane>
-            <shellControls:Sidebar/>
-        </SplitView.Pane>
-        <SplitView.Content>
-            <Frame x:Name="NavigationFrame"
-                   x:FieldModifier="public" />
-        </SplitView.Content>
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="ExtraNarrow">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="SplitView.DisplayMode"
-                                Value="Overlay" />
-                        <Setter Target="SplitView.IsPaneOpen"
-                                Value="False" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="Narrow">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="550" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="SplitView.DisplayMode"
-                                Value="CompactInline" />
-                        <Setter Target="SplitView.IsPaneOpen"
-                                Value="False" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="Standard">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1000" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="SplitView.DisplayMode"
-                                Value="Inline" />
-                        <Setter Target="SplitView.IsPaneOpen"
-                                Value="True" />
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-    </SplitView>
-
+    <Frame x:Name="NavigationFrame"
+           x:FieldModifier="public" />
 </UserControl>

@@ -1,6 +1,6 @@
-﻿using System.Net;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using SQLite;
+using Windows.UI.Xaml;
 
 namespace Hfr.Model
 {
@@ -10,6 +10,9 @@ namespace Hfr.Model
         private string password;
         private int userId;
         private string _avatarId;
+        private string cookieContainer;
+        private bool isConnecting;
+        private string connectionErrorStatus;
 
         //TODO: Prevent two accounts with same pseudo in database
         [PrimaryKey]
@@ -27,14 +30,8 @@ namespace Hfr.Model
 
         public int UserId
         {
-            get
-            {
-                return userId;
-            }
-            set
-            {
-                Set(ref userId, value);
-            }
+            get { return userId; }
+            set { Set(ref userId, value); }
         }
 
         public string AvatarId
@@ -43,7 +40,36 @@ namespace Hfr.Model
             set { Set(ref _avatarId, value); }
         }
 
-        [Ignore]
-        public CookieContainer CookieContainer { get; set; }
+        public string ConnectionErrorStatus
+        {
+            get { return connectionErrorStatus; }
+            set
+            {
+                Set(ref connectionErrorStatus, value);
+                RaisePropertyChanged(nameof(ConnectionErrorTextVisible));
+            }
+        }
+
+        public Visibility ConnectionErrorTextVisible
+        {
+            get { return string.IsNullOrEmpty(connectionErrorStatus) ? Visibility.Collapsed : Visibility.Visible; }
+        }
+
+        public bool IsConnecting
+        {
+            get { return isConnecting; }
+            set
+            {
+                Set(ref isConnecting, value);
+                RaisePropertyChanged(nameof(ConnectingVisible));
+            }
+        }
+
+        public Visibility ConnectingVisible
+        {
+            get { return IsConnecting ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
+        public string CookieContainer { get; set; }
     }
 }

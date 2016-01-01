@@ -3,13 +3,11 @@ using Hfr.Utilities;
 using Hfr.ViewModel;
 using HtmlAgilityPack;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -25,14 +23,25 @@ namespace Hfr.Helpers
             await ThreadUI.Invoke(() =>
             {
                 Loc.Main.Drapeaux = draps;
-                Loc.Main.DrapsGrouped = draps.GroupBy(x => x.TopicCatName);
+                if (draps != null)
+                {
+                    Loc.Main.DrapsGrouped = draps.GroupBy(x => x.TopicCatName);
+                }
+                
             });
         }
 
         public static async Task<ObservableCollection<Topic>> Fetch()
         {
-            var html = await HttpClientHelper.Get(HFRUrl.DrapFavUrl, Loc.Main.AccountManager.CurrentAccount.CookieContainer);
+            var html = await HttpClientHelper.Get(HFRUrl.DrapFavUrl);
             if (string.IsNullOrEmpty(html)) return null;
+
+            /* DG */
+            Stopwatch stopwatch = new Stopwatch();
+            Debug.WriteLine("Start Bench");
+            stopwatch.Reset();
+            stopwatch.Start();
+            /* DG */
 
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
@@ -60,6 +69,8 @@ namespace Hfr.Helpers
                     x.GetAttributeValue("class", "") == "cCatTopic" &&
                     x.GetAttributeValue("title", "").Contains("Sujet"))
                     .Select(y => y.GetAttributeValue("href", "")).ToArray();
+            
+            //Debug.WriteLine(string.Join("\n\r", favorisTopicUri));
 
             string[] favorisLastPost = htmlDoc.DocumentNode.Descendants("td")
                 .Where(x => x.GetAttributeValue("class", "").Contains("sujetCase9"))
@@ -74,9 +85,20 @@ namespace Hfr.Helpers
                 .Where(x => x.GetAttributeValue("href", "").Contains("#t"))
                 .Select(y => y.GetAttributeValue("href", "")).ToArray();
 
+            //Debug.WriteLine(string.Join("\n\r", favorisBalise));
+
             string[] mpArray =
                 htmlDoc.DocumentNode.Descendants("a").Where(x => x.GetAttributeValue("class", "") == "red")
                 .Select(y => y.InnerText).ToArray();
+
+
+            /* DG */
+            stopwatch.Stop();
+            Debug.WriteLine("Bench Middle: " + stopwatch.ElapsedTicks +
+            " mS: " + stopwatch.ElapsedMilliseconds);
+            stopwatch.Reset();
+            stopwatch.Start();
+            /* DG */
 
             int j = 0;
             var topics = new ObservableCollection<Topic>();
@@ -130,6 +152,9 @@ namespace Hfr.Helpers
                     var pageNumber = int.Parse(WebUtility.HtmlDecode(favorisBalise[j])
                         .Substring(firstPageNumber, lastPageNumber - firstPageNumber));
 
+                    // URL du flag
+                    var drapURI = WebUtility.HtmlDecode(favorisBalise[j]);
+
                     // Formatage topic name
                     string topicNameFav = TopicNameHelper.Shorten(WebUtility.HtmlDecode(line));
 
@@ -168,11 +193,19 @@ namespace Hfr.Helpers
                         TopicCurrentPage = pageNumber,
                         TopicReponseId = reponseId,
                         TopicIndexCategory = HFRCats.GetHFRIndexFromId(topicCatId),
+                        TopicDrapURI = drapURI,
                     });
                     j++;
                 }
                 i++;
             }
+
+            /* DG */
+            stopwatch.Stop();
+            Debug.WriteLine("Bench End: " + stopwatch.ElapsedTicks +
+            " mS: " + stopwatch.ElapsedMilliseconds);
+            /* DG */
+
             Debug.WriteLine("Drapeaux fetched");
             return topics;
         }

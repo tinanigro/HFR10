@@ -1,0 +1,42 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta name='viewport' content='initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link type='text/css' rel='stylesheet' href='ms-appx-web:///Assets/HTML/Style.css' />
+
+    <style type='text/css'>
+        /* PLACEHOLDER FOR USER FONT SIZE */
+    </style>
+</head>
+<body>
+    <div id='hfr_internal_wrapper'>%%MESSAGES%%</div>
+    <a id='bas'></a>
+
+    <script type='text/javascript'>
+        //from HFR
+        //1- Spoiler
+        function swap_spoiler_states(obj) { var div = obj.getElementsByTagName('div'); if (div[0]) { if (div[0].style.visibility == "visible") { div[0].style.visibility = 'hidden'; } else if (div[0].style.visibility == "hidden" || !div[0].style.visibility) { div[0].style.visibility = 'visible'; } } }
+        function md_verif_size(which, aaa, aab) { }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            //window.location.hash = "#bas";
+        }, false);
+
+        function contextMenu(event, el, string) {
+            console.log(event);
+            console.log(string);
+            console.log(el);
+            console.log(el.offsetTop + " scroll= " + el.scrollTop);
+            console.log(Math.floor(el.getBoundingClientRect().top) + " scroll= " + window.pageYOffset);
+            
+            //window.location = "http://local/popup/?" + el;
+            window.location = "http://local/popup/?" + string;
+            //event.stopPropagation();
+            return false;
+        }
+        
+    </script>
+
+</body>
+</html>

@@ -95,19 +95,23 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\ConnectCommand.cs" />
-    <Compile Include="Commands\OpenTopicCommand.cs" />
-    <Compile Include="Commands\UI\OpenSplitViewPaneCommand.cs" />
+    <Compile Include="Commands\EditorCommands.cs" />
+    <Compile Include="Commands\MessagesCommands.cs" />
+    <Compile Include="Commands\TopicsCommands.cs" />
     <Compile Include="Converters\AvatarIdToUrlConverter.cs" />
+    <Compile Include="Converters\NegatedBooleanConverter.cs" />
     <Compile Include="Databases\AccountDataRepository.cs" />
     <Compile Include="Databases\IDataRepository.cs" />
     <Compile Include="Helpers\AppViewHelper.cs" />
     <Compile Include="Helpers\ConnectHelper.cs" />
     <Compile Include="Helpers\DrapFetcher.cs" />
+    <Compile Include="Helpers\FormFetcher.cs" />
     <Compile Include="Helpers\HttpClientHelper.cs" />
-    <Compile Include="Helpers\ThraedUI.cs" />
+    <Compile Include="Helpers\ThreadUI.cs" />
     <Compile Include="Helpers\TopicFetcher.cs" />
     <Compile Include="Helpers\TopicNameHelper.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Editor.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Topic.cs" />
@@ -122,11 +126,16 @@
     </Compile>
     <Compile Include="Utilities\Command.cs" />
     <Compile Include="Utilities\HFRCats.cs" />
+    <Compile Include="Utilities\HFRRessources.cs" />
     <Compile Include="Utilities\HFRUrl.cs" />
+    <Compile Include="ViewModel\EditorViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\MainPages\ConnectPage.xaml.cs">
       <DependentUpon>ConnectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainPages\EditorPage.xaml.cs">
+      <DependentUpon>EditorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -147,7 +156,13 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Assets\HTML\Message.tpl.html" />
+    <Content Include="Assets\HTML\Style.css" />
+    <EmbeddedResource Include="Assets\HTML\Topic.tpl.html" />
+    <Content Include="Assets\HTML\UI\no_avatar.png" />
+    <Content Include="Assets\HTML\UI\rsz_no_avatar.png" />
     <Content Include="Assets\Wallpapers\hero.jpg" />
+    <Content Include="Assets\Wallpapers\wallpaper.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
@@ -180,6 +195,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MainPages\EditorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainPages\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -194,9 +213,18 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="Microsoft.VCLibs.120, Version=14.0">
-      <Name>Microsoft Visual C++ 2013 Runtime Package for Windows Universal</Name>
+    <SDKReference Include="Microsoft.VCLibs, Version=14.0">
+      <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
     </SDKReference>
+    <SDKReference Include="SQLite.UAP.2015, Version=3.8.11.1">
+      <Name>SQLite for Universal App Platform</Name>
+    </SDKReference>
+    <SDKReference Include="WindowsMobile, Version=10.0.10240.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\UI\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

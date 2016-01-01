@@ -1,13 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="using:Hfr.Resources">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!-- Headers -->
     <DataTemplate x:Key="CategoriesHeaderTemplate">
-        <Grid Background="{ThemeResource DarkerGrayBrush}">
-            <TextBlock Text="{Binding Key}"
-                       Style="{StaticResource BodyTextBlockStyle}"
-                       Margin="12,6" />
-        </Grid>
+        <TextBlock Text="{Binding Key}"
+                   Style="{StaticResource SubheaderTextBlockStyle}"
+                   Foreground="{StaticResource MainBrush}"
+                   Margin="0,12" />
     </DataTemplate>
 
     <!-- Item Templates -->
@@ -19,35 +17,31 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="12" />
                 <ColumnDefinition />
                 <ColumnDefinition Width="12" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="12" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="1"
-                       Grid.ColumnSpan="3"
+            <TextBlock Grid.ColumnSpan="3"
                        Text="{Binding TopicName}"
                        TextWrapping="NoWrap"
                        TextTrimming="CharacterEllipsis"
                        FontWeight="Normal"
                        FontSize="18" />
             <TextBlock Grid.Row="1"
-                       Grid.Column="1"
                        Text="{Binding TopicLastPost}"
                        Foreground="DimGray"
                        VerticalAlignment="Bottom" />
-            <TextBlock Grid.Column="3"
+            <TextBlock Grid.Column="2"
                        Grid.Row="1"
                        Foreground="{StaticResource MainBrush}">
-                                    <Run Text="{Binding TopicCurrentPage}" />
-                                    <Run Text="{Binding TopicNbPage}"
-                                         FontSize="20"
-                                         FontWeight="Light" />
+                <Run Text="{Binding TopicCurrentPage}" />
+                <Run Text="{Binding TopicNbPage}"
+                        FontSize="20"
+                        FontWeight="Light" />
             </TextBlock>
             <Grid Grid.Row="2"
                   Grid.Column="0"
-                  Grid.ColumnSpan="4"
+                  Grid.ColumnSpan="3"
                   Background="{ThemeResource DarkerGrayBrush}"
                   Height="1"
                   Margin="0,6,0,0" />

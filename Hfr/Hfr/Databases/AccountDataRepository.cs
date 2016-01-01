@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using Hfr.Model;
 using SQLite;
+using System.Diagnostics;
 
 namespace Hfr.Database
 {
@@ -19,6 +19,8 @@ namespace Hfr.Database
         {
             using (var connection = new SQLiteConnection(_dbPath))
             {
+                //Display local path at launch
+                Debug.WriteLine(Windows.Storage.ApplicationData.Current.LocalFolder.Path);
                 connection.CreateTable<Account>();
             }
         }

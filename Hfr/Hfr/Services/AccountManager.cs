@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Hfr.Commands;
@@ -13,7 +12,7 @@ namespace Hfr.Services
 {
     public class AccountManager
     {
-        private AccountDataRepository accountDataRepository;
+        private AccountDataRepository accountDataRepository = new AccountDataRepository();
         private ConnectCommand connectCommand = new ConnectCommand();
         public List<Account> Accounts = new List<Account>();
         public Account CurrentAccount { get; set; }
@@ -33,18 +32,7 @@ namespace Hfr.Services
                 if (accounts.Count == 1)
                 {
                     CurrentAccount = accounts[0];
-                    bool success = await CurrentAccount.BeginAuthentication(false);
-                    if (success)
-                    {
-                        await ThreadUI.Invoke(() =>
-                        {
-                            Loc.NavigationService.Navigate(Page.Main);
-                        });
-                    }
-                    else
-                    {
-                        Debug.WriteLine("Login failed");
-                    }
+#warning "Optimistic: any account/cookies is supposed valid, proper implementation needed (cookies timeout check)"
                 }
                 else
                 {
@@ -57,7 +45,7 @@ namespace Hfr.Services
                 await ThreadUI.Invoke(() =>
                 {
                     CurrentAccount = new Account();
-                    Loc.NavigationService.Navigate(Page.Connect);
+                    Loc.NavigationService.Navigate(View.Connect);
                 });
             }
         }

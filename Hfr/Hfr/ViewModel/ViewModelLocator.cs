@@ -12,7 +12,6 @@
   See http://www.galasoft.ch/mvvm
 */
 
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Hfr.Services.Classes;
 using Microsoft.Practices.ServiceLocation;
@@ -44,6 +43,7 @@ namespace Hfr.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<EditorViewModel>();
             SimpleIoc.Default.Register<NavigationService>();
         }
 
@@ -52,6 +52,14 @@ namespace Hfr.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
+            }
+        }
+
+        public static EditorViewModel Editor
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<EditorViewModel>();
             }
         }
 
