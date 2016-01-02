@@ -11,9 +11,14 @@
     <GridLength x:Key="DefaultMarginGridLength">12</GridLength>
 
     <Thickness x:Key="DefaultMarginVertical">0,12</Thickness>
+    <Thickness x:Key="DefaultMarginHorizontal">12,0</Thickness>
     <Thickness x:Key="DefaultMarginTop">0,12,0,0</Thickness>
     <Thickness x:Key="DefaultMarginLeft">12,0,0,0</Thickness>
+    <Thickness x:Key="DefaultMarginRight">0,0,12,0</Thickness>
 
     <x:Double x:Key="SidebarCompactWidth">70</x:Double>
     <GridLength x:Key="SidebarCompactWidthGridLength">70</GridLength>
+    
+    <GridLength x:Key="DefaultTextBlockHeightGridLength">25</GridLength>
+    <x:Double x:Key="DefaultTextBlockHeight">25</x:Double>
 </ResourceDictionary>
