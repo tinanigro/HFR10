@@ -132,8 +132,7 @@ namespace Hfr.Helpers
                 }
 
                 TempHTMLTopic = BodyTemplate.Replace("%%MESSAGES%%", TempHTMLMessagesList);
-                //Debug.WriteLine(TempHTMLTopic);
-                (Loc.NavigationService.CurrentPage as MainPage).TopicWebView.NavigateToString(TempHTMLTopic);
+                currentTopic.RenderedHtml = TempHTMLTopic;
             });
         }
     }
