@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 using Hfr.Commands;
 using Hfr.Database;
 using Hfr.Helpers;
@@ -40,7 +42,7 @@ namespace Hfr.Services
                         await ThreadUI.Invoke(() =>
                         {
                             Loc.Main.AccountManager.CurrentAccount.IsConnected = false;
-                            Loc.NavigationService.Navigate(Page.Main);
+                            Loc.NavigationService.Navigate(View.Main);
                         });
                     }
                     else
