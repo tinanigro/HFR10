@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
+using Hfr.Utilities;
 
 namespace Hfr.Helpers
 {
@@ -50,7 +51,7 @@ namespace Hfr.Helpers
                     cleanCookies();
                     Debug.WriteLine("Get Helper url = " + url);
 
-                    var baseAddress = new Uri("http://forum.hardware.fr");
+                    var baseAddress = new Uri(HFRUrl.ForumUrl);
                     var cookieContainr = new CookieContainer();
                     var handler = new HttpClientHandler();
                     handler.CookieContainer = cookieContainr;
@@ -106,7 +107,7 @@ namespace Hfr.Helpers
                     cleanCookies();
                     Debug.WriteLine("Post Helper url = " + url);
 
-                    var baseAddress = new Uri("http://forum.hardware.fr");
+                    var baseAddress = new Uri(HFRUrl.ForumUrl);
                     var cookieContainr = new CookieContainer();
                     var handler = new HttpClientHandler();
                     handler.CookieContainer = cookieContainr;
