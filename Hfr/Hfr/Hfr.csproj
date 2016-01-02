@@ -98,7 +98,9 @@
     <Compile Include="Commands\EditorCommands.cs" />
     <Compile Include="Commands\MessagesCommands.cs" />
     <Compile Include="Commands\TopicsCommands.cs" />
+    <Compile Include="Commands\UI\NavigateToSettings.cs" />
     <Compile Include="Commands\UI\OpenSplitViewPaneCommand.cs" />
+    <Compile Include="Commands\UI\SetDefaultColumnViewCommand.cs" />
     <Compile Include="Converters\AvatarIdToUrlConverter.cs" />
     <Compile Include="Converters\NegatedBooleanConverter.cs" />
     <Compile Include="Databases\AccountDataRepository.cs" />
@@ -116,6 +118,7 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Editor.cs" />
+    <Compile Include="Models\MainColumn.cs" />
     <Compile Include="Models\PrivateChat.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Post.cs" />

@@ -37,29 +37,58 @@
             <mainPageControls:CategoriesList x:Name="CategoriesList"
                                              Grid.Column="2" />
             <mainPageControls:MessagesList x:Name="MessagesList"
-                                             Grid.Column="4" />
+                                           Grid.Column="4" />
             <local:TopicView x:Name="TopicGrid"
                              Grid.Column="2"
                              Grid.ColumnSpan="3" />
 
         </Grid>
-        <CommandBar Grid.Row="2"
+        <CommandBar x:Name="MainCommandBar" 
+                    Grid.Row="2"
                     Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
+            <CommandBar.Content>
+                <Grid>
+                    <AppBarButton Label="Search"
+                                  Icon="Find" />
+                </Grid>
+            </CommandBar.Content>
             <CommandBar.PrimaryCommands>
-                <AppBarButton x:Name="appBarButton"
-                              HorizontalAlignment="Stretch"
-                              Icon="Sync"
-                              Label=""
-                              VerticalAlignment="Stretch"
-                              Command="{Binding RefreshDrapsCommand}" />
+                <AppBarToggleButton x:Name="TopicsListButton"
+                                    Icon="Flag"
+                                    Label="Drapeaux"
+                                    IsChecked="{Binding TopicListColumnVisible, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    Visibility="Collapsed"
+                                    Command="{Binding SetDefaultColumnViewCommand}"
+                                    CommandParameter="0"/>
+                <AppBarToggleButton x:Name="CategoriesListButton"
+                                    Grid.Column="1"
+                                    Icon="List"
+                                    Label="Catégories"
+                                    IsChecked="{Binding CategoriesListColumnVisible, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    Visibility="Collapsed"
+                                    Command="{Binding SetDefaultColumnViewCommand}"
+                                    CommandParameter="1" />
+                <AppBarToggleButton x:Name="PrivateChatsButton"
+                                    Grid.Column="2"
+                                    Icon="Mail"
+                                    Label="Messages privés"
+                                    IsChecked="{Binding PrivateChatsColumnVisible, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    Visibility="Collapsed"
+                                    Command="{Binding SetDefaultColumnViewCommand}"
+                                    CommandParameter="2" />
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="Settings"
+                              Command="{Binding NavigateToSettings}"/>
                 <AppBarButton x:Name="appBarButton1"
                               HorizontalAlignment="Stretch"
                               Icon="Add"
-                              Label=""
+                              Label="Test Reponse - DEBUG only"
                               VerticalAlignment="Stretch"
                               Command="{Binding ShowEditorCommand}"
+                              Visibility="Collapsed"
                               CommandParameter="{Binding Source='http://debug'}" />
-            </CommandBar.PrimaryCommands>
+            </CommandBar.SecondaryCommands>
         </CommandBar>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
@@ -103,6 +132,12 @@
                     </VisualState.StateTriggers>
 
                     <VisualState.Setters>
+                        <Setter Target="TopicsListButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="PrivateChatsButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="CategoriesListButton.Visibility"
+                                Value="Visible" />
                         <Setter Target="TopicGrid.Visibility"
                                 Value="Collapsed" />
                         <Setter Target="CategoriesList.Visibility"
@@ -111,6 +146,62 @@
                                 Value="Visible" />
                         <Setter Target="MessagesList.Visibility"
                                 Value="Collapsed" />
+                        <Setter Target="ThirdColumnDefinition.Width"
+                                Value="0" />
+                        <Setter Target="SecondColumnDefinition.Width"
+                                Value="0" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="CategoriesListColumnVisible">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{Binding CategoriesListColumnVisible}" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="TopicsListButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="PrivateChatsButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="CategoriesListButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="TopicGrid.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="CategoriesList.Visibility"
+                                Value="Visible" />
+                        <Setter Target="CategoriesList.(Grid.Column)"
+                                Value="0"/>
+                        <Setter Target="TopicsList.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="MessagesList.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="ThirdColumnDefinition.Width"
+                                Value="0" />
+                        <Setter Target="SecondColumnDefinition.Width"
+                                Value="0" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PrivateChatsColumnVisible">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{Binding PrivateChatsColumnVisible}" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="TopicsListButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="PrivateChatsButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="CategoriesListButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="TopicGrid.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="CategoriesList.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="TopicsList.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="MessagesList.Visibility"
+                                Value="Visible" />
+                        <Setter Target="MessagesList.(Grid.Column)"
+                                Value="0" />
                         <Setter Target="ThirdColumnDefinition.Width"
                                 Value="0" />
                         <Setter Target="SecondColumnDefinition.Width"
@@ -131,10 +222,14 @@
                                 Value="Collapsed" />
                         <Setter Target="MessagesList.Visibility"
                                 Value="Collapsed" />
-                        <Setter Target="FirstColumnDefinition.Width"
+                        <Setter Target="MainCommandBar.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="TopicGrid.(Grid.Column)"
+                                Value="0" />
+                        <Setter Target="ThirdColumnDefinition.Width"
                                 Value="0" />
                         <Setter Target="SecondColumnDefinition.Width"
-                                Value="*" />
+                                Value="0" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="FirstColumnAndTopicVisible">
@@ -152,6 +247,8 @@
                         <Setter Target="CategoriesList.Visibility"
                                 Value="Collapsed" />
                         <Setter Target="MessagesList.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="MainCommandBar.Visibility"
                                 Value="Collapsed" />
                     </VisualState.Setters>
                 </VisualState>

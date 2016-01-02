@@ -27,30 +27,60 @@ namespace Hfr.ViewModel
         private int _selectedTopic;
         private bool _drapeauxLoading;
         private bool _drapeauxLoaded;
-        private bool isCategoriesLoading;
-        private bool isPrivateChatsLoading;
+        private bool _categoriesLoading;
+        private bool _privateChatsLoading;
 
-        private bool IsDrapeauxLoading
+        private MainColumn _mainColumn;
+        private bool _firstColumnAndTopicVisible;
+        private bool _allColumnsVisible;
+        private bool _twoColumnsVisible;
+        private bool _topicListColumnVisible;
+        private bool _topicViewColumnVisible;
+        private bool _categoriesListColumnVisible;
+        private bool _privateChatsColumnVisible;
+
+        public bool IsDrapeauxLoading
         {
             get { return _drapeauxLoading; }
             set
             {
                 Set(ref _drapeauxLoading, value);
-                if (value)
-                    Set(ref _drapeauxLoaded, false);
+                RaisePropertyChanged(nameof(LoadingTopicsList));
             }
         }
 
-        private bool IsDrapeauxLoaded
+        public bool IsDrapeauxLoaded
         {
             get { return _drapeauxLoaded; }
             set
             {
                 Set(ref _drapeauxLoaded, value);
-                if (value)
-                    Set(ref _drapeauxLoading, false);
             }
         }
+
+        public bool IsCategoriesLoading
+        {
+            get { return _categoriesLoading;}
+            set
+            {
+                Set(ref _categoriesLoading, value);
+                RaisePropertyChanged(nameof(LoadingCategoriesList));
+            }
+        }
+
+        public bool IsPrivateChatsLoading
+        {
+            get { return _privateChatsLoading; }
+            set
+            {
+                Set(ref _privateChatsLoading, value); 
+                RaisePropertyChanged(nameof(LoadingPrivateChatsList));
+            }
+        }
+
+        public Visibility LoadingTopicsList => IsDrapeauxLoading ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility LoadingCategoriesList => IsCategoriesLoading ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility LoadingPrivateChatsList => IsPrivateChatsLoading ? Visibility.Visible: Visibility.Collapsed;
         #endregion
 
         #region private fields
@@ -61,11 +91,6 @@ namespace Hfr.ViewModel
         private IEnumerable<IGrouping<string, SubCategory>> _catsGrouped;
         private IEnumerable<IGrouping<string, PrivateChat>> _privateChatsGrouped;
         private ObservableCollection<Topic> _topics = new ObservableCollection<Topic>();
-        private bool _firstColumnAndTopicVisible;
-        private bool _allColumnsVisible;
-        private bool _twoColumnsVisible;
-        private bool _topicListColumnVisible;
-        private bool _topicViewColumnVisible;
 
         #endregion
         #region public fields
@@ -81,20 +106,28 @@ namespace Hfr.ViewModel
             {
                 Set(ref drapeaux, value);
                 IsDrapeauxLoaded = true;
-                RaisePropertyChanged(nameof(LoadingScreenDraps));
+                IsDrapeauxLoading = false;
             }
         }
 
         public List<SubCategory> Categories
         {
             get { return _categories; }
-            set { Set(ref _categories, value); }
+            set
+            {
+                Set(ref _categories, value);
+                IsCategoriesLoading = false;
+            }
         }
 
         public List<PrivateChat> PrivateChats
         {
             get { return privateChats; }
-            set { Set(ref privateChats, value); }
+            set
+            {
+                Set(ref privateChats, value);
+                IsPrivateChatsLoading = false;
+            }
         }
 
         public IEnumerable<IGrouping<string, Topic>> DrapsGrouped
@@ -141,8 +174,7 @@ namespace Hfr.ViewModel
             }
             set { Set(ref _privateChatsGrouped, value); }
         }
-        public Visibility LoadingScreenDraps => IsDrapeauxLoaded ? Visibility.Collapsed : Visibility.Visible;
-
+        
         public ObservableCollection<Topic> Topics
         {
             get { return _topics; }
@@ -218,10 +250,35 @@ namespace Hfr.ViewModel
             set { Set(ref _twoColumnsVisible, value); }
         }
 
+        public MainColumn DefaultColumn
+        {
+            get { return _mainColumn; }
+            set
+            {
+                Set(ref _mainColumn, value);
+                TriggerUIAdapter();
+            }
+        }
+
         public bool TopicListColumnVisible
         {
             get { return _topicListColumnVisible; }
             set { Set(ref _topicListColumnVisible, value); }
+        }
+
+        public bool CategoriesListColumnVisible
+        {
+            get { return _categoriesListColumnVisible; }
+            set
+            {
+                Set(ref _categoriesListColumnVisible, value);
+            }
+        }
+
+        public bool PrivateChatsColumnVisible
+        {
+            get { return _privateChatsColumnVisible; }
+            set { Set(ref _privateChatsColumnVisible, value); }
         }
 
         public bool TopicViewColumnVisible
@@ -238,7 +295,11 @@ namespace Hfr.ViewModel
             FirstColumnAndTopicVisible = false;
             AllColumnsVisible = false;
             TwoColumnsVisible = false;
+
             TopicListColumnVisible = false;
+            CategoriesListColumnVisible = false;
+            PrivateChatsColumnVisible = false;
+
             // TODO : Use UI logic here instead of lazy loading it into properties.
             var width = Window.Current.Bounds.Width;
             if (CurrentTopic != null)
@@ -256,7 +317,18 @@ namespace Hfr.ViewModel
             {
                 if (width < Strings.PortraitWidth)
                 {
-                    TopicListColumnVisible = true;
+                    switch (DefaultColumn)
+                    {
+                        case MainColumn.TopicsList:
+                            TopicListColumnVisible = true;
+                            break;
+                        case MainColumn.CategoriesList:
+                            CategoriesListColumnVisible = true;
+                            break;
+                        case MainColumn.PrivateChats:
+                            PrivateChatsColumnVisible = true;
+                            break;
+                    }
                 }
                 else if (width < Strings.NormalWidth)
                 {
@@ -274,24 +346,26 @@ namespace Hfr.ViewModel
             if (!IsDrapeauxLoading)
             {
                 IsDrapeauxLoading = true;
+                IsDrapeauxLoaded = false;
+                DrapsGrouped = null;
                 Task.Run(async () => await DrapFetcher.GetDraps());
             }
         }
 
         public void RefreshCats()
         {
-            if (!isCategoriesLoading)
+            if (!_categoriesLoading)
             {
-                isCategoriesLoading = true;
+                IsCategoriesLoading = true;
                 Task.Run(async () => await CatFetcher.GetCats());
             }
         }
 
         public void RefreshPrivateChats()
         {
-            if (!isPrivateChatsLoading)
+            if (!_privateChatsLoading)
             {
-                isPrivateChatsLoading = true;
+                IsPrivateChatsLoading = true;
                 Task.Run(async () => await PrivateChatsFetcher.GetPrivateChats());
             }
         }
@@ -334,8 +408,10 @@ namespace Hfr.ViewModel
 
 #warning "for debugging purpose"
         public ShowEditorCommand ShowEditorCommand { get; } = new ShowEditorCommand();
+
         public OpenSplitViewPaneCommand OpenSplitViewPaneCommand { get; } = new OpenSplitViewPaneCommand();
 
+        public SetDefaultColumnViewCommand SetDefaultColumnViewCommand { get; } = new SetDefaultColumnViewCommand();
 
         public NavigateToSettings NavigateToSettings { get; } = new NavigateToSettings();
         #endregion
