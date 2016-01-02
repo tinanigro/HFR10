@@ -14,12 +14,17 @@
             <ColumnDefinition x:Name="HamburgerButtonColumn" 
                               Width="Auto" />
             <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <local:Hamburger x:Name="HamburgerButton"/>
         <TextBlock x:Name="HeaderTextBlock" 
                    Grid.Column="1"
                    Text="HEADER"
                    FontWeight="SemiBold"
-                   VerticalAlignment="Center" />
+                   VerticalAlignment="Center" 
+                   TextTrimming="CharacterEllipsis"
+                   TextWrapping="NoWrap"/>
+        <ContentPresenter x:Name="RightContentPresenter"
+                          Grid.Column="2"/>
     </Grid>
 </UserControl>

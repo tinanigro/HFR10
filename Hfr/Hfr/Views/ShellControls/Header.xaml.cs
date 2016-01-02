@@ -54,5 +54,28 @@ namespace Hfr.Views.ShellControls
             HamburgerButtonColumn.Width = (HamburgerVisible) ? new GridLength() : Strings.DefaultMargin;
             HamburgerButton.Visibility = (HamburgerVisible) ? Visibility.Visible : Visibility.Collapsed;
         }
+
+
+
+        public object RightContent
+        {
+            get { return (object)GetValue(RightContentProperty); }
+            set { SetValue(RightContentProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for RightContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RightContentProperty =
+            DependencyProperty.Register(nameof(RightContent), typeof(object), typeof(Header), new PropertyMetadata(null, RightContentPropertyChanged));
+
+        private static void RightContentPropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            var that = dependencyObject as Header;
+            that.UpdateRightContent();
+        }
+
+        void UpdateRightContent()
+        {
+            RightContentPresenter.Content = RightContent;
+        }
     }
 }
