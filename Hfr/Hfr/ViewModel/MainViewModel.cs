@@ -337,6 +337,7 @@ namespace Hfr.ViewModel
         public OpenSplitViewPaneCommand OpenSplitViewPaneCommand { get; } = new OpenSplitViewPaneCommand();
 
 
+        public NavigateToSettings NavigateToSettings { get; } = new NavigateToSettings();
         #endregion
 
         public MainViewModel()

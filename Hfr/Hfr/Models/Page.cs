@@ -4,6 +4,7 @@
     {
         Connect,
         Main,
-        Editor
+        Editor,
+        Settings
     }
 }

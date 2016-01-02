@@ -61,6 +61,7 @@ namespace Hfr.Services.Classes
                     }
                     break;
                 case View.Editor:
+                case View.Settings:
                     _navigationFrame.GoBack();
                     CurrentView = View.Main;
                     break;
@@ -93,6 +94,9 @@ namespace Hfr.Services.Classes
                     break;
                 case View.Editor:
                     _navigationFrame.Navigate(typeof(EditorPage), parameter);
+                    break;
+                case View.Settings:
+                    _navigationFrame.Navigate(typeof (Settings));
                     break;
                 default:
                     break;
