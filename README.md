@@ -1,2 +1,2 @@
 # HFR4WinRT
-Pour tous les HFRiens utilisant Windows 8.1 ou Windows Phone
+Pour tous les HFRiens utilisant Windows 10 sur leur PC, tablette, ou téléphone.
