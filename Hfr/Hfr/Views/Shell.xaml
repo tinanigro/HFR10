@@ -19,7 +19,17 @@
         </SplitView.Pane>
         <SplitView.Content>
             <Frame x:Name="NavigationFrame"
-                   x:FieldModifier="public" />
+                   x:FieldModifier="public">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition>
+                            <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                <DrillInNavigationTransitionInfo />
+                            </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                        </NavigationThemeTransition>
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+            </Frame>
         </SplitView.Content>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
