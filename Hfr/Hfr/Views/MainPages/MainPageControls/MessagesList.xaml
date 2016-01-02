@@ -25,7 +25,8 @@
         </Grid.RowDefinitions>
         <shellControls:Header HeaderContent="Messages privés" />
         <SemanticZoom Grid.Row="1"
-                      Margin="{StaticResource DefaultMarginHorizontal}">
+                      Margin="{StaticResource DefaultMarginHorizontal}"
+                      ViewChangeCompleted="SemanticZoom_OnViewChangeCompleted">
             <SemanticZoom.ZoomedInView>
                 <ListView ItemsSource="{Binding Source={StaticResource PrivateChatsCvs}}"
                           ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}"

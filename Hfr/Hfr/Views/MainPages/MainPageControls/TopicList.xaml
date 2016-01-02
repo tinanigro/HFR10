@@ -86,7 +86,7 @@
         </SemanticZoom>
 
         <StackPanel Grid.Row="1"
-                    Visibility="{Binding LoadingScreenDraps}"
+                    Visibility="{Binding LoadingTopicsList}"
                     VerticalAlignment="Center">
             <ProgressRing IsActive="True"
                           Height="100"

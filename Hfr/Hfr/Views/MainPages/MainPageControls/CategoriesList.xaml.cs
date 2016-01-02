@@ -8,5 +8,10 @@ namespace Hfr.Views.MainPages.MainPageControls
         {
             this.InitializeComponent();
         }
+
+        private void SemanticZoom_ViewChangeStarted(object sender, SemanticZoomViewChangedEventArgs e)
+        {
+            CatsZoomeOutListView.ItemsSource = CatsCvs.View.CollectionGroups;
+        }
     }
 }
