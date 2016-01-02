@@ -20,7 +20,12 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <shellControls:Header HeaderContent="Drapeaux"/>
+        <shellControls:Header HeaderContent="Drapeaux">
+            <shellControls:Header.RightContent>
+                <AppBarButton Icon="Sync"
+                              Command="{Binding RefreshDrapsCommand}" />
+            </shellControls:Header.RightContent>
+        </shellControls:Header>
         <SemanticZoom Grid.Row="1"
                       Margin="{StaticResource DefaultMarginHorizontal}"
                       ViewChangeCompleted="SemanticZoom_OnViewChangeCompleted">
