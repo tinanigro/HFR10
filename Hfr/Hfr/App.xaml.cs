@@ -59,7 +59,6 @@ namespace Hfr
                 }
             }
             AppViewHelper.SetAppView();
-            Loc.NavigationService.Navigate(View.Main);
             Window.Current.Activate();
         }
 
