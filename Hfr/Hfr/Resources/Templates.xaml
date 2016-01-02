@@ -3,16 +3,17 @@
     <!-- Headers -->
     <DataTemplate x:Key="CategoriesHeaderTemplate">
         <TextBlock Text="{Binding Key}"
+                   Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"
                    Style="{StaticResource SubheaderTextBlockStyle}"
-                   Foreground="{StaticResource MainBrush}"
                    Margin="0,12" />
     </DataTemplate>
 
     <!-- Item Templates -->
     <DataTemplate x:Key="FlagItemTemplate">
-        <Grid Margin="0,6,0,0">
+        <Grid Padding="0,6,0,0"
+              Margin="{StaticResource DefaultMarginRight}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="{StaticResource DefaultTextBlockHeightGridLength}" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -26,24 +27,63 @@
                        TextWrapping="NoWrap"
                        TextTrimming="CharacterEllipsis"
                        FontWeight="Normal"
-                       FontSize="18" />
+                       FontSize="15" />
             <TextBlock Grid.Row="1"
                        Text="{Binding TopicLastPost}"
-                       Foreground="DimGray"
+                       Foreground="{ThemeResource SystemControlForegroundBaseLowBrush}"
                        VerticalAlignment="Bottom" />
 
             <TextBlock Grid.Column="3"
                        Grid.Row="1">
-                                    <Run Text="{Binding TopicCurrentPage}" />
-                                    <Run Text="{Binding TopicNbPage}"
-                                         FontSize="20"
-                                         FontWeight="Light" />
+                <Run Text="{Binding TopicCurrentPage}"
+                     Foreground="{ThemeResource SystemControlForegroundBaseLowBrush}" />
+                <Run Text="{Binding TopicNbPage}"
+                     FontSize="18"
+                     FontWeight="Light"
+                     Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
             </TextBlock>
             <Grid Grid.Row="2"
                   Grid.Column="0"
                   Grid.ColumnSpan="4"
                   Height="1"
                   Margin="0,6,0,0" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SubCatItemTemplate">
+        <Grid Height="{StaticResource DefaultTextBlockHeight}"
+              Margin="{StaticResource DefaultMarginRight}">
+            <TextBlock Text="{Binding Name}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="PrivateChatItemTemplate">
+        <Grid Padding="0,6"
+              Margin="{StaticResource DefaultMarginRight}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource DefaultTextBlockHeightGridLength}" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="{StaticResource DefaultMarginGridLength}" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0"
+                       Grid.ColumnSpan="3"
+                       Text="{Binding Subject}"
+                       TextWrapping="NoWrap"
+                       TextTrimming="CharacterEllipsis"
+                       FontWeight="Normal"
+                       FontSize="15" />
+            <TextBlock Grid.Column="2"
+                       Grid.Row="1"
+                       Text="{Binding Poster}"
+                       Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+            <TextBlock Grid.Column="0"
+                       Grid.Row="1"
+                       Text="{Binding DateTimeString}"
+                       Foreground="{ThemeResource SystemControlForegroundBaseLowBrush}" />
         </Grid>
     </DataTemplate>
 </ResourceDictionary>
