@@ -98,7 +98,5 @@ namespace Hfr.Helpers
                 await ThreadUI.Invoke(() => account.AvatarId = userAvatarFileArray[0].Split('/')[4].Replace(".jpg", "").Replace("mesdiscussions-", ""));
             }
         }
-
-
     }
 }

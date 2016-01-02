@@ -29,6 +29,4 @@ namespace Hfr.Commands
             Loc.Main.RefreshDraps();
         }
     }
-
-    
 }

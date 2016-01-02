@@ -104,6 +104,7 @@ namespace Hfr.Services.Classes
             CurrentView = page;
             ShowBackButtonIfCanGoBack();
         }
+
         public void Navigate(View page)
         {
             Navigate(page, null);

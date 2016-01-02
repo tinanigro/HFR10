@@ -94,7 +94,7 @@
                         <Setter Target="MessagesList.Visibility"
                                 Value="Collapsed" />
                         <Setter Target="ThirdColumnDefinition.Width"
-                                Value="0" /> 
+                                Value="0" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="TopicListColumnVisible">

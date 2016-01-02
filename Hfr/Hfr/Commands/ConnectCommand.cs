@@ -13,7 +13,6 @@ namespace Hfr.Commands
     {
         public override async void Execute(object parameter)
         {
-
             /* Connect when ENTER key is pressed */
             var keyStroke = parameter as KeyRoutedEventArgs;
             if (keyStroke != null)
