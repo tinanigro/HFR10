@@ -24,11 +24,8 @@ namespace Hfr
             private set { Window.Current.Content = value; }
         }
 
-        public static Frame NavigationFrame
-        {
-            get { return AppShell?.NavigationFrame; }
-        }
-        
+        public static Frame NavigationFrame => AppShell?.NavigationFrame;
+
         public App()
         {
             this.InitializeComponent();
