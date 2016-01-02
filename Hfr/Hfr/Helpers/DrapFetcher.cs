@@ -27,11 +27,10 @@ namespace Hfr.Helpers
                 {
                     Loc.Main.DrapsGrouped = draps.GroupBy(x => x.TopicCatName);
                 }
-                
             });
         }
 
-        public static async Task<ObservableCollection<Topic>> Fetch()
+        static async Task<ObservableCollection<Topic>> Fetch()
         {
             var html = await HttpClientHelper.Get(HFRUrl.DrapFavUrl);
             if (string.IsNullOrEmpty(html)) return null;
