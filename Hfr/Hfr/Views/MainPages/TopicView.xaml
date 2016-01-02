@@ -1,41 +1,34 @@
-﻿<UserControl
-    x:Class="Hfr.Views.MainPages.TopicView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Hfr.Views.MainPages"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:shellControls="using:Hfr.Views.ShellControls"
-    mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+﻿<UserControl x:Class="Hfr.Views.MainPages.TopicView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:Hfr.Views.MainPages"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shellControls="using:Hfr.Views.ShellControls"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="400">
 
     <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <shellControls:Header HeaderContent="{Binding CurrentTopic.TopicName}" />
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       Text="{Binding CurrentTopic.TopicName}" />
-            <AppBarButton Grid.Column="1"
-                          Icon="Add" />
-            <AppBarButton Grid.Column="2"
-                          Icon="Refresh" />
-        </Grid>
+        <shellControls:Header HeaderContent="{Binding CurrentTopic.TopicName}">
+            <shellControls:Header.RightContent>
+                <AppBarButton Icon="Refresh" />
+            </shellControls:Header.RightContent>
+        </shellControls:Header>
         <WebView x:Name="TopicWebView"
                  x:FieldModifier="public"
-                 Grid.Row="2"
-                 NavigationStarting="TopicWebView_OnNavigationStarting">
-        </WebView>
+                 Grid.Row="1"
+                 NavigationStarting="TopicWebView_OnNavigationStarting" />
+        <CommandBar Grid.Row="2">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="Répondre"
+                              Icon="Add"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
     </Grid>
 </UserControl>
