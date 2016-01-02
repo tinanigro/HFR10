@@ -5,261 +5,154 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:triggers="using:WinRT.Triggers"
-
+      xmlns:shellControls="using:Hfr.Views.ShellControls"
+      xmlns:mainPageControls="using:Hfr.Views.MainPages.MainPageControls"
       DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
       mc:Ignorable="d">
-    <Page.Resources>
-        <CollectionViewSource x:Key="DrapsCvs"
-                              x:Name="DrapsCvs"
-                              IsSourceGrouped="True"
-                              Source="{Binding DrapsGrouped}" />
-    </Page.Resources>
 
-    <Page.BottomAppBar>
-        <AppBar ClosedDisplayMode="Compact" Style="{StaticResource AppBarStyleNoExpandBtn}">
-            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
-                <AppBarButton x:Name="appBarButton" HorizontalAlignment="Stretch" Icon="Sync" Label="" VerticalAlignment="Stretch" Command="{Binding RefreshDrapsCommand}">
+    <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="FirstColumnDefinition" 
+                                  Width="3*"/>
+                <ColumnDefinition Width="1" />
+                <ColumnDefinition x:Name="SecondColumnDefinition"
+                                  Width="2*" />
+                <ColumnDefinition Width="1" />
+                <ColumnDefinition x:Name="ThirdColumnDefinition"
+                                  Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1"
+                  Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" />
+            <Grid Grid.Column="3"
+                  Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" />
 
-                </AppBarButton>
-                <AppBarButton x:Name="appBarButton1" HorizontalAlignment="Stretch" Icon="Add" Label="" VerticalAlignment="Stretch" Command="{Binding ShowEditorCommand}" CommandParameter="{Binding Source='http://debug'}">
+            <mainPageControls:TopicList x:Name="TopicsList"
+                                        Grid.Column="0" />
+            <mainPageControls:CategoriesList x:Name="CategoriesList"
+                                             Grid.Column="2" />
+            <mainPageControls:MessagesList x:Name="MessagesList"
+                                             Grid.Column="4" />
+            <local:TopicView x:Name="TopicGrid"
+                             Grid.Column="2"
+                             Grid.ColumnSpan="3" />
 
-                </AppBarButton>
-            </StackPanel>
-            <!--<AutoSuggestBox Grid.Column="1" Width="300" Height="50" HorizontalAlignment="Right"/>-->
-        </AppBar>
-    </Page.BottomAppBar>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="TopicsColumnDefinition" />
-            <ColumnDefinition x:Name="TopicContentColumnDefinition" />
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition Height="50" />
-            </Grid.RowDefinitions>
-            <Pivot Grid.Row="0"
-                   Background="{StaticResource MainBrush}">
-                <PivotItem>
-                    <PivotItem.Header>
-                        <SymbolIcon Symbol="Favorite"/>
-
-                    </PivotItem.Header>
-                    <PivotItem.Content>
-                        <Grid>
-                            <SemanticZoom ViewChangeCompleted="SemanticZoom_OnViewChangeCompleted">
-                                <SemanticZoom.ZoomedInView>
-                                    <ListView ItemsSource="{Binding Source={StaticResource DrapsCvs}}"
-                                              ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}"
-                                              SelectionMode="None"
-                                              IsItemClickEnabled="True"
-                                              ItemClick="Drapeaux_ItemClick"
-                                              ItemTemplate="{StaticResource FlagItemTemplate}">
-                                        <triggers:Interactions.Triggers>
-                                            <triggers:EventTrigger EventName="ItemClick">
-                                                <triggers:InvokeCommandAction Command="{Binding OpenTopicCommand}"
-                                                                              PassEventArgsToCommand="True" />
-                                            </triggers:EventTrigger>
-                                        </triggers:Interactions.Triggers>
-                                        <ListView.GroupStyle>
-                                            <GroupStyle HeaderTemplate="{StaticResource CategoriesHeaderTemplate}">
-                                                <GroupStyle.HeaderContainerStyle>
-                                                    <Style TargetType="ListViewHeaderItem">
-                                                        <Setter Property="HorizontalContentAlignment"
-                                                                Value="Stretch" />
-                                                        <Setter Property="Margin"
-                                                                Value="-12,0" />
-                                                    </Style>
-                                                </GroupStyle.HeaderContainerStyle>
-                                            </GroupStyle>
-                                        </ListView.GroupStyle>
-                                        <ListView.ItemContainerTransitions>
-                                            <TransitionCollection>
-                                                <EntranceThemeTransition />
-                                                <AddDeleteThemeTransition />
-                                            </TransitionCollection>
-                                        </ListView.ItemContainerTransitions>
-                                        <ListView.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <ItemsStackPanel />
-                                            </ItemsPanelTemplate>
-                                        </ListView.ItemsPanel>
-                                    </ListView>
-                                </SemanticZoom.ZoomedInView>
-                                <SemanticZoom.ZoomedOutView>
-                                    <ListView x:Name="DrapsZoomeOutListView"
-                                              ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}"
-                                              SelectionMode="None"
-                                              IsItemClickEnabled="True">
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Group.Key}" />
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                        <ListView.ItemContainerTransitions>
-                                            <TransitionCollection>
-                                                <EntranceThemeTransition />
-                                            </TransitionCollection>
-                                        </ListView.ItemContainerTransitions>
-                                        <ListView.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <ItemsStackPanel />
-                                            </ItemsPanelTemplate>
-                                        </ListView.ItemsPanel>
-                                    </ListView>
-                                </SemanticZoom.ZoomedOutView>
-                            </SemanticZoom>
-
-                            <StackPanel Visibility="{Binding LoadingScreenDraps}"
-                                        VerticalAlignment="Center">
-                                <ProgressRing IsActive="True"
-                                              Height="100"
-                                              Width="100"
-                                              Foreground="{StaticResource MainBrush}"
-                                              VerticalAlignment="Center"
-                                              Margin="0,-50,0,0" />
-                                <TextBlock Text="Chargements des topics"
-                                           Style="{StaticResource SubtitleTextBlockStyle}"
-                                           Margin="0,12,0,0"
-                                           HorizontalAlignment="Center" />
-                            </StackPanel>
-                        </Grid>
-                    </PivotItem.Content>
-                </PivotItem>
-                <PivotItem>
-                    <PivotItem.Header>
-                        <SymbolIcon Symbol="List" VerticalAlignment="Center" Margin="0,3,0,0"/>
-
-                    </PivotItem.Header>
-
-                </PivotItem>
-                <PivotItem >
-                    <PivotItem.Header>
-                        <SymbolIcon Symbol="Mail" VerticalAlignment="Center"  Margin="0,3,0,0"/>
-
-                    </PivotItem.Header>
-                </PivotItem>
-            </Pivot>
-            <TextBox x:Name="SearchBox"
-                     Grid.Row="1"
-                     PlaceholderText="entrez un mot clé ..."
-                     Style="{StaticResource BorderlessTextBoxStyle}" />
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <AppBarButton x:Name="HamburgerButton"
-                              DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
-                              Command="{Binding OpenSplitViewPaneCommand}">
-                    <AppBarButton.Icon>
-                        <FontIcon FontFamily="Segoe MDL2 Assets"
-                                  Glyph=""
-                                  FontSize="28" />
-                    </AppBarButton.Icon>
-                </AppBarButton>
-                <TextBox x:Name="SearchBox"
-                         Grid.Column="1"
-                         PlaceholderText="entrez un mot clé ..."
-                         Margin="12,6"
-                         VerticalAlignment="Center" />
-            </Grid>
-            <ListView Grid.Row="1"
-                      ItemsSource="{Binding Source={StaticResource DrapsCvs}}"
-                      ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}"
-                      SelectionMode="None"
-                      IsItemClickEnabled="True"
-                      ItemClick="Drapeaux_ItemClick"
-                      ItemTemplate="{StaticResource FlagItemTemplate}">
-                <triggers:Interactions.Triggers>
-                    <triggers:EventTrigger EventName="ItemClick">
-                        <triggers:InvokeCommandAction Command="{Binding OpenTopicCommand}"
-                                                      PassEventArgsToCommand="True" />
-                    </triggers:EventTrigger>
-                </triggers:Interactions.Triggers>
-                <ListView.GroupStyle>
-                    <GroupStyle HeaderTemplate="{StaticResource CategoriesHeaderTemplate}">
-                        <GroupStyle.HeaderContainerStyle>
-                            <Style TargetType="ListViewHeaderItem">
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Stretch" />
-                                <Setter Property="Padding"
-                                        Value="-4" />
-                            </Style>
-                        </GroupStyle.HeaderContainerStyle>
-                    </GroupStyle>
-                </ListView.GroupStyle>
-                <ListView.ItemContainerTransitions>
-                    <TransitionCollection>
-                        <EntranceThemeTransition />
-                    </TransitionCollection>
-                </ListView.ItemContainerTransitions>
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <ItemsStackPanel />
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-            </ListView>
-
-            <Grid Background="{ThemeResource DarkMainBrush}"
-                  RequestedTheme="Dark">
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Left"
-                           Text="{Binding CurrentTopic.TopicName}" />
-                <AppBarButton Grid.Column="1"
-                              Icon="Add" />
-                <AppBarButton Grid.Column="2"
-                              Icon="Refresh" />
-            </Grid>
-            <WebView x:Name="TopicWebView"
-                     x:FieldModifier="public"
-                     Grid.Row="1" NavigationStarting="TopicWebView_OnNavigationStarting" >
-            </WebView>
         </Grid>
+        <CommandBar Grid.Row="2"
+                    Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="appBarButton"
+                              HorizontalAlignment="Stretch"
+                              Icon="Sync"
+                              Label=""
+                              VerticalAlignment="Stretch"
+                              Command="{Binding RefreshDrapsCommand}" />
+                <AppBarButton x:Name="appBarButton1"
+                              HorizontalAlignment="Stretch"
+                              Icon="Add"
+                              Label=""
+                              VerticalAlignment="Stretch"
+                              Command="{Binding ShowEditorCommand}"
+                              CommandParameter="{Binding Source='http://debug'}" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
-                <VisualState x:Name="Narrow">
+                <VisualState x:Name="AllColumnsVisible">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                        <StateTrigger IsActive="{Binding TopicVisible, Converter={StaticResource NegatedBooleanConverter}}" />
+                        <StateTrigger IsActive="{Binding AllColumnsVisible}" />
                     </VisualState.StateTriggers>
+
                     <VisualState.Setters>
-                        <Setter Target="TopicsColumnDefinition.Width"
-        					Value="*" />
-                        <Setter Target="TopicContentColumnDefinition.Width"
-        					Value="0" />
+                        <Setter Target="TopicGrid.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="CategoriesList.Visibility"
+                                Value="Visible" />
+                        <Setter Target="TopicsList.Visibility"
+                                Value="Visible" />
+                        <Setter Target="MessagesList.Visibility"
+                                Value="Visible" /> 
                     </VisualState.Setters>
                 </VisualState>
-                <VisualState x:Name="NarrowTopicVisible">
+                <VisualState x:Name="TwoColumnsVisible">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                        <StateTrigger IsActive="{Binding TopicVisible}" />
+                        <StateTrigger IsActive="{Binding TwoColumnsVisible}" />
                     </VisualState.StateTriggers>
+
                     <VisualState.Setters>
-                        <Setter Target="TopicsColumnDefinition.Width"
-        					Value="0" />
-                        <Setter Target="TopicContentColumnDefinition.Width"
-        					Value="*" />
+                        <Setter Target="TopicGrid.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="CategoriesList.Visibility"
+                                Value="Visible" />
+                        <Setter Target="TopicsList.Visibility"
+                                Value="Visible" />
+                        <Setter Target="MessagesList.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="ThirdColumnDefinition.Width"
+                                Value="0" /> 
                     </VisualState.Setters>
                 </VisualState>
-                <VisualState x:Name="Medium">
+                <VisualState x:Name="TopicListColumnVisible">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="700" />
-                        <StateTrigger IsActive="{Binding TopicVisible, Converter={StaticResource NegatedBooleanConverter}}" />
+                        <StateTrigger IsActive="{Binding TopicListColumnVisible}" />
                     </VisualState.StateTriggers>
+
                     <VisualState.Setters>
-                        <Setter Target="TopicsColumnDefinition.Width"
-        					Value="150" />
-                        <Setter Target="TopicContentColumnDefinition.Width"
-        					Value="*" />
+                        <Setter Target="TopicGrid.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="CategoriesList.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="TopicsList.Visibility"
+                                Value="Visible" />
+                        <Setter Target="MessagesList.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="ThirdColumnDefinition.Width"
+                                Value="0" />
+                        <Setter Target="SecondColumnDefinition.Width"
+                                Value="0" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="TopicViewVisible">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{Binding TopicViewColumnVisible}" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="TopicGrid.Visibility"
+                                Value="Visible" />
+                        <Setter Target="CategoriesList.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="TopicsList.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="MessagesList.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="FirstColumnDefinition.Width"
+                                Value="0" />
+                        <Setter Target="SecondColumnDefinition.Width"
+                                Value="*" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="FirstColumnAndTopicVisible">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{Binding FirstColumnAndTopicVisible}" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="FirstColumnDefinition.Width"
+                                Value="2*" />
+                        <Setter Target="TopicGrid.Visibility"
+                                Value="Visible" />
+                        <Setter Target="TopicsList.Visibility"
+                                Value="Visible" />
+                        <Setter Target="CategoriesList.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="MessagesList.Visibility"
+                                Value="Collapsed" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
