@@ -3,6 +3,7 @@ using Hfr.Views.MainPages;
 using Windows.UI.Core;
 using Hfr.ViewModel;
 using Hfr.Model;
+using Hfr.Views.MiscPages;
 
 namespace Hfr.Services.Classes
 {
