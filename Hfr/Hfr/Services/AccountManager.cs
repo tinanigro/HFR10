@@ -34,8 +34,13 @@ namespace Hfr.Services
                 if (accounts.Count == 1)
                 {
                     CurrentAccount = accounts[0];
+                    Loc.NavigationService.Navigate(View.Connect);
 #warning "Optimistic: any account/cookies is supposed valid, proper implementation needed (cookies timeout check)"
-
+                    await ThreadUI.Invoke(() =>
+                    {
+                        Loc.Main.AccountManager.CurrentAccount.ConnectionErrorStatus = "Connecting";
+                        Loc.Main.AccountManager.CurrentAccount.IsConnecting = true;
+                    });
                     bool success = await CurrentAccount.BeginAuthentication(false);
                     if (success)
                     {
