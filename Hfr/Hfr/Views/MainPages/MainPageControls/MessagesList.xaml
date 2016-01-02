@@ -65,7 +65,7 @@
                 </ListView>
             </SemanticZoom.ZoomedInView>
             <SemanticZoom.ZoomedOutView>
-                <ListView x:Name="DrapsZoomeOutListView"
+                <ListView x:Name="ChatsZoomeOutListView"
                           ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}"
                           SelectionMode="None"
                           IsItemClickEnabled="True">
