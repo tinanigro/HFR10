@@ -88,14 +88,14 @@
         </SemanticZoom>
 
         <StackPanel Grid.Row="1"
-                    Visibility="{Binding LoadingScreenDraps}"
+                    Visibility="{Binding LoadingCategoriesList}"
                     VerticalAlignment="Center">
             <ProgressRing IsActive="True"
                           Height="100"
                           Width="100"
                           VerticalAlignment="Center"
                           Margin="0,-50,0,0" />
-            <TextBlock Text="Chargements des topics"
+            <TextBlock Text="Chargements des catégories"
                        Style="{StaticResource SubtitleTextBlockStyle}"
                        Margin="0,12,0,0"
                        HorizontalAlignment="Center" />
