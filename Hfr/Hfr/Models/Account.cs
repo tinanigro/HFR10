@@ -20,7 +20,6 @@ namespace Hfr.Model
         {
             IsConnecting = false;
             IsConnected = false;
-            Pseudo = "Not connected";
         }
 
         //TODO: Prevent two accounts with same pseudo in database
