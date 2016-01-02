@@ -25,7 +25,7 @@
             <VisualStateGroup>
                 <VisualState x:Name="ExtraNarrow">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource MinimumWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="SplitView.DisplayMode"
@@ -36,7 +36,7 @@
                 </VisualState>
                 <VisualState x:Name="Standard">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1000" />
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="SplitView.DisplayMode"
