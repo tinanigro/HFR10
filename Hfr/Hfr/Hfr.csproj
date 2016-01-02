@@ -98,22 +98,28 @@
     <Compile Include="Commands\EditorCommands.cs" />
     <Compile Include="Commands\MessagesCommands.cs" />
     <Compile Include="Commands\TopicsCommands.cs" />
+    <Compile Include="Commands\UI\OpenSplitViewPaneCommand.cs" />
     <Compile Include="Converters\AvatarIdToUrlConverter.cs" />
     <Compile Include="Converters\NegatedBooleanConverter.cs" />
     <Compile Include="Databases\AccountDataRepository.cs" />
     <Compile Include="Databases\IDataRepository.cs" />
     <Compile Include="Helpers\AppViewHelper.cs" />
+    <Compile Include="Helpers\CatFetcher.cs" />
     <Compile Include="Helpers\ConnectHelper.cs" />
     <Compile Include="Helpers\DrapFetcher.cs" />
     <Compile Include="Helpers\FormFetcher.cs" />
     <Compile Include="Helpers\HttpClientHelper.cs" />
+    <Compile Include="Helpers\PrivateChatsFetcher.cs" />
     <Compile Include="Helpers\ThreadUI.cs" />
     <Compile Include="Helpers\TopicFetcher.cs" />
     <Compile Include="Helpers\TopicNameHelper.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Editor.cs" />
+    <Compile Include="Models\PrivateChat.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Models\Topic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountManager.cs" />
@@ -140,6 +146,18 @@
     </Compile>
     <Compile Include="Views\MainPages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainPages\MainPageControls\CategoriesList.xaml.cs">
+      <DependentUpon>CategoriesList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainPages\MainPageControls\MessagesList.xaml.cs">
+      <DependentUpon>MessagesList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainPages\MainPageControls\TopicList.xaml.cs">
+      <DependentUpon>TopicList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainPages\TopicView.xaml.cs">
+      <DependentUpon>TopicView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
@@ -211,6 +229,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPages\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainPages\MainPageControls\CategoriesList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainPages\MainPageControls\MessagesList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainPages\MainPageControls\TopicList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainPages\TopicView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
