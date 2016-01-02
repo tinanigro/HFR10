@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
+using Hfr.ViewModel;
 
 namespace Hfr.Model
 {
+    
     public class Topic : ViewModelBase
     {
         private string _html;
+        private string _renderedHtml;
+
+
+        
+
         public string TopicName { get; set; }
         public int TopicCatId { get; set; }
         public string TopicSubCatId { get; set; }
@@ -27,6 +34,16 @@ namespace Hfr.Model
         {
             get { return _html; }
             set { Set(ref _html, value); }
+        }
+
+        public string RenderedHtml
+        {
+            get { return _renderedHtml; }
+            set
+            {
+                Set(ref _renderedHtml, value);
+                Loc.Main.UpdateTopicWebView(this, value);
+            }
         }
     }
 }

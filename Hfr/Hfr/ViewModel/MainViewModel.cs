@@ -16,6 +16,7 @@ using Windows.UI.Xaml;
 
 namespace Hfr.ViewModel
 {
+    public delegate void TopicReadyToBeDisplayed(Topic topic, string computedHtml);
     public class MainViewModel : ViewModelBase
     {
         #region private fields
@@ -129,7 +130,11 @@ namespace Hfr.ViewModel
             get { return _topics; }
             set { Set(ref _topics, value); }
         }
-
+        #endregion
+        #region events
+        public event TopicReadyToBeDisplayed TopicReadyToBeDisplayed;
+        #endregion
+        #region public properties
         public int SelectedTopic
         {
             get { return _selectedTopic; }
