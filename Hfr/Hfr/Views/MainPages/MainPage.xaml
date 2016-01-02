@@ -18,8 +18,8 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="FirstColumnDefinition" 
-                                  Width="3*"/>
+                <ColumnDefinition x:Name="FirstColumnDefinition"
+                                  Width="3*" />
                 <ColumnDefinition Width="1" />
                 <ColumnDefinition x:Name="SecondColumnDefinition"
                                   Width="2*" />
@@ -105,7 +105,7 @@
                         <Setter Target="TopicsList.Visibility"
                                 Value="Visible" />
                         <Setter Target="MessagesList.Visibility"
-                                Value="Visible" /> 
+                                Value="Visible" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="TwoColumnsVisible">
