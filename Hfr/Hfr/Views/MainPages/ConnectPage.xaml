@@ -85,26 +85,6 @@
         </Grid>
 
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="HamburgerStates">
-                <VisualState x:Name="YesHamburger">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="Header.HamburgerVisible"
-                                Value="True" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="NoHamburger">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1000" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="Header.HamburgerVisible"
-                                Value="False" />
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
             <VisualStateGroup x:Name="WindowHeightStates">
                 <VisualState x:Name="Tall">
                     <VisualState.StateTriggers>
