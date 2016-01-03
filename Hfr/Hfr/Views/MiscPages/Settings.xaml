@@ -1,19 +1,39 @@
-﻿<Page
-    x:Class="Hfr.Views.MiscPages.Settings"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Hfr.Views.MiscPages"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+﻿<Page x:Class="Hfr.Views.MiscPages.Settings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:Hfr.Views.MiscPages"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      DataContext="{Binding Source={StaticResource Locator}, Path=Settings}">
 
     <Grid>
         <Pivot Title="Settings">
             <PivotItem Header="General">
-
+                <TextBlock Text="Rien ici pour l'instant, désolé !" />
             </PivotItem>
             <PivotItem Header="About">
+                <StackPanel>
+                    <TextBlock TextAlignment="Center"
+                               TextWrapping="Wrap"
+                               Margin="{StaticResource DefaultMargin}">
+                    <Run Text="HFR10"
+                         FontSize="28" />
+                    <LineBreak />
+                    <Run Text="par la communauté HFR"
+                         FontSize="18"
+                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+                    <LineBreak />
+                    <LineBreak />
+                    <Run Text="Ceci est une version complètement expérimentale. N'hésitez pas à remonter tout bug, toute suggestion, aux développeurs, sur le topic dédié."
+                         FontSize="15"
+                         Foreground="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" />
+                    </TextBlock>
 
+                    <Button Content="TOPIC HFR10"
+                            HorizontalAlignment="Center"
+                            Command="{Binding GoToAppTopicCommand}"/>
+                </StackPanel>
             </PivotItem>
         </Pivot>
     </Grid>
