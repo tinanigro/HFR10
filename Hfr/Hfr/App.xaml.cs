@@ -45,7 +45,7 @@ namespace Hfr
             if (AppShell == null)
             {
                 AppShell = new Shell();
-                Loc.NavigationService.Initialize(NavigationFrame);
+                Loc.NavigationService.Initialize();
                 ThreadUI.setDispatcher(NavigationFrame.Dispatcher);
                 Loc.Main.AccountManager = new AccountManager();
 

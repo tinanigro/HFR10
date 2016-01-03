@@ -1,24 +1,26 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Hfr.Views.MainPages;
 using Windows.UI.Core;
+using Hfr.Commands.UI;
 using Hfr.ViewModel;
 using Hfr.Model;
+using Hfr.Views;
 using Hfr.Views.MiscPages;
 
 namespace Hfr.Services.Classes
 {
     public class NavigationService
     {
-        private Frame _navigationFrame;
+        private Shell _shell => App.AppShell;
+        private Frame _navigationFrame => App.NavigationFrame;
         public View CurrentView;
         public bool CanGoBack
         {
             get { return CanGoBackCompute(); }
         }
 
-        public void Initialize(Frame rootFrame)
+        public void Initialize()
         {
-            _navigationFrame = rootFrame;
             SystemNavigationManager.GetForCurrentView().BackRequested += (s, e) =>
             {
                 if (CanGoBack)
