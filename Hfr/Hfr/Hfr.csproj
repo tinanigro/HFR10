@@ -123,6 +123,7 @@
     <Compile Include="Helpers\HttpClientHelper.cs" />
     <Compile Include="Helpers\PrivateChatsFetcher.cs" />
     <Compile Include="Helpers\ThreadUI.cs" />
+    <Compile Include="Helpers\ToastHelper.cs" />
     <Compile Include="Helpers\TopicFetcher.cs" />
     <Compile Include="Helpers\TopicNameHelper.cs" />
     <Compile Include="Models\Account.cs" />
