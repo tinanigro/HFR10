@@ -66,6 +66,7 @@ namespace Hfr.Services.Classes
                     break;
                 case View.Editor:
                     _shell.ExtraPaneContent = null;
+                    CurrentView = View.Main;
                     break;
                 case View.Settings:
                     _navigationFrame.GoBack();
