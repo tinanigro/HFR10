@@ -45,6 +45,8 @@ namespace Hfr.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<EditorViewModel>();
             SimpleIoc.Default.Register<NavigationService>();
+            SimpleIoc.Default.Register<SubCategoryViewModel>();
+            SimpleIoc.Default.Register<TopicViewModel>();
         }
 
         public static MainViewModel Main
@@ -62,6 +64,10 @@ namespace Hfr.ViewModel
                 return ServiceLocator.Current.GetInstance<EditorViewModel>();
             }
         }
+
+        public static SubCategoryViewModel SubCategory => ServiceLocator.Current.GetInstance<SubCategoryViewModel>();
+
+        public static TopicViewModel Topic => ServiceLocator.Current.GetInstance<TopicViewModel>();
 
         public static NavigationService NavigationService
         {

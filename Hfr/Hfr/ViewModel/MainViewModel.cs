@@ -13,21 +13,20 @@ using Hfr.Helpers;
 using Hfr.Model;
 using Hfr.Services;
 using Windows.UI.Xaml;
+using Hfr.Commands.Topics;
 using Hfr.Commands.UI;
 using Hfr.Models;
 using Hfr.Utilities;
 
 namespace Hfr.ViewModel
 {
-    public delegate void TopicReadyToBeDisplayed(Topic topic, string computedHtml);
+    public delegate void TopicReadyToBeDisplayed(Topic topic);
     public class MainViewModel : ViewModelBase
     {
         #region private properties 
         private AccountManager _accountManager;
-        private int _selectedTopic;
         private bool _drapeauxLoading;
         private bool _drapeauxLoaded;
-        private bool _categoriesLoading;
         private bool _privateChatsLoading;
 
         private MainColumn _mainColumn;
@@ -58,15 +57,6 @@ namespace Hfr.ViewModel
             }
         }
 
-        public bool IsCategoriesLoading
-        {
-            get { return _categoriesLoading;}
-            set
-            {
-                Set(ref _categoriesLoading, value);
-                RaisePropertyChanged(nameof(LoadingCategoriesList));
-            }
-        }
 
         public bool IsPrivateChatsLoading
         {
@@ -79,23 +69,20 @@ namespace Hfr.ViewModel
         }
 
         public Visibility LoadingTopicsList => IsDrapeauxLoading ? Visibility.Visible : Visibility.Collapsed;
-        public Visibility LoadingCategoriesList => IsCategoriesLoading ? Visibility.Visible : Visibility.Collapsed;
+        
         public Visibility LoadingPrivateChatsList => IsPrivateChatsLoading ? Visibility.Visible: Visibility.Collapsed;
         #endregion
 
         #region private fields
         private ObservableCollection<Topic> drapeaux;
-        private List<SubCategory> _categories;
         private List<PrivateChat> privateChats;
         private IEnumerable<IGrouping<string, Topic>> _favorisGrouped;
-        private IEnumerable<IGrouping<string, SubCategory>> _catsGrouped;
+        
         private IEnumerable<IGrouping<string, PrivateChat>> _privateChatsGrouped;
         private ObservableCollection<Topic> _topics = new ObservableCollection<Topic>();
 
         #endregion
         #region public fields
-        public AccountManager AccountManager { get { return _accountManager; } set { Set(ref _accountManager, value); } }
-
         public ObservableCollection<Topic> Drapeaux
         {
             get
@@ -110,15 +97,6 @@ namespace Hfr.ViewModel
             }
         }
 
-        public List<SubCategory> Categories
-        {
-            get { return _categories; }
-            set
-            {
-                Set(ref _categories, value);
-                IsCategoriesLoading = false;
-            }
-        }
 
         public List<PrivateChat> PrivateChats
         {
@@ -146,21 +124,6 @@ namespace Hfr.ViewModel
             }
         }
 
-        public IEnumerable<IGrouping<string, SubCategory>> CategoriesGrouped
-        {
-            get
-            {
-                if (_catsGrouped == null)
-                {
-                    RefreshCats();
-                }
-                return _catsGrouped;
-            }
-            set
-            {
-                Set(ref _catsGrouped, value);
-            }
-        }
 
         public IEnumerable<IGrouping<string, PrivateChat>> PrivateChatsGrouped
         {
@@ -182,55 +145,9 @@ namespace Hfr.ViewModel
         }
         #endregion
         #region events
-        public event TopicReadyToBeDisplayed TopicReadyToBeDisplayed;
         #endregion
         #region public properties
-        public int SelectedTopic
-        {
-            get { return _selectedTopic; }
-            set
-            {
-                Set(ref _selectedTopic, value);
-                RaisePropertyChanged(nameof(CurrentTopic));
-                RaisePropertyChanged(nameof(TopicVisible));
-                Loc.NavigationService.ShowBackButtonIfCanGoBack();
-                if (CurrentTopic != null)
-                {
-                    Task.Run(async () => await TopicFetcher.GetPosts(CurrentTopic));
-                }
-            }
-        }
-
-        public Topic CurrentTopic
-        {
-            get
-            {
-                if (IsInDesignMode)
-                {
-                    return new Topic()
-                    {
-                        TopicName = "TU DesignTime"
-                    };
-                }
-                if (!Topics.Any() || SelectedTopic == -1) return null;
-                else if (SelectedTopic > -1 && SelectedTopic < Topics.Count)
-                    return Topics[(int)SelectedTopic];
-                else
-                {
-                    SelectedTopic = 0;
-                    return Topics[(int)SelectedTopic];
-                }
-            }
-        }
-
-        public bool TopicVisible
-        {
-            get
-            {
-                TriggerUIAdapter();
-                return CurrentTopic != null;
-            }
-        }
+        public AccountManager AccountManager { get { return _accountManager; } set { Set(ref _accountManager, value); } }
 
         public bool FirstColumnAndTopicVisible
         {
@@ -266,7 +183,7 @@ namespace Hfr.ViewModel
             set { Set(ref _topicListColumnVisible, value); }
         }
 
-        public bool CategoriesListColumnVisible
+        public bool CategoriesPanelColumnVisible
         {
             get { return _categoriesListColumnVisible; }
             set
@@ -289,7 +206,7 @@ namespace Hfr.ViewModel
 
         #endregion
         #region methods
-        void TriggerUIAdapter()
+        public void TriggerUIAdapter()
         {
             TopicViewColumnVisible = false;
             FirstColumnAndTopicVisible = false;
@@ -297,12 +214,12 @@ namespace Hfr.ViewModel
             TwoColumnsVisible = false;
 
             TopicListColumnVisible = false;
-            CategoriesListColumnVisible = false;
+            CategoriesPanelColumnVisible = false;
             PrivateChatsColumnVisible = false;
 
             // TODO : Use UI logic here instead of lazy loading it into properties.
             var width = Window.Current.Bounds.Width;
-            if (CurrentTopic != null)
+            if (Loc.Topic.CurrentTopic != null)
             {
                 if (width < Strings.PortraitWidth)
                 {
@@ -323,7 +240,7 @@ namespace Hfr.ViewModel
                             TopicListColumnVisible = true;
                             break;
                         case MainColumn.CategoriesList:
-                            CategoriesListColumnVisible = true;
+                            CategoriesPanelColumnVisible = true;
                             break;
                         case MainColumn.PrivateChats:
                             PrivateChatsColumnVisible = true;
@@ -352,15 +269,6 @@ namespace Hfr.ViewModel
             }
         }
 
-        public void RefreshCats()
-        {
-            if (!_categoriesLoading)
-            {
-                IsCategoriesLoading = true;
-                Task.Run(async () => await CatFetcher.GetCats());
-            }
-        }
-
         public void RefreshPrivateChats()
         {
             if (!_privateChatsLoading)
@@ -368,11 +276,6 @@ namespace Hfr.ViewModel
                 IsPrivateChatsLoading = true;
                 Task.Run(async () => await PrivateChatsFetcher.GetPrivateChats());
             }
-        }
-
-        public void UpdateTopicWebView(Topic topic, string html)
-        {
-            TopicReadyToBeDisplayed?.Invoke(topic, html);
         }
 
         internal void ShowContextForMessage(object parameter)
@@ -407,9 +310,6 @@ namespace Hfr.ViewModel
         public ContextMessageCommand ContextMessageCommand { get; } = new ContextMessageCommand();
 
 #warning "for debugging purpose"
-        public ShowEditorCommand ShowEditorCommand { get; } = new ShowEditorCommand();
-
-        public OpenSplitViewPaneCommand OpenSplitViewPaneCommand { get; } = new OpenSplitViewPaneCommand();
 
         public SetDefaultColumnViewCommand SetDefaultColumnViewCommand { get; } = new SetDefaultColumnViewCommand();
 
