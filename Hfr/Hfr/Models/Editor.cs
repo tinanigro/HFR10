@@ -25,7 +25,12 @@ namespace Hfr.Model
                 string value;
                 if (Data.TryGetValue("content_form", out value))
                 {
-                    var text = Data["content_form"].Trim();
+                    var text = Data["content_form"].Trim(); // We trim to prevent empty string with spare odd \r or \n
+                    // However if the string is not empty after a trim, it then contains something, and we want to add an extra NewLine for the user
+                    if (!string.IsNullOrEmpty(text))
+                    {
+                        text += Environment.NewLine;
+                    }
                     return text;
                 }
                 return "";
