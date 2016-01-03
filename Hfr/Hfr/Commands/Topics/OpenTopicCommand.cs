@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Windows.UI.Xaml.Controls;
-using Hfr.Model;
 using Hfr.Utilities;
 using Hfr.ViewModel;
 
