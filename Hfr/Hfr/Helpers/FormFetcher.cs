@@ -34,10 +34,7 @@ namespace Hfr.Helpers
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 
-            HtmlNode formNode =
-                htmlDoc.DocumentNode
-                    .Descendants("form")
-                    .First(x => (string) x.GetAttributeValue("id", "") == "hop");
+            HtmlNode formNode = htmlDoc.DocumentNode.Descendants("form").First(x => (string) x.GetAttributeValue("id", "") == "hop");
 
             //Submit URL
             string submitUrl = formNode.GetAttributeValue("action", "");
