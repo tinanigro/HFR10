@@ -4,6 +4,8 @@ using Hfr.Helpers;
 using System;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using Hfr.Utilities;
 using Hfr.Commands;
@@ -13,6 +15,7 @@ namespace Hfr.ViewModel
     public class EditorViewModel : ViewModelBase, IDisposable
     {
         private Editor _currentEditor;
+        private bool _isBusy = false;
 
         public Editor CurrentEditor
         {
@@ -23,6 +26,27 @@ namespace Hfr.ViewModel
             }
         }
 
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set
+            {
+                Set(ref _isBusy, value);
+                RaisePropertyChanged(nameof(IsBusyScreenVisible));
+                RaisePropertyChanged(nameof(IsEditorEnabled));
+            }
+        }
+
+        public bool IsEditorEnabled
+        {
+            get { return !IsBusy; }
+        }
+
+        public Visibility IsBusyScreenVisible
+        {
+            get { return IsBusy ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
         #region methods
         public void LoadEditor(string url)
         {
@@ -31,6 +55,11 @@ namespace Hfr.ViewModel
 
         public async void SubmitEditor()
         {
+            await ThreadUI.Invoke(() =>
+            {
+                IsBusy = true;
+            });
+
             CurrentEditor.PrepareForSubmit(); //Required!!!
             var result = await HttpClientHelper.Post(CurrentEditor.SubmitUrl, CurrentEditor.Data);
 
@@ -40,7 +69,9 @@ namespace Hfr.ViewModel
             {
                 await ThreadUI.Invoke(() =>
                 {
+                    IsBusy = false;
                     Loc.NavigationService.GoBack();
+                    ApplicationView.GetForCurrentView().SuppressSystemOverlays = false;
                 });
                 await Loc.Topic.RefreshPage();
             }
