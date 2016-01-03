@@ -1,6 +1,7 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Hfr.Views.MainPages;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Hfr.Commands.UI;
 using Hfr.ViewModel;
 using Hfr.Model;
