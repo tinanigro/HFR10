@@ -20,9 +20,9 @@ namespace Hfr.Views.MainPages
             Loc.Editor.OnNavigatedFrom();
         }
 
-        private void EditorPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void EditorPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Loc.Editor.OnNavigatedTo(url);
+            await Loc.Editor.OnNavigatedTo(url);
         }
     }
 }
