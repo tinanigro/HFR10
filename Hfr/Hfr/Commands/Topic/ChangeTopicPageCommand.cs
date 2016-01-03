@@ -13,7 +13,7 @@ namespace Hfr.Commands.Topic
             if (parameter is string)
             {
                 var action = (string)parameter;
-                if (action == "+")
+                if (action == "+" && Loc.Topic.CurrentTopic.TopicCurrentPage < Loc.Topic.CurrentTopic.TopicNbPage)
                 {
                     Loc.Topic.CurrentTopic.TopicCurrentPage = Loc.Topic.CurrentTopic.TopicCurrentPage + 1;
                 }
