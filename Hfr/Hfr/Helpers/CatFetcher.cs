@@ -25,19 +25,19 @@ namespace Hfr.Helpers
             Debug.WriteLine("Updating UI with new Drapeaux list");
             await ThreadUI.Invoke(() =>
             {
-                Loc.Main.Categories = cats;
+                Loc.SubCategory.Categories = cats;
                 if (cats != null)
                 {
-                    Loc.Main.CategoriesGrouped = cats.GroupBy(x => x.CategoryName);
+                    Loc.SubCategory.CategoriesGrouped = cats.GroupBy(x => x.CategoryName);
                 }
             });
         }
 
-        public static async Task<List<SubCategory>> Fetch()
+        static async Task<List<SubCategory>> Fetch()
         {
             var html = await HttpClientHelper.Get(HFRUrl.ForumUrl);
             if (string.IsNullOrEmpty(html)) return null;
-            
+
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 
