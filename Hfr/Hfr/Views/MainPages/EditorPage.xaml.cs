@@ -1,30 +1,28 @@
 ﻿using Hfr.ViewModel;
 using Windows.UI.Xaml.Controls;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+using Windows.UI.Xaml.Navigation;
 
 namespace Hfr.Views.MainPages
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class EditorPage : Page
+    public sealed partial class EditorPage : UserControl
     {
-        private EditorViewModel viewModel;
-
-        public EditorPage()
+        private string url;
+        public EditorPage(object quoteUrl)
         {
             this.InitializeComponent();
+            this.url = quoteUrl?.ToString();
+            this.Loaded += EditorPage_Loaded;
+            this.Unloaded += EditorPage_Unloaded;
         }
 
-        protected override void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        private void EditorPage_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            base.OnNavigatedTo(e);
+            Loc.Editor.OnNavigatedFrom();
+        }
 
-            viewModel = (EditorViewModel)this.DataContext;
-            viewModel.OnNavigatedTo(e);
+        private void EditorPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Loc.Editor.OnNavigatedTo(url);
         }
     }
-
-    
 }
