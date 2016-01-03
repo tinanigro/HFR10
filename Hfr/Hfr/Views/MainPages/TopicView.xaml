@@ -6,8 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:shellControls="using:Hfr.Views.ShellControls"
              mc:Ignorable="d"
-             d:DesignHeight="300"
-             d:DesignWidth="400">
+             DataContext="{Binding Source={StaticResource Locator}, Path=Topic}">
 
     <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
         <Grid.RowDefinitions>
@@ -17,18 +16,52 @@
         </Grid.RowDefinitions>
         <shellControls:Header HeaderContent="{Binding CurrentTopic.TopicName}">
             <shellControls:Header.RightContent>
-                <AppBarButton Icon="Refresh" />
+                <TextBlock Grid.Column="2"
+                           Grid.Row="1"
+                           Margin="{StaticResource DefaultMarginRight}"
+                           VerticalAlignment="Center">
+                    <Run Text="{Binding CurrentTopic.TopicCurrentPage}"
+                         Foreground="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                         FontSize="20" />
+                    <Run Text="{Binding CurrentTopic.TopicNbPage}"
+                         FontWeight="Light"
+                         FontSize="23"
+                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+                </TextBlock>
             </shellControls:Header.RightContent>
         </shellControls:Header>
         <WebView x:Name="TopicWebView"
                  x:FieldModifier="public"
                  Grid.Row="1"
                  NavigationStarting="TopicWebView_OnNavigationStarting" />
-        <CommandBar Grid.Row="2">
+        <CommandBar Grid.Row="2"
+                    Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
             <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Back"
+                              Label="Précédente"
+                              IsCompact="True"
+                              Command="{Binding ChangeTopicPageCommand}"
+                              CommandParameter="-" />
+                <AppBarButton Icon="Forward"
+                              Label="Suivante"
+                              IsCompact="True"
+                              Command="{Binding ChangeTopicPageCommand}"
+                              CommandParameter="+"/>
                 <AppBarButton Label="Répondre"
-                              Icon="Add"/>
+                              Icon="Add"
+                              Command="{Binding ShowEditorCommand}"/>
             </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Refresh" 
+                              Label="Rafraîchir"/>
+                <AppBarButton x:Name="appBarButton1"
+                              HorizontalAlignment="Stretch"
+                              Icon="Add"
+                              Label="Test Reponse - DEBUG only"
+                              VerticalAlignment="Stretch"
+                              Command="{Binding ShowEditorCommand}"
+                              CommandParameter="{Binding Source='http://debug'}" />
+            </CommandBar.SecondaryCommands>
         </CommandBar>
     </Grid>
 </UserControl>
