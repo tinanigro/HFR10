@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
@@ -21,5 +22,10 @@ namespace Hfr.Utilities
         public static Uri TopicPageCacheUri = new Uri(TopicPageCache);
 
         public static string LocalUriPrefix = "http://local/";
+
+        public static string CleanFromWeb(this string text)
+        {
+            return WebUtility.HtmlDecode(text.Trim());
+        }
     }
 }
