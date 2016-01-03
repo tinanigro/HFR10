@@ -75,6 +75,10 @@ namespace Hfr.Services.Classes
                     break;
                 case View.CategoryTopicsList:
                     ((MainPage)App.NavigationFrame.Content)?.Navigate(View.CategoriesList);
+                    CurrentView = View.CategoriesList;
+                    break;
+                case View.CategoriesList:
+                    CurrentView = View.Main;
                     break;
             }
             ShowBackButtonIfCanGoBack();
@@ -102,7 +106,14 @@ namespace Hfr.Services.Classes
                     _navigationFrame.Navigate(typeof(ConnectPage));
                     break;
                 case View.Main:
-                    _navigationFrame.Navigate(typeof(MainPage));
+                    if (CurrentView == View.CategoryTopicsList)
+                    {
+
+                    }
+                    else
+                    {
+                        _navigationFrame.Navigate(typeof(MainPage));
+                    }
                     break;
                 case View.Editor:
                     _shell.ExtraPaneContent = new EditorPage(parameter);
@@ -129,5 +140,6 @@ namespace Hfr.Services.Classes
 
         public Page CurrentPage { get { return _navigationFrame.Content as Page; } }
         public GoBackCommand GoBackCommand { get; } = new GoBackCommand();
+        public NavigateToCategoriesList NavigateToCategoriesList { get; } = new NavigateToCategoriesList();
     }
 }

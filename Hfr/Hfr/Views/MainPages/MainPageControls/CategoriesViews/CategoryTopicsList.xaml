@@ -18,7 +18,7 @@
         <shellControls:Header HeaderContent="Topics">
             <shellControls:Header.RightContent>
                 <AppBarButton Icon="Clear"
-                              Command="{Binding Source={StaticResource Locator}, Path=NavigationService.GoBackCommand}"/>
+                              Command="{Binding Source={StaticResource Locator}, Path=NavigationService.NavigateToCategoriesList}"/>
             </shellControls:Header.RightContent>
         </shellControls:Header>
         <Grid Grid.Row="1"

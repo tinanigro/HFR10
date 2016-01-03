@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Windows.UI.Xaml.Controls;
+using Hfr.Model;
 using Hfr.Utilities;
 using Hfr.ViewModel;
 
@@ -26,6 +27,8 @@ namespace Hfr.Commands.Topics
                 Loc.Main.Topics.Add(topic);
             else Loc.Main.Topics[0] = topic;
             Loc.Topic.SelectedTopic = 0;
+
+            Loc.NavigationService.Navigate(View.Main);
         }
     }
 }

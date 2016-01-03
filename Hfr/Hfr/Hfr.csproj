@@ -110,6 +110,7 @@
     <Compile Include="Commands\Topic\ChangeTopicPageCommand.cs" />
     <Compile Include="Commands\Topic\RefreshTopicCommand.cs" />
     <Compile Include="Commands\UI\GoBackCommand.cs" />
+    <Compile Include="Commands\UI\NavigateToCategoriesList.cs" />
     <Compile Include="Commands\UI\NavigateToSettings.cs" />
     <Compile Include="Commands\UI\SetDefaultColumnViewCommand.cs" />
     <Compile Include="Converters\AvatarIdToUrlConverter.cs" />
