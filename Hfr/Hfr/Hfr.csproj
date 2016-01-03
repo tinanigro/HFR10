@@ -103,6 +103,7 @@
     <Compile Include="Commands\Editor\ShowEditorCommand.cs" />
     <Compile Include="Commands\MessagesCommands.cs" />
     <Compile Include="Commands\OpenSubCatCommand.cs" />
+    <Compile Include="Commands\Settings\GoToAppTopicCommand.cs" />
     <Compile Include="Commands\Topics\ChangeTopicsListPageInSubCatCommand.cs" />
     <Compile Include="Commands\Topics\RefreshDrapsCommand.cs" />
     <Compile Include="Commands\Topics\OpenTopicCommand.cs" />
