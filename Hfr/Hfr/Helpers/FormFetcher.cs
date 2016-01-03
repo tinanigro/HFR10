@@ -26,6 +26,7 @@ namespace Hfr.Helpers
 
         public static async Task<Editor> Fetch(string formUrl)
         {
+            if (string.IsNullOrEmpty(formUrl)) return null;
             var html = await HttpClientHelper.Get(formUrl);
 
             HtmlNode.ElementsFlags.Remove("form");
