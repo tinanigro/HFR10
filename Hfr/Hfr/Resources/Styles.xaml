@@ -155,6 +155,8 @@
                 Value="False" />
         <Setter Property="Padding"
                 Value="0" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
@@ -301,7 +303,7 @@
                                       IsTabStop="False"
                                       AutomationProperties.AccessibilityView="Raw"
                                       ZoomMode="Disabled"
-                                      VerticalAlignment="Center" />
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         <ContentControl x:Name="PlaceholderTextContentPresenter"
                                         Grid.Row="1"
                                         Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"
@@ -311,7 +313,7 @@
                                         Grid.ColumnSpan="2"
                                         Content="{TemplateBinding PlaceholderText}"
                                         IsHitTestVisible="False"
-                                        VerticalAlignment="Center" />
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         <Button x:Name="DeleteButton"
                                 Grid.Row="1"
                                 Style="{StaticResource DeleteButtonStyle}"
@@ -567,7 +569,7 @@
           | |   | |                                                    
           |_|   |_|                                                    
     -->
-    <Style x:Key="HorizontalAppBarButton" 
+    <Style x:Key="HorizontalAppBarButton"
            TargetType="AppBarButton">
         <Setter Property="Background"
                 Value="Transparent" />
