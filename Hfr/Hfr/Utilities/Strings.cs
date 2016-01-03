@@ -14,5 +14,12 @@ namespace Hfr.Utilities
         public static double PortraitWidth => (double)App.Current.Resources[nameof(PortraitWidth)];
         public static double NormalWidth => (double)App.Current.Resources[nameof(NormalWidth)]; 
         public static double WideWidth => (double) App.Current.Resources[nameof(WideWidth)];
+
+        public static string WebSiteCacheFolderName = "website-cache";
+        public static string WebSiteCacheFileName = "webpage.html";
+        public static string TopicPageCache = $"ms-appdata:///local/{WebSiteCacheFolderName}/{WebSiteCacheFileName}";
+        public static Uri TopicPageCacheUri = new Uri(TopicPageCache);
+
+        public static string LocalUriPrefix = "http://local/";
     }
 }
