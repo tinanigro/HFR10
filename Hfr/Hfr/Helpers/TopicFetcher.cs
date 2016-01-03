@@ -11,7 +11,6 @@ using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Windows.Foundation;
 using Windows.Storage;
 
 namespace Hfr.Helpers
