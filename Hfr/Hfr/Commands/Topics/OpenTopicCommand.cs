@@ -10,15 +10,21 @@ namespace Hfr.Commands.Topics
     {
         public override void Execute(object parameter)
         {
-            var itemClick = parameter as ItemClickEventArgs;
-            if (itemClick != null)
+            Model.Topic topic = null;
+            if (parameter is ItemClickEventArgs)
             {
-                var topic = itemClick.ClickedItem as Model.Topic;
-                if (!Loc.Main.Topics.Any())
-                    Loc.Main.Topics.Add(topic);
-                else Loc.Main.Topics[0] = topic;
-                Loc.Topic.SelectedTopic = 0;
+                var itemClick = parameter as ItemClickEventArgs;
+                topic = itemClick.ClickedItem as Model.Topic;
             }
+            else if (parameter is Model.Topic)
+            {
+                topic = (Model.Topic) parameter;
+            }
+
+            if (!Loc.Main.Topics.Any())
+                Loc.Main.Topics.Add(topic);
+            else Loc.Main.Topics[0] = topic;
+            Loc.Topic.SelectedTopic = 0;
         }
     }
 }
