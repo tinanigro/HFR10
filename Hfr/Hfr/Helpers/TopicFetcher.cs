@@ -26,6 +26,11 @@ namespace Hfr.Helpers
 
         public static async Task Fetch(Topic currentTopic)
         {
+            await ThreadUI.Invoke(() =>
+            {
+                Loc.Topic.IsTopicLoading = true;
+            });
+
             var html = await HttpClientHelper.Get(currentTopic.TopicDrapURI);
             if (string.IsNullOrEmpty(html)) return;
 
@@ -146,7 +151,12 @@ namespace Hfr.Helpers
             var file = await subfolder.CreateFileAsync($"{Strings.WebSiteCacheFileName}", CreationCollisionOption.ReplaceExisting);
             await FileIO.WriteTextAsync(file, TempHTMLTopic);
 
-            await ThreadUI.Invoke(() => Loc.Topic.UpdateTopicWebView(currentTopic));
+            await ThreadUI.Invoke(() =>
+            {
+                Loc.Topic.UpdateTopicWebView(currentTopic);
+
+                Loc.Topic.IsTopicLoading = false;
+            });
         }
     }
 }
