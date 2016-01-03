@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using GalaSoft.MvvmLight;
 using Hfr.Commands;
 using Hfr.Commands.Editor;
@@ -13,10 +14,24 @@ namespace Hfr.ViewModel
     {
         #region private props
         private int _selectedTopic;
+        private bool _isTopicLoading;
         #endregion
         #region private fields
         #endregion
-        #region public props        
+        #region public props      
+
+        public bool IsTopicLoading
+        {
+            get { return _isTopicLoading;}
+            set
+            {
+                Set(ref _isTopicLoading, value); 
+                RaisePropertyChanged(nameof(TopicLoadingVisibility));
+            }
+        }
+
+        public Visibility TopicLoadingVisibility => IsTopicLoading ? Visibility.Visible : Visibility.Collapsed;
+
         public int SelectedTopic
         {
             get { return _selectedTopic; }
