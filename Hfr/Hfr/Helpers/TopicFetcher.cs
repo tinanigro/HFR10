@@ -42,22 +42,13 @@ namespace Hfr.Helpers
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 
-            var topicText = htmlDoc.DocumentNode.Descendants("div")
-                    .Where(x => x.GetAttributeValue("id", "").Contains("para"))
-                    .
-                    Select(y => y.InnerHtml).ToArray();
+            var postNodes =
+                htmlDoc.DocumentNode.Descendants("table")
+                    .Where(x => x.GetAttributeValue("class", "") == "messagetable")
+                    .ToArray();
 
-            var messCase1 = htmlDoc.DocumentNode.Descendants("td").Where(x =>
-                        x.GetAttributeValue("class", "").Contains("messCase1") &&
-                        x.InnerHtml.Contains("<div><b class=\"s2\">Publicité</b></div>") == false &&
-                        x.InnerHtml.Contains("Auteur") == false)
-                        .Select(x => x.InnerHtml).ToArray();
+            if (postNodes == null || !postNodes.Any()) return;
 
-            string[] toolbar = htmlDoc.DocumentNode.Descendants("div")
-                        .Where(x => (string)x.GetAttributeValue("class", "") == "toolbar")
-                        .Select(x => x.InnerHtml).ToArray();
-
-            int i = 0;
             string TempHTMLMessagesList = "";
             string TempHTMLMessage = "";
             string TempHTMLTopic = "";
@@ -80,68 +71,70 @@ namespace Hfr.Helpers
                 MessageTemplate = reader.ReadToEnd();
             }
 
-            foreach (var post in topicText)
+            var i = 0;
+            foreach (var postNode in postNodes)
             {
                 TempHTMLMessage = MessageTemplate;
 
+                // Id de la réponse
+                var reponseId =
+                    postNode.Descendants("a")
+                        .FirstOrDefault(x => x.GetAttributeValue("href", "").StartsWith("#t"))
+                        .GetAttributeValue("href", "")
+                        .Replace("#t", "");
+                
                 // Pseudo
-                int firstPseudo = messCase1[i].IndexOf("<b class=\"s2\">", StringComparison.Ordinal) +
-                                  "<b class=\"s2\">".Length;
-                int lastPseudo = messCase1[i].LastIndexOf("</b>", StringComparison.Ordinal);
-                var Pseudo = messCase1[i].Substring(firstPseudo, lastPseudo - firstPseudo);
-                Pseudo = Pseudo.Replace(((char)8203).ToString(), ""); // char seperator (jocebug)
+                var pseudo = postNode.Descendants("b").FirstOrDefault(x => x.GetAttributeValue("class", "") == "s2").InnerText.CleanFromWeb();
+
+                // Mood
+                var mood = postNode.Descendants("span").FirstOrDefault(x=>x.GetAttributeValue("class","") == "MoodStatus")?.InnerText.CleanFromWeb();
+
+                // Img
+                var avatarUri = "ms-appx-web:///Assets/HTML/UI/rsz_no_avatar.png";
+                var avatarClass = "no_avatar";
+                var divAvatarNode = postNode.Descendants("div").FirstOrDefault(x=>x.GetAttributeValue("class", "") == "avatar_center");
+                if (divAvatarNode != null && divAvatarNode.ChildNodes.Any())
+                {
+                    var imgAvatarNode = divAvatarNode.FirstChild;
+                    var uri = imgAvatarNode.GetAttributeValue("src", "");
+                    if (!string.IsNullOrEmpty(uri))
+                    {
+                        avatarUri = uri;
+                        avatarClass = "";
+                    }
+                }
+
+                // Date
+                var date = postNode.Descendants("div").FirstOrDefault(x=>x.GetAttributeValue("class","") == "toolbar").InnerText.CleanFromWeb();
+                date = date.Replace("Posté le ", "");
 
                 // Content
-                int lastPostText = topicText[i].IndexOf("<div style=\"clear: both;\"> </div>", StringComparison.Ordinal);
+                var content = postNode.Descendants("div").FirstOrDefault(x => x.GetAttributeValue("id", "").Contains("para")).InnerHtml;
+                int lastPostText = content.IndexOf("<div style=\"clear: both;\"> </div>", StringComparison.Ordinal);
                 if (lastPostText == -1)
                 {
-                    lastPostText = topicText[i].Length;
+                    lastPostText = content.Length;
                 }
-                var Content = topicText[i].Substring(0, lastPostText);
-                Content = Regex.Replace(WebUtility.HtmlDecode(Content), " target=\"_blank\"", "");
 
-                // Date et heure
-                int firstDate = toolbar[i].IndexOf("Posté le ") + "Posté le ".Length; ;
-                int lastDate = 31;
-                var dateHeure = Regex.Replace(toolbar[i].Substring(firstDate, lastDate), "&nbsp;", " ");
-
-                // Id de la réponse
-                int firstReponseId = messCase1[i].IndexOf("title=\"n°") + "title=\"n°".Length;
-                int lastlastReponseId = messCase1[i].LastIndexOf("\" alt=\"n°");
-                var reponseId = messCase1[i].Substring(firstReponseId, lastlastReponseId - firstReponseId);
-
-                // Affichage des avatars
-                var avatarUri = "";
-                var avatarClass = "";
-
-                if (messCase1[i].Contains("avatar_center"))
-                {
-                    int firstAvatar = messCase1[i].IndexOf("<div class=\"avatar_center\" style=\"clear:both\"><img src=\"") + "<div class=\"avatar_center\" style=\"clear:both\"><img src=\"".Length;
-                    int lastAvatar = messCase1[i].LastIndexOf("\" alt=\"");
-                    avatarUri = messCase1[i].Substring(firstAvatar, lastAvatar - firstAvatar);
-                }
-                else
-                {
-                    avatarUri = "ms-appx-web:///Assets/HTML/UI/rsz_no_avatar.png";
-                    avatarClass = "no_avatar";
-                }
+                content = content.Substring(0, lastPostText);
+                content = content.CleanFromWeb();
 
                 TempHTMLMessage = TempHTMLMessage.Replace("%%ID%%", i.ToString());
                 TempHTMLMessage = TempHTMLMessage.Replace("%%POSTID%%", reponseId);
 
                 TempHTMLMessage = TempHTMLMessage.Replace("%%no_avatar_class%%", avatarClass);
                 TempHTMLMessage = TempHTMLMessage.Replace("%%AUTEUR_AVATAR%%", avatarUri);
-                TempHTMLMessage = TempHTMLMessage.Replace("%%AUTEUR_PSEUDO%%", Pseudo);
-                TempHTMLMessage = TempHTMLMessage.Replace("%%MESSAGE_DATE%%", dateHeure);
+                TempHTMLMessage = TempHTMLMessage.Replace("%%AUTEUR_PSEUDO%%", pseudo);
+                TempHTMLMessage = TempHTMLMessage.Replace("%%MESSAGE_DATE%%", date);
 
-                TempHTMLMessage = TempHTMLMessage.Replace("%%MESSAGE_CONTENT%%", Content);
+                TempHTMLMessage = TempHTMLMessage.Replace("%%MESSAGE_CONTENT%%", content);
 
                 TempHTMLMessagesList += TempHTMLMessage;
                 i++;
             }
 
             // Get URL of the new post form
-            var url = htmlDoc.DocumentNode.Descendants("form").FirstOrDefault(x=>x.GetAttributeValue("id", "") == "repondre_form").GetAttributeValue("action", "");
+            var url = htmlDoc.DocumentNode.Descendants("form").FirstOrDefault(x => x.GetAttributeValue("id", "") == "repondre_form").GetAttributeValue("action", "");
             currentTopic.TopicNewPostUriForm = WebUtility.HtmlDecode(url);
 
             TempHTMLTopic = BodyTemplate.Replace("%%MESSAGES%%", TempHTMLMessagesList);
