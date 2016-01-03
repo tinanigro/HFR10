@@ -47,6 +47,9 @@ namespace Hfr
                 AppShell = new Shell();
                 Loc.NavigationService.Initialize();
                 ThreadUI.setDispatcher(NavigationFrame.Dispatcher);
+                AppViewHelper.SetAppView();
+                Window.Current.Activate();
+
                 Loc.Main.AccountManager = new AccountManager();
 
                 AppShell.Language = ApplicationLanguages.Languages[0];
@@ -58,8 +61,6 @@ namespace Hfr
                     //TODO: Load state from previously suspended application
                 }
             }
-            AppViewHelper.SetAppView();
-            Window.Current.Activate();
         }
 
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
