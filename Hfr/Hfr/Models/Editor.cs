@@ -25,7 +25,8 @@ namespace Hfr.Model
                 string value;
                 if (Data.TryGetValue("content_form", out value))
                 {
-                    return Data["content_form"];
+                    var text = Data["content_form"].Trim();
+                    return text;
                 }
                 return "";
             }
