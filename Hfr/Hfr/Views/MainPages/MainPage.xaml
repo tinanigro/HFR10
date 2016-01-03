@@ -43,12 +43,18 @@
                              Grid.ColumnSpan="3" />
 
         </Grid>
-        <CommandBar x:Name="MainCommandBar" 
+        <CommandBar x:Name="MainCommandBar"
                     Grid.Row="2"
                     Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
             <CommandBar.Content>
-                <Grid>
-                    <AppBarButton Label="Search"
+                <Grid Height="{Binding ElementName=MainCommandBar, Path=ActualHeight}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Image Source="{Binding AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}"
+                           Stretch="Fill" />
+                    <AppBarButton Grid.Column="1"
                                   Icon="Find" />
                 </Grid>
             </CommandBar.Content>
@@ -79,15 +85,7 @@
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Settings"
-                              Command="{Binding NavigateToSettings}"/>
-                <AppBarButton x:Name="appBarButton1"
-                              HorizontalAlignment="Stretch"
-                              Icon="Add"
-                              Label="Test Reponse - DEBUG only"
-                              VerticalAlignment="Stretch"
-                              Command="{Binding ShowEditorCommand}"
-                              Visibility="Collapsed"
-                              CommandParameter="{Binding Source='http://debug'}" />
+                              Command="{Binding NavigateToSettings}" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
         <VisualStateManager.VisualStateGroups>
