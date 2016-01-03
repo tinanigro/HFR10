@@ -54,7 +54,8 @@
                               CommandParameter="+"/>
                 <AppBarButton Label="Répondre"
                               Icon="Add"
-                              Command="{Binding ShowEditorCommand}"/>
+                              Command="{Binding ShowEditorCommand}"
+                              CommandParameter="{Binding CurrentTopic}"/>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Icon="Refresh" 
