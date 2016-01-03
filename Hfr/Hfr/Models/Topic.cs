@@ -35,7 +35,12 @@ namespace Hfr.Model
         public int TopicCurrentPage
         {
             get { return _topicCurrentPage; }
-            set { Set(ref _topicCurrentPage, value); }
+            set
+            {
+                Set(ref _topicCurrentPage, value);
+                RaisePropertyChanged(nameof(CanGoForward));
+                RaisePropertyChanged(nameof(CanGoPrevious));
+            }
         }
 
         public string TopicReponseId
@@ -102,6 +107,16 @@ namespace Hfr.Model
                 }
                 return new SolidColorBrush(Colors.WhiteSmoke);
             }
+        }
+
+        public bool CanGoForward
+        {
+            get { return TopicCurrentPage < TopicNbPage; }
+        }
+
+        public bool CanGoPrevious
+        {
+            get { return TopicCurrentPage > 1; }
         }
     }
 }
