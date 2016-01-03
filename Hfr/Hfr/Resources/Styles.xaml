@@ -130,7 +130,7 @@
     |_|\___/_/\_\\__|____/ \___/_/\_\
                                      
     -->
-    
+
     <Style x:Key="TransparentTextBoxStyle"
            TargetType="TextBox">
         <Setter Property="MinWidth"

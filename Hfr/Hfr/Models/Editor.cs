@@ -17,7 +17,6 @@ namespace Hfr.Model
 
         public int idxTopic; //Topic index in MainViewModel <Topics>
         
-
         public string Text
         {
             get
@@ -40,11 +39,9 @@ namespace Hfr.Model
                 Data["content_form"] = value.ToString();
             }
         }
-
         
         public void PrepareForSubmit()
         {
-
             FixNewLines();
             SecureCleanUp();
         }
@@ -65,7 +62,6 @@ namespace Hfr.Model
 
             //delete super safety
             DeleteDataForKey("delete", "0");
-
         }
 
         private void DeleteDataForKey(string key, string condition)
