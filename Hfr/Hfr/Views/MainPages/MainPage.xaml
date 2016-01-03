@@ -34,8 +34,8 @@
 
             <mainPageControls:TopicList x:Name="TopicsList"
                                         Grid.Column="0" />
-            <mainPageControls:CategoriesList x:Name="CategoriesList"
-                                             Grid.Column="2" />
+            <mainPageControls:CategoriesPanel x:Name="CategoriesPanel"
+                                              Grid.Column="2" />
             <mainPageControls:MessagesList x:Name="MessagesList"
                                            Grid.Column="4" />
             <local:TopicView x:Name="TopicGrid"
@@ -59,12 +59,12 @@
                                     IsChecked="{Binding TopicListColumnVisible, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                     Visibility="Collapsed"
                                     Command="{Binding SetDefaultColumnViewCommand}"
-                                    CommandParameter="0"/>
-                <AppBarToggleButton x:Name="CategoriesListButton"
+                                    CommandParameter="0" />
+                <AppBarToggleButton x:Name="CategoriesPanelButton"
                                     Grid.Column="1"
                                     Icon="List"
                                     Label="Catégories"
-                                    IsChecked="{Binding CategoriesListColumnVisible, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    IsChecked="{Binding CategoriesPanelColumnVisible, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                     Visibility="Collapsed"
                                     Command="{Binding SetDefaultColumnViewCommand}"
                                     CommandParameter="1" />
@@ -100,7 +100,7 @@
                     <VisualState.Setters>
                         <Setter Target="TopicGrid.Visibility"
                                 Value="Collapsed" />
-                        <Setter Target="CategoriesList.Visibility"
+                        <Setter Target="CategoriesPanel.Visibility"
                                 Value="Visible" />
                         <Setter Target="TopicsList.Visibility"
                                 Value="Visible" />
@@ -116,7 +116,7 @@
                     <VisualState.Setters>
                         <Setter Target="TopicGrid.Visibility"
                                 Value="Collapsed" />
-                        <Setter Target="CategoriesList.Visibility"
+                        <Setter Target="CategoriesPanel.Visibility"
                                 Value="Visible" />
                         <Setter Target="TopicsList.Visibility"
                                 Value="Visible" />
@@ -136,11 +136,11 @@
                                 Value="Visible" />
                         <Setter Target="PrivateChatsButton.Visibility"
                                 Value="Visible" />
-                        <Setter Target="CategoriesListButton.Visibility"
+                        <Setter Target="CategoriesPanelButton.Visibility"
                                 Value="Visible" />
                         <Setter Target="TopicGrid.Visibility"
                                 Value="Collapsed" />
-                        <Setter Target="CategoriesList.Visibility"
+                        <Setter Target="CategoriesPanel.Visibility"
                                 Value="Collapsed" />
                         <Setter Target="TopicsList.Visibility"
                                 Value="Visible" />
@@ -152,9 +152,9 @@
                                 Value="0" />
                     </VisualState.Setters>
                 </VisualState>
-                <VisualState x:Name="CategoriesListColumnVisible">
+                <VisualState x:Name="CategoriesPanelColumnVisible">
                     <VisualState.StateTriggers>
-                        <StateTrigger IsActive="{Binding CategoriesListColumnVisible}" />
+                        <StateTrigger IsActive="{Binding CategoriesPanelColumnVisible}" />
                     </VisualState.StateTriggers>
 
                     <VisualState.Setters>
@@ -162,14 +162,14 @@
                                 Value="Visible" />
                         <Setter Target="PrivateChatsButton.Visibility"
                                 Value="Visible" />
-                        <Setter Target="CategoriesListButton.Visibility"
+                        <Setter Target="CategoriesPanelButton.Visibility"
                                 Value="Visible" />
                         <Setter Target="TopicGrid.Visibility"
                                 Value="Collapsed" />
-                        <Setter Target="CategoriesList.Visibility"
+                        <Setter Target="CategoriesPanel.Visibility"
                                 Value="Visible" />
-                        <Setter Target="CategoriesList.(Grid.Column)"
-                                Value="0"/>
+                        <Setter Target="CategoriesPanel.(Grid.Column)"
+                                Value="0" />
                         <Setter Target="TopicsList.Visibility"
                                 Value="Collapsed" />
                         <Setter Target="MessagesList.Visibility"
@@ -190,11 +190,11 @@
                                 Value="Visible" />
                         <Setter Target="PrivateChatsButton.Visibility"
                                 Value="Visible" />
-                        <Setter Target="CategoriesListButton.Visibility"
+                        <Setter Target="CategoriesPanelButton.Visibility"
                                 Value="Visible" />
                         <Setter Target="TopicGrid.Visibility"
                                 Value="Collapsed" />
-                        <Setter Target="CategoriesList.Visibility"
+                        <Setter Target="CategoriesPanel.Visibility"
                                 Value="Collapsed" />
                         <Setter Target="TopicsList.Visibility"
                                 Value="Collapsed" />
@@ -216,7 +216,7 @@
                     <VisualState.Setters>
                         <Setter Target="TopicGrid.Visibility"
                                 Value="Visible" />
-                        <Setter Target="CategoriesList.Visibility"
+                        <Setter Target="CategoriesPanel.Visibility"
                                 Value="Collapsed" />
                         <Setter Target="TopicsList.Visibility"
                                 Value="Collapsed" />
@@ -244,7 +244,7 @@
                                 Value="Visible" />
                         <Setter Target="TopicsList.Visibility"
                                 Value="Visible" />
-                        <Setter Target="CategoriesList.Visibility"
+                        <Setter Target="CategoriesPanel.Visibility"
                                 Value="Collapsed" />
                         <Setter Target="MessagesList.Visibility"
                                 Value="Collapsed" />
