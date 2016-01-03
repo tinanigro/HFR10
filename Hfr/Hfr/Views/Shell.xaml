@@ -7,55 +7,27 @@
              xmlns:shellControls="using:Hfr.Views.ShellControls"
              mc:Ignorable="d"
              d:DesignHeight="300"
-             d:DesignWidth="400"
-             RequestedTheme="Dark">
-    <SplitView x:Name="SplitView"
-               Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+             d:DesignWidth="400">
+    <Grid RequestedTheme="Dark">
+        <Frame x:Name="NavigationFrame"
                x:FieldModifier="public"
-               OpenPaneLength="300"
-               CompactPaneLength="{StaticResource SidebarCompactWidth}">
-        <SplitView.Pane>
-            <shellControls:Sidebar/>
-        </SplitView.Pane>
-        <SplitView.Content>
-            <Frame x:Name="NavigationFrame"
-                   x:FieldModifier="public">
-                <Frame.ContentTransitions>
-                    <TransitionCollection>
-                        <NavigationThemeTransition>
-                            <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                                <DrillInNavigationTransitionInfo />
-                            </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                        </NavigationThemeTransition>
-                    </TransitionCollection>
-                </Frame.ContentTransitions>
-            </Frame>
-        </SplitView.Content>
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="ExtraNarrow">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{StaticResource MinimumWidth}" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="SplitView.DisplayMode"
-                                Value="Overlay" />
-                        <Setter Target="SplitView.IsPaneOpen"
-                                Value="False" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="Standard">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideWidth}" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="SplitView.DisplayMode"
-                                Value="CompactInline" />
-                        <Setter Target="SplitView.IsPaneOpen"
-                                Value="False" />
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-    </SplitView>
+               Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <Frame.ContentTransitions>
+                <TransitionCollection>
+                    <NavigationThemeTransition>
+                        <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                            <DrillInNavigationTransitionInfo />
+                        </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    </NavigationThemeTransition>
+                </TransitionCollection>
+            </Frame.ContentTransitions>
+        </Frame>
+        
+        <Grid x:Name="ExtraPaneGrid" 
+              Background="Transparent"
+              Visibility="Collapsed">
+            <ContentPresenter x:Name="ExtraPaneContentPresenter"/>
+        </Grid>
+    </Grid>
+    
 </UserControl>
