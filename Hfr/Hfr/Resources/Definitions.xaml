@@ -19,6 +19,6 @@
     <x:Double x:Key="SidebarCompactWidth">70</x:Double>
     <GridLength x:Key="SidebarCompactWidthGridLength">70</GridLength>
     
-    <GridLength x:Key="DefaultTextBlockHeightGridLength">25</GridLength>
-    <x:Double x:Key="DefaultTextBlockHeight">25</x:Double>
+    <GridLength x:Key="DefaultTextBlockHeightGridLength">21</GridLength>
+    <x:Double x:Key="DefaultTextBlockHeight">21</x:Double>
 </ResourceDictionary>
