@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Windows.Foundation;
-using Windows.Storage;
-using Windows.Storage.Streams;
 using Windows.UI.Xaml.Controls;
-using Windows.Web;
+using Hfr.Model;
 using Hfr.Utilities;
 using Hfr.ViewModel;
 
@@ -16,11 +13,11 @@ namespace Hfr.Views.MainPages
     {
         public TopicView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             Loc.Topic.TopicReadyToBeDisplayed += CurrentTopic_TopicReadyToBeDisplayed;
         }
 
-        private void CurrentTopic_TopicReadyToBeDisplayed(Model.Topic topic)
+        private void CurrentTopic_TopicReadyToBeDisplayed(Topic topic)
         {
             TopicWebView.NavigationCompleted += TopicWebViewOnNavigationCompleted;
             TopicWebView.Navigate(Strings.TopicPageCacheUri);
@@ -58,8 +55,6 @@ namespace Hfr.Views.MainPages
                         Loc.Main.ContextMessageCommand.Execute(param);
                 }
             }
-            else
-                Debug.WriteLine("WW initial =" + args);
         }
     }
 }
