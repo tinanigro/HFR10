@@ -84,6 +84,7 @@ namespace Hfr.ViewModel
 
         #region commands
         public ChangeTopicPageCommand ChangeTopicPageCommand { get; } = new ChangeTopicPageCommand();
+        public RefreshTopicCommand RefreshTopicCommand { get; } = new RefreshTopicCommand();
         public ShowEditorCommand ShowEditorCommand { get; } = new ShowEditorCommand();
         #endregion
 
