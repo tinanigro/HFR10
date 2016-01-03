@@ -55,6 +55,7 @@ namespace Hfr.Services.Classes
 
         public void GoBack()
         {
+            ApplicationView.GetForCurrentView().SuppressSystemOverlays = false;
             switch (CurrentView)
             {
                 case View.Main:
@@ -116,6 +117,7 @@ namespace Hfr.Services.Classes
             }
             CurrentView = page;
             ShowBackButtonIfCanGoBack();
+            ApplicationView.GetForCurrentView().SuppressSystemOverlays = false;
         }
 
         public void Navigate(View page)
