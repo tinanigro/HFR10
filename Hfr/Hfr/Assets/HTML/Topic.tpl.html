@@ -35,7 +35,15 @@
             //event.stopPropagation();
             return false;
         }
-        
+
+        function scrollTo(hash) {
+            location.hash = "#" + hash;
+        }
+
+        function quotes(postId) {
+            window.location = "http://local/quote?postId=" + postId;
+            return false;
+        }
     </script>
 
 </body>
