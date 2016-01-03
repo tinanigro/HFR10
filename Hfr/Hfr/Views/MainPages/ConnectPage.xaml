@@ -46,6 +46,7 @@
                          FontWeight="Medium"
                          PlaceholderText="pseudo"
                          Text="{Binding CurrentAccount.Pseudo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         IsSpellCheckEnabled="False"
                          MaxWidth="350"
                          RelativePanel.Below="PseudoHeaderTextBlock"
                          RelativePanel.AlignLeftWithPanel="True"
