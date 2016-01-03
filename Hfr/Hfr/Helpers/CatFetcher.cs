@@ -72,8 +72,70 @@ namespace Hfr.Helpers
                 }
                 Debug.WriteLine("");
             }
-
             return subcategories;
+        }
+
+        public static async Task GetTopics(SubCategory subcat)
+        {
+            Debug.WriteLine($"Fetching topics from {subcat.Name}");
+            var topics = await FetchTopics(subcat);
+            Debug.WriteLine("Updating UI with topics from cat");
+            await ThreadUI.Invoke(() =>
+            {
+                Loc.SubCategory.Topics = topics;
+            });
+        }
+
+        static async Task<List<Topic>> FetchTopics(SubCategory subCategory)
+        {
+            var url = subCategory.Url.Replace("liste_sujet-1", $"liste_sujet-{Loc.SubCategory.TopicsPage}");
+            
+            var html = await HttpClientHelper.Get(url);
+
+            if (string.IsNullOrEmpty(html)) return null;
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+
+            var topicNodes = htmlDoc.DocumentNode.Descendants("tr").Where(x => x.GetAttributeValue("class", "").Contains("sujet ligne_booleen")).ToArray();
+
+            if (topicNodes == null) return null;
+            var topics = new List<Topic>();
+            foreach (var topicNode in topicNodes)
+            {
+                var topicName = topicNode.Descendants("a").FirstOrDefault(x => x.GetAttributeValue("class", "") == "cCatTopic").InnerText;
+                var topicAuthor = topicNode.Descendants("td").FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("sujetCase6")).InnerText.Trim();
+
+                var topicPageNode = topicNode.Descendants("td").FirstOrDefault(x => x.GetAttributeValue("class", "") == "sujetCase4").InnerText;
+                var topicPage = 1;
+                if (!string.IsNullOrEmpty(topicPageNode))
+                {
+                    int.TryParse(topicPageNode, out topicPage);
+                    if (topicPage == 0)
+                        topicPage = 1;
+                }
+                
+                var sujetCase3Node = topicNode.Descendants("td").FirstOrDefault(x => x.GetAttributeValue("class", "") == "sujetCase3");
+
+                var topicUrl = sujetCase3Node.Descendants("a").FirstOrDefault(x => x.GetAttributeValue("href", "").StartsWith("/hfr/")).GetAttributeValue("href","");
+
+                var topicIsStickyNodes = sujetCase3Node.Descendants("img");
+                var topicIsSticky = topicIsStickyNodes.FirstOrDefault(x => x.GetAttributeValue("src", "").Contains("flechesticky"));
+                var topicIsClosed = topicIsStickyNodes.FirstOrDefault(x=>x.GetAttributeValue("alt", "") == "closed");
+                
+
+                var topic = new Topic();
+                topic.TopicName = topicName;
+                topic.TopicAuthor = topicAuthor;
+                topic.TopicIsSticky = topicIsSticky != null;
+                topic.TopicIsClosed = topicIsClosed != null;
+                topic.TopicNbPage = topicPage;
+                topic.TopicDrapURI = topicUrl;
+
+                topics.Add(topic);
+            }
+
+            return topics;
         }
     }
 }
