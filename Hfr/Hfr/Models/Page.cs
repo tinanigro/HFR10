@@ -5,6 +5,8 @@
         Connect,
         Main,
         Editor,
-        Settings
+        Settings,
+        CategoriesList,
+        CategoryTopicsList
     }
 }
