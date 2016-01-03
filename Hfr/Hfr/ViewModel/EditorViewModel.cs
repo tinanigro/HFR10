@@ -48,12 +48,17 @@ namespace Hfr.ViewModel
         }
 
         #region methods
-        public void LoadEditor(string url)
+        public async Task LoadEditor(string url)
         {
-            Task.Run(async () => await FormFetcher.GetEditor(url));
+            await ThreadUI.Invoke(() => IsBusy = true);
+            await Task.Run(async () => await FormFetcher.GetEditor(url));
+            await ThreadUI.Invoke(() =>
+            {
+                IsBusy = false;
+            });
         }
 
-        public async void SubmitEditor()
+        public async Task SubmitEditor()
         {
             await ThreadUI.Invoke(() =>
             {
@@ -79,22 +84,28 @@ namespace Hfr.ViewModel
             {
                 await ThreadUI.Invoke(() =>
                 {
+                    IsBusy = false;
                 });
             }
         }
         #endregion
 
         #region navigation
-        public void OnNavigatedTo(object parameter)
+        public async Task OnNavigatedTo(object parameter)
         {
             var url = parameter as string;
+            await ThreadUI.Invoke(() =>
+            {
+                IsBusy = false;
+                ApplicationView.GetForCurrentView().SuppressSystemOverlays = true;
+            });
             Debug.WriteLine("EditorViewModel OnNavigatedTo " + url);
-
+            
             if (url == "http://debug")
             {
                 url = HFRUrl.Dbg_Form_QuoteSingleURL;
             }
-            LoadEditor(url);
+            await LoadEditor(url);
         }
 
         public void OnNavigatedFrom()
