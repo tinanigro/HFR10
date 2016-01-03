@@ -47,6 +47,7 @@ namespace Hfr.ViewModel
             SimpleIoc.Default.Register<NavigationService>();
             SimpleIoc.Default.Register<SubCategoryViewModel>();
             SimpleIoc.Default.Register<TopicViewModel>();
+            SimpleIoc.Default.Register<SettingsViewModel>();
         }
 
         public static MainViewModel Main
