@@ -6,6 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:triggers="using:WinRT.Triggers"
              xmlns:shellControls="using:Hfr.Views.ShellControls"
+             xmlns:customControls="using:Hfr.CustomControls"
              mc:Ignorable="d"
              DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
     <UserControl.Resources>
@@ -30,7 +31,7 @@
                       Margin="{StaticResource DefaultMarginHorizontal}"
                       ViewChangeCompleted="SemanticZoom_OnViewChangeCompleted">
             <SemanticZoom.ZoomedInView>
-                <ListView ItemsSource="{Binding Source={StaticResource DrapsCvs}}"
+                <customControls:ScrollLockListView ItemsSource="{Binding Source={StaticResource DrapsCvs}}"
                           ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}"
                           SelectionMode="None"
                           IsItemClickEnabled="True"
@@ -64,7 +65,7 @@
                             <ItemsStackPanel />
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
-                </ListView>
+                </customControls:ScrollLockListView>
             </SemanticZoom.ZoomedInView>
             <SemanticZoom.ZoomedOutView>
                 <ListView x:Name="DrapsZoomeOutListView"

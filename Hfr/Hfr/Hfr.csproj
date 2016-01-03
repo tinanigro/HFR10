@@ -114,6 +114,7 @@
     <Compile Include="Commands\UI\SetDefaultColumnViewCommand.cs" />
     <Compile Include="Converters\AvatarIdToUrlConverter.cs" />
     <Compile Include="Converters\NegatedBooleanConverter.cs" />
+    <Compile Include="CustomControls\ScrollLockListView.cs" />
     <Compile Include="Databases\AccountDataRepository.cs" />
     <Compile Include="Databases\IDataRepository.cs" />
     <Compile Include="Helpers\AppViewHelper.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="Helpers\ToastHelper.cs" />
     <Compile Include="Helpers\TopicFetcher.cs" />
     <Compile Include="Helpers\TopicNameHelper.cs" />
+    <Compile Include="Helpers\VisualTreeHelperExtensions.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Editor.cs" />
