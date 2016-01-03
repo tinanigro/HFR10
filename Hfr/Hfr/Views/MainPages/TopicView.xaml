@@ -43,11 +43,13 @@
                 <AppBarButton Icon="Back"
                               Label="Précédente"
                               IsCompact="True"
+                              IsEnabled="{Binding CurrentTopic.CanGoPrevious}"
                               Command="{Binding ChangeTopicPageCommand}"
                               CommandParameter="-" />
                 <AppBarButton Icon="Forward"
                               Label="Suivante"
                               IsCompact="True"
+                              IsEnabled="{Binding CurrentTopic.CanGoForward}"
                               Command="{Binding ChangeTopicPageCommand}"
                               CommandParameter="+"/>
                 <AppBarButton Label="Répondre"
@@ -56,14 +58,21 @@
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Icon="Refresh" 
-                              Label="Rafraîchir"/>
-                <AppBarButton x:Name="appBarButton1"
+                              Label="Rafraîchir"
+                              Command="{Binding RefreshTopicCommand}" />
+                <AppBarButton Label="Première page"
+                              Command="{Binding ChangeTopicPageCommand}"
+                              CommandParameter="first" />
+                <AppBarButton Label="Dernière page"
+                              Command="{Binding ChangeTopicPageCommand}"
+                              CommandParameter="last" />
+                <!--<AppBarButton x:Name="appBarButton1"
                               HorizontalAlignment="Stretch"
                               Icon="Add"
                               Label="Test Reponse - DEBUG only"
                               VerticalAlignment="Stretch"
                               Command="{Binding ShowEditorCommand}"
-                              CommandParameter="{Binding Source='http://debug'}" />
+                              CommandParameter="{Binding Source='http://debug'}" />-->
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Grid>
