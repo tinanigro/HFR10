@@ -113,8 +113,12 @@
                     <VisualState.Setters>
                         <Setter Target="ConnectButton.IsEnabled"
                                 Value="False" />
+                        <Setter Target="PseudoTextBox.IsEnabled"
+                                Value="False" />
+                        <Setter Target="PasswordTextBox.IsEnabled"
+                                Value="False" />
                         <Setter Target="ConnectButton.Content"
-                                Value="Connecting" />
+                                Value="Connecting" /> 
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
