@@ -27,16 +27,14 @@
                            HorizontalAlignment="Center"
                            Width="250"
                            Margin="0,-50,0,0">
-                <TextBlock x:Name="Logo"
-                           Margin="0,0,0,40"
-                           RelativePanel.AlignTopWithPanel="True"
-                           RelativePanel.AlignHorizontalCenterWithPanel="True">
-                    <Run Text="HFR"
-                         FontSize="88" />
-                    <LineBreak />
-                    <Run Text="Logo designer needed :o"
-                         Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
-                </TextBlock>
+                
+                <Image x:Name="Logo" 
+                       Margin="0,0,0,40"
+                       Source="ms-appx:///Assets/Logo/HFR.png"
+                       Height="100"
+                       RelativePanel.AlignTopWithPanel="True"
+                       RelativePanel.AlignHorizontalCenterWithPanel="True" />
+                
                 <TextBlock x:Name="PseudoHeaderTextBlock"
                            Text="PSEUDO"
                            Margin="{StaticResource DefaultMarginTop}"
