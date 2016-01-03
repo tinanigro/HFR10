@@ -145,6 +145,7 @@
     <Compile Include="ViewModel\EditorViewModel.cs" />
     <Compile Include="Utilities\Strings.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\SubCategoryViewModel.cs" />
     <Compile Include="ViewModel\TopicViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

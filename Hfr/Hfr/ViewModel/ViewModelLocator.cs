@@ -69,6 +69,8 @@ namespace Hfr.ViewModel
 
         public static TopicViewModel Topic => ServiceLocator.Current.GetInstance<TopicViewModel>();
 
+        public static SettingsViewModel Settings => ServiceLocator.Current.GetInstance<SettingsViewModel>();
+
         public static NavigationService NavigationService
         {
             get { return ServiceLocator.Current.GetInstance<NavigationService>(); }
