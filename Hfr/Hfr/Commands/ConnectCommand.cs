@@ -48,6 +48,7 @@ namespace Hfr.Commands
                 {
                     Loc.Main.AccountManager.CurrentAccount.IsConnecting = false;
                     Loc.Main.AccountManager.CurrentAccount.ConnectionErrorStatus = "Login failed";
+                    ToastHelper.Simple("Echec de la connexion");
                 });
                 Debug.WriteLine("Login failed");
             }
