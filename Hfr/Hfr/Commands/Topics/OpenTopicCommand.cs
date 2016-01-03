@@ -20,6 +20,8 @@ namespace Hfr.Commands.Topics
                 topic = (Model.Topic) parameter;
             }
 
+            if (topic == null) return;
+
             if (!Loc.Main.Topics.Any())
                 Loc.Main.Topics.Add(topic);
             else Loc.Main.Topics[0] = topic;
