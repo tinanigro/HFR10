@@ -8,7 +8,8 @@
 
 body {
     font-family:Segoe UI !important;
-    background-color:white;
+    color: white;
+    background-color:#1F1F1F;
 }
 
 .clear {
@@ -19,24 +20,44 @@ body {
 .message .anchorlink {
 	display:block;
 }
+
+.oldcitation {
+    background-color: #131313;
+    border-width: 0px;
+}
+
 .message .header {
-    background-color:lightgrey;
-    padding:8px;
+    background-color:#131313;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.message .wrapper div {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 16px;
 }
 
 .message .header .avatar, .message .header .infos {
     float:left;
 }
+
 .message .header .action {
     float:right;
+    margin-top: 12px;
 }
+
 .message .header .infos {
     margin-left:8px
 }
+
 .message .header .infos * {
     width:100%;
     line-height:30px;
 }
+
 .message .header .avatar {
 	text-align:left;
 
@@ -59,6 +80,10 @@ body {
     
 }
 
+.message .header .infos .message_date {
+    color: #565656;
+}
+
 .message .content {
     overflow: hidden;
     padding:8px;
@@ -67,16 +92,16 @@ body {
 
 /* HFR content > * */
 .message .content table 
-{ 
-	border: 1px solid silver;
-	padding: 4px !important;
+{
+    border: 0px;
+	padding: 16px !important;
 	width:100%;
 	
 	margin-bottom:5px !important;
 }
+
 .message .content table p
 {
-	
 	overflow-x:hidden;
 }
 
@@ -90,8 +115,12 @@ body {
 
 .message .content table .s1 a {
 	font-weight:bold !important;
-	text-decoration:underline !important;
-	color:black !important;
+	color:whitesmoke !important;
+    text-decoration: none !important;
+}
+
+hr {
+    border: 0px;
 }
 
 .message .content div.masque {
