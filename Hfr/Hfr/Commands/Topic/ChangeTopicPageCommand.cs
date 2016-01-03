@@ -21,6 +21,14 @@ namespace Hfr.Commands.Topic
                 {
                     Loc.Topic.CurrentTopic.TopicCurrentPage = Loc.Topic.CurrentTopic.TopicCurrentPage - 1;
                 }
+                else if (action == "last")
+                {
+                    Loc.Topic.CurrentTopic.TopicCurrentPage = Loc.Topic.CurrentTopic.TopicNbPage;
+                }
+                else if (action == "first")
+                {
+                    Loc.Topic.CurrentTopic.TopicCurrentPage = 1;
+                }
                 Task.Run(() => TopicFetcher.GetPosts(Loc.Topic.CurrentTopic));
             }
         }
