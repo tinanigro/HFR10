@@ -96,10 +96,15 @@
     </Compile>
     <Compile Include="Commands\ConnectCommand.cs" />
     <Compile Include="Commands\EditorCommands.cs" />
+    <Compile Include="Commands\Editor\ShowEditorCommand.cs" />
     <Compile Include="Commands\MessagesCommands.cs" />
-    <Compile Include="Commands\TopicsCommands.cs" />
+    <Compile Include="Commands\OpenSubCatCommand.cs" />
+    <Compile Include="Commands\Topics\ChangeTopicsListPageInSubCatCommand.cs" />
+    <Compile Include="Commands\Topics\RefreshDrapsCommand.cs" />
+    <Compile Include="Commands\Topics\OpenTopicCommand.cs" />
+    <Compile Include="Commands\Topic\ChangeTopicPageCommand.cs" />
+    <Compile Include="Commands\UI\GoBackCommand.cs" />
     <Compile Include="Commands\UI\NavigateToSettings.cs" />
-    <Compile Include="Commands\UI\OpenSplitViewPaneCommand.cs" />
     <Compile Include="Commands\UI\SetDefaultColumnViewCommand.cs" />
     <Compile Include="Converters\AvatarIdToUrlConverter.cs" />
     <Compile Include="Converters\NegatedBooleanConverter.cs" />
@@ -140,6 +145,8 @@
     <Compile Include="ViewModel\EditorViewModel.cs" />
     <Compile Include="Utilities\Strings.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\SubCategoryViewModel.cs" />
+    <Compile Include="ViewModel\TopicViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\MainPages\ConnectPage.xaml.cs">
       <DependentUpon>ConnectPage.xaml</DependentUpon>
@@ -150,8 +157,14 @@
     <Compile Include="Views\MainPages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainPages\MainPageControls\CategoriesList.xaml.cs">
+    <Compile Include="Views\MainPages\MainPageControls\CategoriesPanel.xaml.cs">
+      <DependentUpon>CategoriesPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainPages\MainPageControls\CategoriesViews\CategoriesList.xaml.cs">
       <DependentUpon>CategoriesList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainPages\MainPageControls\CategoriesViews\CategoryTopicsList.xaml.cs">
+      <DependentUpon>CategoryTopicsList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPages\MainPageControls\MessagesList.xaml.cs">
       <DependentUpon>MessagesList.xaml</DependentUpon>
@@ -193,6 +206,7 @@
     <Content Include="Assets\HTML\UI\no_avatar.png" />
     <Content Include="Assets\HTML\UI\rsz_no_avatar.png" />
     <Content Include="Assets\Wallpapers\background.jpg" />
+    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
@@ -238,7 +252,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainPages\MainPageControls\CategoriesList.xaml">
+    <Page Include="Views\MainPages\MainPageControls\CategoriesPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainPages\MainPageControls\CategoriesViews\CategoriesList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainPages\MainPageControls\CategoriesViews\CategoryTopicsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
