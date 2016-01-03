@@ -26,6 +26,11 @@ body {
     border-width: 0px;
 }
 
+.citation {
+    background-color: #131313;
+    border-width: 0px;
+}
+
 .message .header {
     background-color:#131313;
     padding-bottom: 8px;
@@ -140,7 +145,6 @@ hr {
 .message .content table.code, .message .content table.fixed, .message .content table.quote, .message .content table.citation {
     table-layout:fixed;
     border: none;
-    border-left: 3px solid  silver;
 }
 
 .message .content table.code p, .message .content table.fixed p {
