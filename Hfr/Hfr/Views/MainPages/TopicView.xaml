@@ -34,6 +34,9 @@
                  x:FieldModifier="public"
                  Grid.Row="1"
                  NavigationStarting="TopicWebView_OnNavigationStarting" />
+        <ProgressBar Grid.Row="1"
+                     IsIndeterminate="True"
+                     Visibility="{Binding TopicLoadingVisibility}"/>
         <CommandBar Grid.Row="2"
                     Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
             <CommandBar.PrimaryCommands>
