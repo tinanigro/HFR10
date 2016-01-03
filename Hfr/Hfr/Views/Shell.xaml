@@ -23,11 +23,10 @@
             </Frame.ContentTransitions>
         </Frame>
         
-        <Grid x:Name="ExtraPaneGrid" 
-              Background="Transparent"
+        <Grid x:Name="ExtraPaneGrid"
+              Background="{ThemeResource SystemControlBackgroundAltMediumLowBrush}"
               Visibility="Collapsed">
             <ContentPresenter x:Name="ExtraPaneContentPresenter"/>
         </Grid>
     </Grid>
-    
 </UserControl>
