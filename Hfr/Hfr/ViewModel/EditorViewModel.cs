@@ -4,12 +4,13 @@ using Hfr.Helpers;
 using System;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using Windows.UI.Xaml.Navigation;
 using Hfr.Utilities;
 using Hfr.Commands;
 
 namespace Hfr.ViewModel
 {
-    public class EditorViewModel : ViewModelBase
+    public class EditorViewModel : ViewModelBase, IDisposable
     {
         private Editor _currentEditor;
 
@@ -41,6 +42,7 @@ namespace Hfr.ViewModel
                 {
                     Loc.NavigationService.GoBack();
                 });
+                await Loc.Topic.RefreshPage();
             }
             else
             {
@@ -52,14 +54,21 @@ namespace Hfr.ViewModel
         #endregion
 
         #region navigation
-        public void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        public void OnNavigatedTo(object parameter)
         {
-            var url = e.Parameter as string;
+            var url = parameter as string;
             Debug.WriteLine("EditorViewModel OnNavigatedTo " + url);
 
-            if (url == "http://debug") url = HFRUrl.Dbg_Form_QuoteSingleURL;
-
+            if (url == "http://debug")
+            {
+                url = HFRUrl.Dbg_Form_QuoteSingleURL;
+            }
             LoadEditor(url);
+        }
+
+        public void OnNavigatedFrom()
+        {
+            Dispose();
         }
         #endregion
 
@@ -67,5 +76,9 @@ namespace Hfr.ViewModel
         public SubmitEditorCommand SubmitEditorCommand { get; } = new SubmitEditorCommand();
         #endregion
 
+        public void Dispose()
+        {
+
+        }
     }
 }
