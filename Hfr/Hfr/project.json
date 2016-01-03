@@ -7,6 +7,7 @@
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
     "MvvmLightLibs": "5.1.1",
     "Newtonsoft.Json": "6.0.8",
+    "NotificationsExtensions.Win10": "10586.0.0",
     "WinRTTriggers": "1.6.0"
   },
   "frameworks": {
