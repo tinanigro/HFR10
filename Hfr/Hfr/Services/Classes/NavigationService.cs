@@ -58,15 +58,20 @@ namespace Hfr.Services.Classes
             switch (CurrentView)
             {
                 case View.Main:
-                    if (Loc.Main.TopicVisible)
+                    if (Loc.Topic.TopicVisible)
                     {
-                        Loc.Main.SelectedTopic = -1;
+                        Loc.Topic.SelectedTopic = -1;
                     }
                     break;
                 case View.Editor:
+                    _shell.ExtraPaneContent = null;
+                    break;
                 case View.Settings:
                     _navigationFrame.GoBack();
                     CurrentView = View.Main;
+                    break;
+                case View.CategoryTopicsList:
+                    ((MainPage)App.NavigationFrame.Content)?.Navigate(View.CategoriesList);
                     break;
             }
             ShowBackButtonIfCanGoBack();
@@ -77,12 +82,13 @@ namespace Hfr.Services.Classes
             switch (CurrentView)
             {
                 case View.Main:
-                    return Loc.Main.TopicVisible;
+                    return Loc.Topic.TopicVisible;
                 case View.Editor:
+                case View.CategoryTopicsList:
                     return true;
                 default:
                     return _navigationFrame.CanGoBack;
-            }            
+            }
         }
 
         public void Navigate(View page, object parameter)
@@ -96,10 +102,14 @@ namespace Hfr.Services.Classes
                     _navigationFrame.Navigate(typeof(MainPage));
                     break;
                 case View.Editor:
-                    _navigationFrame.Navigate(typeof(EditorPage), parameter);
+                    _shell.ExtraPaneContent = new EditorPage(parameter);
                     break;
                 case View.Settings:
-                    _navigationFrame.Navigate(typeof (Settings));
+                    _navigationFrame.Navigate(typeof(Settings));
+                    break;
+                case View.CategoryTopicsList:
+                case View.CategoriesList:
+                    ((MainPage)App.NavigationFrame.Content)?.Navigate(page);
                     break;
                 default:
                     break;
@@ -114,5 +124,6 @@ namespace Hfr.Services.Classes
         }
 
         public Page CurrentPage { get { return _navigationFrame.Content as Page; } }
+        public GoBackCommand GoBackCommand { get; } = new GoBackCommand();
     }
 }
