@@ -1,10 +1,12 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Hfr.ViewModel;
 using System.Linq;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Hfr.Model;
 
 namespace Hfr.Views.MainPages
 {
@@ -18,30 +20,22 @@ namespace Hfr.Views.MainPages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            Window.Current.SizeChanged += CurrentOnSizeChanged;
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
-            Window.Current.SizeChanged -= CurrentOnSizeChanged;
         }
 
-        private void CurrentOnSizeChanged(object sender, WindowSizeChangedEventArgs windowSizeChangedEventArgs)
+        public void Navigate(View view)
         {
-            if (windowSizeChangedEventArgs.Size.Width < 1050)
+            switch (view)
             {
-                VisualStateManager.GoToState(this, Loc.Main.Topics.Any() ? "SnapTopicView" : "SnapTopicList", false);
+                case View.CategoryTopicsList:
+                case View.CategoriesList:
+                    CategoriesPanel.Navigate(view);
+                    break;
             }
-            else
-            {
-                VisualStateManager.GoToState(this, "FullTwoColumns", false);
-            }
-        }
-
-        private void GoBack_OnClick(object sender, RoutedEventArgs e)
-        {
-            VisualStateManager.GoToState(this, "SnapTopicList", false);
         }
     }
 }
