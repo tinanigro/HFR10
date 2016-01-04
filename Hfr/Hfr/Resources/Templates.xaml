@@ -10,39 +10,7 @@
 
     <!-- Item Templates -->
     <DataTemplate x:Key="FlagItemTemplate">
-        <Grid Padding="0,6"
-              Margin="{StaticResource DefaultMarginRight}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="{StaticResource DefaultTextBlockHeightGridLength}" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="12" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.ColumnSpan="3"
-                       Text="{Binding TopicName}"
-                       TextWrapping="NoWrap"
-                       TextTrimming="CharacterEllipsis"
-                       FontWeight="Normal"
-                       FontSize="15" />
-            <TextBlock Grid.Row="1"
-                       Text="{Binding TopicLastPost}"
-                       Foreground="{ThemeResource SystemControlForegroundBaseLowBrush}"
-                       VerticalAlignment="Bottom" />
-
-            <TextBlock Grid.Column="2"
-                       Grid.Row="1">
-                <Run Text="{Binding TopicCurrentPage}"
-                     Foreground="{ThemeResource SystemControlForegroundBaseLowBrush}" />
-                <Run Text="{Binding TopicNbPage}"
-                     FontSize="18"
-                     FontWeight="Light"
-                     Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
-            </TextBlock>
-        </Grid>
+        <controls:FlagItemTemplate />
     </DataTemplate>
 
     <DataTemplate x:Key="SubCatItemTemplate">
@@ -83,38 +51,6 @@
     </DataTemplate>
 
     <DataTemplate x:Key="StandardTopicItemTemplate">
-        <Grid Padding="0,6"
-              Margin="{StaticResource DefaultMarginRight}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="{StaticResource DefaultTextBlockHeightGridLength}" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="12" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.ColumnSpan="3"
-                       Text="{Binding TopicName}"
-                       TextWrapping="NoWrap"
-                       TextTrimming="CharacterEllipsis"
-                       Foreground="{Binding Foreground}"
-                       FontWeight="{Binding FontWeight}"
-                       FontSize="15" />
-            <TextBlock Grid.Row="1"
-                       Text="{Binding TopicAuthor}"
-                       FontWeight="{Binding FontWeight}"
-                       Foreground="{ThemeResource SystemControlForegroundBaseLowBrush}"
-                       VerticalAlignment="Bottom" />
-
-            <TextBlock Grid.Column="2"
-                       Grid.Row="1"
-                       Text="{Binding TopicNbPage}"
-                       FontSize="18"
-                       FontWeight="Light"
-                       Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
-        </Grid>
     </DataTemplate>
 
 </ResourceDictionary>
