@@ -18,7 +18,7 @@ namespace Hfr.Commands.Topics
             }
             else if (parameter is Model.Topic)
             {
-                topic = (Model.Topic) parameter;
+                topic = (Model.Topic)parameter;
             }
 
             if (topic == null) return;
