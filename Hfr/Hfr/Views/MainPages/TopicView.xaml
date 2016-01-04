@@ -51,19 +51,26 @@
                               IsCompact="True"
                               IsEnabled="{Binding CurrentTopic.CanGoForward}"
                               Command="{Binding ChangeTopicPageCommand}"
-                              CommandParameter="+"/>
+                              CommandParameter="+" />
                 <AppBarButton Label="Répondre"
                               Icon="Add"
                               Command="{Binding ShowEditorCommand}"
-                              CommandParameter="{Binding CurrentTopic}"/>
+                              CommandParameter="{Binding CurrentTopic}" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Icon="Refresh" 
+                <AppBarButton Icon="Refresh"
                               Label="Rafraîchir"
                               Command="{Binding RefreshTopicCommand}" />
-                <AppBarButton Label="Première page"
+                <AppBarButton x:Name="FirstPageButton"
+                              Label="Première page"
                               Command="{Binding ChangeTopicPageCommand}"
                               CommandParameter="first" />
+                <AppBarButton Style="{StaticResource AppBarTextButtonStyle}"
+                              Width="{Binding ElementName=FirstPageButton, Path=ActualWidth}"
+                              Label="Page :"
+                              Icon="Accept"
+                              Command="{Binding ChangeTopicPageCommand}"
+                              CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"/>
                 <AppBarButton Label="Dernière page"
                               Command="{Binding ChangeTopicPageCommand}"
                               CommandParameter="last" />

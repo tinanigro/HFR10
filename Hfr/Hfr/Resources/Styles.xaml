@@ -569,22 +569,23 @@
           | |   | |                                                    
           |_|   |_|                                                    
     -->
-    <Style x:Key="HorizontalAppBarButton"
+
+    <Style x:Key="AppBarTextButtonStyle"
            TargetType="AppBarButton">
         <Setter Property="Background"
                 Value="Transparent" />
         <Setter Property="Foreground"
                 Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
         <Setter Property="HorizontalAlignment"
-                Value="Left" />
+                Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Stretch" />
         <Setter Property="VerticalAlignment"
                 Value="Top" />
         <Setter Property="FontFamily"
                 Value="{ThemeResource ContentControlThemeFontFamily}" />
         <Setter Property="FontWeight"
                 Value="Normal" />
-        <Setter Property="Width"
-                Value="68" />
         <Setter Property="UseSystemFocusVisuals"
                 Value="True" />
         <Setter Property="Template">
@@ -592,7 +593,7 @@
                 <ControlTemplate TargetType="AppBarButton">
                     <Grid x:Name="Root"
                           MinWidth="{TemplateBinding MinWidth}"
-                          MaxWidth="{TemplateBinding MaxWidth}"
+                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                           Background="{TemplateBinding Background}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="ApplicationViewStates">
@@ -613,7 +614,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0"
                                                                     Value="Collapsed" />
                                         </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OverflowTextLabel"
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OverflowGrid"
                                                                        Storyboard.TargetProperty="Visibility">
                                             <DiscreteObjectKeyFrame KeyTime="0"
                                                                     Value="Visible" />
@@ -627,7 +628,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0"
                                                                     Value="Collapsed" />
                                         </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OverflowTextLabel"
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OverflowGrid"
                                                                        Storyboard.TargetProperty="Visibility">
                                             <DiscreteObjectKeyFrame KeyTime="0"
                                                                     Value="Visible" />
@@ -643,7 +644,7 @@
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal">
                                     <Storyboard>
-                                        <PointerUpThemeAnimation Storyboard.TargetName="OverflowTextLabel" />
+                                        <PointerUpThemeAnimation Storyboard.TargetName="OverflowGrid" />
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="PointerOver">
@@ -668,7 +669,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0"
                                                                     Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
-                                        <PointerUpThemeAnimation Storyboard.TargetName="OverflowTextLabel" />
+                                        <PointerUpThemeAnimation Storyboard.TargetName="OverflowGrid" />
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Pressed">
@@ -693,7 +694,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0"
                                                                     Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
-                                        <PointerDownThemeAnimation Storyboard.TargetName="OverflowTextLabel" />
+                                        <PointerDownThemeAnimation Storyboard.TargetName="OverflowGrid" />
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Disabled">
@@ -736,19 +737,41 @@
                                        TextWrapping="Wrap"
                                        Margin="0,0,0,6" />
                         </StackPanel>
-
-                        <TextBlock x:Name="OverflowTextLabel"
-                                   Text="{TemplateBinding Label}"
-                                   Foreground="{TemplateBinding Foreground}"
-                                   FontSize="15"
-                                   FontFamily="{TemplateBinding FontFamily}"
-                                   TextAlignment="Left"
-                                   TextTrimming="Clip"
-                                   TextWrapping="NoWrap"
-                                   HorizontalAlignment="Stretch"
-                                   VerticalAlignment="Center"
-                                   Margin="12,11,0,13"
-                                   Visibility="Collapsed" />
+                        <Grid x:Name="OverflowGrid"
+                              Visibility="Collapsed">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="6"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="OverflowTextLabel"
+                                       Text="{TemplateBinding Label}"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       FontSize="15"
+                                       FontFamily="{TemplateBinding FontFamily}"
+                                       TextAlignment="Left"
+                                       TextTrimming="Clip"
+                                       TextWrapping="NoWrap"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Center"
+                                       Margin="12,6,0,7" />
+                            <TextBox Grid.Column="1"
+                                     PlaceholderText="n°"
+                                     HorizontalAlignment="Right"
+                                     VerticalAlignment="Stretch"
+                                     Style="{StaticResource TransparentTextBoxStyle}"
+                                     Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag, Mode=TwoWay}"
+                                     MaxWidth="50"
+                                     InputScope="Number" />
+                            <ContentPresenter Grid.Column="2"
+                                              Height="17"
+                                              Margin="3,0,0,0"
+                                              Content="{TemplateBinding Icon}"
+                                              Foreground="{TemplateBinding Foreground}"
+                                              HorizontalAlignment="Stretch"
+                                              AutomationProperties.AccessibilityView="Raw" />
+                        </Grid>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
