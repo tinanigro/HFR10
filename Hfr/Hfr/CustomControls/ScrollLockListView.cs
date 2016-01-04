@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Hfr.Helpers;
 
@@ -23,7 +17,6 @@ namespace Hfr.CustomControls
             var sV = this.GetFirstDescendantOfType<ScrollViewer>();
             sV.ViewChanging += SV_ViewChanging;
             sV.ViewChanged += SV_ViewChanged;
-
         }
 
         private void SV_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
