@@ -65,7 +65,7 @@
                 <AppBarButton x:Name="FirstPageButton"
                               Label="Première page"
                               Command="{Binding ChangeTopicPageCommand}"
-                              CommandParameter="first" />
+                              CommandParameter="{Binding Source={StaticResource Strings}, Path=First}" />
                 <AppBarButton Style="{StaticResource AppBarTextButtonStyle}"
                               Width="{Binding ElementName=FirstPageButton, Path=ActualWidth}"
                               Label="Page :"
@@ -74,7 +74,7 @@
                               CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"/>
                 <AppBarButton Label="Dernière page"
                               Command="{Binding ChangeTopicPageCommand}"
-                              CommandParameter="last" />
+                              CommandParameter="{Binding Source={StaticResource Strings}, Path=Last}" />
                 <!--<AppBarButton x:Name="appBarButton1"
                               HorizontalAlignment="Stretch"
                               Icon="Add"
