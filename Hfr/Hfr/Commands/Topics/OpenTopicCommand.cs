@@ -28,7 +28,8 @@ namespace Hfr.Commands.Topics
             else Loc.Main.Topics[0] = topic;
             Loc.Topic.SelectedTopic = 0;
 
-            Loc.NavigationService.Navigate(View.Main);
+            if (Loc.NavigationService.CurrentView != View.Main)
+                Loc.NavigationService.Navigate(View.Main);
         }
     }
 }
