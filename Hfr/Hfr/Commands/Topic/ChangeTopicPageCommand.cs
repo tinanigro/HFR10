@@ -21,11 +21,11 @@ namespace Hfr.Commands.Topic
                 {
                     Loc.Topic.CurrentTopic.TopicCurrentPage = Loc.Topic.CurrentTopic.TopicCurrentPage - 1;
                 }
-                else if (action == "last")
+                else if (action == Strings.Last)
                 {
                     Loc.Topic.CurrentTopic.TopicCurrentPage = Loc.Topic.CurrentTopic.TopicNbPage;
                 }
-                else if (action == "first")
+                else if (action == Strings.First)
                 {
                     Loc.Topic.CurrentTopic.TopicCurrentPage = 1;
                 }

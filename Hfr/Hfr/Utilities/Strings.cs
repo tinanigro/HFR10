@@ -8,8 +8,13 @@ using Windows.UI.Xaml;
 
 namespace Hfr.Utilities
 {
-    public static class Strings
+    public class Strings
     {
+        public Strings()
+        {
+
+        }
+
         public static GridLength DefaultMargin => (GridLength) App.Current.Resources["DefaultMarginGridLength"];
         public static double MinimumWidth => (double) App.Current.Resources[nameof(MinimumWidth)];
         public static double PortraitWidth => (double)App.Current.Resources[nameof(PortraitWidth)];
@@ -23,9 +28,8 @@ namespace Hfr.Utilities
 
         public static string LocalUriPrefix = "http://local/";
 
-        public static string CleanFromWeb(this string text)
-        {
-            return WebUtility.HtmlDecode(text.Trim());
-        }
+
+        public static string First => "First";
+        public static string Last => "Last";
     }
 }
