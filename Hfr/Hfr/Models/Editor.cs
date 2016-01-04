@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Windows.System.Profile;
 using GalaSoft.MvvmLight;
 
 namespace Hfr.Model
@@ -44,6 +45,10 @@ namespace Hfr.Model
         {
             FixNewLines();
             SecureCleanUp();
+            if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile") // If Mobile, add the Phone icon to the Msg
+            {
+                Data["MsgIcon"] = "20";
+            }
         }
 
         public void FixNewLines()
