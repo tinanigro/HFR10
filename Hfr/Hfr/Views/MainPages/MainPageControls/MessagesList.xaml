@@ -23,7 +23,11 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <shellControls:Header HeaderContent="Messages privés" />
+        <shellControls:Header HeaderContent="Messages privés">
+            <shellControls:Header.LeftContent>
+                <SymbolIcon Symbol="Mail" />
+            </shellControls:Header.LeftContent>
+        </shellControls:Header>
         <SemanticZoom Grid.Row="1"
                       Margin="{StaticResource DefaultMarginHorizontal}"
                       ViewChangeCompleted="SemanticZoom_OnViewChangeCompleted">

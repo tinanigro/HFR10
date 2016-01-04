@@ -11,30 +11,54 @@ namespace Hfr.Views.ShellControls
         public Header()
         {
             this.InitializeComponent();
-            UpdateHamburger();
+            UpdateLeftContent();
         }
-        
-        public bool HamburgerVisible
-        {
-            get { return (bool)GetValue(HamburgerVisibleProperty); }
-            set { SetValue(HamburgerVisibleProperty, value); }
-        }
-        
-        public static readonly DependencyProperty HamburgerVisibleProperty =
-            DependencyProperty.Register(nameof(HamburgerVisible), typeof(bool), typeof(Header), new PropertyMetadata(false, HamburgerVisiblePropertyChanged));
 
-        private static void HamburgerVisiblePropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        #region left content
+        public object LeftContent
+        {
+            get { return (object)GetValue(LeftContentProperty); }
+            set { SetValue(LeftContentProperty, value); }
+        }
+
+        public static readonly DependencyProperty LeftContentProperty =
+            DependencyProperty.Register(nameof(LeftContent), typeof(object), typeof(Header), new PropertyMetadata(null, LeftContentPropertyChanged));
+
+        private static void LeftContentPropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
             var that = dependencyObject as Header;
-            that.UpdateHamburger();
+            that.UpdateLeftContent();
         }
 
+        public bool LeftContentVisible
+        {
+            get { return (bool)GetValue(LeftContentVisibleProperty); }
+            set { SetValue(LeftContentVisibleProperty, value); }
+        }
+
+        public static readonly DependencyProperty LeftContentVisibleProperty =
+            DependencyProperty.Register(nameof(LeftContentVisible), typeof(bool), typeof(Header), new PropertyMetadata(true, LeftContentVisiblePropertyChanged));
+
+        private static void LeftContentVisiblePropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            var that = dependencyObject as Header;
+            that.UpdateLeftContent();
+        }
+
+        private void UpdateLeftContent()
+        {
+            LeftContentPresenter.Visibility = (LeftContentVisible && LeftContent != null) ? Visibility.Visible : Visibility.Collapsed;
+            LeftContentPresenter.Content = LeftContent;
+        }
+        #endregion
+
+        #region header content
         public string HeaderContent
         {
             get { return (string)GetValue(HeaderProperty); }
             set { SetValue(HeaderProperty, value); }
         }
-        
+
         public static readonly DependencyProperty HeaderProperty =
             DependencyProperty.Register(nameof(HeaderContent), typeof(string), typeof(Header), new PropertyMetadata("Header", HeaderPropertyChanged));
 
@@ -48,14 +72,8 @@ namespace Hfr.Views.ShellControls
         {
             HeaderTextBlock.Text = HeaderContent.ToUpper();
         }
-
-        void UpdateHamburger()
-        {
-            HamburgerButtonColumn.Width = (HamburgerVisible) ? new GridLength() : Strings.DefaultMargin;
-            HamburgerButton.Visibility = (HamburgerVisible) ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-
+        #endregion
+        #region right content
 
         public object RightContent
         {
@@ -77,5 +95,6 @@ namespace Hfr.Views.ShellControls
         {
             RightContentPresenter.Content = RightContent;
         }
+        #endregion
     }
 }

@@ -11,20 +11,21 @@
     Height="50">
     <Grid Background="{ThemeResource SystemControlHighlightAltListAccentLowBrush}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="HamburgerButtonColumn" 
-                              Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="{StaticResource DefaultMarginGridLength}" />
             <ColumnDefinition />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <local:Hamburger x:Name="HamburgerButton"/>
+        <ContentPresenter x:Name="LeftContentPresenter"
+                          Margin="{StaticResource DefaultMarginLeft}"/>
         <TextBlock x:Name="HeaderTextBlock" 
-                   Grid.Column="1"
+                   Grid.Column="2"
                    Text="HEADER"
                    FontWeight="SemiBold"
                    VerticalAlignment="Center" 
                    TextTrimming="CharacterEllipsis"
                    TextWrapping="NoWrap"/>
         <ContentPresenter x:Name="RightContentPresenter"
-                          Grid.Column="2"/>
+                          Grid.Column="3"/>
     </Grid>
 </UserControl>

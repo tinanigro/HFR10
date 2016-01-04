@@ -14,13 +14,17 @@
                               IsSourceGrouped="True"
                               Source="{Binding CategoriesGrouped}" />
     </Page.Resources>
-    
-    <Grid >
+
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <shellControls:Header HeaderContent="Catégories" />
+        <shellControls:Header HeaderContent="Catégories">
+            <shellControls:Header.LeftContent>
+                <SymbolIcon Symbol="List" />
+            </shellControls:Header.LeftContent>
+        </shellControls:Header>
         <SemanticZoom Grid.Row="1"
                       Margin="{StaticResource DefaultMarginHorizontal}"
                       ViewChangeStarted="SemanticZoom_ViewChangeStarted">

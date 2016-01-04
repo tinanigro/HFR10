@@ -22,6 +22,9 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <shellControls:Header HeaderContent="Drapeaux">
+            <shellControls:Header.LeftContent>
+                <SymbolIcon Symbol="Flag"/>
+            </shellControls:Header.LeftContent>
             <shellControls:Header.RightContent>
                 <AppBarButton Icon="Sync"
                               Command="{Binding RefreshDrapsCommand}" />
