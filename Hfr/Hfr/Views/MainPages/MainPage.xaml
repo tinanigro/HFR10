@@ -10,7 +10,8 @@
       DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
       mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+    <Grid x:Name="RootGrid"
+          Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
@@ -33,14 +34,18 @@
                   Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" />
 
             <mainPageControls:TopicList x:Name="TopicsList"
-                                        Grid.Column="0" />
+                                        Grid.Column="0"
+                                        Visibility="Collapsed" />
             <mainPageControls:CategoriesPanel x:Name="CategoriesPanel"
-                                              Grid.Column="2" />
+                                              Grid.Column="2"
+                                              Visibility="Collapsed" />
             <mainPageControls:MessagesList x:Name="MessagesList"
-                                           Grid.Column="4" />
+                                           Grid.Column="4"
+                                           Visibility="Collapsed" />
             <local:TopicView x:Name="TopicGrid"
                              Grid.Column="2"
-                             Grid.ColumnSpan="3" />
+                             Grid.ColumnSpan="3"
+                             Visibility="Collapsed" />
 
         </Grid>
         <CommandBar x:Name="MainCommandBar"
