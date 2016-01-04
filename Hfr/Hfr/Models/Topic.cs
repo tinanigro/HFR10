@@ -30,6 +30,9 @@ namespace Hfr.Model
         public double TopicLastPostDate { get; set; }
         public string TopicLastPost { get; set; }
         public TimeSpan TopicLastPostTimeSpan { get; set; }
+
+        public int TopicFirstPage => 1;
+
         public int TopicNbPage { get; set; }
 
         public int TopicCurrentPage
