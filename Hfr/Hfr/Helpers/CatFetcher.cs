@@ -51,14 +51,14 @@ namespace Hfr.Helpers
             foreach (var cat in catsArray)
             {
                 var catNode = cat.Descendants("a").FirstOrDefault(x => x.GetAttributeValue("class", "") == "cCatTopic");
-                var catName = catNode.InnerText?.Trim();
+                var catName = catNode.InnerText?.CleanFromWeb();
                 var catUrl = catNode.GetAttributeValue("href", "");
                 Debug.WriteLine(catName);
                 var subcatNodes = cat.Descendants("a").Where(x => x.GetAttributeValue("class", "") == "Tableau").ToArray();
 
                 var mainSubCategory = new SubCategory();
                 mainSubCategory.CategoryName = catName;
-                mainSubCategory.Name = $"Tout de {catName}";
+                mainSubCategory.Name = $"{catName}";
                 mainSubCategory.Url = catUrl;
                 subcategories.Add(mainSubCategory);
                 foreach (var subcatNode in subcatNodes)
@@ -66,7 +66,7 @@ namespace Hfr.Helpers
                     Debug.WriteLine($"--- {subcatNode.InnerText}");
                     var subCategory = new SubCategory();
                     subCategory.CategoryName = catName;
-                    subCategory.Name = subcatNode.InnerText;
+                    subCategory.Name = subcatNode.InnerText.CleanFromWeb();
                     subCategory.Url = subcatNode.GetAttributeValue("href", "");
                     subcategories.Add(subCategory);
                 }
