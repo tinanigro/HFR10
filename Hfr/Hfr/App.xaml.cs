@@ -34,7 +34,7 @@ namespace Hfr
 
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
+            Loc.Init();
 #if DEBUG
             if (Debugger.IsAttached)
             {

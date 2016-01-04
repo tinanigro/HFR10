@@ -42,6 +42,11 @@ namespace Hfr.ViewModel
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
+        }
+
+        public static void Init()
+        {
+            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<EditorViewModel>();
             SimpleIoc.Default.Register<NavigationService>();
