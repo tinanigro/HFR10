@@ -125,6 +125,7 @@
     <Compile Include="Helpers\FormFetcher.cs" />
     <Compile Include="Helpers\HttpClientHelper.cs" />
     <Compile Include="Helpers\PrivateChatsFetcher.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Helpers\ThreadUI.cs" />
     <Compile Include="Helpers\ToastHelper.cs" />
     <Compile Include="Helpers\TopicFetcher.cs" />
@@ -294,6 +295,14 @@
     <Page Include="Resources\Templates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Controls\FlagItemTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\StandardTopicItemTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPages\ConnectPage.xaml">
       <SubType>Designer</SubType>
