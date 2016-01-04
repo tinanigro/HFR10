@@ -29,8 +29,6 @@ namespace Hfr.ViewModel
         /// </summary>
         public Loc()
         {
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
             ////if (ViewModelBase.IsInDesignModeStatic)
             ////{
             ////    // Create design time view services and models
