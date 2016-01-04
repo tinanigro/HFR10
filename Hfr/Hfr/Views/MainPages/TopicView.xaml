@@ -33,7 +33,8 @@
         <WebView x:Name="TopicWebView"
                  x:FieldModifier="public"
                  Grid.Row="1"
-                 NavigationStarting="TopicWebView_OnNavigationStarting" />
+                 NavigationStarting="TopicWebView_OnNavigationStarting"
+                 DefaultBackgroundColor="{ThemeResource SystemChromeMediumColor}"/>
         <ProgressBar Grid.Row="1"
                      IsIndeterminate="True"
                      Visibility="{Binding TopicLoadingVisibility}" />
