@@ -13,8 +13,13 @@ namespace Hfr.Helpers
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
             {
                 var statusBar = StatusBar.GetForCurrentView();
-                statusBar.BackgroundColor = (Color?) App.Current.Resources["SystemAccentColor"];
+                statusBar.BackgroundColor = (Color?)App.Current.Resources["SystemAccentColor"];
                 statusBar.BackgroundOpacity = 1;
+            }
+            else
+            {
+                var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+                titleBar.ButtonBackgroundColor = titleBar.BackgroundColor = (Color?)App.Current.Resources["SystemAccentColor"];
             }
         }
 
