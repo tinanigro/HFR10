@@ -42,7 +42,6 @@ namespace Hfr.ViewModel
                 {
                     Loc.NavigationService.ShowBackButtonIfCanGoBack();
                     RaisePropertyChanged(nameof(CurrentTopic));
-                    Task.Run(async () => await TopicFetcher.GetPosts(CurrentTopic));
                 }
             }
         }
