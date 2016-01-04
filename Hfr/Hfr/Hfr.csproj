@@ -152,6 +152,11 @@
     <Compile Include="Utilities\HFRCats.cs" />
     <Compile Include="Utilities\HFRRessources.cs" />
     <Compile Include="Utilities\HFRUrl.cs" />
+    <Compile Include="Utilities\MultiBinding\Binding.cs" />
+    <Compile Include="Utilities\MultiBinding\IMultiValueConverter.cs" />
+    <Compile Include="Utilities\MultiBinding\MultiBinding.cs" />
+    <Compile Include="Utilities\MultiBinding\MultiBindingLinker.cs" />
+    <Compile Include="Utilities\MultiBinding\MultiBindings.cs" />
     <Compile Include="ViewModel\EditorViewModel.cs" />
     <Compile Include="Utilities\Strings.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -159,6 +164,12 @@
     <Compile Include="ViewModel\SubCategoryViewModel.cs" />
     <Compile Include="ViewModel\TopicViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\Controls\FlagItemTemplate.xaml.cs">
+      <DependentUpon>FlagItemTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\StandardTopicItemTemplate.xaml.cs">
+      <DependentUpon>StandardTopicItemTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPages\ConnectPage.xaml.cs">
       <DependentUpon>ConnectPage.xaml</DependentUpon>
     </Compile>
@@ -267,6 +278,11 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Definitions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Resources\Flyouts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -1,0 +1,38 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:Hfr.Resources"
+                    xmlns:mb="using:Huyn.MultiBinding">
+
+    <vm:Loc x:Key="Locator"
+            xmlns:vm="using:Hfr.ViewModel" />
+    <MenuFlyout x:Key="FlagItemMenuFlyout">
+        <MenuFlyoutItem Text="Première page"
+                        Command="{Binding Source={StaticResource Locator}, Path=Main.OpenTopicCommand}">
+            <mb:MultiBindingLinker.Attach>
+                <mb:MultiBindings>
+                    <mb:MultiBinding TargetProperty="CommandParameter">
+                        <mb:Binding Tag="topic"
+                                    Source="{Binding}" />
+                        <mb:Binding Tag="page"
+                                    Source="{Binding}"
+                                    Path="TopicFirstPage"/>
+                    </mb:MultiBinding>
+                </mb:MultiBindings>
+            </mb:MultiBindingLinker.Attach>
+        </MenuFlyoutItem>
+        <MenuFlyoutItem Text="Dernière page"
+                        Command="{Binding Source={StaticResource Locator}, Path=Main.OpenTopicCommand}">
+            <mb:MultiBindingLinker.Attach>
+                <mb:MultiBindings>
+                    <mb:MultiBinding TargetProperty="CommandParameter">
+                        <mb:Binding Source="{Binding}"
+                                    Tag="topic" />
+                        <mb:Binding Tag="page" 
+                                    Source="{Binding}"
+                                    Path="TopicNbPage"/>
+                    </mb:MultiBinding>
+                </mb:MultiBindings>
+            </mb:MultiBindingLinker.Attach>
+        </MenuFlyoutItem>
+    </MenuFlyout>
+</ResourceDictionary>
