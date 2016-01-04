@@ -41,7 +41,7 @@
                            Style="{StaticResource TranslucentSubheaderTextBlockStyle}"
                            RelativePanel.Below="Logo" />
                 <TextBox x:Name="PseudoTextBox"
-                         Style="{StaticResource TransparentTextBoxStyle}"
+                         Style="{StaticResource AutoSuggestBoxTextBoxStyle}"
                          Margin="{StaticResource DefaultMarginTop}"
                          FontWeight="Medium"
                          PlaceholderText="pseudo"

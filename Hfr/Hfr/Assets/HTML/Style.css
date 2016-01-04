@@ -32,9 +32,9 @@ body {
 }
 
 .message .header {
-    background-color:#131313;
-    padding-bottom: 8px;
-    padding-top: 8px;
+    background-color:#222A35;
+    padding-bottom: 1px;
+    padding-top: 1px;
     padding-left: 16px;
     padding-right: 16px;
 }
