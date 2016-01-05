@@ -22,11 +22,21 @@
                 </TransitionCollection>
             </Frame.ContentTransitions>
         </Frame>
-        
+
         <Grid x:Name="ExtraPaneGrid"
               Background="{ThemeResource SystemControlBackgroundAltMediumLowBrush}"
               Visibility="Collapsed">
-            <ContentPresenter x:Name="ExtraPaneContentPresenter"/>
+            <Frame x:Name="ExtraPageFrame">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition>
+                            <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                <SlideNavigationTransitionInfo />
+                            </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                        </NavigationThemeTransition>
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+            </Frame>
         </Grid>
     </Grid>
 </UserControl>
