@@ -285,7 +285,7 @@ namespace Hfr.ViewModel
                 IsDrapeauxLoading = true;
                 IsDrapeauxLoaded = false;
                 DrapsGrouped = null;
-                Task.Run(async () => await DrapFetcher.GetDraps());
+                Task.Run(async () => await DrapFetcher.GetDraps(Loc.Settings.FollowedTopicType));
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using Hfr.Model;
+using Hfr.Models;
 using Hfr.Utilities;
 using Hfr.ViewModel;
 using HtmlAgilityPack;
@@ -15,10 +16,10 @@ namespace Hfr.Helpers
 {
     public static class DrapFetcher
     {
-        public static async Task GetDraps()
+        public static async Task GetDraps(FollowedTopicType topicType)
         {
             Debug.WriteLine("Fetching Drapeaux");
-            var draps = await Fetch();
+            var draps = await Fetch(topicType);
             Debug.WriteLine("Updating UI with new Drapeaux list");
             await ThreadUI.Invoke(() =>
             {
@@ -30,9 +31,24 @@ namespace Hfr.Helpers
             });
         }
 
-        static async Task<ObservableCollection<Topic>> Fetch()
+        static async Task<ObservableCollection<Topic>> Fetch(FollowedTopicType topicType)
         {
-            var html = await HttpClientHelper.Get(HFRUrl.DrapFavUrl);
+            var url = "";
+            switch (topicType)
+            {
+                case FollowedTopicType.Favoris:
+                    url = HFRUrl.FavsUrl;
+                    break;
+                case FollowedTopicType.Drapeaux:
+                    url = HFRUrl.DrapsUrl;
+                    break;
+                case FollowedTopicType.Lus:
+                    url = HFRUrl.ReadsUrl;
+                    break;
+                default:
+                    break;
+            }
+            var html = await HttpClientHelper.Get(url);
             if (string.IsNullOrEmpty(html)) return null;
 
             /* DG */

@@ -137,6 +137,7 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Editor.cs" />
+    <Compile Include="Models\FollowedTopicType.cs" />
     <Compile Include="Models\MainColumn.cs" />
     <Compile Include="Models\PrivateChat.cs" />
     <Compile Include="Models\Page.cs" />

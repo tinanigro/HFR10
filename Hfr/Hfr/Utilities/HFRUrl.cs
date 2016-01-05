@@ -4,7 +4,10 @@
     {
         public static readonly string ForumUrl = "http://forum.hardware.fr";
         public static readonly string ConnectUrl = "/login_validation.php?config=hfr.inc";
-        public static readonly string DrapFavUrl = "/forum1f.php?owntopic=1";
+        
+        public static readonly string DrapsUrl = "/forum1f.php?owntopic=1";
+        public static readonly string ReadsUrl = "/forum1f.php?owntopic=2";
+        public static readonly string FavsUrl = "/forum1f.php?owntopic=3";
 
         public static readonly string MessagesUrl = "/forum1.php?config=hfr.inc&cat=prive&subcat=&sondage=0&owntopic=0&trash=0&trash_post=0&moderation=0&new=0&nojs=0&subcatgroup=0"; // Need to add "&page=1"
         public static readonly string ProfilePageUrl = "/user/editprofil.php?config=hfr.inc&page=5";

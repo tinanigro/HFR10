@@ -95,7 +95,7 @@ namespace Hfr.ViewModel
         public void UpdateTopicWebView(Topic topic)
         {
             TopicReadyToBeDisplayed?.Invoke(topic);
-            Task.Run(async () => await DrapFetcher.GetDraps());
+            Task.Run(async () => await DrapFetcher.GetDraps(Loc.Settings.FollowedTopicType));
         }
 
         public Task RefreshPage()
