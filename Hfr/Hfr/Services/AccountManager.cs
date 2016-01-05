@@ -77,7 +77,7 @@ namespace Hfr.Services
                         var password = ApplicationSettingsHelper.ReadSettingsValue(nameof(CurrentAccount.Password), false).ToString();
                         CurrentAccount.Pseudo = pseudo;
                         CurrentAccount.Password = password;
-                        connectCommand.Execute(null);
+                        ConnectCommand.Execute(null);
                     }
                 });
             }
