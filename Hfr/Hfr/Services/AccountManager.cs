@@ -109,6 +109,7 @@ namespace Hfr.Services
                 ApplicationSettingsHelper.ReadResetSettingsValue(nameof(CurrentAccount.Pseudo), false);
                 ApplicationSettingsHelper.ReadResetSettingsValue(nameof(CurrentAccount.Password), false);
             }
+            Accounts.RemoveAll(x => x.Pseudo == CurrentAccount.Pseudo);
             CurrentAccount = null;
         }
     }
