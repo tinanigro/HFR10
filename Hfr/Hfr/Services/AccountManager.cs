@@ -59,7 +59,7 @@ namespace Hfr.Services
                 }
                 else
                 {
-                    // Handle seletion of one of the multi accounts
+                    // Handle selection of one of the multi accounts
                 }
             }
             else
