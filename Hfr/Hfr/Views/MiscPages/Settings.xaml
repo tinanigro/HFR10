@@ -10,58 +10,86 @@
     <Grid>
         <Pivot Title="Paramètres">
             <PivotItem Header="Général">
-                <StackPanel>
-                    <TextBlock Text="Interface utilisateur"
-                               Style="{StaticResource SubtitleTextBlockStyle}"
-                               Margin="{StaticResource DefaultMarginBottom}" />
-                    <ToggleSwitch Header="Afficher les MPs dans une 3ème colonne"
-                                  IsOn="{Binding DisplayPrivateChatsByDefault, Mode=TwoWay}" 
-                                  OnContent="Oui"
-                                  OffContent="Non"/>
-                    <ToggleSwitch Header="Style des avatars"
-                                  IsOn="{Binding SquareAvatarStylePreferred, Mode=TwoWay}"
-                                  Margin="{StaticResource DefaultMarginBottom}" 
-                                  OffContent="Cercle Windows 10 style"
-                                  OnContent="Carré oldschool"/>
-                    <TextBlock Text="Gestion des comptes"
-                               Style="{StaticResource SubtitleTextBlockStyle}"
-                               Margin="{StaticResource DefaultMarginBottom}" />
-                    <TextBlock Text="Connecté en tant que "
-                               Style="{StaticResource BodyTextBlockStyle}"
-                               Margin="{StaticResource DefaultMarginBottom}" />
-                    <RelativePanel Margin="{StaticResource DefaultMarginBottom}"
-                                   Height="80">
-                        <Grid x:Name="AvatarImageGrid"
-                              RelativePanel.AlignTopWithPanel="True"
-                              RelativePanel.AlignBottomWithPanel="True"
-                              Margin="{StaticResource DefaultMarginRight}">
-                            <Image Source="{Binding Source={StaticResource Locator}, Path=Main.AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}"
-                                   Stretch="UniformToFill"
-                                   Width="80"
-                                   Visibility="{Binding SquareAvatarVisible}" />
-                            <Ellipse x:Name="AvatarImageEllipse"
-                                     Width="80"
-                                     Visibility="{Binding CircleAvatarVisible}">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="{Binding Source={StaticResource Locator}, Path=Main.AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}"
-                                                Stretch="UniformToFill" />
-                                </Ellipse.Fill>
-                            </Ellipse>
-                        </Grid>
+                <ScrollViewer Style="{StaticResource VerticalScrollViewerStyle}">
+                    <RelativePanel>
+                        <StackPanel x:Name="AccountManagementGrid"
+                                    Width="400">
+                            <TextBlock x:Name="AccountManagementHeader"
+                                       Text="Gestion des comptes"
+                                       Style="{StaticResource SubtitleTextBlockStyle}"
+                                       Margin="{StaticResource DefaultMarginBottom}" />
+                            <TextBlock x:Name="ConnectedAsHeader"
+                                       Text="Connecté en tant que "
+                                       Style="{StaticResource BodyTextBlockStyle}"
+                                       Margin="{StaticResource DefaultMarginBottom}" />
+                            <RelativePanel x:Name="CurrentAccountRelativePanel"
+                                           Margin="{StaticResource DefaultMarginBottom}"
+                                           Height="80">
+                                <Grid x:Name="AvatarImageGrid"
+                                      RelativePanel.AlignTopWithPanel="True"
+                                      RelativePanel.AlignBottomWithPanel="True"
+                                      Margin="{StaticResource DefaultMarginRight}">
+                                    <Image Source="{Binding Source={StaticResource Locator}, Path=Main.AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}"
+                                           Stretch="UniformToFill"
+                                           Width="80"
+                                           Visibility="{Binding SquareAvatarVisible}" />
+                                    <Ellipse x:Name="AvatarImageEllipse"
+                                             Width="80"
+                                             Visibility="{Binding CircleAvatarVisible}">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding Source={StaticResource Locator}, Path=Main.AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}"
+                                                        Stretch="UniformToFill" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                </Grid>
+
+                                <TextBlock x:Name="PseudoTextBlock"
+                                           Text="{Binding Source={StaticResource Locator}, Path=Main.AccountManager.CurrentAccount.Pseudo}"
+                                           Style="{StaticResource SubheaderTextBlockStyle}"
+                                           RelativePanel.RightOf="AvatarImageGrid"
+                                           RelativePanel.AlignTopWithPanel="True"
+                                           Margin="{StaticResource DefaultMarginTop}" />
+                                <Button Content="Déconnexion"
+                                        Command="{Binding Source={StaticResource Locator}, Path=Main.AccountManager.DeleteCurrentAccountCommand}"
+                                        RelativePanel.Below="PseudoTextBlock"
+                                        RelativePanel.AlignLeftWith="PseudoTextBlock"
+                                        RelativePanel.AlignBottomWithPanel="True" />
+                            </RelativePanel>
+                        </StackPanel>
+
+                        <StackPanel x:Name="TopicSettingsGrid"
+                                    Width="400">
+                            <TextBlock x:Name="TopicSettingsHeader"
+                                       Text="Type de topics"
+                                       Style="{StaticResource SubtitleTextBlockStyle}"
+                                       Margin="{StaticResource DefaultMarginBottom}" />
+                            <ComboBox x:Name="FollowedTopicTypeComboBox"
+                                      ItemsSource="{Binding FollowedTopicTypes}"
+                                      SelectedItem="{Binding FollowedTopicType, Mode=TwoWay}"
+                                      VerticalAlignment="Center"
+                                      Margin="{StaticResource DefaultMarginBottom}" />
+                        </StackPanel>
                         
-                        <TextBlock x:Name="PseudoTextBlock"
-                                   Text="{Binding Source={StaticResource Locator}, Path=Main.AccountManager.CurrentAccount.Pseudo}"
-                                   Style="{StaticResource SubheaderTextBlockStyle}"
-                                   RelativePanel.RightOf="AvatarImageGrid"
-                                   RelativePanel.AlignTopWithPanel="True"
-                                   Margin="{StaticResource DefaultMarginTop}"/>
-                        <Button Content="Déconnexion"
-                                Command="{Binding Source={StaticResource Locator}, Path=Main.AccountManager.DeleteCurrentAccountCommand}" 
-                                RelativePanel.Below="PseudoTextBlock"
-                                RelativePanel.AlignLeftWith="PseudoTextBlock"
-                                RelativePanel.AlignBottomWithPanel="True"/>
+                        <StackPanel x:Name="UISettingsGrid"
+                                    Width="400">
+                        <TextBlock x:Name="UIHeader"
+                                   Text="Interface utilisateur"
+                                   Style="{StaticResource SubtitleTextBlockStyle}"
+                                   Margin="{StaticResource DefaultMarginBottom}" />
+                        <ToggleSwitch x:Name="PrivateChatsDisplayedInThirdColumnToggle"
+                                      Header="Afficher les MPs dans une 3ème colonne"
+                                      IsOn="{Binding DisplayPrivateChatsByDefault, Mode=TwoWay}"
+                                      OnContent="Oui"
+                                      OffContent="Non" />
+                        <ToggleSwitch x:Name="AvatarStyleToggl" 
+                                      Header="Style des avatars"
+                                      IsOn="{Binding SquareAvatarStylePreferred, Mode=TwoWay}"
+                                      Margin="{StaticResource DefaultMarginBottom}"
+                                      OffContent="Cercle Windows 10 style"
+                                      OnContent="Carré oldschool" />
+                        </StackPanel>
                     </RelativePanel>
-                </StackPanel>
+                </ScrollViewer>
             </PivotItem>
             <PivotItem Header="A propos">
                 <StackPanel>
@@ -89,5 +117,49 @@
                 </StackPanel>
             </PivotItem>
         </Pivot>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStates">
+                <VisualState x:Name="Portrait">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="AccountManagementGrid.(RelativePanel.AlignTopWithPanel)"
+                                Value="True" />
+                        <Setter Target="TopicSettingsGrid.(RelativePanel.Below)"
+                                Value="AccountManagementGrid" />
+                        <Setter Target="UISettingsGrid.(RelativePanel.Below)"
+                                Value="TopicSettingsGrid" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="TwoColumns">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="840" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="AccountManagementGrid.(RelativePanel.AlignTopWithPanel)"
+                                Value="True" />
+                        <Setter Target="TopicSettingsGrid.(RelativePanel.Below)"
+                                Value="AccountManagementGrid" />
+                        <Setter Target="UISettingsGrid.(RelativePanel.RightOf)"
+                                Value="AccountManagementGrid" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="ThreeColumns">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1260" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="AccountManagementGrid.(RelativePanel.AlignTopWithPanel)"
+                                Value="True" />
+                        <Setter Target="TopicSettingsGrid.(RelativePanel.RightOf)"
+                                Value="AccountManagementGrid" />
+                        <Setter Target="UISettingsGrid.(RelativePanel.RightOf)"
+                                Value="TopicSettingsGrid" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>
