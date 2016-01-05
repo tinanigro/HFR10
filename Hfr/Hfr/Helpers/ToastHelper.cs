@@ -34,6 +34,7 @@ namespace Hfr.Helpers
 
             // Generate WinRT notification
             var toast = new ToastNotification(doc);
+            toast.ExpirationTime = DateTimeOffset.Now.AddSeconds(30);
             ToastNotificationManager.CreateToastNotifier().Show(toast);
         }
     }
