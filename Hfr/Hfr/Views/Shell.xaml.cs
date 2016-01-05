@@ -48,12 +48,21 @@ namespace Hfr.Views
 
         public void NavigateExtraFrame(Type type, object parameter)
         {
+            ExtraPageFrameTranslateTransform.Y = 0;
             ExtraPaneGrid.Visibility = Visibility.Visible;
+            FadeInExtraPageStoryboard.Begin();
             ExtraPageFrame.Navigate(type, parameter);
             Responsive();
         }
 
         public void HideExtraFrame()
+        {
+            EasingKeyFrame.Value = ExtraPageFrame.ActualHeight;
+            FadeOutExtraPageStoryboard.Completed += FadeOutExtraPageStoryboard_Completed;
+            FadeOutExtraPageStoryboard.Begin();
+        }
+
+        private void FadeOutExtraPageStoryboard_Completed(object sender, object e)
         {
             ExtraPaneGrid.Visibility = Visibility.Collapsed;
             ExtraPageFrame.Navigate(typeof(BlankPage));

@@ -7,8 +7,42 @@
              xmlns:shellControls="using:Hfr.Views.ShellControls"
              mc:Ignorable="d"
              d:DesignHeight="300"
-             d:DesignWidth="400">
-    <Grid RequestedTheme="Dark">
+             d:DesignWidth="400"
+             RequestedTheme="Dark">
+
+    <UserControl.Resources>
+        <Storyboard x:Name="FadeOutExtraPageStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExtraPageFrameTranslateTransform"
+                                           Storyboard.TargetProperty="Y">
+                <EasingDoubleKeyFrame x:Name="EasingKeyFrame"
+                                      KeyTime="0:0:0.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseOut"
+                                         Exponent="4" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="ExtraPaneGrid"
+                                          Storyboard.TargetProperty="(FrameworkElement.Background).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame Value="#00000000"
+                                     KeyTime="0:0:0.5">
+                    <EasingColorKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseOut"
+                                         Exponent="4" />
+                    </EasingColorKeyFrame.EasingFunction>
+                </EasingColorKeyFrame>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="FadeInExtraPageStoryboard">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="ExtraPaneGrid"
+                                          Storyboard.TargetProperty="(FrameworkElement.Background).(SolidColorBrush.Color)">
+                <LinearColorKeyFrame Value="{ThemeResource SystemAltMediumLowColor}"
+                                     KeyTime="0:0:0.5" />
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <Grid>
         <Frame x:Name="NavigationFrame"
                x:FieldModifier="public"
                Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -24,8 +58,10 @@
         </Frame>
 
         <Grid x:Name="ExtraPaneGrid"
-              Background="{ThemeResource SystemControlBackgroundAltMediumLowBrush}"
               Visibility="Collapsed">
+            <Grid.Background>
+                <SolidColorBrush Color="#00000000" />
+            </Grid.Background>
             <Frame x:Name="ExtraPageFrame">
                 <Frame.ContentTransitions>
                     <TransitionCollection>
@@ -36,6 +72,9 @@
                         </NavigationThemeTransition>
                     </TransitionCollection>
                 </Frame.ContentTransitions>
+                <Frame.RenderTransform>
+                    <TranslateTransform x:Name="ExtraPageFrameTranslateTransform" />
+                </Frame.RenderTransform>
             </Frame>
         </Grid>
     </Grid>
