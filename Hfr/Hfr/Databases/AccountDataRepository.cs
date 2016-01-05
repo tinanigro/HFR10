@@ -64,5 +64,13 @@ namespace Hfr.Database
                 connection.Update(currentAccount);
             }
         }
+
+        public void Delete(Account acc)
+        {
+            using (var connection = new SQLiteConnection(_dbPath))
+            {
+                connection.Delete(acc);
+            }
+        }
     }
 }
