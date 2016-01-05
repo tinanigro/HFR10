@@ -23,17 +23,17 @@ body {
 }
 
 .oldcitation {
-    background-color: #131313;
+    background-color: #252525;
     border-width: 0px;
 }
 
 .citation {
-    background-color: #131313;
+    background-color: #252525;
     border-width: 0px;
 }
 
 .spoiler {
-    background-color: #131313;
+    background-color: #252525;
     border-width: 0px;
 }
 
@@ -67,10 +67,10 @@ body {
     margin-left: 8px;
 }
 
-    .message .header .infos * {
-        width: 100%;
-        line-height: 30px;
-    }
+.message .header .infos * {
+    width: 100%;
+    line-height: 30px;
+}
 
 .message .header .avatar {
     text-align: left;
@@ -80,16 +80,19 @@ body {
     background-position: center;
     width: 60px;
     height: 60px;
-    border-radius: 30px;
-    -webkit-border-radius: 30px;
-    -moz-border-radius: 30px;
     /*box-shadow: 0 0 2px rgba(0, 0, 0, .8);
 	-webkit-box-shadow: 0 0 2px rgba(0, 0, 0, .8);
 	-moz-box-shadow: 0 0 2px rgba(0, 0, 0, .8);*/
 }
 
-    .message .header .avatar.no_avatar {
-    }
+.message .header .avatar.round{
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+}
+
+.message .header .avatar.no_avatar {
+}
 
 .message .header .infos .message_date {
     color: rgba(255, 255, 255, 0.70);
