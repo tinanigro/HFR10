@@ -36,6 +36,7 @@ namespace Hfr.Helpers
             if (string.IsNullOrEmpty(html)) return null;
 
             var htmlDoc = new HtmlDocument();
+
             htmlDoc.LoadHtml(html);
 
             var messagesArray =
@@ -53,14 +54,14 @@ namespace Hfr.Helpers
                 {
                     isMsgNew = true;
                 }
-                var subject = msg.Descendants("a").FirstOrDefault(x => x.GetAttributeValue("class", "") == "cCatTopic").InnerText;
+                var subject = msg.Descendants("a").FirstOrDefault(x => x.GetAttributeValue("class", "") == "cCatTopic").InnerText.CleanFromWeb();
                 var lastMsgNode = msg.Descendants("td").FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("sujetCase9")).FirstChild;
 
                 var dateInnerText = lastMsgNode.FirstChild.InnerText;
                 var dateString = WebUtility.HtmlDecode(dateInnerText).Replace("à", "");
                 var dateTime = DateTime.Parse(dateString, new CultureInfo("fr-FR"));
 
-                var lastPoster = msg.Descendants("td").FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("sujetCase6")).FirstChild.InnerText;
+                var lastPoster = msg.Descendants("td").FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("sujetCase6")).FirstChild.InnerText.CleanFromWeb();
                 var message = new PrivateChat();
                 message.NewMsg = isMsgNew;
                 message.Subject = subject;
@@ -68,7 +69,6 @@ namespace Hfr.Helpers
                 message.Poster = lastPoster;
                 messages.Add(message);
             }
-
             return messages;
         }
     }
