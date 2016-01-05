@@ -12,7 +12,8 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Clear"
                               Label="Annuler"
-                              Command="{Binding Source={StaticResource Locator}, Path=NavigationService.GoBackCommand}" />
+                              Command="{Binding CancelMessageCommand}"
+                              ClickMode="Press" />
                 <AppBarButton Icon="Send"
                               Label="Envoyer"
                               Command="{Binding SubmitEditorCommand}"

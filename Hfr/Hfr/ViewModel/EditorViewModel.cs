@@ -9,6 +9,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using Hfr.Utilities;
 using Hfr.Commands;
+using Hfr.Commands.Editor;
 
 namespace Hfr.ViewModel
 {
@@ -116,6 +117,7 @@ namespace Hfr.ViewModel
 
         #region commands
         public SubmitEditorCommand SubmitEditorCommand { get; } = new SubmitEditorCommand();
+        public CancelMessageCommand CancelMessageCommand { get; } = new CancelMessageCommand();
         #endregion
 
         public void Dispose()
