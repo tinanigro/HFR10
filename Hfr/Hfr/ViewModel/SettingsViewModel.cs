@@ -7,6 +7,7 @@ namespace Hfr.ViewModel
     public class SettingsViewModel : ViewModelBase
     {
         #region private properties
+        private ApplicationSettingsHelper ApplicationSettingsHelper = new ApplicationSettingsHelper();
         private bool _displayPrivateChatsByDefault;
         #endregion
         #region public properties

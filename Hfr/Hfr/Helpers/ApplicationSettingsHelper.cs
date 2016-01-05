@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,8 +8,18 @@ using Windows.Storage;
 
 namespace Hfr.Helpers
 {
-    static class ApplicationSettingsHelper
+    public class ApplicationSettingsHelper
     {
+        public ApplicationSettingsHelper()
+        {
+            ApplicationData.Current.DataChanged += Current_DataChanged;
+        }
+        
+        private void Current_DataChanged(ApplicationData sender, object args)
+        {
+            Debug.WriteLine("App Data changed!");
+        }
+
         /// <summary>
         /// Function that checks if the entry exists in Application settings
         /// </summary>

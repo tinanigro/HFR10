@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Popups;
 
 namespace Hfr.Commands
 {
@@ -35,8 +36,37 @@ namespace Hfr.Commands
             {
                 Loc.Main.AccountManager.Accounts.Add(Loc.Main.AccountManager.CurrentAccount);
                 Loc.Main.AccountManager.AddCurrentAccountInDB();
-                await ThreadUI.Invoke(() =>
+
+                var autoConnectFromRoamingSettings = ApplicationSettingsHelper.Contains(nameof(Loc.Main.AccountManager.CurrentAccount.Pseudo), false);
+                var md = new MessageDialog("Voulez-vous être connecté automatiquement à ce compte ?", "Juste une question");
+                if (!autoConnectFromRoamingSettings)
                 {
+                    md.Commands.Add(new UICommand()
+                    {
+                        Label = "Oui",
+                        Invoked = async (command) =>
+                        {
+                            await ThreadUI.Invoke(() =>
+                            {
+                                Loc.Main.AccountManager.AddCurrentAccountInRoamingSettings();
+                            });
+                        },
+                    });
+                    md.Commands.Add(new UICommand()
+                    {
+                        Label = "Non",
+                        Invoked = (command) =>
+                        {
+
+                        },
+                    });
+                }
+                await ThreadUI.Invoke(async () =>
+                {
+                    if (!autoConnectFromRoamingSettings)
+                    {
+                        await md.ShowAsync();
+                    }
                     Loc.Main.AccountManager.CurrentAccount.IsConnecting = false;
                     Loc.Main.AccountManager.CurrentAccount.ConnectionErrorStatus = "Login succeeded";
                     Loc.NavigationService.Navigate(View.Main);

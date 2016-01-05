@@ -67,6 +67,16 @@ namespace Hfr.Services
                 {
                     CurrentAccount = new Account();
                     Loc.NavigationService.Navigate(View.Connect);
+                    // Trying to detect login and password stored in RoamingSettings
+                    if (ApplicationSettingsHelper.Contains(nameof(CurrentAccount.Pseudo), false) && ApplicationSettingsHelper.Contains(nameof(CurrentAccount.Password), false))
+                    {
+                        ToastHelper.Simple("Connexion automatique ...");
+                        var pseudo = ApplicationSettingsHelper.ReadSettingsValue(nameof(CurrentAccount.Pseudo), false).ToString();
+                        var password = ApplicationSettingsHelper.ReadSettingsValue(nameof(CurrentAccount.Password), false).ToString();
+                        CurrentAccount.Pseudo = pseudo;
+                        CurrentAccount.Password = password;
+                        connectCommand.Execute(null);
+                    }
                 });
             }
         }
@@ -79,6 +89,12 @@ namespace Hfr.Services
         internal void AddCurrentAccountInDB()
         {
             accountDataRepository?.Add(CurrentAccount);
+        }
+
+        internal void AddCurrentAccountInRoamingSettings()
+        {
+            ApplicationSettingsHelper.SaveSettingsValue(nameof(CurrentAccount.Pseudo), CurrentAccount.Pseudo, false);
+            ApplicationSettingsHelper.SaveSettingsValue(nameof(CurrentAccount.Password), CurrentAccount.Password, false);
         }
     }
 }
