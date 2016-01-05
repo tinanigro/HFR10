@@ -140,6 +140,16 @@ namespace Hfr.Helpers
 
             TempHTMLTopic = BodyTemplate.Replace("%%MESSAGES%%", TempHTMLMessagesList);
 
+            await ThreadUI.Invoke(() =>
+            {
+                SolidColorBrush color = (SolidColorBrush)App.Current.Resources["SystemControlHighlightAltListAccentLowBrush"];
+                var colorString = $"{color.Color.R.ToString()}, {color.Color.G.ToString()}, {color.Color.B.ToString()}";
+
+                TempHTMLTopic = TempHTMLTopic.Replace("%%ACCENTCOLOR%%", colorString);
+                //await FileIO.WriteTextAsync(cssFile, css);
+            });
+
+
             // Create/Open WebSite-Cache folder
             var subfolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(Strings.WebSiteCacheFolderName, CreationCollisionOption.OpenIfExists);
             var file = await subfolder.CreateFileAsync($"{Strings.WebSiteCacheFileName}", CreationCollisionOption.ReplaceExisting);
