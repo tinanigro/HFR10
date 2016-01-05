@@ -4,95 +4,27 @@
              xmlns:local="using:Hfr.Views.MainPages.MainPageControls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:triggers="using:WinRT.Triggers"
              xmlns:shellControls="using:Hfr.Views.ShellControls"
-             xmlns:customControls="using:Hfr.CustomControls"
+             xmlns:topicsViews="using:Hfr.Views.MainPages.MainPageControls.TopicsViews"
              mc:Ignorable="d"
              DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
-    <UserControl.Resources>
-        <CollectionViewSource x:Key="DrapsCvs"
-                              x:Name="DrapsCvs"
-                              IsSourceGrouped="True"
-                              Source="{Binding DrapsGrouped}" />
-    </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <shellControls:Header HeaderContent="Drapeaux">
+        <shellControls:Header HeaderContent="Topics">
             <shellControls:Header.LeftContent>
-                <SymbolIcon Symbol="Flag"/>
+                <SymbolIcon Symbol="Flag" />
             </shellControls:Header.LeftContent>
             <shellControls:Header.RightContent>
                 <AppBarButton Icon="Sync"
                               Command="{Binding RefreshDrapsCommand}" />
             </shellControls:Header.RightContent>
         </shellControls:Header>
-        <SemanticZoom Grid.Row="1"
-                      Margin="{StaticResource DefaultMarginHorizontal}"
-                      ViewChangeCompleted="SemanticZoom_OnViewChangeCompleted">
-            <SemanticZoom.ZoomedInView>
-                <customControls:ScrollLockListView ItemsSource="{Binding Source={StaticResource DrapsCvs}}"
-                          ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}"
-                          SelectionMode="None"
-                          IsItemClickEnabled="True"
-                          ItemTemplate="{StaticResource FlagItemTemplate}">
-                    <triggers:Interactions.Triggers>
-                        <triggers:EventTrigger EventName="ItemClick">
-                            <triggers:InvokeCommandAction Command="{Binding OpenTopicCommand}"
-                                                          PassEventArgsToCommand="True" />
-                        </triggers:EventTrigger>
-                    </triggers:Interactions.Triggers>
-                    <ListView.GroupStyle>
-                        <GroupStyle HeaderTemplate="{StaticResource CategoriesHeaderTemplate}">
-                            <GroupStyle.HeaderContainerStyle>
-                                <Style TargetType="ListViewHeaderItem">
-                                    <Setter Property="HorizontalContentAlignment"
-                                            Value="Stretch" />
-                                    <Setter Property="Margin"
-                                            Value="-12,0" />
-                                </Style>
-                            </GroupStyle.HeaderContainerStyle>
-                        </GroupStyle>
-                    </ListView.GroupStyle>
-                    <ListView.ItemContainerTransitions>
-                        <TransitionCollection>
-                            <EntranceThemeTransition />
-                            <AddDeleteThemeTransition />
-                        </TransitionCollection>
-                    </ListView.ItemContainerTransitions>
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <ItemsStackPanel />
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                </customControls:ScrollLockListView>
-            </SemanticZoom.ZoomedInView>
-            <SemanticZoom.ZoomedOutView>
-                <ListView x:Name="DrapsZoomeOutListView"
-                          ItemContainerStyle="{StaticResource HorizontalListViewContainerStyle}"
-                          SelectionMode="None"
-                          IsItemClickEnabled="True">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Group.Key}" />
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <ListView.ItemContainerTransitions>
-                        <TransitionCollection>
-                            <EntranceThemeTransition />
-                        </TransitionCollection>
-                    </ListView.ItemContainerTransitions>
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <ItemsStackPanel />
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                </ListView>
-            </SemanticZoom.ZoomedOutView>
-        </SemanticZoom>
+
+        <topicsViews:FollowedTopicsList Grid.Row="1" />
 
         <StackPanel Grid.Row="1"
                     Visibility="{Binding LoadingTopicsList}"

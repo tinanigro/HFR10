@@ -1,6 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using Hfr.Commands.Settings;
 using Hfr.Helpers;
+using Hfr.Models;
+using System.Collections.Generic;
 using Windows.UI.Xaml;
 
 namespace Hfr.ViewModel

@@ -9,10 +9,5 @@ namespace Hfr.Views.MainPages.MainPageControls
         {
             this.InitializeComponent();
         }
-
-        private void SemanticZoom_OnViewChangeCompleted(object sender, SemanticZoomViewChangedEventArgs e)
-        {
-            DrapsZoomeOutListView.ItemsSource = DrapsCvs.View.CollectionGroups;
-        }
     }
 }

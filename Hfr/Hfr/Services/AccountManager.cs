@@ -27,7 +27,7 @@ namespace Hfr.Services
             Task.Run(() => Initialize());
         }
 
-        async Task Initialize()
+        public async Task Initialize()
         {
             var accounts = accountDataRepository?.GetAccounts();
             if (accounts != null && accounts.Any())

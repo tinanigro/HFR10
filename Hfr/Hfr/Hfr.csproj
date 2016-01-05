@@ -199,6 +199,9 @@
     <Compile Include="Views\MainPages\MainPageControls\TopicList.xaml.cs">
       <DependentUpon>TopicList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MainPages\MainPageControls\TopicsViews\FollowedTopicsList.xaml.cs">
+      <DependentUpon>FollowedTopicsList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPages\TopicView.xaml.cs">
       <DependentUpon>TopicView.xaml</DependentUpon>
     </Compile>
@@ -339,6 +342,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPages\MainPageControls\TopicList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainPages\MainPageControls\TopicsViews\FollowedTopicsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
