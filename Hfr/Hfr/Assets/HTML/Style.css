@@ -32,6 +32,11 @@ body {
     border-width: 0px;
 }
 
+.spoiler {
+    background-color: #131313;
+    border-width: 0px;
+}
+
 .message .header {
     padding-bottom: 8px;
     padding-top: 8px;
