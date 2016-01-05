@@ -131,7 +131,18 @@ namespace Hfr.Helpers
                 {
                     TempHTMLMessage = TempHTMLMessage.Replace("%%moderation%%", "");
                 }
+
                 TempHTMLMessage = TempHTMLMessage.Replace("%%no_avatar_class%%", avatarClass);
+
+                if (Loc.Settings.SquareAvatarStylePreferred)
+                {
+                    TempHTMLMessage = TempHTMLMessage.Replace("%%round_avatar_class%%", "");
+                }
+                else
+                {
+                    TempHTMLMessage = TempHTMLMessage.Replace("%%round_avatar_class%%", "round");
+                }
+
                 TempHTMLMessage = TempHTMLMessage.Replace("%%AUTEUR_AVATAR%%", avatarUri);
                 TempHTMLMessage = TempHTMLMessage.Replace("%%AUTEUR_PSEUDO%%", pseudo);
                 TempHTMLMessage = TempHTMLMessage.Replace("%%MESSAGE_DATE%%", date);

@@ -15,7 +15,52 @@
                                Style="{StaticResource SubtitleTextBlockStyle}"
                                Margin="{StaticResource DefaultMarginBottom}" />
                     <ToggleSwitch Header="Afficher les MPs dans une 3ème colonne"
-                                  IsOn="{Binding DisplayPrivateChatsByDefault, Mode=TwoWay}" />
+                                  IsOn="{Binding DisplayPrivateChatsByDefault, Mode=TwoWay}" 
+                                  OnContent="Oui"
+                                  OffContent="Non"/>
+                    <ToggleSwitch Header="Style des avatars"
+                                  IsOn="{Binding SquareAvatarStylePreferred, Mode=TwoWay}"
+                                  Margin="{StaticResource DefaultMarginBottom}" 
+                                  OffContent="Cercle Windows 10 style"
+                                  OnContent="Carré oldschool"/>
+                    <TextBlock Text="Gestion des comptes"
+                               Style="{StaticResource SubtitleTextBlockStyle}"
+                               Margin="{StaticResource DefaultMarginBottom}" />
+                    <TextBlock Text="Connecté en tant que "
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Margin="{StaticResource DefaultMarginBottom}" />
+                    <RelativePanel Margin="{StaticResource DefaultMarginBottom}"
+                                   Height="80">
+                        <Grid x:Name="AvatarImageGrid"
+                              RelativePanel.AlignTopWithPanel="True"
+                              RelativePanel.AlignBottomWithPanel="True"
+                              Margin="{StaticResource DefaultMarginRight}">
+                            <Image Source="{Binding Source={StaticResource Locator}, Path=Main.AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}"
+                                   Stretch="UniformToFill"
+                                   Width="80"
+                                   Visibility="{Binding SquareAvatarVisible}" />
+                            <Ellipse x:Name="AvatarImageEllipse"
+                                     Width="80"
+                                     Visibility="{Binding CircleAvatarVisible}">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding Source={StaticResource Locator}, Path=Main.AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}"
+                                                Stretch="UniformToFill" />
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Grid>
+                        
+                        <TextBlock x:Name="PseudoTextBlock"
+                                   Text="{Binding Source={StaticResource Locator}, Path=Main.AccountManager.CurrentAccount.Pseudo}"
+                                   Style="{StaticResource SubheaderTextBlockStyle}"
+                                   RelativePanel.RightOf="AvatarImageGrid"
+                                   RelativePanel.AlignTopWithPanel="True"
+                                   Margin="{StaticResource DefaultMarginTop}"/>
+                        <Button Content="Déconnexion"
+                                Command="{Binding Source={StaticResource Locator}, Path=Main.AccountManager.DeleteCurrentAccountCommand}" 
+                                RelativePanel.Below="PseudoTextBlock"
+                                RelativePanel.AlignLeftWith="PseudoTextBlock"
+                                RelativePanel.AlignBottomWithPanel="True"/>
+                    </RelativePanel>
                 </StackPanel>
             </PivotItem>
             <PivotItem Header="A propos">

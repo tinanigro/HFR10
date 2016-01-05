@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using Hfr.Commands.Settings;
 using Hfr.Helpers;
+using Windows.UI.Xaml;
 
 namespace Hfr.ViewModel
 {
@@ -9,6 +10,7 @@ namespace Hfr.ViewModel
         #region private properties
         private ApplicationSettingsHelper ApplicationSettingsHelper = new ApplicationSettingsHelper();
         private bool _displayPrivateChatsByDefault;
+        private bool _squareAvatarStylePreferred;
         #endregion
         #region public properties
         public bool DisplayPrivateChatsByDefault
@@ -33,6 +35,34 @@ namespace Hfr.ViewModel
                 Set(ref _displayPrivateChatsByDefault, value);
             }
         }
+
+        public bool SquareAvatarStylePreferred
+        {
+            get
+            {
+                var square = ApplicationSettingsHelper.ReadSettingsValue(nameof(SquareAvatarStylePreferred), false);
+                if (square == null)
+                {
+                    _squareAvatarStylePreferred = false;
+                }
+                else
+                {
+                    _squareAvatarStylePreferred = (bool)square;
+                }
+                return _squareAvatarStylePreferred;
+            }
+            set
+            {
+                if (_squareAvatarStylePreferred == value) return;
+                ApplicationSettingsHelper.SaveSettingsValue(nameof(SquareAvatarStylePreferred), value, false);
+                Set(ref _squareAvatarStylePreferred, value);
+                RaisePropertyChanged(nameof(SquareAvatarVisible));
+                RaisePropertyChanged(nameof(CircleAvatarVisible));
+            }
+        }
+
+        public Visibility SquareAvatarVisible { get { return _squareAvatarStylePreferred ? Visibility.Visible : Visibility.Collapsed; } }
+        public Visibility CircleAvatarVisible { get { return _squareAvatarStylePreferred ? Visibility.Collapsed : Visibility.Visible; } }
         #endregion
 
 
