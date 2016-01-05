@@ -8,11 +8,17 @@
       DataContext="{Binding Source={StaticResource Locator}, Path=Settings}">
 
     <Grid>
-        <Pivot Title="Settings">
-            <PivotItem Header="General">
-                <TextBlock Text="Rien ici pour l'instant, désolé !" />
+        <Pivot Title="Paramètres">
+            <PivotItem Header="Général">
+                <StackPanel>
+                    <TextBlock Text="Interface utilisateur" 
+                               Style="{StaticResource SubtitleTextBlockStyle}"
+                               Margin="{StaticResource DefaultMarginBottom}"/>
+                    <ToggleSwitch Header="Afficher les messages privés"
+                                  IsOn="{Binding DisplayPrivateChatsByDefault, Mode=TwoWay}"/>
+                </StackPanel>
             </PivotItem>
-            <PivotItem Header="About">
+            <PivotItem Header="A propos">
                 <StackPanel>
                     <TextBlock TextAlignment="Center"
                                TextWrapping="Wrap"
