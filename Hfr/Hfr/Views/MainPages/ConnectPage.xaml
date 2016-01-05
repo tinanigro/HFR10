@@ -18,10 +18,6 @@
         <shellControls:Header x:Name="Header"
                               HeaderContent="Connexion" />
         <Grid Grid.Row="1">
-            <Grid.Background>
-                <ImageBrush Stretch="UniformToFill"
-                            ImageSource="ms-appx:///Assets/Wallpapers/background.jpg" />
-            </Grid.Background>
             <RelativePanel x:Name="FormPanel"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
