@@ -11,11 +11,11 @@
         <Pivot Title="Paramètres">
             <PivotItem Header="Général">
                 <StackPanel>
-                    <TextBlock Text="Interface utilisateur" 
+                    <TextBlock Text="Interface utilisateur"
                                Style="{StaticResource SubtitleTextBlockStyle}"
-                               Margin="{StaticResource DefaultMarginBottom}"/>
-                    <ToggleSwitch Header="Afficher les messages privés"
-                                  IsOn="{Binding DisplayPrivateChatsByDefault, Mode=TwoWay}"/>
+                               Margin="{StaticResource DefaultMarginBottom}" />
+                    <ToggleSwitch Header="Afficher les MPs dans une 3ème colonne"
+                                  IsOn="{Binding DisplayPrivateChatsByDefault, Mode=TwoWay}" />
                 </StackPanel>
             </PivotItem>
             <PivotItem Header="A propos">
