@@ -118,6 +118,7 @@
     <Compile Include="CustomControls\ScrollLockListView.cs" />
     <Compile Include="Databases\AccountDataRepository.cs" />
     <Compile Include="Databases\IDataRepository.cs" />
+    <Compile Include="Helpers\ApplicationSettingsHelper.cs" />
     <Compile Include="Helpers\AppViewHelper.cs" />
     <Compile Include="Helpers\CatFetcher.cs" />
     <Compile Include="Helpers\ConnectHelper.cs" />
