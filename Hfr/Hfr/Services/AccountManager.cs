@@ -98,5 +98,18 @@ namespace Hfr.Services
             ApplicationSettingsHelper.SaveSettingsValue(nameof(CurrentAccount.Pseudo), CurrentAccount.Pseudo, false);
             ApplicationSettingsHelper.SaveSettingsValue(nameof(CurrentAccount.Password), CurrentAccount.Password, false);
         }
+
+        internal void DeleteCurrentAccount()
+        {
+            if (CurrentAccount == null) return;
+            accountDataRepository?.Delete(CurrentAccount);
+            if (ApplicationSettingsHelper.Contains(nameof(CurrentAccount.Pseudo), false) 
+                && ApplicationSettingsHelper.ReadSettingsValue(nameof(CurrentAccount.Pseudo), false).ToString() == CurrentAccount.Pseudo)
+            {
+                ApplicationSettingsHelper.ReadResetSettingsValue(nameof(CurrentAccount.Pseudo), false);
+                ApplicationSettingsHelper.ReadResetSettingsValue(nameof(CurrentAccount.Password), false);
+            }
+            CurrentAccount = null;
+        }
     }
 }
