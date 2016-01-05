@@ -8,7 +8,7 @@ using System;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Popups;
 
-namespace Hfr.Commands
+namespace Hfr.Commands.Settings.Accounts
 {
     public class ConnectCommand : Command
     {

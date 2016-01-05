@@ -98,12 +98,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Commands\ConnectCommand.cs" />
+    <Compile Include="Commands\Settings\Accounts\ConnectCommand.cs" />
     <Compile Include="Commands\EditorCommands.cs" />
     <Compile Include="Commands\Editor\CancelMessageCommand.cs" />
     <Compile Include="Commands\Editor\ShowEditorCommand.cs" />
     <Compile Include="Commands\MessagesCommands.cs" />
     <Compile Include="Commands\OpenSubCatCommand.cs" />
+    <Compile Include="Commands\Settings\Accounts\DeleteCurrentAccount.cs" />
     <Compile Include="Commands\Settings\GoToAppTopicCommand.cs" />
     <Compile Include="Commands\Topics\ChangeTopicsListPageInSubCatCommand.cs" />
     <Compile Include="Commands\Topics\RefreshDrapsCommand.cs" />

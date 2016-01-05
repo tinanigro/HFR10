@@ -9,20 +9,22 @@ using Hfr.Database;
 using Hfr.Helpers;
 using Hfr.Model;
 using Hfr.ViewModel;
+using Hfr.Commands.Settings.Accounts;
 
 namespace Hfr.Services
 {
     public class AccountManager
     {
         private AccountDataRepository accountDataRepository = new AccountDataRepository();
-        private ConnectCommand connectCommand = new ConnectCommand();
         public List<Account> Accounts = new List<Account>();
         public Account CurrentAccount { get; set; }
-        public ConnectCommand ConnectCommand { get { return connectCommand; } }
-        
+
+        public ConnectCommand ConnectCommand { get; } = new ConnectCommand();
+        public DeleteCurrentAccountCommand DeleteCurrentAccountCommand { get; } = new DeleteCurrentAccountCommand();
+
         public AccountManager()
         {
-            Initialize();
+            Task.Run(() => Initialize());
         }
 
         async Task Initialize()
