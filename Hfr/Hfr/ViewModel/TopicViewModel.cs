@@ -43,6 +43,11 @@ namespace Hfr.ViewModel
                     Loc.NavigationService.ShowBackButtonIfCanGoBack();
                     RaisePropertyChanged(nameof(CurrentTopic));
                 }
+                if (value == -1)
+                {
+                    // No topic displayed, reset webview
+                    UpdateTopicWebView(null);
+                }
             }
         }
 
@@ -95,6 +100,7 @@ namespace Hfr.ViewModel
         public void UpdateTopicWebView(Topic topic)
         {
             TopicReadyToBeDisplayed?.Invoke(topic);
+            if (topic != null)
             Task.Run(async () => await DrapFetcher.GetDraps(Loc.Settings.FollowedTopicType));
         }
 

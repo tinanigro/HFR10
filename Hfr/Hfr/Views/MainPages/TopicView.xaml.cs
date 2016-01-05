@@ -20,13 +20,17 @@ namespace Hfr.Views.MainPages
         private void CurrentTopic_TopicReadyToBeDisplayed(Topic topic)
         {
             TopicWebView.NavigationCompleted += TopicWebViewOnNavigationCompleted;
-            TopicWebView.Navigate(Strings.TopicPageCacheUri);
+            if (topic != null)
+                TopicWebView.Navigate(Strings.TopicPageCacheUri);
+            else
+                TopicWebView.NavigateToString("");
         }
 
         private async void TopicWebViewOnNavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
             TopicWebView.NavigationCompleted -= TopicWebViewOnNavigationCompleted;
-            if (!string.IsNullOrEmpty(Loc.Topic.CurrentTopic.TopicReponseId))
+            
+            if (!string.IsNullOrEmpty(Loc.Topic.CurrentTopic?.TopicReponseId))
             {
                 await TopicWebView.InvokeScriptAsync("scrollTo", new string[1]
                 {
