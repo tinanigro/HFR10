@@ -52,6 +52,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="StandardTopicItemTemplate">
+        <controls:StandardTopicItemTemplate />
     </DataTemplate>
 
 </ResourceDictionary>
