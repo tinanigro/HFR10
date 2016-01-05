@@ -205,6 +205,17 @@ namespace Hfr.ViewModel
             set { Set(ref _topicViewColumnVisible, value); }
         }
 
+        public bool DisplayPrivateChatsInsteadOfCategoriesVisible
+        {
+            get { return _displayPrivateChatsInsteadOfCategoriesVisible; }
+            set
+            {
+                if (_displayPrivateChatsInsteadOfCategoriesVisible == value) return;
+                Set(ref _displayPrivateChatsInsteadOfCategoriesVisible, value);
+                TriggerUIAdapter();
+            }
+        }
+
         #endregion
         #region methods
         public void TriggerUIAdapter()
@@ -222,6 +233,7 @@ namespace Hfr.ViewModel
             var width = Window.Current.Bounds.Width;
             if (Loc.Topic.CurrentTopic != null)
             {
+                DisplayPrivateChatsInsteadOfCategoriesVisible = false;
                 if (width < Strings.PortraitWidth)
                 {
                     TopicViewColumnVisible = true;
@@ -248,9 +260,16 @@ namespace Hfr.ViewModel
                             break;
                     }
                 }
-                else if (width < Strings.NormalWidth)
+                else if (width < Strings.NormalWidth || !Loc.Settings.DisplayPrivateChatsByDefault)
                 {
-                    TwoColumnsVisible = true;
+                    if (DisplayPrivateChatsInsteadOfCategoriesVisible)
+                    {
+                        TwoColumnsVisible = false;
+                    }
+                    else
+                    {
+                        TwoColumnsVisible = true;
+                    }
                 }
                 else
                 {
