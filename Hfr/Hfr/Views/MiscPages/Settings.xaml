@@ -40,7 +40,7 @@
 
                     <Button Content="TOPIC HFR10"
                             HorizontalAlignment="Center"
-                            Command="{Binding GoToAppTopicCommand}"/>
+                            Command="{Binding GoToAppTopicCommand}" />
                 </StackPanel>
             </PivotItem>
         </Pivot>
