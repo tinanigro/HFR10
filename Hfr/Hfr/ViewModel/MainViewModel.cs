@@ -84,6 +84,7 @@ namespace Hfr.ViewModel
 
         #endregion
         #region public fields
+
         public ObservableCollection<Topic> Drapeaux
         {
             get
@@ -145,9 +146,8 @@ namespace Hfr.ViewModel
             set { Set(ref _topics, value); }
         }
         #endregion
-        #region events
-        #endregion
         #region public properties
+
         public AccountManager AccountManager { get { return _accountManager; } set { Set(ref _accountManager, value); } }
 
         public bool FirstColumnAndTopicVisible
@@ -216,6 +216,8 @@ namespace Hfr.ViewModel
             }
         }
 
+        #endregion
+        #region events
         #endregion
         #region methods
         public void TriggerUIAdapter()
