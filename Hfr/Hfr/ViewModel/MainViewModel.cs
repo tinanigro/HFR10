@@ -37,6 +37,7 @@ namespace Hfr.ViewModel
         private bool _topicViewColumnVisible;
         private bool _categoriesListColumnVisible;
         private bool _privateChatsColumnVisible;
+        private bool _displayPrivateChatsInsteadOfCategoriesVisible;
 
         public bool IsDrapeauxLoading
         {
@@ -63,21 +64,21 @@ namespace Hfr.ViewModel
             get { return _privateChatsLoading; }
             set
             {
-                Set(ref _privateChatsLoading, value); 
+                Set(ref _privateChatsLoading, value);
                 RaisePropertyChanged(nameof(LoadingPrivateChatsList));
             }
         }
 
         public Visibility LoadingTopicsList => IsDrapeauxLoading ? Visibility.Visible : Visibility.Collapsed;
-        
-        public Visibility LoadingPrivateChatsList => IsPrivateChatsLoading ? Visibility.Visible: Visibility.Collapsed;
+
+        public Visibility LoadingPrivateChatsList => IsPrivateChatsLoading ? Visibility.Visible : Visibility.Collapsed;
         #endregion
 
         #region private fields
         private ObservableCollection<Topic> drapeaux;
         private List<PrivateChat> privateChats;
         private IEnumerable<IGrouping<string, Topic>> _favorisGrouped;
-        
+
         private IEnumerable<IGrouping<string, PrivateChat>> _privateChatsGrouped;
         private ObservableCollection<Topic> _topics = new ObservableCollection<Topic>();
 
@@ -137,7 +138,7 @@ namespace Hfr.ViewModel
             }
             set { Set(ref _privateChatsGrouped, value); }
         }
-        
+
         public ObservableCollection<Topic> Topics
         {
             get { return _topics; }

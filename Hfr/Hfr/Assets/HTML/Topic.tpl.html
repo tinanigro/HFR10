@@ -7,6 +7,10 @@
 
     <style type='text/css'>
         /* PLACEHOLDER FOR USER FONT SIZE */
+
+        .message .header {
+            background-color: rgba(%%ACCENTCOLOR%%, 0.50);
+        }
     </style>
 </head>
 <body>
@@ -29,7 +33,7 @@
             console.log(el);
             console.log(el.offsetTop + " scroll= " + el.scrollTop);
             console.log(Math.floor(el.getBoundingClientRect().top) + " scroll= " + window.pageYOffset);
-            
+
             //window.location = "http://local/popup/?" + el;
             window.location = "http://local/popup/?" + string;
             //event.stopPropagation();

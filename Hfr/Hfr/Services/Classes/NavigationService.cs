@@ -116,7 +116,7 @@ namespace Hfr.Services.Classes
                     }
                     break;
                 case View.Editor:
-                    _shell.ExtraPaneContent = new EditorPage(parameter);
+                    _shell.NavigateExtraFrame(typeof(EditorPage), parameter);
                     break;
                 case View.Settings:
                     _navigationFrame.Navigate(typeof(Settings));

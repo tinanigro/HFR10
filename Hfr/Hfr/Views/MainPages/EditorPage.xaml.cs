@@ -4,25 +4,24 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Hfr.Views.MainPages
 {
-    public sealed partial class EditorPage : UserControl
+    public sealed partial class EditorPage : Page
     {
-        private string url;
-        public EditorPage(object quoteUrl)
+        public EditorPage()
         {
             this.InitializeComponent();
-            this.url = quoteUrl?.ToString();
-            this.Loaded += EditorPage_Loaded;
-            this.Unloaded += EditorPage_Unloaded;
         }
 
-        private void EditorPage_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
+
+            await Loc.Editor.OnNavigatedTo(e.Parameter);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
             Loc.Editor.OnNavigatedFrom();
-        }
-
-        private async void EditorPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            await Loc.Editor.OnNavigatedTo(url);
         }
     }
 }

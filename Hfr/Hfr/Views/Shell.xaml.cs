@@ -1,12 +1,14 @@
-﻿using Windows.UI.Xaml;
+﻿using Hfr.Views.MiscPages;
+using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Hfr.Views
 {
     public sealed partial class Shell : UserControl
     {
-        private readonly double ExtraPaneDefaultHeight = 650;
-        private readonly double ExtraPaneDefaultWidth = 400;
+        private readonly double ExtraPaneDefaultHeight = 750;
+        private readonly double ExtraPaneDefaultWidth = 450;
         public Shell()
         {
             this.InitializeComponent();
@@ -24,45 +26,37 @@ namespace Hfr.Views
             {
                 if (ExtraPaneVisible)
                 {
-                    ExtraPaneContentPresenter.HorizontalAlignment = HorizontalAlignment.Stretch;
-                    ExtraPaneContentPresenter.VerticalAlignment = VerticalAlignment.Stretch;
-                    ExtraPaneContentPresenter.Height = this.ActualHeight;
-                    ExtraPaneContentPresenter.Width = this.ActualWidth;
+                    ExtraPageFrame.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    ExtraPageFrame.VerticalAlignment = VerticalAlignment.Stretch;
+                    ExtraPageFrame.Height = this.ActualHeight;
+                    ExtraPageFrame.Width = this.ActualWidth;
                 }
             }
             else
             {
                 if (ExtraPaneVisible)
                 {
-                    ExtraPaneContentPresenter.HorizontalAlignment = HorizontalAlignment.Right;
-                    ExtraPaneContentPresenter.VerticalAlignment = VerticalAlignment.Bottom;
-                    ExtraPaneContentPresenter.Height = ExtraPaneDefaultHeight;
-                    ExtraPaneContentPresenter.Width = ExtraPaneDefaultWidth;
+                    ExtraPageFrame.HorizontalAlignment = HorizontalAlignment.Right;
+                    ExtraPageFrame.VerticalAlignment = VerticalAlignment.Bottom;
+                    ExtraPageFrame.Height = ExtraPaneDefaultHeight;
+                    ExtraPageFrame.Width = ExtraPaneDefaultWidth;
                 }
             }
         }
 
-        public bool ExtraPaneVisible => ExtraPaneContent != null;
+        public bool ExtraPaneVisible => ExtraPageFrame.Content != null;
 
-        public object ExtraPaneContent
+        public void NavigateExtraFrame(Type type, object parameter)
         {
-            get { return (object)GetValue(ExtraPaneContentProperty); }
-            set { SetValue(ExtraPaneContentProperty, value); }
-        }
-
-        public static readonly DependencyProperty ExtraPaneContentProperty = DependencyProperty.Register(nameof(ExtraPaneContent), typeof(object), typeof(Shell), new PropertyMetadata(null, PropertyChangedCallback));
-
-        private static void PropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
-        {
-            var that = (Shell) dependencyObject;
-            that.UpdateExtraPaneContent();
-        }
-
-        void UpdateExtraPaneContent()
-        {
-            ExtraPaneGrid.Visibility = (ExtraPaneVisible) ? Visibility.Visible : Visibility.Collapsed;
-            ExtraPaneContentPresenter.Content = ExtraPaneContent;
+            ExtraPaneGrid.Visibility = Visibility.Visible;
+            ExtraPageFrame.Navigate(type, parameter);
             Responsive();
+        }
+
+        public void HideExtraFrame()
+        {
+            ExtraPaneGrid.Visibility = Visibility.Collapsed;
+            ExtraPageFrame.Navigate(typeof(BlankPage));
         }
     }
 }

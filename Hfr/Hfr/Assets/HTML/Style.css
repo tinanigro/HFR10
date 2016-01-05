@@ -46,113 +46,106 @@ body {
 }
 
 .message .header .avatar, .message .header .infos {
-    float:left;
+    float: left;
 }
 
 .message .header .action {
-    float:right;
+    float: right;
     margin-top: 12px;
 }
 
 .message .header .infos {
-    margin-left:8px
+    margin-left: 8px;
 }
 
-.message .header .infos * {
-    width:100%;
-    line-height:30px;
-}
+    .message .header .infos * {
+        width: 100%;
+        line-height: 30px;
+    }
 
 .message .header .avatar {
-	text-align:left;
-
-	background-size: cover;
-	background-color: transparent;
-	background-repeat: no-repeat;
-	background-position:center;
-
+    text-align: left;
+    background-size: cover;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
     width: 60px;
-	height: 60px;
-	border-radius: 30px;
-	-webkit-border-radius: 30px;
-	-moz-border-radius: 30px;
-	
-	/*box-shadow: 0 0 2px rgba(0, 0, 0, .8);
+    height: 60px;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    /*box-shadow: 0 0 2px rgba(0, 0, 0, .8);
 	-webkit-box-shadow: 0 0 2px rgba(0, 0, 0, .8);
 	-moz-box-shadow: 0 0 2px rgba(0, 0, 0, .8);*/
 }
-.message .header .avatar.no_avatar {
-    
-}
+
+    .message .header .avatar.no_avatar {
+    }
 
 .message .header .infos .message_date {
-    color: #565656;
+    color: rgba(255, 255, 255, 0.70);
 }
 
 .message .content {
     overflow: hidden;
-    padding:8px;
+    padding: 8px;
 }
 
 
-/* HFR content > * */
-.message .content table 
-{
-    border: 0px;
-	padding: 16px !important;
-	width:100%;
-	
-	margin-bottom:5px !important;
-}
+    /* HFR content > * */
+    .message .content table {
+        border: 0px;
+        padding: 16px !important;
+        width: 100%;
+        margin-bottom: 5px !important;
+    }
 
-.message .content table p
-{
-	overflow-x:hidden;
-}
+        .message .content table p {
+            overflow-x: hidden;
+        }
 
-.message .content img, .message .content table, .message .content table p, .message .content table p img {
-    max-width:100%;
-}
+            .message .content img, .message .content table, .message .content table p, .message .content table p img {
+                max-width: 100%;
+            }
 
-.message .content img[onload] {
-    margin:0 !important;
-}
+                .message .content img[onload] {
+                    margin: 0 !important;
+                }
 
-.message .content table .s1 a {
-	font-weight:bold !important;
-	color:whitesmoke !important;
-    text-decoration: none !important;
-}
+                .message .content table .s1 a {
+                    font-weight: bold !important;
+                    color: whitesmoke !important;
+                    text-decoration: none !important;
+                }
 
 hr {
     border: 0px;
 }
 
 .message .content div.masque {
-	visibility:hidden;
+    visibility: hidden;
 }
 
-.message .content ol, .message .content ul
-{
-	margin:1em 0px !important;
-	padding-left:2em !important
+.message .content ol, .message .content ul {
+    margin: 1em 0px !important;
+    padding-left: 2em !important;
 }
 
 .message .content table.code td {
-	font-size:0.8em !important;
+    font-size: 0.8em !important;
 }
 
 .message .content table.code, .message .content table.fixed, .message .content table.quote, .message .content table.citation {
-    table-layout:fixed;
+    table-layout: fixed;
     border: none;
 }
 
-.message .content table.code p, .message .content table.fixed p {
-    overflow:scroll;
-    -webkit-overflow-scrolling: touch;
-    white-space:nowrap;
-}
+    .message .content table.code p, .message .content table.fixed p {
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+    }
 
-.message .content table.code *, .message .content table.fixed * {
-    font-family: monospace !important;
-}
+    .message .content table.code *, .message .content table.fixed * {
+        font-family: monospace !important;
+    }
