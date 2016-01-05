@@ -123,6 +123,14 @@ namespace Hfr.Helpers
                 TempHTMLMessage = TempHTMLMessage.Replace("%%ID%%", i.ToString());
                 TempHTMLMessage = TempHTMLMessage.Replace("%%POSTID%%", reponseId);
 
+                if (pseudo == "Modération")
+                {
+                    TempHTMLMessage = TempHTMLMessage.Replace("%%moderation%%", "moderation");
+                }
+                else
+                {
+                    TempHTMLMessage = TempHTMLMessage.Replace("%%moderation%%", "");
+                }
                 TempHTMLMessage = TempHTMLMessage.Replace("%%no_avatar_class%%", avatarClass);
                 TempHTMLMessage = TempHTMLMessage.Replace("%%AUTEUR_AVATAR%%", avatarUri);
                 TempHTMLMessage = TempHTMLMessage.Replace("%%AUTEUR_PSEUDO%%", pseudo);
