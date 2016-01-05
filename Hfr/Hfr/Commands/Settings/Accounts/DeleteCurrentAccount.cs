@@ -8,7 +8,7 @@ namespace Hfr.Commands.Settings.Accounts
         public override void Execute(object parameter)
         {
             Loc.Main.AccountManager.DeleteCurrentAccount();
-            Loc.NavigationService.Navigate(Model.View.Connect);
+            Task.Run(() => Loc.Main.AccountManager.Initialize());
         }
     }
 }
