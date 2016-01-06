@@ -48,7 +48,7 @@ namespace Hfr.Model
             get { return _topicCurrentPage; }
             set
             {
-                Set(ref _topicCurrentPage,value);
+                Set(ref _topicCurrentPage, value);
                 RaisePropertyChanged(nameof(CanGoForward));
                 RaisePropertyChanged(nameof(CanGoPrevious));
             }
