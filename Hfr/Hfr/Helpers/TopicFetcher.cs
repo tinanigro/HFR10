@@ -105,10 +105,14 @@ namespace Hfr.Helpers
                     }
                 }
 
+                var toolbar = postNode.Descendants("div").FirstOrDefault(x => x.GetAttributeValue("class", "") == "toolbar");
                 // Date
-                var date = postNode.Descendants("div").FirstOrDefault(x=>x.GetAttributeValue("class","") == "toolbar").InnerText.CleanFromWeb();
+                var date = toolbar.InnerText.CleanFromWeb();
                 date = date.Replace("Posté le ", "");
 
+                // Can edit
+                bool canEdit = toolbar.Descendants("img").Any(x => x.GetAttributeValue("alt", "") == "edit" && x.GetAttributeValue("title", "").Contains("Edit"));
+                
                 // Content
                 var content = postNode.Descendants("div").FirstOrDefault(x => x.GetAttributeValue("id", "").Contains("para")).InnerHtml;
                 int lastPostText = content.IndexOf("<div style=\"clear: both;\"> </div>", StringComparison.Ordinal);
@@ -141,6 +145,17 @@ namespace Hfr.Helpers
                 else
                 {
                     TempHTMLMessage = TempHTMLMessage.Replace("%%round_avatar_class%%", "round");
+                }
+                
+                if  (canEdit)
+                {
+                    // Post is editable
+                    TempHTMLMessage = TempHTMLMessage.Replace("%%PERSONALPOST%%", "");
+                }
+                else
+                {
+                    // Post is not personal, hide personal actions
+                    TempHTMLMessage = TempHTMLMessage.Replace("%%PERSONALPOST%%", "personal_post_button_hidden");
                 }
 
                 TempHTMLMessage = TempHTMLMessage.Replace("%%AUTEUR_AVATAR%%", avatarUri);
