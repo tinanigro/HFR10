@@ -10,7 +10,13 @@
     <Page.BottomAppBar>
         <CommandBar Background="{ThemeResource SystemControlForegroundAccentBrush}">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Icon="Clear"
+                <AppBarButton Icon="Delete"
+                              Label="Supprimer"
+                              Command="{Binding DeleteMessageCommand}"
+                              ClickMode="Press"
+                              Visibility="{Binding IsEditUIVisible}" />
+                <AppBarSeparator />
+                <AppBarButton Icon="Cancel"
                               Label="Annuler"
                               Command="{Binding CancelMessageCommand}"
                               ClickMode="Press" />
@@ -43,8 +49,7 @@
                  Text="{Binding CurrentEditor.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  TextWrapping="Wrap"
                  AcceptsReturn="True"
-                 ScrollViewer.VerticalScrollBarVisibility="Visible"
-                 IsEnabled="{Binding IsEditorEnabled}"/>
+                 ScrollViewer.VerticalScrollBarVisibility="Visible"/>
         <ProgressBar Grid.Row="1"
                      IsIndeterminate="True"
                      Visibility="{Binding IsBusyScreenVisible}" />

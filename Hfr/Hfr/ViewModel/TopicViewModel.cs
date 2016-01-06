@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using GalaSoft.MvvmLight;
@@ -7,6 +8,7 @@ using Hfr.Commands.Editor;
 using Hfr.Commands.Topic;
 using Hfr.Helpers;
 using Hfr.Model;
+using Hfr.Models;
 
 namespace Hfr.ViewModel
 {
@@ -104,9 +106,24 @@ namespace Hfr.ViewModel
             Task.Run(async () => await DrapFetcher.GetDraps(Loc.Settings.FollowedTopicType));
         }
 
-        public Task RefreshPage()
+        public async Task RefreshPage(EditorIntent editorIntent)
         {
-            return Task.Run(async () => await TopicFetcher.GetPosts(CurrentTopic));
+            await ThreadUI.Invoke(() =>
+            {
+                switch (editorIntent)
+                {
+                    case EditorIntent.New:
+                    case EditorIntent.Quote:
+                    case EditorIntent.MultiQuote:
+                        CurrentTopic.TopicCurrentPage = CurrentTopic.TopicNbPage;
+                        break;
+                    case EditorIntent.Edit:
+                        break;
+                    default:
+                        break;
+                }
+            });
+            await Task.Run(async () => await TopicFetcher.GetPosts(CurrentTopic));
         }
         #endregion
 

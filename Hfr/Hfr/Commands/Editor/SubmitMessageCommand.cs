@@ -1,7 +1,5 @@
-﻿using Hfr.Model;
-using Hfr.Utilities;
+﻿using Hfr.Utilities;
 using Hfr.ViewModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Hfr.Commands
@@ -12,6 +10,5 @@ namespace Hfr.Commands
         {
             Task.Run(() => Loc.Editor.SubmitEditor());
         }
-    }
-    
+    }    
 }

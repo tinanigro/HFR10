@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Navigation;
 using Hfr.Utilities;
 using Hfr.Commands;
 using Hfr.Commands.Editor;
+using Hfr.Models;
 
 namespace Hfr.ViewModel
 {
@@ -48,14 +49,25 @@ namespace Hfr.ViewModel
             get { return IsBusy ? Visibility.Visible : Visibility.Collapsed; }
         }
 
+        public Visibility IsEditUIVisible
+        {
+            get { return CurrentEditor?.Intent == EditorIntent.Edit ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
+        public string MultiQuoteTemporaryContent { get; set; }
         #region methods
-        public async Task LoadEditor(string url)
+        public async Task LoadEditor(EditorPackage package)
         {
             await ThreadUI.Invoke(() => IsBusy = true);
-            await Task.Run(async () => await FormFetcher.GetEditor(url));
+            await Task.Run(async () => await FormFetcher.GetEditor(package));
             await ThreadUI.Invoke(() =>
             {
                 IsBusy = false;
+                RaisePropertyChanged(nameof(IsEditUIVisible));
+                if (package.Intent == EditorIntent.MultiQuote)
+                {
+                    Loc.NavigationService.GoBack();
+                }
             });
         }
 
@@ -75,11 +87,11 @@ namespace Hfr.ViewModel
             {
                 await ThreadUI.Invoke(() =>
                 {
-                    IsBusy = false;
                     Loc.NavigationService.GoBack();
                     ApplicationView.GetForCurrentView().SuppressSystemOverlays = false;
+                    _isBusy = false;
                 });
-                await Loc.Topic.RefreshPage();
+                await Loc.Topic.RefreshPage(CurrentEditor.Intent);
             }
             else
             {
@@ -94,19 +106,19 @@ namespace Hfr.ViewModel
         #region navigation
         public async Task OnNavigatedTo(object parameter)
         {
-            var url = parameter as string;
+            var editorPackage = parameter as EditorPackage;
+            _isBusy = false;
             await ThreadUI.Invoke(() =>
             {
-                IsBusy = false;
                 ApplicationView.GetForCurrentView().SuppressSystemOverlays = true;
             });
-            Debug.WriteLine("EditorViewModel OnNavigatedTo " + url);
+            Debug.WriteLine("EditorViewModel OnNavigatedTo " + editorPackage.PostUriForm);
             
-            if (url == "http://debug")
+            if (editorPackage.PostUriForm == "http://debug")
             {
-                url = HFRUrl.Dbg_Form_QuoteSingleURL;
+                editorPackage.PostUriForm = HFRUrl.Dbg_Form_QuoteSingleURL;
             }
-            await LoadEditor(url);
+            await LoadEditor(editorPackage);
         }
 
         public void OnNavigatedFrom()
@@ -117,6 +129,7 @@ namespace Hfr.ViewModel
 
         #region commands
         public SubmitEditorCommand SubmitEditorCommand { get; } = new SubmitEditorCommand();
+        public DeleteMessageCommand DeleteMessageCommand { get; } = new DeleteMessageCommand();
         public CancelMessageCommand CancelMessageCommand { get; } = new CancelMessageCommand();
         #endregion
 

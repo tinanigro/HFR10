@@ -63,6 +63,11 @@ body {
     margin-top: 12px;
 }
 
+.message .header .action .icon{
+    height: 32px;
+    width: 32px;
+}
+
 .message .header .infos {
     margin-left: 8px;
 }
