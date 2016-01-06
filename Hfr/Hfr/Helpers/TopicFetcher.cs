@@ -159,15 +159,18 @@ namespace Hfr.Helpers
 
             TempHTMLTopic = BodyTemplate.Replace("%%MESSAGES%%", TempHTMLMessagesList);
 
+            // Get Accent Color
             await ThreadUI.Invoke(() =>
             {
                 SolidColorBrush color = (SolidColorBrush)App.Current.Resources["SystemControlHighlightAltListAccentLowBrush"];
                 var colorString = $"{color.Color.R.ToString()}, {color.Color.G.ToString()}, {color.Color.B.ToString()}";
 
                 TempHTMLTopic = TempHTMLTopic.Replace("%%ACCENTCOLOR%%", colorString);
-                //await FileIO.WriteTextAsync(cssFile, css);
             });
 
+            // Get user selected font-size
+            var fontSize = Loc.Settings.FontSizePreferred;
+            TempHTMLTopic = TempHTMLTopic.Replace("%%FONTSIZE%%", fontSize.ToString());
 
             // Create/Open WebSite-Cache folder
             var subfolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(Strings.WebSiteCacheFolderName, CreationCollisionOption.OpenIfExists);

@@ -87,6 +87,12 @@
                                       Margin="{StaticResource DefaultMarginBottom}"
                                       OffContent="Cercle Windows 10 style"
                                       OnContent="Carré oldschool" />
+                            <Slider Header="Taille de la police"
+                                    Minimum="{Binding MinimumFontSize}"
+                                    Maximum="{Binding MaximumFontSize}"
+                                    Value="{Binding FontSizePreferred, Mode=TwoWay}"
+                                    SmallChange="0.1"
+                                    StepFrequency="0.1" />
                         </StackPanel>
                     </RelativePanel>
                 </ScrollViewer>
