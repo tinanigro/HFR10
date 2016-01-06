@@ -85,17 +85,17 @@ namespace Hfr.Helpers
             return tcs.Task;
         }
 
-        static async Task GetAvatar(Account account)
+        public static async Task GetAvatar(Account account)
         {
             var html = await HttpClientHelper.Get(HFRUrl.ProfilePageUrl, Loc.Main.AccountManager.CurrentAccount.CookieContainer);
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 
-            string[] userAvatarFileArray = htmlDoc.DocumentNode.Descendants("img").Where(x => x.GetAttributeValue("src", "").Contains("http://forum-images.hardware.fr/images/mesdiscussions-")).Select(y => y.GetAttributeValue("src", "")).ToArray();
+            var avatarSrc = htmlDoc.DocumentNode.Descendants("img").FirstOrDefault(x => x.GetAttributeValue("src", "").Contains("http://forum-images.hardware.fr/images/mesdiscussions-")).GetAttributeValue("src", "");
 
-            if (userAvatarFileArray.Length != 0)
+            if (!string.IsNullOrEmpty(avatarSrc))
             {
-                await ThreadUI.Invoke(() => account.AvatarId = userAvatarFileArray[0].Split('/')[4].Replace(".jpg", "").Replace("mesdiscussions-", ""));
+                await ThreadUI.Invoke(() => account.AvatarId = avatarSrc.Split('/')[4].Replace("mesdiscussions-", ""));
             }
         }
     }

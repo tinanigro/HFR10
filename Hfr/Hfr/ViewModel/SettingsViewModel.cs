@@ -3,6 +3,7 @@ using Hfr.Commands.Settings;
 using Hfr.Helpers;
 using Hfr.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 
 namespace Hfr.ViewModel
@@ -136,7 +137,18 @@ namespace Hfr.ViewModel
             }
         }
         #endregion
+        #region methods
+        public void OnNavigatedTo()
+        {
+            Task.Run(() => Initialize());
+        }
 
+        async Task Initialize()
+        {
+            await ConnectHelper.GetAvatar(Loc.Main.AccountManager.CurrentAccount);
+            Loc.Main.AccountManager.UpdateCurrentAccountInDB();
+        }
+        #endregion
         #region commands
         public GoToAppTopicCommand GoToAppTopicCommand { get; } = new GoToAppTopicCommand();
         #endregion

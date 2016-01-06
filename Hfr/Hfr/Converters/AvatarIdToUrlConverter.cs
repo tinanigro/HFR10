@@ -10,9 +10,10 @@ namespace Hfr.Converters
             if (value == null)
             {
                 // No avatar
-                return "http://cache1.asset-cache.net/xc/483691632.jpg?v=2&c=IWSAsset&k=2&d=EMp_JPhMen2_gYwlQVvHyNzU4vF1kgQTl-RoD3x2Acp8nN6YliR4PMzRCzld1npg0";
+                return "ms-appx:///Assets/HTML/UI/no_avatar.png";
             }
-            return "http://forum-images.hardware.fr/images/mesdiscussions-" + value + ".jpg";
+
+            return "http://forum-images.hardware.fr/images/mesdiscussions-" + value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
