@@ -62,10 +62,48 @@ body {
     float: right;
 }
 
-.message .header .action .icon{
-    height: 32px;
-    width: 32px;
+.message .header .action .horizontal_menu {
+    list-style: none;
+    display: inline;
 }
+
+    .message .header .action .personal_post_button_hidden {
+        visibility: collapse;
+        display: none !important;
+    }
+
+    .message .header .action .horizontal_menu li {
+        display: inline-block;
+    }
+    
+    @media screen and (max-width: 450px) {
+        .message .header .action .horizontal_menu li {
+            padding: 8px 3px;
+        }
+    }
+
+    @media screen and (max-width: 550px) {
+        .message .header .action .horizontal_menu li {
+            padding: 8px 10px;
+        }
+    }
+    
+    @media screen and (min-width: 550px) {
+        .message .header .action .horizontal_menu li {
+            padding: 8px 16px;
+        }
+    }
+
+    .message .header .action .horizontal_menu .icon{
+        height: 30px;
+        width: 30px;
+        opacity: 0.6;
+        transition: opacity 0.5s;
+    }
+
+    .message .header .action .horizontal_menu .icon:hover{
+        opacity: 1;
+    }
 
 .message .header .infos {
     margin-left: 8px;
