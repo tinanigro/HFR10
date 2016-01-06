@@ -2,11 +2,20 @@
 using System.Collections.Generic;
 using Windows.System.Profile;
 using GalaSoft.MvvmLight;
+using Hfr.Models;
 
 namespace Hfr.Model
 {
     public class Editor : ViewModelBase
     {
+        private EditorIntent _intent;
+
+        public EditorIntent Intent
+        {
+            get { return _intent; }
+            set { Set(ref _intent, value); }
+        }
+
         public string FromUrl { get; set; }
         public string SubmitUrl { get; set; }
 
