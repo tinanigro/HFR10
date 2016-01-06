@@ -18,7 +18,7 @@
     <Thickness x:Key="DefaultMarginLeft">12,0,0,0</Thickness>
     <Thickness x:Key="DefaultMarginRight">0,0,12,0</Thickness>
 
-    <Thickness x:Key="DefaultMarginExceptBottom">12,36,12,0</Thickness>
+    <Thickness x:Key="DefaultMarginExceptBottom">12,12,12,0</Thickness>
     
     <x:Double x:Key="SidebarCompactWidth">70</x:Double>
     <GridLength x:Key="SidebarCompactWidthGridLength">70</GridLength>
