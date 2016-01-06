@@ -2,6 +2,7 @@
 {
     public class HFRCats
     {
+        // TODO : FIX THIS, IT SHOULD BE DYNAMIC !!!
         public static string PlainNameFromId(int id)
         {
             if (id == 1) { return ("Hardware"); }
@@ -23,6 +24,7 @@
             if (id == 8) { return ("Emploi & Etudes"); }
             if (id == 9) { return ("Seti et projets distribués"); }
             if (id == 13) { return ("Discussions"); }
+            if (id == 30) { return ("Electronique, domotique, DIY"); }
             return id == 0 ? ("Section réservée") : ("Erreur");
         }
 
