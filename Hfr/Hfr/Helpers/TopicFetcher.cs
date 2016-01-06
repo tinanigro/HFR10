@@ -43,6 +43,36 @@ namespace Hfr.Helpers
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 
+            //Refresh Current/Number of pages
+            var pagesList = htmlDoc.DocumentNode.Descendants("tr")
+                       .Where(x => x.GetAttributeValue("class", "") == "cBackHeader fondForum2PagesHaut")
+                       .SelectMany(tr => tr.Descendants("div"))
+                       .Where(x => x.GetAttributeValue("class", "") == "left")
+                       .FirstOrDefault();
+
+            int nbPage = 1;
+            int currentPage = 1;
+            if (pagesList != null)
+            {
+               
+                var nbPageStr = pagesList.Descendants("a")
+                    .LastOrDefault().InnerText;
+                int.TryParse(nbPageStr, out nbPage);
+                                
+                var currentPageStr = pagesList.Descendants("b")
+                    .LastOrDefault().InnerText;
+                int.TryParse(currentPageStr, out currentPage);
+
+                if (currentPage > nbPage) nbPage = currentPage;
+            }
+            
+            await ThreadUI.Invoke(() =>
+            {
+                Loc.Topic.CurrentTopic.TopicNbPage = nbPage;
+                Loc.Topic.CurrentTopic.TopicCurrentPage = currentPage;
+            });
+
+
             var postNodes =
                 htmlDoc.DocumentNode.Descendants("table")
                     .Where(x => x.GetAttributeValue("class", "") == "messagetable")

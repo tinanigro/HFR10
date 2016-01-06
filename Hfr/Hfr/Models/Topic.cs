@@ -17,6 +17,7 @@ namespace Hfr.Model
         private string _html;
         private string _topicReponseId;
         private int _topicCurrentPage = 1;
+        private int _topicNbPage = 1;
 
         public string TopicName { get; set; }
         public string TopicAuthor { get; set; }
@@ -33,14 +34,21 @@ namespace Hfr.Model
 
         public int TopicFirstPage => 1;
 
-        public int TopicNbPage { get; set; }
+        public int TopicNbPage
+        {
+            get { return _topicNbPage; }
+            set
+            {
+                Set(ref _topicNbPage, value);
+            }
+        }
 
         public int TopicCurrentPage
         {
             get { return _topicCurrentPage; }
             set
             {
-                Set(ref _topicCurrentPage, value);
+                Set(ref _topicCurrentPage,value);
                 RaisePropertyChanged(nameof(CanGoForward));
                 RaisePropertyChanged(nameof(CanGoPrevious));
             }
