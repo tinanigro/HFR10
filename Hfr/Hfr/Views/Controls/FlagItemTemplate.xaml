@@ -11,8 +11,7 @@
           Margin="{StaticResource DefaultMarginRight}"
           RightTapped="RightTapped_Grid"
           Holding="Grid_Holding"
-          FlyoutBase.AttachedFlyout="{StaticResource FlagItemMenuFlyout}"
-          ToolTipService.ToolTip="{Binding TopicName}">
+          FlyoutBase.AttachedFlyout="{StaticResource FlagItemMenuFlyout}">
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource DefaultTextBlockHeightGridLength}" />
             <RowDefinition Height="Auto" />
@@ -28,7 +27,8 @@
                    TextWrapping="NoWrap"
                    TextTrimming="CharacterEllipsis"
                    FontWeight="Normal"
-                   FontSize="15" />
+                   FontSize="15"
+                   ToolTipService.ToolTip="{Binding TopicName}" />
         <TextBlock Grid.Row="1"
                    Text="{Binding TopicLastPost}"
                    Foreground="{ThemeResource SystemControlForegroundBaseLowBrush}"
