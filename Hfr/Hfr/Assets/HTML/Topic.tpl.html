@@ -44,9 +44,13 @@
             location.hash = "#" + hash;
         }
 
-        function quotes(postId) {
+        function quote(postId) {
             window.location = "http://local/quote?postId=" + postId;
             return false;
+        }
+
+        function edit(postId) {
+            window.location = "http://local/edit?postId=" + postId;
         }
     </script>
 

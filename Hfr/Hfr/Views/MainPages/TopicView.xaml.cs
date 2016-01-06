@@ -51,6 +51,13 @@ namespace Hfr.Views.MainPages
                     if (!string.IsNullOrEmpty(postId))
                         Loc.Topic.ShowEditorCommand.Execute(Loc.Topic.CurrentTopic.TopicNewPostUriForm + $"&numrep={postId}");
                 }
+                else if (args.Uri.AbsoluteUri.Contains("edit"))
+                {
+                    var decoder = new WwwFormUrlDecoder(args.Uri.Query);
+                    var postId = decoder.FirstOrDefault(x => x.Name == "postId")?.Value;
+                    if (!string.IsNullOrEmpty(postId))
+                        Loc.Topic.ShowEditorCommand.Execute(Loc.Topic.CurrentTopic.TopicNewPostUriForm + $"&numreponse={postId}");
+                }
                 else
                 {
                     Debug.WriteLine("WW " + args.Uri.Query + "-- " + args.Uri + " -- " + args.Uri.AbsoluteUri);
