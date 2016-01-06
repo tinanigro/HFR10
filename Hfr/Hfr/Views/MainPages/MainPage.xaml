@@ -57,8 +57,10 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Image Source="{Binding AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}"
-                           Stretch="Fill" />
+                    <Image x:Name="Avatar"
+                           Source="{Binding AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}"
+                           Stretch="Fill"
+                           Visibility="Collapsed"/>
                     <AppBarButton Grid.Column="1"
                                   Icon="Find" />
                 </Grid>
@@ -115,6 +117,8 @@
                                 Value="Visible" />
                         <Setter Target="MessagesList.Visibility"
                                 Value="Visible" />
+                        <Setter Target="Avatar.Visibility"
+                                Value="Visible" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="TwoColumnsVisible">
@@ -135,6 +139,8 @@
                                 Value="Visible" />
                         <Setter Target="ThirdColumnDefinition.Width"
                                 Value="0" />
+                        <Setter Target="Avatar.Visibility"
+                                Value="Visible" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="DisplayPrivateChatsInsteadOfCategoriesVisible">
@@ -152,6 +158,8 @@
                         <Setter Target="MessagesList.Visibility"
                                 Value="Visible" />
                         <Setter Target="ForcePrivateChatsButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="Avatar.Visibility"
                                 Value="Visible" />
                         <Setter Target="SecondColumnDefinition.Width"
                                 Value="0" />
