@@ -1,6 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Navigation;
 
 namespace Hfr.Views.MainPages
 {
@@ -18,6 +19,11 @@ namespace Hfr.Views.MainPages
                 e.Handled = true;
                 PasswordTextBox.Focus(FocusState.Keyboard);
             }
+        }
+
+        private void PseudoTextBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            PseudoTextBox.Focus(FocusState.Keyboard);
         }
     }
 }

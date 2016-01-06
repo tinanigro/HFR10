@@ -47,7 +47,8 @@
                          RelativePanel.Below="PseudoHeaderTextBlock"
                          RelativePanel.AlignLeftWithPanel="True"
                          RelativePanel.AlignRightWithPanel="True" 
-                         KeyDown="PseudoTextBox_KeyDown"/>
+                         KeyDown="PseudoTextBox_KeyDown"
+                         Loaded="PseudoTextBox_Loaded"/>
                 <TextBlock x:Name="PasswordHeaderTextBlock"
                            Text="MOT DE PASSE"
                            Margin="{StaticResource DefaultMarginTop}"

@@ -32,7 +32,8 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <shellControls:Header HeaderContent="Votre réponse" />
-        <TextBox Grid.Row="1"
+        <TextBox x:Name="MessageTextBlock" 
+                 Grid.Row="1"
                  PlaceholderText="Ecrivez votre message ici ..."
                  VerticalAlignment="Stretch"
                  Padding="16"
