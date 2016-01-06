@@ -57,8 +57,7 @@ namespace Hfr.Helpers
                     else if (node.GetAttributeValue("type", "") == "checkbox")
                     {
                         // Checkboxes
-                        formInputs.Add(node.GetAttributeValue("name", ""),
-                            node.GetAttributeValue("checked", "") == "checked" ? "1" : "0");
+                        formInputs.Add(node.GetAttributeValue("name", ""), node.GetAttributeValue("checked", "") == "checked" ? "1" : "0");
                     }
                     else
                     {
