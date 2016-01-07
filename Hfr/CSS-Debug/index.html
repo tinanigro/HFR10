@@ -1,24 +1,53 @@
 <!doctype html>
 <html>
 <head>
-    <meta name='viewport' content='initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no' />
-    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no" />
     <link type='text/css' rel='stylesheet' href='../Hfr/Assets/HTML/Style.css' />
-
+    <script src="../Hfr/Assets/HTML/JS/jquery-2.1.4.min.js"></script>
     <style type='text/css'>
         /* PLACEHOLDER FOR USER FONT SIZE */
+        .message .content {
+            font-size: 15px;
+        }
+
+        .message .header {
+            background-color: rgba(116, 77, 169, 0.50);
+        }
     </style>
 </head>
+
 <body>
     <div id='hfr_internal_wrapper'><div class="message" id="num0">
-    <a class="anchorlink" id="1545197"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062522"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-13802.jpg')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="personal_post_button_hidden">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">Constellation06</div>
-            <div class="message_date">22-07-2013 à 14:25:00</div>
+            <div class="auteur_pseudo">doum</div>
+            <div class="message_date">07-01-2016Â Ã Â 21:00:56Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -27,7 +56,10 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>HFR4WinRT, le projet open source visant à faire d'HFR une superbe app universelle et adaptée à vos usages de power-users.</p> <p><strong>Le repo</strong><br>Repo git tout ce qu'il y a de plus basique.<br><a rel="nofollow" href="https://github.com/ThomasNigro/HFR4WinRT" class="cLink">Lien vers le GitHub</a></p> <p><strong>Licence</strong><br>Le code est sous <span class="u">GPLv3</span>.<br><a rel="nofollow" href="https://github.com/ThomasNigro/HFR4WinRT/blob/master/LICENSE" class="cLink">https://github.com/ThomasNigro/HFR4 [...] er/LICENSE</a></p> <p><strong>Le OneNote</strong><br><a rel="nofollow" href="https://onedrive.live.com/view.aspx?resid=EC108A9C3B2F8F84!744742&ithint=onenote%2c&app=OneNote&authkey=!AMfGOYcIGZcS4JQ" class="cLink">https://onedrive.live.com/view.aspx [...] YcIGZcS4JQ</a></p> <p><br><strong>En quoi puis-je aider?</strong><br>Je suis dev, je peux<br></p><ul><li> cloner</li><li> forker</li><li> ajouter des features d'apres le OneNote</li><li> debugger un bug trouvé</li><li> betatester</li></ul><p><br>Je suis user, je peux<br></p><ul><li> proposer des features</li><li> reporter des bugs</li></ul>     <p>Bienvenue sur le topic officiel de HFR RT, le client HFR pour vos devices équipés d'un OS Microsoft !<br>La première page sera updatée dans la semaine <img src="http://forum-images.hardware.fr/icones/smilies/jap.gif" alt=":jap:" title=":jap:"><br><img src="http://files.thomasnigro.fr/hfr/app/download.png" alt="http://files.thomasnigro.fr/hfr/app/download.png" title="http://files.thomasnigro.fr/hfr/app/download.png" onload="md_verif_size(this,'Cliquez pour agrandir','2','250')" style="margin: 5px"><br><strong> v1.0.14.1522 disponible pour Windows 8.1 et Windows RT 8.1 !</strong><br><a rel="nofollow" href="http://apps.microsoft.com/windows/fr-fr/app/hfr-rt/87c6d29e-2728-41da-8778-321c03215803" class="cLink"><img src="http://i.msdn.microsoft.com/dynimg/IC671223.png" alt="http://i.msdn.microsoft.com/dynimg/IC671223.png" title="http://i.msdn.microsoft.com/dynimg/IC671223.png" onload="md_verif_size(this,'Cliquez pour agrandir','2','250')" style="margin: 5px"></a><br><em> Cette version présente encore quelques bugs mais de nombreux correctifs vont être apportés régulièrement</em></p> <p><img src="http://files.thomasnigro.fr/hfr/app/features.png" alt="http://files.thomasnigro.fr/hfr/app/features.png" title="http://files.thomasnigro.fr/hfr/app/features.png" onload="md_verif_size(this,'Cliquez pour agrandir','2','250')" style="margin: 5px"><br>Version 1.0</p> <div class="container"><table class="quote"><tr class="none"><td><b class="s1">Citation :</b><br><br><p><br><strong>Page d'accueil</strong><br></p><ul><li> voir la liste des drapeaux</li><li> trier les drapeaux en fonction de l'ancienneté du dernier message</li><li> organisation des drapeaux via Semantic Zoom</li></ul><p><br></p><ul><li> voir la liste des message privés</li><li> trier les MP en fonction de l'ancienneté du dernier message</li><li> aperçu rapide "lu/non lu"</li><li> organisation via Semantic Zoom</li></ul><p><br></p><ul><li> voir les catégories, sous catégories et leur topic</li><li> organisation via Semantic Zoom</li></ul><p><br></p><ul><li> actualisation des drapeaux et MP</li><li> envoi d'un mp directement depuis la page d'accueil</li></ul><p><br><strong>Page de topic</strong><br>Général<br></p><ul><li> Consultation d'un topic</li><li> Navigation automatique vers le dernier post lu</li><li> Navigation vers première, dernière, page n-1, page n+1, page x</li><li> actualisation de la page en cours</li><li> ouvrir le topic à la page actuelle dans le navigateur</li></ul><p><br>Liste des posts<br></p><ul><li> affichage des posts dans le bon ordre</li><li> affichage du pseudo, du moodStatus, la date du poste et du nb de fois où le post a été quoté</li><li> /!\ ENCORE EN VERSION BETA : affichage du contenu du post en natif, via un contrôle perso HFRHtmlToRichTextBox, style Modern</li><li> indication des edits du post</li></ul><p><br>Option pour chacun des posts<br></p><ul><li> répondre à un post</li><li> ajouter à la liste des posts auquel on va répondre</li><li> envoyer un mp au pseudo qui a envoyé ce post</li><li> mettre un favori sur le post</li><li> consulter le profil</li></ul><p>---- sur ses propres posts<br></p><ul><li> supprimer le post</li><li> éditer le post</li></ul><p><br>Répondre à un post/un topic<br></p><ul><li> uploader une image via hfrRehost et l'insérer</li><li> insérer un smiley via WikiSmiley</li><li> insérer un smiley parmi des smileys favoris (à régler dans les paramètres)</li><li> mettre en gras, italique, souligné</li><li> insérer un spoiler</li><li> insérer un lien</li><li> insérer une image depuis le web</li><li> insérer une citation</li><li> envoi d'une réponse instantanément</li></ul><p><br>Gestions des topics<br></p><ul><li> Jusqu'à 20 topics pour moins de 500Mo via un système d'onglets</li><li> possibilité d'ouvrir plusieurs fois le même topic mais à des pages différentes</li><li> gestion des raccourcis </li></ul><p>---- Ctrl Tab pour aller à l'onglet n+1<br>---- Ctrl Shift Tab pour aller à l'onglet n-1<br>---- Ctrl T pour ouvrir un nouvel onglet<br>---- Ctrl W pour fermer l'onglet en cours</p> <p>Responsive Design<br></p><ul><li> le layout de la page s'adapte en fonction de</li></ul><p>---- la résolution<br>---- l'orientation<br>---- la largeur accordée à l'app (fullscreen, moitié, tiers ou quart)</p> <ul><li> les posts s'adaptent également aux paramètres ci dessus</li></ul><p><br>Divers<br></p><ul><li> Partage via le share charm du lien du topic dans lequel on se situe</li><li> en cliquant sur un lien, ouverture dans IE11 Metro en moitié d'écran</li><li> en cliquant sur une image, ouverture dans IE11 pour la voir en plus grand, zoomer, dezoomer et l'enregistrer en local</li><li> /!\ NON SUPPORT DES GIFS ANIMES pour l'instant. Ils restent fixes.</li><li> /!\ EXPERIMENTAL: intégration des vidéos Youtube directement dans l'app</li><li> plein d'autres choses que j'ai oublié</li></ul><p><br><strong> Page d'un MP</strong><br></p><ul><li> Affichage sous forme de Messages de la conversation</li><li> affichage de l'avatar de l'expéditeur, ainsi que le votre</li><li> Possibilité de répondre, avec les même possibilités que sur le panneau de réponse des topics</li></ul><p><br><strong> Page des Catégories</strong><br></p><ul><li> Affichage des topics de catégorie, sous catégorie</li><li> Navigation dans ces topics</li></ul><p><br><strong> Page de consultation d'un profil</strong><br></p><ul><li> Consultation basique</li></ul><p><br><strong> Page des paramètrs</strong><br></p><ul><li> Déconnexion</li><li> Gestion des smileys favoris</li></ul><p><br><strong> Divers</strong><br></p><ul><li> Notifications de MP</li><li> Live Tile</li></ul><p><br></p></td></tr></table></div> <p><img src="http://files.thomasnigro.fr/hfr/app/compatibility.png" alt="http://files.thomasnigro.fr/hfr/app/compatibility.png" title="http://files.thomasnigro.fr/hfr/app/compatibility.png" onload="md_verif_size(this,'Cliquez pour agrandir','2','250')" style="margin: 5px"><br></p><ul><li> Windows 8: v0.1 Beta (jamais mise a jour depuis)</li><li> Windows 8.1 : Version actuelle</li><li> Windows Phone 8.1 : Version actuelle</li></ul><p><br>Optimisé pour écran tactile mais aussi pour le clavier (présence de raccourcis claviers), et testé pour être pas trop dégueu avec le Leap.<br>Taille d'écran > 4.5" de préférence.[url]<a rel="nofollow" href="http://" class="cLink"></a>[/url]
+            <p><strong>Reprise du message prÃ©cÃ©dent :</strong><br></p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=57&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062504" class="Topic">Tolorfen a Ã©crit :</a></b><hr size="1"><p>Moi depuis la maj d' aujourd'hui, impossible de quoter. Quand je clique sur l'icÃ´ne, ca me renvoi en haut de la page et rien d'autre
+<br>Â <br>Ã‰dit: Bizarre, maintenant ca marche...
+<br><br></p><hr size="1"></td></tr></table></div><p>
+<br>t'es sur que tu etais en alpha 5? Â <br>Je veux pas mettre ma main a coupÃ© mais ca me faisait ca avec l'alpha 4 et ca semble bon depuis la 5
         </div>
         <div class="clear"></div>
 
@@ -35,14 +67,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num1">
-    <a class="anchorlink" id="1545198"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062530"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">Constellation06</div>
-            <div class="message_date">22-07-2013 à 14:25:12</div>
+            <div class="auteur_pseudo">Constellatâ€‹ion06</div>
+            <div class="message_date">07-01-2016Â Ã Â 21:06:22Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -51,118 +104,9 @@
 
     <div class="wrapper">
         <div class="content">
-            <p><img src="http://thomasnigro.fr/hfr/app/historique.png" alt="http://thomasnigro.fr/hfr/app/historique.png" title="http://thomasnigro.fr/hfr/app/historique.png" onload="md_verif_size(this,'Cliquez pour agrandir','2','250')" style="margin: 5px">
-<br> <br>Merci aux betatesteurs <img src="http://forum-images.hardware.fr/icones/smilies/love.gif" alt=":love:" title=":love:">
-<br></p><div class="container"><table class="quote"><tr class="none"><td><b class="s1">Citation :</b><br><br><p>DDReaper, Tolorfen, doum, dada051, vindev_hell, smover, rdz-oliv et tous les autres<br></p></td></tr></table></div><p>
-<br> <br><strong>Première ligne de code: 21/07/2013, 23h00.
-<br></strong>
-<br> <br><strong>Alpha 1: 22/07/2013, 23h00.</strong>
-<br></p><div class="container"><table class="quote"><tr class="none"><td><b class="s1">Citation :</b><br><br><p>Cette alpha absolument inutilisable et ne sert qu'à donner, pour l'instant une très maigre idée de ce que ça peut donner.
-<br></p><ul><li> le design est un design de test, et n'est pas forcément définitif
-</li><li> des tas de fonctions sont manquants
-</li><li> de très nombreux bugs
-</li></ul><p>Distribuée à :
-<br></p><ul><li> DDReaper
-</li></ul><p><br></p></td></tr></table></div><p>
-<br> <br><strong>Alpha 2 : 24/07/2013, 23h00.</strong>
-<br></p><div class="container"><table class="quote"><tr class="none"><td><b class="s1">Citation :</b><br><br><p>
-<br>Uniquement pour 8.1
-<br>Dans cette alpha
-<br></p><ul><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]">  Quelques bugs corrigés
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> Première apparition d'un vrai design consistant
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> Préparation du design à la navigation par onglets (3 instances maximum) seront prévues. Mais le moteur derrière fonctionne pas encore donc désactivé <img src="http://forum-images.hardware.fr/icones/redface.gif" alt=":o" title=":o">
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]">  j'ajoute la possibilité d'avancer d'une page, reculer d'une page, aller à une page désirée.
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> lecture des MP
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> répondre à un mp
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> affichage de la liste des topics d'une catégorie,
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/2/judgedredd.gif" alt="[:judgedredd:2]" title="[:judgedredd:2]">  d'une sous catégorie (<strong> reporté à une alpha + n</strong>)
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]">  commandes de chaque post (quoter, répondre à, mettre un favori,  envoyer un mp, supprimer le post si le post vient de l'user connecté)
-</li></ul><p>
-<br>Retours:
-<br></p><ul><li> ne pas oublier de faire l'affichage des topics
-</li><li> le orange pète un peu trop les rétines
-</li><li> l'app n'utilise pas la totalité de l'écran dans certaines résolutions (je sens que ça va me gonfler ça)
-</li><li> bouton Première et Dernière page directement dans l'appBar
-</li><li> liens externes à HFR: à ouvrir dans une page externe
-</li><li> ...  </li></ul><p><br></p></td></tr></table></div><p>
-<br> <br><strong>Alpha 3 : 26/07/2013, 23h00.</strong>
-<br></p><div class="container"><table class="quote"><tr class="none"><td><b class="s1">Citation :</b><br><br><p>
-<br>Dans cette alpha
-<br></p><ul><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> ne pas oublier de faire l'affichage des topics
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> le orange pète un peu trop les rétines
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> l'app n'utilise pas la totalité de l'écran dans certaines résolutions (je sens que ça va me gonfler ça)
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> bouton Première et Dernière page directement dans l'appBar
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> liens externes à HFR: à ouvrir dans une page externe
-</li><li> ... tout un tas de trucs ont été faits dans cette alpha 3, que j'ai oublié de lister[*]  <img src="http://forum-images.hardware.fr/images/perso/2/judgedredd.gif" alt="[:judgedredd:2]" title="[:judgedredd:2]"> affichage de la liste des topics d'une d'une sous catégorie
-</li></ul><p>
-<br><br></p></td></tr></table></div><p>
-<br> <br><strong>Candidate à la Beta 1 : 01/08/2013, 03h30.</strong>
-<br></p><div class="container"><table class="quote"><tr class="none"><td><b class="s1">Citation :</b><br><br><p>
-<br>Dans cette beta
-<br></p><ul><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> images affichées en plus grand
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> sauvegarde complète des identifiants et mot de passe fonctionnelle
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> design des MP: orange et pas bleu... intégrer les avatars et pseudos ...  </li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> accepter le saut de ligne dans la réponse des MP (passage en richtextbox requis)
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> meilleure gestion du filtre anti flood: voir le mp de smover qui décrit bien le pb
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> meilleure gestion des erreurs diverses : voir tous les catch de l'app et apporter une explication via Notif ou MessageDialog
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> virer le bouton Profil ou le AccountProfileGrid en haut à droite : choisir l'un des deux pour éviter la redondance
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> Margin=10,0,0,0 sur les trois SemanticZoom de la WelcomePage
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> tenter d'améliorer encore un peu la lisibilité de la liste des drapeaux/favoris
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/2/judgedredd.gif" alt="[:judgedredd:2]" title="[:judgedredd:2]"> à voir: historique des derniers MP consultés (dans la sidebar? avec un flyout?)
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/2/judgedredd.gif" alt="[:judgedredd:2]" title="[:judgedredd:2]"> convertir les smileys Emoji en smiley HFR (fonction à reporter si besoin, faire des recherches préliminaires)
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/2/judgedredd.gif" alt="[:judgedredd:2]" title="[:judgedredd:2]"> smover propose d'afficher les boutons selon avec un tap de l'utilisateur. Je suis plutôt d'accord mais pas tout le monde l'est: sondage
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> revoir les transition et leur impact sur la fatigue visuelle
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> if(page==1) previousAppBarButton=Collapsed else Visible
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> if(page==numberOfPages) nextAppBarButton=Collapsed else Visible
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> après selection d'un smiley virer le Replace("\r", "" )
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> réduire la taille des rectangles dans les catégories de la WelcomePage
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> design de la page des topics (draps+all) d'une sous cat' précise
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> design de la page d'un MP
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> ToastNotif pour signaler le nombre de fav non lus et nb de mp non lus
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> affichage de la liste des topics d'une sous catégorie
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> impossible de lire un topic (parsing html qui foire) si on a posté plusieurs fois sur le topic dans la même page, un truc comme ça.
-</li></ul><p><br></p></td></tr></table></div><p>
-<br> <br><strong>Nouvelle candidate à la Beta 1 : 01/08/2013, 17h15.</strong>
-<br></p><div class="container"><table class="quote"><tr class="none"><td><b class="s1">Citation :</b><br><br><p>
-<br>Terminée, candidate n3 validée pour Beta 1 (candidate 2 + bugfix suite aux retours)
-<br>Dans cette beta
-<br></p><ul><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> edit fonctionne
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> suppression de post debugué
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> certains avatars faisaient merder la mise en page
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> certains boutons de navigation disparaissaient en 1er et derniere page d'un topic
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> quand on clic sur le titre d'une citation ça emmène désormais à la dite citation
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> sidebar fonctionne à chaque endroit où elle est
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> correction de bugs divers
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> correction de problèmes de threads
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/2/judgedredd.gif" alt="[:judgedredd:2]" title="[:judgedredd:2]"> agencement des MP bof en portrait
-</li></ul><p>...
-<br> <br>Dans les retours:
-<br></p><ul><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> le menu list catégories a un léger probleme d'affichage, là ou le menu list des favoris le mouseover mets un fond grisé, sur le menulist categories ca fait un encadré gris  (merci vindev_hell)
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> (doum) bug affichage des citations qui se superposent
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> (doum) citations en rouge
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> (doum) premiere cat des fav plus bas que les autres
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> (doum) smiley qui apparait à la fin du post c'est embetant
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> (doum) probleme de la sidebar entre Button et ListItem (focus toussa toussa)
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> (doum) la liste de la sidebar pas actualisée
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/2/judgedredd.gif" alt="[:judgedredd:2]" title="[:judgedredd:2]"> (doum) rendre les catégories cliquables dans la liste des fav
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> (doum) flyout de la sidebar disparait pas automatiquement
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> (doum) catégories ne s'affichent plus dans WelcomePage
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/2/judgedredd.gif" alt="[:judgedredd:2]" title="[:judgedredd:2]"> (travize) soucis de scroll dans les mp
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/2/judgedredd.gif" alt="[:judgedredd:2]" title="[:judgedredd:2]"> (travize) bouton des post pas très beaux
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/yann39.gif" alt="[:yann39]" title="[:yann39]"> (vindev hell) accès sommaire au profil d'une personne
-</li><li>  <img src="http://forum-images.hardware.fr/images/perso/2/judgedredd.gif" alt="[:judgedredd:2]" title="[:judgedredd:2]"> (vindev hell) problèmes avec MP en portrait
-</li></ul><p><br></p></td></tr></table></div><p>
-<br> <br> <br><strong>Aucune beta de 6/8/2013 jusqu'à la release 0.1</strong>
-<br></p><div class="container"><table class="quote"><tr class="none"><td><b class="s1">Citation :</b><br><br><p>
-<br>Le développement de la branche privée a été stoppé à partir de la Beta 2 pour une raison simple: j'ai décidé de rétroporter l'app pour Windows 8.0 et non Windows 8.1. Seulement voilà, l'environnement de dev de 8.0 est tellement anémique et limitatif que la moitié du code fonctionnant dans WP7 (avec HFR 7) et W8.1 ne tournait pas sous 8.0 en raison du manque important d'API.
-<br>J'ai donc du changer complètement le code métier d'HFR, avec un autre concept. Au lieu d'afficher les topics dans un WebBrowser/WebView, c'est à dire en parsant le HTML pour récréer de l'HTML, j'ai décidé de convertir le HTML en éléments natifs du Framework.
-<br>Si vous avez un <p style="gras grand beau cmb" >test/>, son contenu sera utilisée dans une TextBlock créée sur le moment et qui verra ses propriétés Text et Style modifiées.
-<br>Sur le papier, ça paraît simple, en réalité, il y a eu un travail de fond assez conséquent. J'ai passé une nuit dans les locaux de l'entreprise So@t (très sympas par ailleurs) où j'ai pu me faire aider par des plus compétents que moi. A 8 heures le lendemain, une version alpha du moteur était prête <img src="http://forum-images.hardware.fr/icones/redface.gif" alt=":o" title=":o">
-<br>Y'en a pour un peu plus d'un millier de lignes de code, c'est pas optimisé et le rendu est moche, mais il fonctionne et sera vite amélioré, rassurez vous.
-<br><br></p></td></tr></table></div><p>
-<br> <br> <br><strong>Sortie de la Beta 0.1 sur le Store le 13 Septembre.</strong>
-<br> <br> <br><strong>V1.0 le 17 Octobre 2013 pour la sortie de Windows 8.1</strong>
-<br>>> Voir le premier post. <img src="http://forum-images.hardware.fr/icones/smilies/jap.gif" alt=":jap:" title=":jap:">
-<br> <br>
+            <p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=57&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062522" class="Topic">doum a Ã©crit :</a></b><hr size="1"><p>
+<br>t'es sur que tu etais en alpha 5? Â <br>Je veux pas mettre ma main a coupÃ© mais ca me faisait ca avec l'alpha 4 et ca semble bon depuis la 5<br></p><hr size="1"></td></tr></table></div><p>
+<br>yes
         </div>
         <div class="clear"></div>
 
@@ -170,14 +114,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num2">
-    <a class="anchorlink" id="1545199"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062535"></a>
+
+    <div class="header ">
+        <div class="avatar no_avatar " style="background-image:url('ms-appx-web:///Assets/HTML/UI/rsz_no_avatar.png')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="personal_post_button_hidden">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">Constellation06</div>
-            <div class="message_date">22-07-2013 à 14:25:16</div>
+            <div class="auteur_pseudo">flobo09</div>
+            <div class="message_date">07-01-2016Â Ã Â 21:09:33Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -186,39 +151,8 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>Post témoin de la mise en forme :
-<br> <br>< > & "
-<br> <br><strong>Gras</strong>
-<br> <br><em>Italique</em>
-<br> <br><span class="u">Souligné</span>
-<br> <br><strike>Strike</strike>
-<br> <br><span style="color:#ff0000">rouge</span>
-<br> <br><span style="color:#0000ff">bleu</span>
-<br> <br><a rel="nofollow" href="http://www.google.fr" class="cLink">Url</a>
-<br> <br></p><table ondblclick="switchNumbering2(this);" class="code"><tr class="none"><td><b class="s1" style="font-family: Verdana, Helvetica, Arial, Sans-serif;">Code :</b><br><pre class="java"><ol><li class="li1"><div class="de1"><a href="http://www.google.com/search?hl=en&q=allinurl%3ASystem+java.sun.com&bntI=I%27m%20Feeling%20Lucky"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">(</span><span class="st0">"Code Java"</span> <span class="br0">)</span>;</div></li><li class="li1"><div class="de1"><span class="co1">//Ceci est un test</span></div></li></ol></pre></td></tr></table><p>
-<br></p><table class="code"><tr class="none"><td><b class="s1" style="font-family: Verdana, Helvetica, Arial, Sans-serif;">Code :</b><br><ol id="code1" class="olcode"><li>System.out.println("Code Java" );</li><li><span style="color:green"><i>//Ceci est un test</i></span></li></ol></td></tr></table><p>
-<br></p><table class="code"><tr class="none"><td><b class="s1" style="font-family: Verdana, Helvetica, Arial, Sans-serif;">Code :</b><br><ol id="code2" class="olcode"><li>System.out.println("Code Java" );</li><li><span style="color:green"><i>//Ceci est un test</i></span></li></ol></td></tr></table><p>
-<br>Ceci est un test
-<br></p><div class="container"><table class="quote"><tr class="none"><td><b class="s1">Citation :</b><br><br><p>Quote<br></p></td></tr></table></div><p>
-<br>Ceci est un test
-<br></p><div class="container"><table class="citation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=1&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t520054" class="Topic">Zaldarf a écrit :</a></b><br><br><p>Ceci est un test<br></p></td></tr></table></div><p>
-<br>Ceci est un test
-<br></p><table class="fixed"><tr class="none"><td><p>Ceci est un test
-<br>abcdefghi
-<br>123456789</p></td></tr></table><p>
-<br>Ceci est un test
-<br></p><div class="container"><table class="spoiler" onclick="javascript:swap_spoiler_states(this)" style="cursor:pointer;"><tr class="none"><td><b class="s1Topic">Spoiler :</b><br><br><div class="Topic masque"><p>Ceci est un test</p></div></td></tr></table></div><p>
-<br>Ceci est un test
-<br></p><ul><li> Ceci est un test
-</li><li> Liste
-</li><li> à
-</li><li> puces
-</li></ul><p>
-<br><img src="http://code.google.com/android/goodies/wallpaper/android-wallpaper4_1024x768.png" alt="http://code.google.com/android/goodies/wallpaper/android-wallpaper4_1024x768.png" title="http://code.google.com/android/goodies/wallpaper/android-wallpaper4_1024x768.png" onload="md_verif_size(this,'Cliquez pour agrandir','2','250')" style="margin: 5px">
-<br> <br><a rel="nofollow" href="http://www.google.fr" class="cLink"><img src="http://code.google.com/android/goodies/wallpaper/android-wallpaper4_1024x768.png" alt="http://code.google.com/android/goodies/wallpaper/android-wallpaper4_1024x768.png" title="http://code.google.com/android/goodies/wallpaper/android-wallpaper4_1024x768.png" onload="md_verif_size(this,'Cliquez pour agrandir','2','250')" style="margin: 5px"></a>
-<br> <br></p><div class="container"><table class="quote"><tr class="none"><td><b class="s1">Citation :</b><br><br><p><img src="http://code.google.com/android/goodies/wallpaper/android-wallpaper4_1024x768.png" alt="http://code.google.com/android/goodies/wallpaper/android-wallpaper4_1024x768.png" title="http://code.google.com/android/goodies/wallpaper/android-wallpaper4_1024x768.png" onload="md_verif_size(this,'Cliquez pour agrandir','2','250')" style="margin: 5px"><br></p></td></tr></table></div><p>
-<br> <br></p><div class="container"><table class="spoiler" onclick="javascript:swap_spoiler_states(this)" style="cursor:pointer;"><tr class="none"><td><b class="s1Topic">Spoiler :</b><br><br><div class="Topic masque"><p><img src="http://code.google.com/android/goodies/wallpaper/android-wallpaper4_1024x768.png" alt="http://code.google.com/android/goodies/wallpaper/android-wallpaper4_1024x768.png" title="http://code.google.com/android/goodies/wallpaper/android-wallpaper4_1024x768.png" onload="md_verif_size(this,'Cliquez pour agrandir','2','250')" style="margin: 5px"></p></div></td></tr></table></div><p>
-<br> <br><img src="http://code.google.com/android/goodies/wallpaper/android-wallpaper4_1024x768.png" alt="http://code.google.com/android/goodies/wallpaper/android-wallpaper4_1024x768.png" title="http://code.google.com/android/goodies/wallpaper/android-wallpaper4_1024x768.png" onload="md_verif_size(this,'Cliquez pour agrandir','2','250')" style="margin: 5px">
+            <p>J'Ã©tais en train d'Ã©crire un message pour dire qu'il y a un soucis, c'est Ã©crit "post numÃ©ro 99" pour chaque post.
+<br>Â <br>Puis j'ai compris au milieu de la rÃ©daction, que je suis con sur le coup Â <img src="http://forum-images.hardware.fr/icones/biggrin.gif" alt=":D" title=":D"> .
         </div>
         <div class="clear"></div>
 
@@ -226,14 +160,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num3">
-    <a class="anchorlink" id="1545200"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-524186.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062538"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-893672.jpg')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="personal_post_button_hidden">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">DDReaper</div>
-            <div class="message_date">22-07-2013 à 16:02:55</div>
+            <div class="auteur_pseudo">Ben_Linux</div>
+            <div class="message_date">07-01-2016Â Ã Â 21:13:23Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -242,7 +197,7 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>drapal <img src="http://forum-images.hardware.fr/icones/redface.gif" alt=":o" title=":o">
+            <p>je me trompe ou mÃªme en rÃ©duisant au max la police sur hfr10 ca change rien sur le tel ? (mais pris en compte sur le pc)
         </div>
         <div class="clear"></div>
 
@@ -250,14 +205,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num4">
-    <a class="anchorlink" id="1545201"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062543"></a>
+
+    <div class="header ">
+        <div class="avatar no_avatar " style="background-image:url('ms-appx-web:///Assets/HTML/UI/rsz_no_avatar.png')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="personal_post_button_hidden">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">Constellation06</div>
-            <div class="message_date">22-07-2013 à 21:08:19</div>
+            <div class="auteur_pseudo">crapeau</div>
+            <div class="message_date">07-01-2016Â Ã Â 21:17:38Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -266,7 +242,9 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>voilà quelqu'un de bien <img src="http://forum-images.hardware.fr/icones/redface.gif" alt=":o" title=":o">
+            <p>Bonjour,
+<br>J'ai installÃ© Hfr10 sur mon 950 xl et chaque fois que je tente de lancer l'appli, il me demande de m'identifier user et mdp et des que je me signe l'application se ferme. Bizarre car je n'ai aucun soucis avec Hfr8. Merci pour les conseils
+<br>
         </div>
         <div class="clear"></div>
 
@@ -274,14 +252,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num5">
-    <a class="anchorlink" id="1545202"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-524186.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062548"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-964277.png')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="personal_post_button_hidden">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">DDReaper</div>
-            <div class="message_date">22-07-2013 à 21:42:22</div>
+            <div class="auteur_pseudo">zywiec</div>
+            <div class="message_date">07-01-2016Â Ã Â 21:27:36Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -290,7 +289,7 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>Ready to test sur ma surface pro <img src="http://forum-images.hardware.fr/icones/smile.gif" alt=":)" title=":)">
+            <p>Je viens de l'installer sur une Dell venue 8. Le mot de passe synchro automatiquement <img src="http://forum-images.hardware.fr/icones/smilies/love.gif" alt=":love:" title=":love:">
         </div>
         <div class="clear"></div>
 
@@ -298,14 +297,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num6">
-    <a class="anchorlink" id="1545203"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062552"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">Constellation06</div>
-            <div class="message_date">22-07-2013 à 22:21:34</div>
+            <div class="auteur_pseudo">Constellatâ€‹ion06</div>
+            <div class="message_date">07-01-2016Â Ã Â 21:33:41Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -314,8 +334,17 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>Génial <img src="http://forum-images.hardware.fr/icones/smile.gif" alt=":)" title=":)">
-<br>Donc ce soir je vais publier une Alpha, plus d'infos en premier post.
+            <p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=58&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062535" class="Topic">flobo09 a Ã©crit :</a></b><hr size="1"><p>J'Ã©tais en train d'Ã©crire un message pour dire qu'il y a un soucis, c'est Ã©crit "post numÃ©ro 99" pour chaque post.
+<br>Â <br>Puis j'ai compris au milieu de la rÃ©daction, que je suis con sur le coup Â <img src="http://forum-images.hardware.fr/icones/biggrin.gif" alt=":D" title=":D"> . <br></p><hr size="1"></td></tr></table></div><p>
+<br>Bah pour le coup j'ai pas compris de quoi tu parles x)
+<br>Â <br></p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=58&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062538" class="Topic">Ben_Linux a Ã©crit :</a></b><hr size="1"><p>je me trompe ou mÃªme en rÃ©duisant au max la police sur hfr10 ca change rien sur le tel ? (mais pris en compte sur le pc)<br></p><hr size="1"></td></tr></table></div><p>
+<br>C'est fixed pour la alpha 6 <img src="http://forum-images.hardware.fr/icones/wink.gif" alt=";)" title=";)"> my bad
+<br>Â <br></p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=58&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062543" class="Topic">crapeau a Ã©crit :</a></b><hr size="1"><p>Bonjour,
+<br>J'ai installÃ© Hfr10 sur mon 950 xl et chaque fois que je tente de lancer l'appli, il me demande de m'identifier user et mdp et des que je me signe l'application se ferme. Bizarre car je n'ai aucun soucis avec Hfr8. Merci pour les conseils
+<br><br></p><hr size="1"></td></tr></table></div><p>
+<br>Alors c'est un peu overkill mais pourrais-tu me filer tes ID et mdp par MP que je regarde ?
+<br>Je peux te fixer ca pour l'alpha 6 de ce soir.
+<br>
         </div>
         <div class="clear"></div>
 
@@ -323,14 +352,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num7">
-    <a class="anchorlink" id="1545204"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-524186.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062553"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">DDReaper</div>
-            <div class="message_date">22-07-2013 à 22:22:57</div>
+            <div class="auteur_pseudo">Constellatâ€‹ion06</div>
+            <div class="message_date">07-01-2016Â Ã Â 21:34:22Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -339,7 +389,9 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>Tu fais une keynote ou bien ? <img src="http://forum-images.hardware.fr/icones/redface.gif" alt=":o" title=":o">
+            <p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=57&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062488" class="Topic">david42fr a Ã©crit :</a></b><hr size="1"><p>Pareil, 5 Ã©toiles parce qu'il le vaut bien!!!<br></p><hr size="1"></td></tr></table></div><p>
+<br>Â <br>Â <br></p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=57&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062485" class="Topic">breezer79 a Ã©crit :</a></b><hr size="1"><p>Et bien rien que pour Ã§a je vais aller mettre 5 Ã©toiles. De ce pas.<br></p><hr size="1"></td></tr></table></div><p>
+<br>Â <br>Merci beaucoup, c'est gentil <img src="http://forum-images.hardware.fr/icones/smile.gif" alt=":)" title=":)">
         </div>
         <div class="clear"></div>
 
@@ -347,14 +399,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num8">
-    <a class="anchorlink" id="1545205"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062557"></a>
+
+    <div class="header ">
+        <div class="avatar no_avatar " style="background-image:url('ms-appx-web:///Assets/HTML/UI/rsz_no_avatar.png')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="personal_post_button_hidden">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">Constellation06</div>
-            <div class="message_date">22-07-2013 à 22:25:08</div>
+            <div class="auteur_pseudo">flobo09</div>
+            <div class="message_date">07-01-2016Â Ã Â 21:37:38Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -363,7 +436,10 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>Non j'essaye de mettre les idées claires dans ma tête, parce que ça fait presque 24 heures que je suis dessus et que je suis un peu fatiguée vois tu <img src="http://forum-images.hardware.fr/icones/biggrin.gif" alt=":D" title=":D">
+            <p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=58&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062552" class="Topic">Constellation06 a Ã©crit :</a></b><hr size="1"><p>
+<br>Bah pour le coup j'ai pas compris de quoi tu parles x)
+<br>Â <br><br></p><hr size="1"></td></tr></table></div><p>
+<br>Les quotes, j'ai pris Ã§a pour un 99 <img src="http://forum-images.hardware.fr/icones/biggrin.gif" alt=":D" title=":D"> .
         </div>
         <div class="clear"></div>
 
@@ -371,14 +447,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num9">
-    <a class="anchorlink" id="1545206"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-524186.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062558"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-13875.jpg')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="personal_post_button_hidden">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">DDReaper</div>
-            <div class="message_date">22-07-2013 à 22:26:43</div>
+            <div class="auteur_pseudo">DraX</div>
+            <div class="message_date">07-01-2016Â Ã Â 21:39:26Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -387,7 +484,9 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>si jamais un jour je propose une interface et qu'elle est bien, il y a moyen qu'on parle ? ou tu es du genre à vouloir bosser en solo <img src="http://forum-images.hardware.fr/icones/wink.gif" alt=";)" title=";)"> ?
+            <p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=57&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062491" class="Topic">Constellation06 a Ã©crit :</a></b><hr size="1"><p>
+<br>C'est bien relou car je ne vois pas ce qui pourrait causer cela, Ã  premiere vue... <img src="http://forum-images.hardware.fr/icones/ohwell.gif" alt=":/" title=":/"><br></p><hr size="1"></td></tr></table></div><p>
+<br>Â <br>Le forum en lui mÃªme je pense. <img src="http://forum-images.hardware.fr/icones/wink.gif" alt=";)" title=";)">
         </div>
         <div class="clear"></div>
 
@@ -395,14 +494,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num10">
-    <a class="anchorlink" id="1545207"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062567"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-818031.jpg')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="personal_post_button_hidden">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">Constellation06</div>
-            <div class="message_date">22-07-2013 à 22:28:40</div>
+            <div class="auteur_pseudo">DustB</div>
+            <div class="message_date">07-01-2016Â Ã Â 21:49:11Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -411,7 +531,10 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>on est sur un forum, donc on discute, on voit tout ça ensemble. si tu es capable de me prouver qu'elle est efficace et agréable, pourquoi pas <img src="http://forum-images.hardware.fr/icones/biggrin.gif" alt=":D" title=":D"><br>Je vais essayer d'être assez transparent sur la conception de l'app, de sorte qu'elle convienne au plus de monde possible. <img src="http://forum-images.hardware.fr/icones/smilies/jap.gif" alt=":jap:" title=":jap:">
+            <p>Petit curiositÃ© ce soir.
+<br>Dans le topic lumia, quand je clique sur mon post quotÃ© par spyritus, au lieu d'aller sur mon post, Â l'Ã©cran n'affiche plus rien et puis... Plus rien.
+<br>Il faut faire back pour s'en sortir.
+<br>Sinon, le contrÃ´le de la taille de la police n'a toujours pas l'air fonctionnel. Mais vu le boulot abattu...
         </div>
         <div class="clear"></div>
 
@@ -419,14 +542,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num11">
-    <a class="anchorlink" id="1545208"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-524186.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062571"></a>
+
+    <div class="header ">
+        <div class="avatar no_avatar " style="background-image:url('ms-appx-web:///Assets/HTML/UI/rsz_no_avatar.png')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="personal_post_button_hidden">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">DDReaper</div>
-            <div class="message_date">22-07-2013 à 23:14:01</div>
+            <div class="auteur_pseudo">crapeau</div>
+            <div class="message_date">07-01-2016Â Ã Â 21:53:13Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -435,7 +579,7 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>je crois qu'on est que deux <img src="http://forum-images.hardware.fr/icones/redface.gif" alt=":o" title=":o"> 
+            <p>Constellation06, je suis pas douÃ©. Comment passer en Mp? Tu peux m'envoyer 1Mp et je fournirai User et Mp. Merci
         </div>
         <div class="clear"></div>
 
@@ -443,14 +587,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num12">
-    <a class="anchorlink" id="1545209"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-786039.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062580"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-13802.jpg')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="personal_post_button_hidden">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">kikou2419</div>
-            <div class="message_date">23-07-2013 à 00:55:01</div>
+            <div class="auteur_pseudo">doum</div>
+            <div class="message_date">07-01-2016Â Ã Â 22:06:29Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -459,8 +624,7 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>Drap.
-<br> <br>Je n'ai pas de surface et la version web me suffit pour mon ordi mais je vous sentais un peu seul <img src="http://forum-images.hardware.fr/icones/biggrin.gif" alt=":D" title=":D">
+            <p>y'a encore un brin de taf niveau optimisation de la mise en page et du look and feel, parcequ'on perd quand meme enormement d'affichage par rapport a Edge :</p>Â <p>Edge :<br><a rel="nofollow" href="http://reho.st/view/self/b74e6ec71d27047ef9eaa6e1328a36ac1c379de8.png" target="_blank" class="cLink"><img src="http://reho.st/medium/self/b74e6ec71d27047ef9eaa6e1328a36ac1c379de8.png" alt="http://reho.st/medium/self/b74e6ec71d27047ef9eaa6e1328a36ac1c379de8.png" title="http://reho.st/medium/self/b74e6ec71d27047ef9eaa6e1328a36ac1c379de8.png" onload="md_verif_size(this,'Cliquez pour agrandir','2','250')" style="margin: 5px"></a></p>Â <p>HFR10:<br><a rel="nofollow" href="http://reho.st/view/self/84584e3c0e78924d71c9851eb108234d1682bd04.png" target="_blank" class="cLink"><img src="http://reho.st/medium/self/84584e3c0e78924d71c9851eb108234d1682bd04.png" alt="http://reho.st/medium/self/84584e3c0e78924d71c9851eb108234d1682bd04.png" title="http://reho.st/medium/self/84584e3c0e78924d71c9851eb108234d1682bd04.png" onload="md_verif_size(this,'Cliquez pour agrandir','2','250')" style="margin: 5px"></a></p>Â <p>j'ai pris volontairement un des pires cas, la on perd 2 posts visible, mais c'est tres reguliermeent au moins 1 post
         </div>
         <div class="clear"></div>
 
@@ -468,14 +632,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num13">
-    <a class="anchorlink" id="1545210"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-89386.gif')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062586"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">thefolken</div>
-            <div class="message_date">23-07-2013 à 01:08:39</div>
+            <div class="auteur_pseudo">Constellatâ€‹ion06</div>
+            <div class="message_date">07-01-2016Â Ã Â 22:17:22Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -484,8 +669,26 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>Poy,
-<br> <br>C'était pas possible (techniquement) de faire une seule app "HFR8" dispo sur le market compatible WP8/W8/WRT ?
+            <p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=58&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062557" class="Topic">flobo09 a Ã©crit :</a></b><hr size="1"><p>
+<br>Les quotes, j'ai pris Ã§a pour un 99 <img src="http://forum-images.hardware.fr/icones/biggrin.gif" alt=":D" title=":D"> .<br></p><hr size="1"></td></tr></table></div><p>
+<br></p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=58&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062558" class="Topic">DraX a Ã©crit :</a></b><hr size="1"><p>
+<br>Â <br>Le forum en lui mÃªme je pense. <img src="http://forum-images.hardware.fr/icones/wink.gif" alt=";)" title=";)"><br></p><hr size="1"></td></tr></table></div><p>
+<br>Â <br>haha <img src="http://forum-images.hardware.fr/icones/biggrin.gif" alt=":D" title=":D">
+<br></p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=58&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062567" class="Topic">DustB a Ã©crit :</a></b><hr size="1"><p>Petit curiositÃ© ce soir.
+<br>Dans le topic lumia, quand je clique sur mon post quotÃ© par spyritus, au lieu d'aller sur mon post, Â l'Ã©cran n'affiche plus rien et puis... Plus rien.
+<br>Il faut faire back pour s'en sortir.
+<br>Sinon, le contrÃ´le de la taille de la police n'a toujours pas l'air fonctionnel. Mais vu le boulot abattu...<br></p><hr size="1"></td></tr></table></div><p>
+<br>le support des liens internes est pas encore fait, mais quelqu'un devrait me faire un ticket
+<br>pour la taille des polices, ce sera pour ton reveil de demain <img src="http://forum-images.hardware.fr/icones/wink.gif" alt=";)" title=";)">
+<br></p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=58&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062571" class="Topic">crapeau a Ã©crit :</a></b><hr size="1"><p>Constellation06, je suis pas douÃ©. Comment passer en Mp? Tu peux m'envoyer 1Mp et je fournirai User et Mp. Merci<br></p><hr size="1"></td></tr></table></div><p>
+<br>envoyÃ© !
+<br></p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=58&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062580" class="Topic">doum a Ã©crit :</a></b><hr size="1"><p>y'a encore un brin de taf niveau optimisation de la mise en page et du look and feel, parcequ'on perd quand meme enormement d'affichage par rapport a Edge :
+<br>Â <br>Edge :
+<br><a rel="nofollow" href="http://reho.st/view/self/b74e6ec71d27047ef9eaa6e1328a36ac1c379de8.png" target="_blank" class="cLink"><a rel="nofollow" href="http://reho.st/medium/self/b74e6ec71d27047ef9eaa6e1328a36ac1c379de8.png" target="_blank" class="cLink">http://reho.st/medium/self/b74e6ec [...] 379de8.png</a></a>
+<br>Â <br>HFR10:
+<br><a rel="nofollow" href="http://reho.st/view/self/84584e3c0e78924d71c9851eb108234d1682bd04.png" target="_blank" class="cLink"><a rel="nofollow" href="http://reho.st/medium/self/84584e3c0e78924d71c9851eb108234d1682bd04.png" target="_blank" class="cLink">http://reho.st/medium/self/84584e3 [...] 82bd04.png</a></a>
+<br>Â <br>j'ai pris volontairement un des pires cas, la on perd 2 posts visible, mais c'est tres reguliermeent au moins 1 post<br></p><hr size="1"></td></tr></table></div><p>
+<br>je vais voir quoi faire
         </div>
         <div class="clear"></div>
 
@@ -493,14 +696,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num14">
-    <a class="anchorlink" id="1545211"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062590"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-13802.jpg')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="personal_post_button_hidden">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">Constellation06</div>
-            <div class="message_date">23-07-2013 à 01:15:32</div>
+            <div class="auteur_pseudo">doum</div>
+            <div class="message_date">07-01-2016Â Ã Â 22:25:30Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -509,9 +733,9 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>DocteurG a fait une app WP7, soit Silverlight. Or Silverlight != WinRT.
-<br> <br>Avec WinRT, on peut effectivement réutiliser une grosse grosse partie du code (95% dans les meilleurs scénarios) entre WP et W8/RT.
-<br> <br>En l'état, je m'occupe de la version Windows 8 (et donc RT).
+            <p>Deja tu laisses systematiquement un saut de ligne apres chaque quote, a voir si c'est utile
+<br>Â <br>ensuite le probleme c'est les avatars au dessus des posts vs les avatars a cotÃ©, forcement ca bouffera tjs un peu plus de place mais on peut pas tout avoir
+<br>Â <br>tiens ca me fait penser que du coup dans HFR10 on perd les phrases sous le pseudo et la signature
         </div>
         <div class="clear"></div>
 
@@ -519,14 +743,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num15">
-    <a class="anchorlink" id="1545212"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-89386.gif')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062593"></a>
+
+    <div class="header ">
+        <div class="avatar no_avatar " style="background-image:url('ms-appx-web:///Assets/HTML/UI/rsz_no_avatar.png')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="personal_post_button_hidden">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">thefolken</div>
-            <div class="message_date">23-07-2013 à 01:36:43</div>
+            <div class="auteur_pseudo">boubou10</div>
+            <div class="message_date">07-01-2016Â Ã Â 22:28:26Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -535,7 +780,11 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>Ça j'ai bien compris  <img src="http://forum-images.hardware.fr/icones/biggrin.gif" alt=":D" title=":D"></p> <p>Mais à terme il n'y aura qu'une seule app ou deux ? Là il avait mis à jour son code pour HFR8, j'avais compris que c'était justement pour être compatible avec les dernières API, et donc possiblement tourner sur 8/RT, c'est pas le cas donc ? Dommage.
+            <p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=58&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062590" class="Topic">doum a Ã©crit :</a></b><hr size="1"><p>
+<br>Â <br>tiens ca me fait penser que du coup dans HFR10 on perd les phrases sous le pseudo et la signature<br></p><hr size="1"></td></tr></table></div><p>
+<br>Â <br>nan mais c'est "normal", c'est du work-in-progress, il manque encore plein de choses, faut faire du ticket dans git, et ca sera fait au fur et Ã  mesure
+<br>Â <br>il manque aussi "editÃ© le" ou bien le "message citÃ© x fois", etc...
+<br>
         </div>
         <div class="clear"></div>
 
@@ -543,14 +792,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num16">
-    <a class="anchorlink" id="1545213"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062595"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">Constellation06</div>
-            <div class="message_date">23-07-2013 à 01:40:42</div>
+            <div class="auteur_pseudo">Constellatâ€‹ion06</div>
+            <div class="message_date">07-01-2016Â Ã Â 22:33:01Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -559,10 +829,7 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>Il n'a pas trop le temps déjà de s'occuper du portage HFR7 > HFR8.
-<br>Du coup je lui ai proposé de m'occuper de la version Windows RT/8.1 car effectivement, le portage de WP8 (WinPRT) à W8.1/RT lui demandera du temps supplémentaire qu'il n'a pas forcément. ^^
-<br>Cela dit, à terme, les 2 apps pourraient très bien fusionner. Mais alors il faudra refaire l'archi de l'app parce que là y'a pas de MVVM, de gestions logiques des projets dans la solution, tout est fait à l'arrache ... Mais ça tourne <img src="http://forum-images.hardware.fr/icones/biggrin.gif" alt=":D" title=":D">
-<br>
+            <p>Hop, Rudy (Huyn) est un nouvel utilisateur de l'app \o/
         </div>
         <div class="clear"></div>
 
@@ -570,14 +837,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num17">
-    <a class="anchorlink" id="1545214"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-89386.gif')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062597"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-480861.jpg')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="personal_post_button_hidden">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">thefolken</div>
-            <div class="message_date">23-07-2013 à 01:42:20</div>
+            <div class="auteur_pseudo">Prince DeLâ€‹U</div>
+            <div class="message_date">07-01-2016Â Ã Â 22:40:09Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -586,9 +874,11 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>oki doki <img src="http://forum-images.hardware.fr/icones/smilies/jap.gif" alt=":jap:" title=":jap:">
-<br> <br>Hésites pas à filer des captures, pour ceussent qui peuvent pas tester !
-<br> <br>Et y'a pas de honte, un proto/alpha, on sait ce que c'est <img src="http://forum-images.hardware.fr/icones/biggrin.gif" alt=":D" title=":D">
+            <p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=58&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062590" class="Topic">doum a Ã©crit :</a></b><hr size="1"><p>Deja tu laisses systematiquement un saut de ligne apres chaque quote, a voir si c'est utile
+<br>Â <br>ensuite le probleme c'est les avatars au dessus des posts vs les avatars a cotÃ©, forcement ca bouffera tjs un peu plus de place mais on peut pas tout avoir
+<br>Â <br>tiens ca me fait penser que du coup dans HFR10 on perd les phrases sous le pseudo et la signature<br></p><hr size="1"></td></tr></table></div><p>
+<br>Peut Ãªtre rÃ©duire aussi les marges intÃ©rieures des quotes et la taille des interlignes.
+<br>Bon j'ai toujours pas l'alpha 5 <img src="http://forum-images.hardware.fr/icones/redface.gif" alt=":o" title=":o">
         </div>
         <div class="clear"></div>
 
@@ -596,14 +886,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num18">
-    <a class="anchorlink" id="1545215"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062598"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-13802.jpg')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="personal_post_button_hidden">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">Constellation06</div>
-            <div class="message_date">23-07-2013 à 01:55:34</div>
+            <div class="auteur_pseudo">doum</div>
+            <div class="message_date">07-01-2016Â Ã Â 22:41:19Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -612,13 +923,14 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>Je suis en train d'uploader une petite vidéo d'une minute montrant à peu près où j'en suis dans le développement. J'ai pas tout testé mais bon.
-<br> <br>Le design est pas définitif, l'UX non plus.
-<br>L'affichage des topics, je suis en plein dedans. C'est ma priorité numéro 1. Comment agencer au mieux l'ensemble, et si possible faire quelque chose de responsive pour pouvoir switcher entre différents templates pour les Snap View/FullScreen. Encore mieux: trouver un affichage qui soit performant dans toutes les situations.
-<br>J'attends d'ailleurs quelques fichiers de DocteurG qui pourraient m'aider à accomplir cette tâche <img src="http://forum-images.hardware.fr/icones/redface.gif" alt=":o" title=":o">
-<br> <br>Le stade beta sera atteint lorsque l'affichage des topics fonctionnera en toutes circonstances et qu'il sera de qualité. D'ici une semaine je pense (je suis pas très familiarisé avec html/css/js...)
-<br> <br> <br>55 minutes restantes pour l'upload sur youtube ....
-<br>
+            <p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=58&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062593" class="Topic">boubou10 a Ã©crit :</a></b><hr size="1"><p>
+<br>Â <br>nan mais c'est "normal", c'est du work-in-progress, il manque encore plein de choses, faut faire du ticket dans git, et ca sera fait au fur et Ã  mesure
+<br>Â <br>il manque aussi "editÃ© le" ou bien le "message citÃ© x fois", etc...
+<br><br></p><hr size="1"></td></tr></table></div><p>
+<br>Â <br>je sais je vais crÃ©er le ticket
+<br>c'etait pas dit dans ce sens la mais plutot :
+<br>- j'avais meme pas fait gaffe que ca manquait
+<br>- ca sera encore pire le probleme de la quantiÃ© affichÃ© si on rajoute ca
         </div>
         <div class="clear"></div>
 
@@ -626,14 +938,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num19">
-    <a class="anchorlink" id="1545216"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062599"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-412934.jpg')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="personal_post_button_hidden">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">Constellation06</div>
-            <div class="message_date">23-07-2013 à 02:42:26</div>
+            <div class="auteur_pseudo">Travize</div>
+            <div class="message_date">07-01-2016Â Ã Â 22:47:03Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -642,7 +975,12 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>Bon, visiblement la suppression d'un post est désormais fonctionnelle !<br>Demain je fais l'edit, la réponse à une quote, la citation et l'envoi/lecture de MP.<br>Ca + l'affichage des topics, on tiendra une beta sympathique !</p> <p>Ensuite, on verra pour le design. Celui actuel me plait franchement pas. Y'a moyen de faire quelque chose de plus esthétique</p> <p>J'ai quand même un bug qui me saoule, dans les topics où je poste plusieurs fois on dirait. Bah ça foire tout le parsing <img src="http://forum-images.hardware.fr/icones/redface.gif" alt=":o" title=":o"><br>
+            <p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=58&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062598" class="Topic">doum a Ã©crit :</a></b><hr size="1"><p>
+<br>Â <br>je sais je vais crÃ©er le ticket
+<br>c'etait pas dit dans ce sens la mais plutot :
+<br>- j'avais meme pas fait gaffe que ca manquait
+<br>- ca sera encore pire le probleme de la quantiÃ© affichÃ© si on rajoute ca<br></p><hr size="1"></td></tr></table></div><p>
+<br>Message citÃ© n fois, j'ai cree Â le ticket dÃ©jÃ .
         </div>
         <div class="clear"></div>
 
@@ -650,14 +988,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num20">
-    <a class="anchorlink" id="1545217"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062601"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-13802.jpg')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="personal_post_button_hidden">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">Constellation06</div>
-            <div class="message_date">23-07-2013 à 02:43:26</div>
+            <div class="auteur_pseudo">doum</div>
+            <div class="message_date">07-01-2016Â Ã Â 22:50:33Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -666,7 +1025,9 @@
 
     <div class="wrapper">
         <div class="content">
-            <p><strong>Vidéo de présentation: <a rel="nofollow" href="http://www.youtube.com/watch?v=oZ55WpX7SKc&feature=youtu.be" class="cLink">http://www.youtube.com/watch?v=oZ5 [...] e=youtu.be</a></strong>
+            <p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=58&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062599" class="Topic">Travize a Ã©crit :</a></b><hr size="1"><p>
+<br>Message citÃ© n fois, j'ai cree Â le ticket dÃ©jÃ .<br></p><hr size="1"></td></tr></table></div><p>
+<br>Â <br>QU'est ce que je fais, je supprime du bien ou je groupe pour qu'y ait qu'un ticket
         </div>
         <div class="clear"></div>
 
@@ -674,14 +1035,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num21">
-    <a class="anchorlink" id="1545218"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-523580.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062602"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">dada051</div>
-            <div class="message_date">23-07-2013 à 09:19:24</div>
+            <div class="auteur_pseudo">Constellatâ€‹ion06</div>
+            <div class="message_date">07-01-2016Â Ã Â 22:51:02Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -690,7 +1072,10 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>Drap !
+            <p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=57&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062449" class="Topic">AnthonyD a Ã©crit :</a></b><hr size="1"><p>
+<br>AprÃ¨s effectivement, il faudrait que le curseur se place, idÃ©alement, Ã  la fin du premier quote. <img src="http://forum-images.hardware.fr/icones/biggrin.gif" alt=":d" title=":D">
+<br><br></p><hr size="1"></td></tr></table></div><p>
+<br>Fait Ã  l'instant !
         </div>
         <div class="clear"></div>
 
@@ -698,14 +1083,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num22">
-    <a class="anchorlink" id="1545219"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-523580.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062613"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">dada051</div>
-            <div class="message_date">23-07-2013 à 09:21:39</div>
+            <div class="auteur_pseudo">Constellatâ€‹ion06</div>
+            <div class="message_date">07-01-2016Â Ã Â 23:17:34Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -714,7 +1120,7 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>Elle pète l'appli !
+            <p>VoilÃ  oÃ¹ j'en suis doum</p>Â <p><img src="http://reho.st/self/f045cc4d80fc410a4998be0066fbcbab6d43f60d.png" alt="http://reho.st/self/f045cc4d80fc410a4998be0066fbcbab6d43f60d.png" title="http://reho.st/self/f045cc4d80fc410a4998be0066fbcbab6d43f60d.png" onload="md_verif_size(this,'Cliquez pour agrandir','2','250')" style="margin: 5px"></p>Â <p>maintenant le souci est que le header de chaque post est evidemment plus gros que sur le site, pour le tactile. mais je vais essayer de gruger un peu encore ... j'ai quelques semblants d'idÃ©es
         </div>
         <div class="clear"></div>
 
@@ -722,14 +1128,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num23">
-    <a class="anchorlink" id="1545220"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062614"></a>
+
+    <div class="header ">
+        <div class="avatar  " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">Constellation06</div>
-            <div class="message_date">23-07-2013 à 12:10:31</div>
+            <div class="auteur_pseudo">Constellatâ€‹ion06</div>
+            <div class="message_date">07-01-2016Â Ã Â 23:19:15Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -738,7 +1165,9 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>Pour l'instant c'est juste un proto, rien de plus <img src="http://forum-images.hardware.fr/icones/biggrin.gif" alt=":D" title=":D">
+            <p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=58&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062601" class="Topic">doum a Ã©crit :</a></b><hr size="1"><p>
+<br>Â <br>QU'est ce que je fais, je supprime du bien ou je groupe pour qu'y ait qu'un ticket <br></p><hr size="1"></td></tr></table></div><p>
+<br>osef du moment que vous les fermez une fois les soucis rÃ©solus
         </div>
         <div class="clear"></div>
 
@@ -746,14 +1175,35 @@
     <div class="clear"></div>
 
 </div><div class="message" id="num24">
-    <a class="anchorlink" id="1545221"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
+    <a class="anchorlink" id="2062617"></a>
+
+    <div class="header ">
+        <div class="avatar no_avatar " style="background-image:url('ms-appx-web:///Assets/HTML/UI/rsz_no_avatar.png')"></div>
+        <div class="action">
+            <ul class="horizontal_menu">
+                <li>
+                    <a href="#" onclick="multiQuote(this.parentNode, this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Quote-Right"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABu0lEQVR4Xu2Z4U3EMAyF/TaBDdiAFWCDYwLYBEbgNoAN2ADdBDACTGAUCaRQVfWlsZNIef3Z9u7Fn99z2jvI5Acmr18IgA6YnAAjMLkBOAQZAUZgcgKMwOQG4C7ACDACBgFVVU9IADZd11rPjEDrBbXWIwDL3q070lqv2AFWhpdAlwVZny+9v1aPAEojYHWwtiN0wGLbjQbOCDAChU+C0ZbkDOAM+P/uEe04DkEOQQ7BbQKtX05a6xXPACsy1nVrqBFA41+g6ADLsrXXa5/sSvVL9UwHlC4gv19Vr0TkPTt3ApDOhRx79KIBPIjIY1btK4CbkOpFRFWL9aIBfIjIRVbwHYDnQADFemEAVrqR6r4E8BkBYK9eCICVLKaajwAOQcUvZ83Zeu4AVPVeRJ4WhX6nKAD48gZQq+cC4Lfj1yKShlCe+b96bwG8eBXvqVcN4IxHV9fB560XCSDZ/uDZ+eSgDQC79KIAHFMcgjK/9m/1bj0vACcRSdtbyvlb1FaXOcBNrxqA12Dr9T0E0Iv8KLp0wCid6LUOOqAX+VF06YBROtFrHXRAL/Kj6NIBo3Si1zrogF7kR9Gd3gE/+++CUHUJHIsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="quote(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Comments"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACk0lEQVR4Xu2a4W3bMBCF39ukmaDNBs4EaSdoMkHTDdIJmg2STtB0A3uC2hM03qCZ4IIDJIARaImkSJmkSMA/DEsU38d35PFkYuWNK9ePBqA5YOUEWgis3ABtEWwh0EIgMQER2ZDcJn5McPdJQ0BEbgA8AngieRs8yoQ3JgNgiO+HnyWEJAAs4nsIV7mFQ3QAI+JvST4ldHNQ11EBlCZeiUUDUKL4aABKFR8FQMniZwMoXfwsADWIDwZQi/ggADWJ9wZQm3gvADWKdwZQq3gnACPig3LvmTftAfwHoPWFPyT1+6w2mgpnJt4m9AXAd5LPoRRKB9DrVkfoaVOBeLXJw1ABLugFa2hovcErLCYBaO+5LIIi8gmAfjYAvp6Y6ksfCE4AcoLQixaRDwAeAFwPQKgTFIJTODgDyBFCN6Y7AD8HELYkr1wWAy8AhUH44rI7eAPIGIJuhWY4vJC8mHJBEIAcIXRrwr+B4MkFMRhAphC06mzuDj9I3o+5YBaA3CBYtusdSd0yT7bZAHKC0OUJfw21e5KXyQFkBkFMwSRHJzmKA4zkpH8ZOoS+2FshETkfgHM7wRICB5KaOqddA4a9n+vl6NkWQRtey2B+kdQQSdZEZPltcEyNAWEJ8Xo4WjYRcpnKpf4iIyK/AXw2xnQkqVBGW9RdYOphqX4XEduJMN1hKJWQkH5F5FtXFzBvn8wA+4uLdUB3+NE6gGl71fWqVaMkBZGQGYp5T7fPf+xKYqd2lMkT4LtMMeYAU/Y1zPAsz9KZ1/8kxi+KphTm2vcEgB2AG1fb1+SAI4A7l9LXKdDFLIKdAw7Gq7FnX7vbIBQDwDVUfK9rAHyJ1XZ9c0BtM+qrpznAl1ht1zcH1DajvnpW74A3dYs2UBUp1qsAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+                <li class="personal_post_button_hidden">
+                    <a href="#" onclick="edit(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id); return false;">
+                        <img class="icon icons8-Edit"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADEUlEQVR4Xu2agXHTQBBF/68AOoBUAFRA0gFUQFIBoQKgg1ABoQJIBSQVECqADiAVLPM9kkecT3crS7LvbN2MZzKxYus97e5t7o448sEj58ciYImAIzewpMCRB8BSBKtLATN7A+BV82oD+DeAbwA+kdTP7lGNADN7CuAzgNMM3RXJd14DVQgws+cAvgN47AS7JnnhubZ4ARn4nwAUGY8isEqHy5yEogUk4G8AnJP8K0AzU1pcA3gSAJ/kakKxAhLwX0ieh0/WzJQe94GEbBQUKSABf0eytwg2kaBasZ4dSJ6k0qA4AY6Cd0FS4R4dZqZpcJ0KJJOMRQlwwLfQvRLM7AcAzRqrUY2AVNgDeBl53BsSmjrwp3PtA8nk1FlEBOQKnpmp6KkJCsd/Eszsa9Ah3pBU19g79i4gB9/eeU6CmUlQODsk68UqRXKNwpzve+EdEm4jLXJyxljXiDkBU589FN4hoft1DyqEuSZobxGwLbxTguBPSaopyo6dp8BY+I4ENTxhUzQIfucRMCF8rOANht+pgBLhdyagVPidCCgZfnYBpcPPKqAG+NkE1AI/i4Ca4CcXUBv8pAJqhJ9MQK3wkwioGX60gNrhRwk4BPitBRwK/FYCDgl+sIBDgx8kYNvtqnBNqmf1dqvFjOx6l+MC95KYmWnlNbZBoa/Re1qCTp7OKA1+aARoxyW1y6Kt6rO+xcgS4d0CmuMpvxwRFZVQKvwQAdpe0rZTO+4AfGheYVpIwos2HUqGHyJAsO87Aj6S1O90OuMKwNsgOm5JnpUOP0RAWABfk9SxtNXokzDFur0j7UZd4poFzCwsgBtnbzKzhG5yb1NdylBWQKQARvfcI8dTut9bJLwrBcxsowC253QaOc+aExnapoqd3ykW3isgLICqBxo6hpI7uFg0vFdAqgNMpVfx8F4BuQ4wlCBwbU1fereoR5XxkX+cLIKODrCFVZQI+j73/8DI+538z3MCugWwetiYvZwAVfXVEdTanqw3VLJ9gPeDar1uEVDrk5vqvpcImMpkrZ+zRECtT26q+/4Hj679UJ3GnNwAAAAASUVORK5CYII=" />
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="infos">
-            <div class="auteur_pseudo">Constellation06</div>
-            <div class="message_date">23-07-2013 à 12:48:44</div>
+            <div class="auteur_pseudo">quietriot</div>
+            <div class="message_date">07-01-2016Â Ã Â 23:30:06Â Â Â </div>
         </div>
 
         <div class="clear"></div>
@@ -762,374 +1212,9 @@
 
     <div class="wrapper">
         <div class="content">
-            <p>Vu que le dev se passe pour l'instant plutôt bien, j'envisage de faire un client complet au fil du temps. Avec gestion du profil, de l'avatar, des smileys, des paramètres du forum, etc.<br>(parce que sinon l'intérêt serait un peu limité vu que c'est une app tablette mais aussi desktop)
-        </div>
-        <div class="clear"></div>
-
-    </div>
-    <div class="clear"></div>
-
-</div><div class="message" id="num25">
-    <a class="anchorlink" id="1545222"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-13875.gif')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
-        <div class="infos">
-            <div class="auteur_pseudo">DraX</div>
-            <div class="message_date">23-07-2013 à 17:05:12</div>
-        </div>
-
-        <div class="clear"></div>
-
-    </div>
-
-    <div class="wrapper">
-        <div class="content">
-            <p> <img src="http://forum-images.hardware.fr/images/perso/4/drax.gif" alt="[:drax:4]" title="[:drax:4]"> 
-        </div>
-        <div class="clear"></div>
-
-    </div>
-    <div class="clear"></div>
-
-</div><div class="message" id="num26">
-    <a class="anchorlink" id="1545223"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-85588.png')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
-        <div class="infos">
-            <div class="auteur_pseudo">Tolorfen</div>
-            <div class="message_date">24-07-2013 à 09:13:11</div>
-        </div>
-
-        <div class="clear"></div>
-
-    </div>
-
-    <div class="wrapper">
-        <div class="content">
-            <p><img src="http://forum-images.hardware.fr/images/perso/drapo.gif" alt="[:drapo]" title="[:drapo]">
-        </div>
-        <div class="clear"></div>
-
-    </div>
-    <div class="clear"></div>
-
-</div><div class="message" id="num27">
-    <a class="anchorlink" id="1545224"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-538259.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
-        <div class="infos">
-            <div class="auteur_pseudo">Harold_Finch</div>
-            <div class="message_date">24-07-2013 à 09:17:49</div>
-        </div>
-
-        <div class="clear"></div>
-
-    </div>
-
-    <div class="wrapper">
-        <div class="content">
-            <p>Drapal, et bon courage  <img src="http://forum-images.hardware.fr/icones/smilies/jap.gif" alt=":jap:" title=":jap:"> 
-        </div>
-        <div class="clear"></div>
-
-    </div>
-    <div class="clear"></div>
-
-</div><div class="message" id="num28">
-    <a class="anchorlink" id="1545225"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
-        <div class="infos">
-            <div class="auteur_pseudo">Constellation06</div>
-            <div class="message_date">24-07-2013 à 09:21:35</div>
-        </div>
-
-        <div class="clear"></div>
-
-    </div>
-
-    <div class="wrapper">
-        <div class="content">
-            <p>Merci <img src="http://forum-images.hardware.fr/icones/smilies/jap.gif" alt=":jap:" title=":jap:">
-<br>N'oubliez pas, pour s'inscrire au beta test, envoyez moi un mp! <img src="http://forum-images.hardware.fr/icones/smilies/jap.gif" alt=":jap:" title=":jap:">
-        </div>
-        <div class="clear"></div>
-
-    </div>
-    <div class="clear"></div>
-
-</div><div class="message" id="num29">
-    <a class="anchorlink" id="1545226"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-235236.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
-        <div class="infos">
-            <div class="auteur_pseudo">Docteur G</div>
-            <div class="message_date">24-07-2013 à 09:33:40</div>
-        </div>
-
-        <div class="clear"></div>
-
-    </div>
-
-    <div class="wrapper">
-        <div class="content">
-            <p>Drap
-        </div>
-        <div class="clear"></div>
-
-    </div>
-    <div class="clear"></div>
-
-</div><div class="message" id="num30">
-    <a class="anchorlink" id="1545227"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-523580.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
-        <div class="infos">
-            <div class="auteur_pseudo">dada051</div>
-            <div class="message_date">24-07-2013 à 10:02:27</div>
-        </div>
-
-        <div class="clear"></div>
-
-    </div>
-
-    <div class="wrapper">
-        <div class="content">
-            <p>Pour la beta test, si faut 8.1 je ne peux pas. Il y a quoi d'ailleurs qui fait que c'est 8.1 et pas 8.0
-        </div>
-        <div class="clear"></div>
-
-    </div>
-    <div class="clear"></div>
-
-</div><div class="message" id="num31">
-    <a class="anchorlink" id="1545228"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
-        <div class="infos">
-            <div class="auteur_pseudo">Constellation06</div>
-            <div class="message_date">24-07-2013 à 10:21:20</div>
-        </div>
-
-        <div class="clear"></div>
-
-    </div>
-
-    <div class="wrapper">
-        <div class="content">
-            <p>Les FlyOut, par exemple (je dis ça parce que je suis justement en train de bosser là dessus).<br>Y'a aussi le WebBrowser, (appelé WebView dans WinRT) qui dans 8.0 était totalement inutilisable. Notamment l'impossibilité d'appeler des script javascript dans la WebView, une grande instabilité et une haute consommation mémoire et cpu reconnue par MS. En fait ils ont totalement refait la WebView dans 8.1 et elle est enfin fonctionnelle et complète.</p> <p>Y'a d'autres raisons mais je ne les ai pas spécialement en tête <img src="http://forum-images.hardware.fr/icones/biggrin.gif" alt=":D" title=":D">
-        </div>
-        <div class="clear"></div>
-
-    </div>
-    <div class="clear"></div>
-
-</div><div class="message" id="num32">
-    <a class="anchorlink" id="1545229"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-13802.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
-        <div class="infos">
-            <div class="auteur_pseudo">doum</div>
-            <div class="message_date">24-07-2013 à 10:36:32</div>
-        </div>
-
-        <div class="clear"></div>
-
-    </div>
-
-    <div class="wrapper">
-        <div class="content">
-            <p>Envoi <img src="http://forum-images.hardware.fr/icones/biggrin.gif" alt=":D" title=":D">
-<br> <br>Surface Pro sous 8.1 <img src="http://forum-images.hardware.fr/icones/wink.gif" alt=";)" title=";)">
-        </div>
-        <div class="clear"></div>
-
-    </div>
-    <div class="clear"></div>
-
-</div><div class="message" id="num33">
-    <a class="anchorlink" id="1545230"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
-        <div class="infos">
-            <div class="auteur_pseudo">Constellation06</div>
-            <div class="message_date">24-07-2013 à 11:07:59</div>
-        </div>
-
-        <div class="clear"></div>
-
-    </div>
-
-    <div class="wrapper">
-        <div class="content">
-            <p>envoi un mp stp, faut que je gère tout sur mon petit excel <img src="http://forum-images.hardware.fr/icones/biggrin.gif" alt=":D" title=":D">
-        </div>
-        <div class="clear"></div>
-
-    </div>
-    <div class="clear"></div>
-
-</div><div class="message" id="num34">
-    <a class="anchorlink" id="1545231"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-523580.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
-        <div class="infos">
-            <div class="auteur_pseudo">dada051</div>
-            <div class="message_date">24-07-2013 à 11:43:56</div>
-        </div>
-
-        <div class="clear"></div>
-
-    </div>
-
-    <div class="wrapper">
-        <div class="content">
-            <p>OK pour les raisons, mon pc perso est sous Windows 8.1, si je le reboot un jour, je testerai, je t'envoie donc un MP
-        </div>
-        <div class="clear"></div>
-
-    </div>
-    <div class="clear"></div>
-
-</div><div class="message" id="num35">
-    <a class="anchorlink" id="1545232"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-784831.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
-        <div class="infos">
-            <div class="auteur_pseudo">Constellation06</div>
-            <div class="message_date">24-07-2013 à 12:18:36</div>
-        </div>
-
-        <div class="clear"></div>
-
-    </div>
-
-    <div class="wrapper">
-        <div class="content">
-            <p><img src="http://forum-images.hardware.fr/icones/smilies/jap.gif" alt=":jap:" title=":jap:">
-        </div>
-        <div class="clear"></div>
-
-    </div>
-    <div class="clear"></div>
-
-</div><div class="message" id="num36">
-    <a class="anchorlink" id="1545233"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
-        <div class="infos">
-            <div class="auteur_pseudo">the gaston lagaffe</div>
-            <div class="message_date">24-07-2013 à 12:41:19</div>
-        </div>
-
-        <div class="clear"></div>
-
-    </div>
-
-    <div class="wrapper">
-        <div class="content">
-            <p><div class="container"><table class="citation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=1&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t3092256" class="Topic">Constellation06 a écrit :</a></b><br><br><p><em>Inspired by Docteur G</em>
-<br><strong>Vidéo de présentation: <a rel="nofollow" href="http://www.youtube.com/watch?v=oZ55WpX7SKc&feature=youtu.be" class="cLink">http://www.youtube.com/watch?v=oZ5 [...] e=youtu.be</a></strong>
-<br>Pistes de design:
-<br><img src="https://pbs.twimg.com/media/BP6g6KoCAAAjOiS.png:large" alt="https://pbs.twimg.com/media/BP6g6KoCAAAjOiS.png:large" title="https://pbs.twimg.com/media/BP6g6KoCAAAjOiS.png:large" onload="md_verif_size(this,'Cliquez pour agrandir','2','250')" style="margin: 5px"><br></p></td></tr></table></div><p>
-<br> <br> <br>Mais c'est très bien tout ça. <img src="http://forum-images.hardware.fr/icones/smilies/jap.gif" alt=":jap:" title=":jap:"> 
-        </div>
-        <div class="clear"></div>
-
-    </div>
-    <div class="clear"></div>
-
-</div><div class="message" id="num37">
-    <a class="anchorlink" id="1545234"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-297719.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
-        <div class="infos">
-            <div class="auteur_pseudo">vindev_HELL</div>
-            <div class="message_date">24-07-2013 à 12:42:23</div>
-        </div>
-
-        <div class="clear"></div>
-
-    </div>
-
-    <div class="wrapper">
-        <div class="content">
-            <p>draplou</p> <p>je veux bien test, Pc lambda sous Win 8.1 avec une config écran un peu exotique un en landscape l'autre en portrait. </p> <p>J'ai remarqué que pas mal d'applis ont du mal avec le mode portrait avec win 8.1
-        </div>
-        <div class="clear"></div>
-
-    </div>
-    <div class="clear"></div>
-
-</div><div class="message" id="num38">
-    <a class="anchorlink" id="1545235"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('http://forum-images.hardware.fr/images/mesdiscussions-817934.jpg')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
-        <div class="infos">
-            <div class="auteur_pseudo">tcho_nathan</div>
-            <div class="message_date">24-07-2013 à 13:25:09</div>
-        </div>
-
-        <div class="clear"></div>
-
-    </div>
-
-    <div class="wrapper">
-        <div class="content">
-            <p>Hello,</p> <p>Je veux bien tester aussi si besoin.<br>Je suis sur Windows 8 sur PC portable Acer <img src="http://forum-images.hardware.fr/icones/wink.gif" alt=";)" title=";)"><br>
-        </div>
-        <div class="clear"></div>
-
-    </div>
-    <div class="clear"></div>
-
-</div><div class="message" id="num39">
-    <a class="anchorlink" id="1545236"></a>
-    
-    <div class="header">
-        <div class="avatar " style="background-image:url('')"></div>
-        <div class="action"><a href="#"> Citer </a></div>
-        <div class="infos">
-            <div class="auteur_pseudo">Flagship</div>
-            <div class="message_date">24-07-2013 à 13:53:26</div>
-        </div>
-
-        <div class="clear"></div>
-
-    </div>
-
-    <div class="wrapper">
-        <div class="content">
-            <p> <img src="http://forum-images.hardware.fr/images/perso/3/raph0ux.gif" alt="[:raph0ux:3]" title="[:raph0ux:3]">  
-<br> <br>Je ne peux pas pas faire le beta testeur la faute à ma Surface RT qui n'a pas encore windows 8.1, mais je vais suivre ça de près en attendant  <img src="http://forum-images.hardware.fr/icones/wink.gif" alt=";)" title=";)">  <br>Bon courage à toi et merci pour la communauté <img src="http://forum-images.hardware.fr/images/perso/ojap.gif" alt="[:ojap]" title="[:ojap]"> 
+            <p><div class="container"><table class="oldcitation"><tr class="none"><td><b class="s1"><a href="/forum2.php?config=hfr.inc&cat=23&subcat=540&post=26848&page=58&p=1&sondage=0&owntopic=1&trash=0&trash_post=0&print=0&numreponse=0&quote_only=0&new=0&nojs=0#t2062590" class="Topic">doum a Ã©crit :</a></b><hr size="1"><p>Dejaensuite le probleme c'est les avatars au dessus des posts vs les avatars a cotÃ©, forcement ca bouffera tjs un peu plus de place mais on peut pas tout avoir
+<br>Â <br><br></p><hr size="1"></td></tr></table></div><p>
+<br>Je prÃ©fÃ¨re dans le cas d'un petit Ã©cran vertical comme un Smartphone
         </div>
         <div class="clear"></div>
 
@@ -1143,7 +1228,54 @@
         //from HFR
         //1- Spoiler
         function swap_spoiler_states(obj) { var div = obj.getElementsByTagName('div'); if (div[0]) { if (div[0].style.visibility == "visible") { div[0].style.visibility = 'hidden'; } else if (div[0].style.visibility == "hidden" || !div[0].style.visibility) { div[0].style.visibility = 'visible'; } } }
-    </script>
+        function md_verif_size(which, aaa, aab) { }
 
+        document.addEventListener('DOMContentLoaded', function () {
+            //window.location.hash = "#bas";
+        }, false);
+
+        function contextMenu(event, el, string) {
+            console.log(event);
+            console.log(string);
+            console.log(el);
+            console.log(el.offsetTop + " scroll= " + el.scrollTop);
+            console.log(Math.floor(el.getBoundingClientRect().top) + " scroll= " + window.pageYOffset);
+
+            //window.location = "http://local/popup/?" + el;
+            window.location = "http://local/popup/?" + string;
+            //event.stopPropagation();
+            return false;
+        }
+
+        function scrollTo(hash) {
+            location.hash = "#" + hash;
+        }
+
+        function quote(postId) {
+            window.location = "http://local/quote?postId=" + postId;
+            return false;
+        }
+
+        function multiQuote(elementSrc, postId) {
+            if (elementSrc.className == 'quote_active') {
+                elementSrc.className = '';
+                window.location = "http://local/deleteFromMultiQuote?postId=" + postId;
+            }
+            else {
+                elementSrc.className = 'quote_active';
+                window.location = "http://local/multiQuote?postId=" + postId;
+            }
+        }
+
+        function edit(postId) {
+            window.location = "http://local/edit?postId=" + postId;
+        }
+
+        function resetAllMultiQuotes() {
+            $('.quote_active').each(function (i, obj) {
+                $(this).removeClass('quote_active');
+            });
+        }
+    </script>
 </body>
 </html>
