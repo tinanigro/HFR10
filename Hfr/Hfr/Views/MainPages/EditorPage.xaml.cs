@@ -1,4 +1,7 @@
-﻿using Hfr.ViewModel;
+﻿using System;
+using Hfr.ViewModel;
+using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -15,7 +18,7 @@ namespace Hfr.Views.MainPages
         {
             base.OnNavigatedTo(e);
             Loc.Editor.PropertyChanged += Editor_PropertyChanged;
-            await Loc.Editor.OnNavigatedTo(e.Parameter);
+            ApplicationView.GetForCurrentView().SuppressSystemOverlays = true;
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -23,6 +26,7 @@ namespace Hfr.Views.MainPages
             base.OnNavigatingFrom(e);
             Loc.Editor.PropertyChanged -= Editor_PropertyChanged;
             Loc.Editor.OnNavigatedFrom();
+            ApplicationView.GetForCurrentView().SuppressSystemOverlays = false;
         }
 
         private void Editor_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

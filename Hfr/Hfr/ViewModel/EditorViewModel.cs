@@ -64,10 +64,6 @@ namespace Hfr.ViewModel
             {
                 IsBusy = false;
                 RaisePropertyChanged(nameof(IsEditUIVisible));
-                if (package.Intent == EditorIntent.MultiQuote)
-                {
-                    Loc.NavigationService.GoBack();
-                }
             });
         }
 
@@ -88,7 +84,6 @@ namespace Hfr.ViewModel
                 await ThreadUI.Invoke(() =>
                 {
                     Loc.NavigationService.GoBack();
-                    ApplicationView.GetForCurrentView().SuppressSystemOverlays = false;
                     _isBusy = false;
                 });
                 await Loc.Topic.RefreshPage(CurrentEditor.Intent);
@@ -108,10 +103,6 @@ namespace Hfr.ViewModel
         {
             var editorPackage = parameter as EditorPackage;
             _isBusy = false;
-            await ThreadUI.Invoke(() =>
-            {
-                ApplicationView.GetForCurrentView().SuppressSystemOverlays = true;
-            });
             Debug.WriteLine("EditorViewModel OnNavigatedTo " + editorPackage.PostUriForm);
             
             if (editorPackage.PostUriForm == "http://debug")
