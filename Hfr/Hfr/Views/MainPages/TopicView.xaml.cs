@@ -8,6 +8,7 @@ using Hfr.Utilities;
 using Hfr.ViewModel;
 using Hfr.Models;
 using System.Threading.Tasks;
+using Hfr.Helpers;
 
 namespace Hfr.Views.MainPages
 {
@@ -24,12 +25,19 @@ namespace Hfr.Views.MainPages
         {
             TopicWebView.NavigationCompleted += TopicWebViewOnNavigationCompleted;
             Loc.Topic.TopicReadyToBeDisplayed += CurrentTopic_TopicReadyToBeDisplayed;
+            Loc.Editor.EditorCancelledMessage += Editor_EditorCancelledMessage;
+        }
+
+        private async void Editor_EditorCancelledMessage()
+        {
+            await TopicWebView.InvokeScriptAsync("resetAllMultiQuotes", new string[0]);
         }
 
         private void TopicView_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             TopicWebView.NavigationCompleted -= TopicWebViewOnNavigationCompleted;
             Loc.Topic.TopicReadyToBeDisplayed -= CurrentTopic_TopicReadyToBeDisplayed;
+            Loc.Editor.EditorCancelledMessage -= Editor_EditorCancelledMessage;
         }
 
         private void CurrentTopic_TopicReadyToBeDisplayed(Topic topic)
@@ -82,7 +90,7 @@ namespace Hfr.Views.MainPages
             await TopicWebView.InvokeScriptAsync("scrollTo", new string[1] { anchor });
         }
 
-        private void TopicWebView_OnNavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
+        private async void TopicWebView_OnNavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
             if (args.Uri != null && args.Uri.AbsoluteUri.StartsWith(Strings.LocalUriPrefix))
             {
@@ -95,6 +103,16 @@ namespace Hfr.Views.MainPages
                     {
                         var package = new EditorPackage(EditorIntent.Quote, Loc.Topic.CurrentTopic.TopicNewPostUriForm + $"&numrep={postId}");
                         Loc.Topic.ShowEditorCommand.Execute(package);
+                    }
+                }
+                else if (args.Uri.AbsoluteUri.Contains("deleteFromMultiQuote"))
+                {
+                    var decoder = new WwwFormUrlDecoder(args.Uri.Query);
+                    var postId = decoder.FirstOrDefault(x => x.Name == "postId")?.Value;
+                    if (!string.IsNullOrEmpty(postId))
+                    {
+                        var package = new EditorPackage(EditorIntent.MultiQuote, Loc.Topic.CurrentTopic.TopicNewPostUriForm + $"&numrep={postId}");
+                        await Loc.Editor.RemoveQuoteFromMultiQuote(package);
                     }
                 }
                 else if (args.Uri.AbsoluteUri.Contains("multiQuote"))

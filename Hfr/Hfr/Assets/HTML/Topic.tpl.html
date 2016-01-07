@@ -1,10 +1,10 @@
 ﻿<!doctype html>
 <html>
 <head>
-    <meta name='viewport' content='initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no' />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no" />
     <link type='text/css' rel='stylesheet' href='ms-appx-web:///Assets/HTML/Style.css' />
-
+    <script src="ms-appx-web:///Assets/HTML/JS/jquery-2.1.4.min.js"></script>
     <style type='text/css'>
         /* PLACEHOLDER FOR USER FONT SIZE */
         .message .content {
@@ -52,15 +52,26 @@
             return false;
         }
 
-        function multiQuote(postId) {
-            window.location = "http://local/multiQuote?postId=" + postId;
+        function multiQuote(elementSrc, postId) {
+            if (elementSrc.className == 'quote_active') {
+                elementSrc.className = '';
+                window.location = "http://local/deleteFromMultiQuote?postId=" + postId;
+            }
+            else {
+                elementSrc.className = 'quote_active';
+                window.location = "http://local/multiQuote?postId=" + postId;
+            }
         }
 
         function edit(postId) {
             window.location = "http://local/edit?postId=" + postId;
         }
 
+        function resetAllMultiQuotes() {
+            $('.quote_active').each(function (i, obj) {
+                $(this).removeClass('quote_active');
+            });
+        }
     </script>
-
 </body>
 </html>

@@ -76,6 +76,10 @@ body {
         display: inline-block;
     }
     
+    .message .header .action .horizontal_menu li.quote_active {
+        background-color: rgba(255,255,255,0.25);
+    }
+
     @media screen and (max-width: 450px) {
         .message .header .action .horizontal_menu li {
             padding: 8px 3px;

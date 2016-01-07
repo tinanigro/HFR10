@@ -146,7 +146,7 @@ namespace Hfr.Helpers
             };
         }
 
-        static async Task<string> FetchMessageContent(EditorPackage package)
+        public static async Task<string> FetchMessageContent(EditorPackage package)
         {
             if (string.IsNullOrEmpty(package.PostUriForm)) return null;
             var html = await HttpClientHelper.Get(package.PostUriForm);

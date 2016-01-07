@@ -14,11 +14,15 @@ using Hfr.Models;
 
 namespace Hfr.ViewModel
 {
+    public delegate void EditorCancelledMessage();
     public class EditorViewModel : ViewModelBase, IDisposable
     {
+        #region private props
         private Editor _currentEditor;
         private bool _isBusy = false;
+        #endregion
 
+        #region public props
         public Editor CurrentEditor
         {
             get { return _currentEditor; }
@@ -55,7 +59,16 @@ namespace Hfr.ViewModel
         }
 
         public string MultiQuoteTemporaryContent { get; set; }
+        #endregion
         #region methods
+        public async Task RemoveQuoteFromMultiQuote(EditorPackage package)
+        {
+            if (string.IsNullOrEmpty(MultiQuoteTemporaryContent)) return;
+            var quote = await FormFetcher.FetchMessageContent(package);
+
+            Loc.Editor.MultiQuoteTemporaryContent= Loc.Editor.MultiQuoteTemporaryContent.Replace(quote, "").Replace(Environment.NewLine, "");
+        }
+
         public async Task LoadEditor(EditorPackage package)
         {
             await ThreadUI.Invoke(() => IsBusy = true);
@@ -114,6 +127,7 @@ namespace Hfr.ViewModel
 
         public void OnNavigatedFrom()
         {
+            EditorCancelledMessage?.Invoke();
             Dispose();
         }
         #endregion
@@ -123,7 +137,9 @@ namespace Hfr.ViewModel
         public DeleteMessageCommand DeleteMessageCommand { get; } = new DeleteMessageCommand();
         public CancelMessageCommand CancelMessageCommand { get; } = new CancelMessageCommand();
         #endregion
-
+        #region events
+        public event EditorCancelledMessage EditorCancelledMessage;
+        #endregion
         public void Dispose()
         {
 
