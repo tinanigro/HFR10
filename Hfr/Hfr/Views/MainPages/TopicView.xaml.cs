@@ -16,12 +16,24 @@ namespace Hfr.Views.MainPages
         public TopicView()
         {
             InitializeComponent();
+            this.Loaded += TopicView_Loaded;
+            this.Unloaded += TopicView_Unloaded;
+        }
+
+        private void TopicView_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            TopicWebView.NavigationCompleted += TopicWebViewOnNavigationCompleted;
             Loc.Topic.TopicReadyToBeDisplayed += CurrentTopic_TopicReadyToBeDisplayed;
+        }
+
+        private void TopicView_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            TopicWebView.NavigationCompleted -= TopicWebViewOnNavigationCompleted;
+            Loc.Topic.TopicReadyToBeDisplayed -= CurrentTopic_TopicReadyToBeDisplayed;
         }
 
         private void CurrentTopic_TopicReadyToBeDisplayed(Topic topic)
         {
-            TopicWebView.NavigationCompleted += TopicWebViewOnNavigationCompleted;
             if (topic != null)
                 TopicWebView.Navigate(Strings.TopicPageCacheUri);
             else
@@ -30,8 +42,8 @@ namespace Hfr.Views.MainPages
 
         private async void TopicWebViewOnNavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
-            TopicWebView.NavigationCompleted -= TopicWebViewOnNavigationCompleted;
-
+            if (args.Uri == null) return;
+            if (args.Uri.AbsoluteUri.Contains($"{Strings.WebSiteCacheFileName}#")) return;
             if (Loc.Editor.CurrentEditor != null)
             {
                 var intent = Loc.Editor.CurrentEditor.Intent;
