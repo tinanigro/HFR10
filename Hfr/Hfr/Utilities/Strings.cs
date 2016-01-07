@@ -31,5 +31,7 @@ namespace Hfr.Utilities
 
         public static string First => "First";
         public static string Last => "Last";
+
+        public static string AppName => "HFR10";
     }
 }
