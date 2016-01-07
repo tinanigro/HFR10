@@ -87,12 +87,16 @@
                                       Margin="{StaticResource DefaultMarginBottom}"
                                       OffContent="Cercle Windows 10 style"
                                       OnContent="Carré oldschool" />
-                            <Slider Header="Taille de la police"
+                            <Slider Header="Taille de la police"                                    
                                     Minimum="{Binding MinimumFontSize}"
                                     Maximum="{Binding MaximumFontSize}"
                                     Value="{Binding FontSizePreferred, Mode=TwoWay}"
-                                    SmallChange="0.1"
-                                    StepFrequency="0.1" />
+                                    SmallChange="1"
+                                    StepFrequency="1" 
+                                    HorizontalAlignment="Left"
+                                    Width="300"/>
+                            <TextBlock Text="Ce paramètre ne sera pas synchronisé"
+                                       Foreground="{ThemeResource SystemControlForegroundBaseLowBrush}" />
                         </StackPanel>
                     </RelativePanel>
                 </ScrollViewer>

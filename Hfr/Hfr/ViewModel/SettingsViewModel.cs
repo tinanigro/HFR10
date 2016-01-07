@@ -90,8 +90,8 @@ namespace Hfr.ViewModel
             }
         }
 
-        public double MinimumFontSize { get { return 0.6; } }
-        public double MaximumFontSize { get { return 1.4; } }
+        public double MinimumFontSize { get { return 10; } }
+        public double MaximumFontSize { get { return 20; } }
 
         /// <summary>
         /// This setting is not synced between devices by design
@@ -103,11 +103,15 @@ namespace Hfr.ViewModel
                 var fontSize = ApplicationSettingsHelper.ReadSettingsValue(nameof(FontSizePreferred), true);
                 if (fontSize == null)
                 {
-                    _fontSizePreferred = 1.0;
+                    _fontSizePreferred = 15;
                 }
                 else
                 {
-                    _fontSizePreferred = (double)fontSize;
+                    if ((double)fontSize < 10)
+                    {
+                        _fontSizePreferred = 15;
+                    }
+                    else _fontSizePreferred = (double)fontSize;
                 }
                 return _fontSizePreferred;
             }
