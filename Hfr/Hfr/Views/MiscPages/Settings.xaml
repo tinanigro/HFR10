@@ -13,7 +13,7 @@
                 <ScrollViewer Style="{StaticResource VerticalScrollViewerStyle}">
                     <RelativePanel>
                         <StackPanel x:Name="AccountManagementGrid"
-                                    Width="400">
+                                    Width="320">
                             <TextBlock x:Name="AccountManagementHeader"
                                        Text="Gestion des comptes"
                                        Style="{StaticResource SubtitleTextBlockStyle}"
@@ -58,7 +58,7 @@
                         </StackPanel>
 
                         <StackPanel x:Name="TopicSettingsGrid"
-                                    Width="400">
+                                    Width="320">
                             <TextBlock x:Name="TopicSettingsHeader"
                                        Text="Type de topics"
                                        Style="{StaticResource SubtitleTextBlockStyle}"
@@ -71,7 +71,7 @@
                         </StackPanel>
                         
                         <StackPanel x:Name="UISettingsGrid"
-                                    Width="400">
+                                    Width="320">
                         <TextBlock x:Name="UIHeader"
                                    Text="Interface utilisateur"
                                    Style="{StaticResource SubtitleTextBlockStyle}"
@@ -145,7 +145,7 @@
                 </VisualState>
                 <VisualState x:Name="TwoColumns">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="840" />
+                        <AdaptiveTrigger MinWindowWidth="640" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="AccountManagementGrid.(RelativePanel.AlignTopWithPanel)"
@@ -158,7 +158,7 @@
                 </VisualState>
                 <VisualState x:Name="ThreeColumns">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1260" />
+                        <AdaptiveTrigger MinWindowWidth="960" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="AccountManagementGrid.(RelativePanel.AlignTopWithPanel)"
