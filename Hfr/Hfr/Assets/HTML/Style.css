@@ -87,19 +87,28 @@ body {
 
     @media screen and (max-width: 450px) {
         .message .header .action .horizontal_menu li {
-            padding: 8px 3px;
+            padding-right: 3px;
+            padding-left: 3px;
+            padding-top: 10px;
+            padding-bottom: 2px;
         }
     }
 
     @media screen and (max-width: 550px) {
         .message .header .action .horizontal_menu li {
-            padding: 8px 10px;
+            padding-right: 10px;
+            padding-left: 10px;
+            padding-top: 10px;
+            padding-bottom: 2px;
         }
     }
     
     @media screen and (min-width: 550px) {
         .message .header .action .horizontal_menu li {
-            padding: 8px 16px;
+            padding-right: 16px;
+            padding-left: 16px;
+            padding-top: 10px;
+            padding-bottom: 2px;
         }
     }
 
@@ -154,15 +163,18 @@ body {
     padding: 8px;
 }
 
-
+    .message .content br {
+        display: block;
+        margin: 10px 0;
+    }
+    
     /* HFR content > * */
     .message .content table {
         border: 0px;
-        padding: 16px !important;
+        padding: 8px !important;
         width: 100%;
-        margin-bottom: 5px !important;
     }
-
+        
         .message .content table p {
             overflow-x: hidden;
         }
