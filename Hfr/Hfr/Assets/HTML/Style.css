@@ -22,6 +22,11 @@ body {
     display: block;
 }
 
+.oldquote {
+    background-color: #252525;
+    border-width: 0px;
+}
+
 .oldcitation {
     background-color: #252525;
     border-width: 0px;
