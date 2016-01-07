@@ -40,6 +40,7 @@ namespace Hfr.Views.MainPages
                     case EditorIntent.New:
                     case EditorIntent.Quote:
                     case EditorIntent.MultiQuote:
+                    case EditorIntent.Delete:
                         await ScrollTo("bas");
                         break;
                     case EditorIntent.Edit:

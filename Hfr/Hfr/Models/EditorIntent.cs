@@ -5,6 +5,7 @@
         New,
         Quote,
         MultiQuote,
-        Edit
+        Edit,
+        Delete
     }
 }

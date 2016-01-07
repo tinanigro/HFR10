@@ -20,6 +20,7 @@ namespace Hfr.Commands.Editor
                     Label = "Oui",
                     Invoked = (command) =>
                     {
+                        Loc.Editor.CurrentEditor.Intent = Models.EditorIntent.Delete;
                         Loc.Editor.CurrentEditor.Data["delete"] = "1";
                         Task.Run(() => Loc.Editor.SubmitEditor());
                     },

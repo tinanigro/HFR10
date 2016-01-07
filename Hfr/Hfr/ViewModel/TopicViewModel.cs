@@ -118,6 +118,7 @@ namespace Hfr.ViewModel
                         CurrentTopic.TopicCurrentPage = CurrentTopic.TopicNbPage;
                         break;
                     case EditorIntent.Edit:
+                    case EditorIntent.Delete:
                         break;
                     default:
                         break;
