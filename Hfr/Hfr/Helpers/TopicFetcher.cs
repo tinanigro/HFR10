@@ -146,14 +146,14 @@ namespace Hfr.Helpers
                 // Content
                 var contentHtml = postNode.Descendants("div").FirstOrDefault(x => x.GetAttributeValue("id", "").Contains("para"));
 
-                var youtubeEntries = contentHtml.Descendants("a").Where(x => x.GetAttributeValue("href", "").Contains("www.youtube.com"));
+                var youtubeEntries = contentHtml.Descendants("a").Where(x => x.GetAttributeValue("href", "").Contains("www.youtube.com") || x.GetAttributeValue("href","").Contains("//youtu.be"));
                 foreach (var youtubeEntry in youtubeEntries)
                 {
                     var videoUrl = youtubeEntry.GetAttributeValue("href", "");
                     videoUrl = "tubecast:link=" + WebUtility.UrlEncode(videoUrl);
                     youtubeEntry.SetAttributeValue("href", videoUrl);
                 }
-
+                
                 var content = contentHtml.InnerHtml;
                 int lastPostText = content.IndexOf("<div style=\"clear: both;\"> </div>", StringComparison.Ordinal);
                 if (lastPostText == -1)
