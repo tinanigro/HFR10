@@ -91,7 +91,7 @@ namespace Hfr.Helpers
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 
-            var avatarSrc = htmlDoc.DocumentNode.Descendants("img").FirstOrDefault(x => x.GetAttributeValue("src", "").Contains("http://forum-images.hardware.fr/images/mesdiscussions-")).GetAttributeValue("src", "");
+            var avatarSrc = htmlDoc.DocumentNode.Descendants("img")?.FirstOrDefault(x => x.GetAttributeValue("src", "").Contains("http://forum-images.hardware.fr/images/mesdiscussions-"))?.GetAttributeValue("src", "");
 
             if (!string.IsNullOrEmpty(avatarSrc))
             {
