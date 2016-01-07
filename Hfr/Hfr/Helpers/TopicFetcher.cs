@@ -142,9 +142,19 @@ namespace Hfr.Helpers
 
                 // Can edit
                 bool canEdit = toolbar.Descendants("img").Any(x => x.GetAttributeValue("alt", "") == "edit" && x.GetAttributeValue("title", "").Contains("Edit"));
-                
+
                 // Content
-                var content = postNode.Descendants("div").FirstOrDefault(x => x.GetAttributeValue("id", "").Contains("para")).InnerHtml;
+                var contentHtml = postNode.Descendants("div").FirstOrDefault(x => x.GetAttributeValue("id", "").Contains("para"));
+
+                var youtubeEntries = contentHtml.Descendants("a").Where(x => x.GetAttributeValue("href", "").Contains("www.youtube.com"));
+                foreach (var youtubeEntry in youtubeEntries)
+                {
+                    var videoUrl = youtubeEntry.GetAttributeValue("href", "");
+                    videoUrl = "tubecast:link=" + WebUtility.UrlEncode(videoUrl);
+                    youtubeEntry.SetAttributeValue("href", videoUrl);
+                }
+
+                var content = contentHtml.InnerHtml;
                 int lastPostText = content.IndexOf("<div style=\"clear: both;\"> </div>", StringComparison.Ordinal);
                 if (lastPostText == -1)
                 {
