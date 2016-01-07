@@ -103,8 +103,8 @@ namespace Hfr.Helpers
             var topics = new List<Topic>();
             foreach (var topicNode in topicNodes)
             {
-                var topicName = topicNode.Descendants("a").FirstOrDefault(x => x.GetAttributeValue("class", "") == "cCatTopic").InnerText;
-                var topicAuthor = topicNode.Descendants("td").FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("sujetCase6")).InnerText.Trim();
+                var topicName = topicNode.Descendants("a").FirstOrDefault(x => x.GetAttributeValue("class", "") == "cCatTopic").InnerText.CleanFromWeb();
+                var topicAuthor = topicNode.Descendants("td").FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("sujetCase6")).InnerText.CleanFromWeb();
 
                 var topicPageNode = topicNode.Descendants("td").FirstOrDefault(x => x.GetAttributeValue("class", "") == "sujetCase4").InnerText;
                 var topicPage = 1;
