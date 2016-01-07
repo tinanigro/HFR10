@@ -13,7 +13,7 @@ namespace Hfr.Commands.Editor
             string deleteEntry;
             if (Loc.Editor.CurrentEditor.Data.TryGetValue("delete", out deleteEntry))
             {
-                var md = new MessageDialog("Voulez-vous vraiment supprimer le post en cours d'édition ?", "Attention");
+                var md = new MessageDialog("Voulez-vous vraiment définitivement supprimer le post en cours d'édition ?", "Attention");
                 md.Commands.Add(new UICommand()
                 {
                     Id = 1,
