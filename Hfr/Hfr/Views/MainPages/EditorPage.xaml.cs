@@ -44,5 +44,11 @@ namespace Hfr.Views.MainPages
                 }
             }
         }
+
+        private async void AppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var md = new MessageDialog("Ce sera pour la prochaine fois, peut-être :o", "Hé ba non!");
+            await md.ShowAsync();
+        }
     }
 }

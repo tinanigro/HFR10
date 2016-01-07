@@ -15,7 +15,9 @@
                               Command="{Binding DeleteMessageCommand}"
                               ClickMode="Press"
                               Visibility="{Binding IsEditUIVisible}" />
-                <AppBarSeparator />
+                <AppBarButton Icon="Emoji"
+                              Label="Smileys" 
+                              Click="AppBarButton_Click"/>
                 <AppBarButton Icon="Cancel"
                               Label="Annuler"
                               Command="{Binding CancelMessageCommand}"
