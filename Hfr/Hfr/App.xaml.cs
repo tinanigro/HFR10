@@ -57,6 +57,7 @@ namespace Hfr
             if (AppShell == null)
             {
                 AppShell = new Shell();
+                App.AppShell.GoToDarkTheme(Loc.Settings.IsApplicationThemeDark);
                 Loc.NavigationService.Initialize();
                 ThreadUI.setDispatcher(NavigationFrame.Dispatcher);
                 AppViewHelper.SetAppView();

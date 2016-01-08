@@ -15,6 +15,7 @@ namespace Hfr.ViewModel
         private FollowedTopicType followedTopicType;
         private bool _displayPrivateChatsByDefault;
         private bool _squareAvatarStylePreferred;
+        private bool _isAppThemeDark;
         private double _fontSizePreferred;
         #endregion
 
@@ -87,6 +88,30 @@ namespace Hfr.ViewModel
                 Set(ref _squareAvatarStylePreferred, value);
                 RaisePropertyChanged(nameof(SquareAvatarVisible));
                 RaisePropertyChanged(nameof(CircleAvatarVisible));
+            }
+        }
+
+        public bool IsApplicationThemeDark
+        {
+            get
+            {
+                var themeDark = ApplicationSettingsHelper.ReadSettingsValue(nameof(IsApplicationThemeDark), false);
+                if (themeDark == null)
+                {
+                    _isAppThemeDark = true;
+                }
+                else
+                {
+                    _isAppThemeDark = (bool)themeDark;
+                }
+                return _isAppThemeDark;
+            }
+            set
+            {
+                if (_isAppThemeDark == value) return;
+                ApplicationSettingsHelper.SaveSettingsValue(nameof(IsApplicationThemeDark), value, false);
+                Set(ref _isAppThemeDark, value);
+                App.AppShell.GoToDarkTheme(value);
             }
         }
 
