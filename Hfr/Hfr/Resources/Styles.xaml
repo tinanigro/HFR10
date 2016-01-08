@@ -154,6 +154,8 @@
                 Value="{ThemeResource TextControlThemeMinHeight}" />
         <Setter Property="Foreground"
                 Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+        <Setter Property="Background"
+                Value="{ThemeResource SystemControlBackgroundChromeMediumBrush}" />
         <Setter Property="SelectionHighlightColor"
                 Value="{ThemeResource SystemControlHighlightAccentBrush}" />
         <Setter Property="BorderThickness"
@@ -169,13 +171,13 @@
         <Setter Property="ScrollViewer.IsDeferredScrollingEnabled"
                 Value="False" />
         <Setter Property="Padding"
-                Value="0" />
+                Value="8,0" />
         <Setter Property="VerticalContentAlignment"
                 Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
-                    <Grid>
+                    <Grid Background="{TemplateBinding Background}">
                         <Grid.Resources>
                             <Style x:Name="DeleteButtonStyle"
                                    TargetType="Button">
@@ -364,7 +366,7 @@
         <Setter Property="Foreground"
                 Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
         <Setter Property="Background"
-                Value="{ThemeResource SystemControlBackgroundAltHighBrush}" />
+                Value="{ThemeResource SystemControlBackgroundChromeMediumBrush}" />
         <Setter Property="SelectionHighlightColor"
                 Value="{ThemeResource SystemControlHighlightAccentBrush}" />
         <Setter Property="BorderThickness"
@@ -378,11 +380,11 @@
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
                 Value="Hidden" />
         <Setter Property="Padding"
-                Value="0" />
+                Value="8,0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="PasswordBox">
-                    <Grid>
+                    <Grid Background="{TemplateBinding Background}">
                         <Grid.Resources>
                             <Style x:Name="RevealButtonStyle"
                                    TargetType="Button">
