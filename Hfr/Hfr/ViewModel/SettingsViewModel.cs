@@ -153,7 +153,7 @@ namespace Hfr.ViewModel
         {
             get
             {
-                var postHeaderTransparency = ApplicationSettingsHelper.ReadSettingsValue(nameof(PostHeaderTransparencyPreferred), true);
+                var postHeaderTransparency = ApplicationSettingsHelper.ReadSettingsValue(nameof(PostHeaderTransparencyPreferred), false);
                 if (postHeaderTransparency == null)
                 {
                     _postHeaderTransparencyPreferred = 0.50;
@@ -168,7 +168,7 @@ namespace Hfr.ViewModel
             set
             {
                 if (_postHeaderTransparencyPreferred == value) return;
-                ApplicationSettingsHelper.SaveSettingsValue(nameof(PostHeaderTransparencyPreferred), value, true);
+                ApplicationSettingsHelper.SaveSettingsValue(nameof(PostHeaderTransparencyPreferred), value, false);
                 Set(ref _postHeaderTransparencyPreferred, value);
             }
         }
