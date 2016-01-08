@@ -131,7 +131,7 @@ namespace Hfr.ViewModel
                 var postHeaderTransparency = ApplicationSettingsHelper.ReadSettingsValue(nameof(PostHeaderTransparencyPreferred), true);
                 if (postHeaderTransparency == null)
                 {
-                    _postHeaderTransparencyPreferred = 0.5;
+                    _postHeaderTransparencyPreferred = 0.50;
                 }
                 else
                 {

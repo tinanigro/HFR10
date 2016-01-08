@@ -69,19 +69,19 @@
                                       VerticalAlignment="Center"
                                       Margin="{StaticResource DefaultMarginBottom}" />
                         </StackPanel>
-                        
+
                         <StackPanel x:Name="UISettingsGrid"
                                     Width="320">
-                        <TextBlock x:Name="UIHeader"
+                            <TextBlock x:Name="UIHeader"
                                    Text="Interface utilisateur"
                                    Style="{StaticResource SubtitleTextBlockStyle}"
                                    Margin="{StaticResource DefaultMarginBottom}" />
-                        <ToggleSwitch x:Name="PrivateChatsDisplayedInThirdColumnToggle"
+                            <ToggleSwitch x:Name="PrivateChatsDisplayedInThirdColumnToggle"
                                       Header="Afficher les MPs dans une 3ème colonne"
                                       IsOn="{Binding DisplayPrivateChatsByDefault, Mode=TwoWay}"
                                       OnContent="Oui"
                                       OffContent="Non" />
-                        <ToggleSwitch x:Name="AvatarStyleToggl" 
+                            <ToggleSwitch x:Name="AvatarStyleToggl" 
                                       Header="Style des avatars"
                                       IsOn="{Binding SquareAvatarStylePreferred, Mode=TwoWay}"
                                       Margin="{StaticResource DefaultMarginBottom}"
@@ -105,8 +105,6 @@
                                     Width="300"/>
                             <TextBlock Text="Ce paramètre ne sera pas synchronisé"
                                        Foreground="{ThemeResource SystemControlForegroundBaseLowBrush}" />
-                            
-
                         </StackPanel>
                     </RelativePanel>
                 </ScrollViewer>
