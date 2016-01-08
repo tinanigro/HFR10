@@ -38,7 +38,7 @@ namespace Hfr.Views.MainPages
                 {
                     MessageTextBlock.IsEnabled = true;
                     MessageTextBlock.Focus(Windows.UI.Xaml.FocusState.Keyboard);
-                    if (string.IsNullOrEmpty(MessageTextBlock.Text) && MessageTextBlock.Text.Length > 0)
+                    if (!string.IsNullOrEmpty(MessageTextBlock.Text) && MessageTextBlock.Text.Length > 0)
                     {
                         MessageTextBlock.SelectionStart = MessageTextBlock.Text.Length - 1;
                     }
