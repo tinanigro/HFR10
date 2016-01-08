@@ -10,6 +10,7 @@ using Hfr.Helpers;
 using Hfr.Model;
 using Hfr.ViewModel;
 using Hfr.Commands.Settings.Accounts;
+using Microsoft.ApplicationInsights.DataContracts;
 
 namespace Hfr.Services
 {
@@ -46,6 +47,7 @@ namespace Hfr.Services
                     bool success = await CurrentAccount.BeginAuthentication(false);
                     if (success)
                     {
+                        App.TelemetryClient.TrackEvent("Login success");
                         await ThreadUI.Invoke(() =>
                         {
                             Loc.Main.AccountManager.CurrentAccount.IsConnected = false;
@@ -55,6 +57,7 @@ namespace Hfr.Services
                     else
                     {
                         Debug.WriteLine("Login failed");
+                        App.TelemetryClient.TrackEvent("Login failed");
                     }
                 }
                 else

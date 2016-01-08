@@ -19,6 +19,7 @@ namespace Hfr.Views.MainPages
             base.OnNavigatedTo(e);
             Loc.Editor.PropertyChanged += Editor_PropertyChanged;
             ApplicationView.GetForCurrentView().SuppressSystemOverlays = true;
+            App.TelemetryClient.TrackPageView(nameof(EditorPage));
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)

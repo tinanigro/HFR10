@@ -12,12 +12,13 @@ using Hfr.ViewModel;
 using Hfr.Helpers;
 using Hfr.Services;
 using Hfr.Model;
+using System.Collections.Generic;
 
 namespace Hfr
 {
     sealed partial class App : Application
     {
-        public TelemetryClient TelemetryClient = new TelemetryClient();
+        public static TelemetryClient TelemetryClient = new TelemetryClient();
         public static Shell AppShell
         {
             get { return (Window.Current.Content as Shell); }
@@ -30,9 +31,18 @@ namespace Hfr
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.UnhandledException += App_UnhandledException;
         }
 
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            TelemetryClient.TrackException(e.Exception, new Dictionary<string, string>()
+            {
+                {"type", nameof(App_UnhandledException) }
+            });
+        }
+
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
             Loc.Init();
 #if DEBUG
@@ -41,6 +51,8 @@ namespace Hfr
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+
+            await WindowsAppInitializer.InitializeAsync("755097ed-7bf6-41a8-81c4-6d072579a7eb", WindowsCollectors.Metadata | WindowsCollectors.PageView | WindowsCollectors.Session | WindowsCollectors.UnhandledException);
 
             if (AppShell == null)
             {
