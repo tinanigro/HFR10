@@ -270,6 +270,7 @@ namespace Hfr.ViewModel
         {
             SmileySearch = "";
             UploadedPicId = "";
+            ShowSmileyUI = false;
         }
     }
 }
