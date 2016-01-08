@@ -227,6 +227,10 @@ namespace Hfr.Helpers
             var fontSize = Loc.Settings.FontSizePreferred;
             TempHTMLTopic = TempHTMLTopic.Replace("%%FONTSIZE%%", fontSize.ToString());
 
+            // Get user selected header transparency setting
+            var postHeaderTransparency = Loc.Settings.PostHeaderTransparencyPreferred;
+            TempHTMLTopic = TempHTMLTopic.Replace("%%headerPostTransparency%%", (1 - postHeaderTransparency).ToString().Replace(",", "."));            
+
             // Create/Open WebSite-Cache folder
             var subfolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(Strings.WebSiteCacheFolderName, CreationCollisionOption.OpenIfExists);
             var file = await subfolder.CreateFileAsync($"{Strings.WebSiteCacheFileName}", CreationCollisionOption.ReplaceExisting);
