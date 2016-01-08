@@ -17,6 +17,7 @@ namespace Hfr.ViewModel
         private bool _squareAvatarStylePreferred;
         private bool _isAppThemeDark;
         private double _fontSizePreferred;
+        private double _postHeaderTransparencyPreferred;
         #endregion
 
         #region public properties        
@@ -145,6 +146,30 @@ namespace Hfr.ViewModel
                 if (_fontSizePreferred == value) return;
                 ApplicationSettingsHelper.SaveSettingsValue(nameof(FontSizePreferred), value, true);
                 Set(ref _fontSizePreferred, value);
+            }
+        }
+
+        public double PostHeaderTransparencyPreferred
+        {
+            get
+            {
+                var postHeaderTransparency = ApplicationSettingsHelper.ReadSettingsValue(nameof(PostHeaderTransparencyPreferred), true);
+                if (postHeaderTransparency == null)
+                {
+                    _postHeaderTransparencyPreferred = 0.50;
+                }
+                else
+                {
+                    _postHeaderTransparencyPreferred = (double)postHeaderTransparency;
+                }
+                
+                return _postHeaderTransparencyPreferred;
+            }
+            set
+            {
+                if (_postHeaderTransparencyPreferred == value) return;
+                ApplicationSettingsHelper.SaveSettingsValue(nameof(PostHeaderTransparencyPreferred), value, true);
+                Set(ref _postHeaderTransparencyPreferred, value);
             }
         }
 

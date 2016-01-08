@@ -97,7 +97,7 @@
                                     Visibility="Collapsed" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Settings"
+                <AppBarButton Label="Paramètres"
                               Command="{Binding NavigateToSettings}" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
