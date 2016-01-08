@@ -50,7 +50,8 @@ namespace Hfr.Services
                         App.TelemetryClient.TrackEvent("Login success");
                         await ThreadUI.Invoke(() =>
                         {
-                            Loc.Main.AccountManager.CurrentAccount.IsConnected = false;
+                            Loc.Main.AccountManager.CurrentAccount.IsConnected = true;
+                            Loc.Main.AccountManager.CurrentAccount.IsConnecting = false;
                             Loc.NavigationService.Navigate(View.Main);
                         });
                     }
@@ -58,6 +59,11 @@ namespace Hfr.Services
                     {
                         Debug.WriteLine("Login failed");
                         App.TelemetryClient.TrackEvent("Login failed");
+                        await ThreadUI.Invoke(() =>
+                        {
+                            Loc.Main.AccountManager.CurrentAccount.IsConnecting = false;
+                            Loc.Main.AccountManager.CurrentAccount.ConnectionErrorStatus = "Login failed";
+                        });
                     }
                 }
                 else
