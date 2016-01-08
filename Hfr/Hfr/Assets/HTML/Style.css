@@ -121,9 +121,6 @@ body {
     background-position: center;
     width: 46px;
     height: 46px;
-    /*box-shadow: 0 0 2px rgba(0, 0, 0, .8);
-	-webkit-box-shadow: 0 0 2px rgba(0, 0, 0, .8);
-	-moz-box-shadow: 0 0 2px rgba(0, 0, 0, .8);*/
 }
 
 .message .header .avatar.round{

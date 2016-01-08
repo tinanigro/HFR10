@@ -85,8 +85,6 @@ namespace Hfr.Helpers
                     x.GetAttributeValue("title", "").Contains("Sujet"))
                     .Select(y => y.GetAttributeValue("href", "")).ToArray();
             
-            //Debug.WriteLine(string.Join("\n\r", favorisTopicUri));
-
             string[] favorisLastPost = htmlDoc.DocumentNode.Descendants("td")
                 .Where(x => x.GetAttributeValue("class", "").Contains("sujetCase9"))
                 .Select(y => y.InnerText).ToArray();
