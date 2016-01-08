@@ -212,15 +212,28 @@ namespace Hfr.ViewModel
                 });
             }
         }
+
+        public async Task GetSmileys()
+        {
+            var smileys = await SmileyFetcher.Fetch(_smileySearch);
+            await ThreadUI.Invoke(() => WikiSmileys = smileys);
+        }
+
+        public void InsertSmiley(Smiley smiley)
+        {
+            SmileyChosen?.Invoke(smiley);
+        }
         #endregion
 
         #region navigation
         public async Task OnNavigatedTo(object parameter)
         {
+            Window.Current.SizeChanged += Current_SizeChanged;
+            TriggerUIAdapter();
             var editorPackage = parameter as EditorPackage;
             _isBusy = false;
             Debug.WriteLine("EditorViewModel OnNavigatedTo " + editorPackage.PostUriForm);
-            
+
             if (editorPackage.PostUriForm == "http://debug")
             {
                 editorPackage.PostUriForm = HFRUrl.Dbg_Form_QuoteSingleURL;
@@ -228,8 +241,14 @@ namespace Hfr.ViewModel
             await LoadEditor(editorPackage);
         }
 
+        private void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
+        {
+            TriggerUIAdapter();
+        }
+
         public void OnNavigatedFrom()
         {
+            Window.Current.SizeChanged -= Current_SizeChanged;
             EditorCancelledMessage?.Invoke();
             Dispose();
         }

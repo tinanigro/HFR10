@@ -129,6 +129,7 @@
     <Compile Include="Helpers\ConnectHelper.cs" />
     <Compile Include="Helpers\DrapFetcher.cs" />
     <Compile Include="Helpers\FormFetcher.cs" />
+    <Compile Include="Helpers\HfrRehostHelper.cs" />
     <Compile Include="Helpers\HttpClientHelper.cs" />
     <Compile Include="Helpers\PrivateChatsFetcher.cs" />
     <Compile Include="Helpers\SmileyFetcher.cs" />

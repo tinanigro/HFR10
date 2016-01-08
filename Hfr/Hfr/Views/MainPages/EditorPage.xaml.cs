@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Linq;
 using Hfr.ViewModel;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Navigation;
+using Hfr.Helpers;
 
 namespace Hfr.Views.MainPages
 {
@@ -63,10 +67,60 @@ namespace Hfr.Views.MainPages
             }
         }
 
-        private async void AppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void IncludeGrandePic(object sender, RoutedEventArgs e)
         {
-            var md = new MessageDialog("Ce sera pour la prochaine fois, peut-être :o", "Hé ba non!");
-            await md.ShowAsync();
+            var url = BuildImgUrlAnchor("full");
+            Loc.Editor.UploadedPicId = "";
+            InsertInMessageTextBlock(url);
+        }
+        
+        private void IncludePreviewPic(object sender, RoutedEventArgs e)
+        {
+            var url = BuildImgUrlAnchor("preview");
+            Loc.Editor.UploadedPicId = "";
+            InsertInMessageTextBlock(url);
+        }
+
+        private void IncludeMiniPic(object sender, RoutedEventArgs e)
+        {
+            var url = BuildImgUrlAnchor("thumb");
+            Loc.Editor.UploadedPicId = "";
+            InsertInMessageTextBlock(url);
+        }
+
+        private string BuildImgUrlAnchor(string size)
+        {
+            string url = "";
+            if (IncludeImgUrlLink.IsOn && IncludeImgUrlLink.IsOn)
+            {
+                url += "[url=http://reho.st/view/self/" + Loc.Editor.UploadedPicId + "]";
+            }
+            url += "[img]http://reho.st/";
+            switch (size)
+            {
+                case "preview":
+                    url += "preview/";
+                    break;
+                case "thumb":
+                    url += "thumb/";
+                    break;
+            }
+            url += "self/" + Loc.Editor.UploadedPicId + "[/img]";
+
+            if (IncludeImgUrlLink.IsOn && IncludeImgUrlLink.IsOn)
+            {
+                url += "[/url]";
+            }
+            return url;
+        }
+
+        void InsertInMessageTextBlock(string text)
+        {
+            Loc.Editor.ShowSmileyUI = false;
+            MessageTextBlock.SelectedText = text;
+            MessageTextBlock.SelectionLength = 0;
+            MessageTextBlock.SelectionStart += text.Length;
+            MessageTextBlock.Focus(FocusState.Keyboard);
         }
     }
 }
