@@ -7,8 +7,8 @@ namespace Hfr.Views
 {
     public sealed partial class Shell : UserControl
     {
-        private readonly double ExtraPaneDefaultHeight = 750;
-        private readonly double ExtraPaneDefaultWidth = 450;
+        private readonly double ExtraPaneDefaultHeight = 650;
+        private readonly double ExtraPaneDefaultWidth = 700;
         public Shell()
         {
             this.InitializeComponent();
