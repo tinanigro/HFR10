@@ -101,7 +101,7 @@
                                     HorizontalAlignment="Left"
                                     Width="300"/>
                             <TextBlock Text="Ce paramètre ne sera pas synchronisé"
-                                       Foreground="{ThemeResource SystemControlForegroundBaseLowBrush}" />
+                                       Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" />
                         </StackPanel>
                     </RelativePanel>
                 </ScrollViewer>

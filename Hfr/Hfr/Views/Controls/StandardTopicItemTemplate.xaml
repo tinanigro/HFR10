@@ -35,7 +35,7 @@
         <TextBlock Grid.Row="1"
                    Text="{Binding TopicAuthor}"
                    FontWeight="{Binding FontWeight}"
-                   Foreground="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                   Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
                    VerticalAlignment="Bottom" />
 
         <TextBlock Grid.Column="2"
@@ -43,6 +43,6 @@
                    Text="{Binding TopicNbPage}"
                    FontSize="18"
                    FontWeight="Light"
-                   Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+                   Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" />
     </Grid>
 </UserControl>
