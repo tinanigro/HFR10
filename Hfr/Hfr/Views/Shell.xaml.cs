@@ -62,6 +62,11 @@ namespace Hfr.Views
             FadeOutExtraPageStoryboard.Begin();
         }
 
+        public void GoToDarkTheme(bool dark)
+        {
+            this.RequestedTheme = dark ? ElementTheme.Dark : ElementTheme.Light;
+        }
+
         private void FadeOutExtraPageStoryboard_Completed(object sender, object e)
         {
             ExtraPaneGrid.Visibility = Visibility.Collapsed;

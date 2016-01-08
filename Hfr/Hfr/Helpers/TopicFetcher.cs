@@ -223,6 +223,16 @@ namespace Hfr.Helpers
                 TempHTMLTopic = TempHTMLTopic.Replace("%%ACCENTCOLOR%%", colorString);
             });
 
+            // Get desired theme
+            if (Loc.Settings.IsApplicationThemeDark)
+            {
+                TempHTMLTopic = TempHTMLTopic.Replace("%%COLOR-FG%%", "white").Replace("%%COLOR-BG%%", "black").Replace("%%COLOR-QUOTE%%", "#252525");
+            }
+            else
+            {
+                TempHTMLTopic = TempHTMLTopic.Replace("%%COLOR-FG%%", "black").Replace("%%COLOR-BG%%", "white").Replace("%%COLOR-QUOTE%%", "#E3E3E3");
+            }
+
             // Get user selected font-size
             var fontSize = Loc.Settings.FontSizePreferred;
             TempHTMLTopic = TempHTMLTopic.Replace("%%FONTSIZE%%", fontSize.ToString());

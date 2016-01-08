@@ -76,7 +76,12 @@
                                    Text="Interface utilisateur"
                                    Style="{StaticResource SubtitleTextBlockStyle}"
                                    Margin="{StaticResource DefaultMarginBottom}" />
-                        <ToggleSwitch x:Name="PrivateChatsDisplayedInThirdColumnToggle"
+                            <ToggleSwitch x:Name="ApplicationTheme"
+                                          Header="Thème de l'app"
+                                          OnContent="Foncé"
+                                          OffContent="Clair"
+                                          IsOn="{Binding IsApplicationThemeDark, Mode=TwoWay}" />
+                            <ToggleSwitch x:Name="PrivateChatsDisplayedInThirdColumnToggle"
                                       Header="Afficher les MPs dans une 3ème colonne"
                                       IsOn="{Binding DisplayPrivateChatsByDefault, Mode=TwoWay}"
                                       OnContent="Oui"

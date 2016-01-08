@@ -116,7 +116,10 @@ namespace Hfr.Model
                 {
                     return (SolidColorBrush)App.Current.Resources["SystemControlForegroundBaseLowBrush"];
                 }
-                return new SolidColorBrush(Colors.WhiteSmoke);
+                if (Loc.Settings.IsApplicationThemeDark)
+                    return new SolidColorBrush(Colors.WhiteSmoke);
+                else
+                    return new SolidColorBrush(Colors.Black);
             }
         }
 

@@ -8,9 +8,6 @@
 
 body {
     font-family: Segoe UI !important;
-    color: white;
-    /*background-color:#1F1F1F;*/
-    background-color: black;
 }
 
 .clear {
@@ -22,23 +19,7 @@ body {
     display: block;
 }
 
-.oldquote {
-    background-color: #252525;
-    border-width: 0px;
-}
-
-.oldcitation {
-    background-color: #252525;
-    border-width: 0px;
-}
-
-.citation {
-    background-color: #252525;
-    border-width: 0px;
-}
-
-.spoiler {
-    background-color: #252525;
+.oldquote, .oldcitation, .citation, .spoiler {
     border-width: 0px;
 }
 
@@ -189,7 +170,6 @@ body {
 
                 .message .content table .s1 a {
                     font-weight: bold !important;
-                    color: whitesmoke !important;
                     text-decoration: none !important;
                 }
 
