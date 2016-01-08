@@ -25,6 +25,7 @@ namespace Hfr.Model
 
         public Dictionary<String, String> Data { get; set; }
 
+        public IEnumerable<Smiley> Smileys { get; set; }
         public int idxTopic; //Topic index in MainViewModel <Topics>
         
         public string Text
@@ -47,6 +48,7 @@ namespace Hfr.Model
             set
             {
                 Data["content_form"] = value.ToString();
+                RaisePropertyChanged(nameof(Text));
             }
         }
         

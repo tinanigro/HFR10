@@ -99,6 +99,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\Editor\DeleteMessageCommand.cs" />
+    <Compile Include="Commands\Editor\PickAndUploadImgCommand.cs" />
+    <Compile Include="Commands\Editor\SmileyChosenCommand.cs" />
     <Compile Include="Commands\Settings\Accounts\ConnectCommand.cs" />
     <Compile Include="Commands\Editor\SubmitMessageCommand.cs" />
     <Compile Include="Commands\Editor\CancelMessageCommand.cs" />
@@ -129,6 +131,7 @@
     <Compile Include="Helpers\FormFetcher.cs" />
     <Compile Include="Helpers\HttpClientHelper.cs" />
     <Compile Include="Helpers\PrivateChatsFetcher.cs" />
+    <Compile Include="Helpers\SmileyFetcher.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Helpers\ThreadUI.cs" />
     <Compile Include="Helpers\ToastHelper.cs" />
@@ -145,6 +148,7 @@
     <Compile Include="Models\PrivateChat.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\Smiley.cs" />
     <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Models\Topic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

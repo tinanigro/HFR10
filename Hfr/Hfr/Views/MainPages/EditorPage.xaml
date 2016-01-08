@@ -5,19 +5,21 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:shellControls="using:Hfr.Views.ShellControls"
+      xmlns:triggers="using:WinRT.Triggers"
       DataContext="{Binding Source={StaticResource Locator}, Path=Editor}"
       mc:Ignorable="d">
     <Page.BottomAppBar>
-        <CommandBar Background="{ThemeResource SystemControlForegroundAccentBrush}">
+        <CommandBar Background="{ThemeResource SystemControlForegroundAccentBrush}"
+                    RequestedTheme="Dark">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Delete"
                               Label="Supprimer"
                               Command="{Binding DeleteMessageCommand}"
                               ClickMode="Press"
                               Visibility="{Binding IsEditUIVisible}" />
-                <AppBarButton Icon="Emoji"
-                              Label="Smileys" 
-                              Click="AppBarButton_Click"/>
+                <AppBarToggleButton Icon="Emoji"
+                                    Label="Smileys"
+                                    IsChecked="{Binding ShowSmileyUI, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <AppBarButton Icon="Cancel"
                               Label="Annuler"
                               Command="{Binding CancelMessageCommand}"
@@ -32,28 +34,141 @@
     </Page.BottomAppBar>
 
     <Grid Margin="{StaticResource DefaultMarginExceptBottom}"
-          Background="{ThemeResource SystemControlBackgroundChromeBlackMediumBrush}"
-          BorderBrush="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
+          Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
+          BorderBrush="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"
           BorderThickness="1">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <shellControls:Header HeaderContent="Votre réponse" />
-        <TextBox x:Name="MessageTextBlock"
-                 Grid.Row="1"
-                 PlaceholderText="Ecrivez votre message ici ..."
-                 VerticalAlignment="Stretch"
-                 Padding="16"
-                 VerticalContentAlignment="Top"
-                 MinHeight="250"
-                 Style="{StaticResource TransparentTextBoxStyle}"
-                 Text="{Binding CurrentEditor.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                 TextWrapping="Wrap"
-                 AcceptsReturn="True"
-                 ScrollViewer.VerticalScrollBarVisibility="Visible" />
+        <shellControls:Header HeaderContent="Votre réponse"
+                              RequestedTheme="Dark" />
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="FirstColumnDefinition"
+                                  Width="0" />
+                <ColumnDefinition x:Name="SecondColumnDefinition" />
+            </Grid.ColumnDefinitions>
+            <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
+                <ScrollViewer Style="{StaticResource VerticalScrollViewerStyle}">
+                    <StackPanel>
+                        <AutoSuggestBox Header="Wiki Smileys"
+                                        PlaceholderText="chercher un smiley"
+                                        Text="{Binding SmileySearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        ItemsSource="{Binding WikiSmileys}"
+                                        ItemTemplate="{StaticResource SmileyHorizontalItemTemplate}"
+                                        UpdateTextOnSelect="False"
+                                        Margin="{StaticResource DefaultMargin}">
+                            <triggers:Interactions.Triggers>
+                                <triggers:EventTrigger EventName="SuggestionChosen">
+                                    <triggers:InvokeCommandAction Command="{Binding SmileyChosenCommand}"
+                                                                  PassEventArgsToCommand="True" />
+                                </triggers:EventTrigger>
+                            </triggers:Interactions.Triggers>
+                        </AutoSuggestBox>
+
+                        <ListView Header="Smileys"
+                                  Margin="{StaticResource DefaultMarginLeft}"
+                                  ItemsSource="{Binding CurrentEditor.Smileys}"
+                                  ItemTemplate="{StaticResource SmileyItemTemplate}"
+                                  IsItemClickEnabled="True"
+                                  SelectionMode="None">
+                            <triggers:Interactions.Triggers>
+                                <triggers:EventTrigger EventName="ItemClick">
+                                    <triggers:InvokeCommandAction Command="{Binding SmileyChosenCommand}"
+                                                                  PassEventArgsToCommand="True" />
+                                </triggers:EventTrigger>
+                            </triggers:Interactions.Triggers>
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid Orientation="Horizontal"
+                                                   ItemWidth="35"
+                                                   ItemHeight="35" />
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                        </ListView>
+
+                        <Button Content="Uploader une image"
+                                Margin="{StaticResource DefaultMargin}"
+                                Command="{Binding PickAndUploadImgCommand}" />
+
+                        <StackPanel Visibility="{Binding UploadImageUrlTextBoxsVisibility}"
+                                    Margin="{StaticResource DefaultMargin}">
+                            <TextBlock Text="Insertion de l'image"
+                                       Style="{StaticResource SubheaderTextBlockStyle}" />
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Grande"
+                                        Click="IncludeGrandePic" />
+                                <Button Content="Preview"
+                                        Click="IncludePreviewPic" />
+                                <Button Content="Mini"
+                                        Click="IncludeMiniPic" />
+                            </StackPanel>
+                            <ToggleSwitch x:Name="IncludeImgUrlLink"
+                                          OnContent="Avec lien" 
+                                          OffContent="Sans lien"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+            <TextBox x:Name="MessageTextBlock"
+                     Grid.Column="1"
+                     PlaceholderText="Ecrivez votre message ici ..."
+                     VerticalAlignment="Stretch"
+                     Padding="16"
+                     VerticalContentAlignment="Top"
+                     MinHeight="250"
+                     Style="{StaticResource TransparentTextBoxStyle}"
+                     Text="{Binding CurrentEditor.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     SelectionStart="{Binding SelectionStart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     ScrollViewer.VerticalScrollBarVisibility="Visible" />
+        </Grid>
         <ProgressBar Grid.Row="1"
                      IsIndeterminate="True"
                      Visibility="{Binding IsBusyScreenVisible}" />
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="MainEditorVisible">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{Binding IsMainEditorVisible}" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="FirstColumnDefinition.Width"
+                                Value="0" />
+                        <Setter Target="SecondColumnDefinition.Width"
+                                Value="*" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="ExtraEditorVisible">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{Binding IsExtraEditorVisibleVisible}" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="FirstColumnDefinition.Width"
+                                Value="*" />
+                        <Setter Target="SecondColumnDefinition.Width"
+                                Value="0" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="IsCompleteEditorVisible">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{Binding IsCompleteEditorVisible}" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="FirstColumnDefinition.Width"
+                                Value="*" />
+                        <Setter Target="SecondColumnDefinition.Width"
+                                Value="2*" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>

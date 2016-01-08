@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="using:Hfr.Views.Controls">
+                    xmlns:controls="using:Hfr.Views.Controls"
+                    xmlns:gif="using:XamlAnimatedGif">
     <!-- Headers -->
     <DataTemplate x:Key="CategoriesHeaderTemplate">
         <TextBlock Text="{Binding Key}"
@@ -10,6 +11,31 @@
     </DataTemplate>
 
     <!-- Item Templates -->
+    <DataTemplate x:Key="SmileyItemTemplate">
+        <Grid VerticalAlignment="Center"
+              HorizontalAlignment="Center">
+            <Image gif:AnimationBehavior.SourceUri="{Binding Src}"
+                   Height="16"
+                   Width="16" />
+        </Grid>
+    </DataTemplate>
+    
+    <DataTemplate x:Key="SmileyHorizontalItemTemplate">
+        <Grid VerticalAlignment="Center"
+              HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="{StaticResource DefaultMarginGridLength}" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Image gif:AnimationBehavior.SourceUri="{Binding Src}"
+                   Height="36"
+                   Width="36" />
+            <TextBlock Grid.Column="2"
+                       Text="{Binding Tag}" />
+        </Grid>
+    </DataTemplate>
+    
     <DataTemplate x:Key="FlagItemTemplate">
         <controls:FlagItemTemplate />
     </DataTemplate>

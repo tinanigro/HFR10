@@ -18,16 +18,25 @@ namespace Hfr.Views.MainPages
         {
             base.OnNavigatedTo(e);
             Loc.Editor.PropertyChanged += Editor_PropertyChanged;
+            Loc.Editor.SmileyChosen += Editor_SmileyChosen;
             ApplicationView.GetForCurrentView().SuppressSystemOverlays = true;
             App.TelemetryClient.TrackPageView(nameof(EditorPage));
         }
+
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
             Loc.Editor.PropertyChanged -= Editor_PropertyChanged;
+            Loc.Editor.SmileyChosen -= Editor_SmileyChosen;
             Loc.Editor.OnNavigatedFrom();
             ApplicationView.GetForCurrentView().SuppressSystemOverlays = false;
+        }
+
+        private void Editor_SmileyChosen(Models.Smiley smiley)
+        {
+            var tagToInsert = " " + smiley.Tag + " ";
+            InsertInMessageTextBlock(tagToInsert);
         }
 
         private void Editor_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -37,7 +46,7 @@ namespace Hfr.Views.MainPages
                 if (Loc.Editor.IsEditorEnabled)
                 {
                     MessageTextBlock.IsEnabled = true;
-                    MessageTextBlock.Focus(Windows.UI.Xaml.FocusState.Keyboard);
+                    MessageTextBlock.Focus(FocusState.Keyboard);
                     if (!string.IsNullOrEmpty(MessageTextBlock.Text) && MessageTextBlock.Text.Length > 0)
                     {
                         MessageTextBlock.SelectionStart = MessageTextBlock.Text.Length - 1;

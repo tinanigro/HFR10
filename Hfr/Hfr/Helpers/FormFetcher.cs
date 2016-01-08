@@ -115,6 +115,19 @@ namespace Hfr.Helpers
                 formInputs.Add(node.GetAttributeValue("name", ""), WebUtility.HtmlDecode(node.InnerText) + Environment.NewLine);
             }
 
+            var smileys = new List<Smiley>();
+            foreach (HtmlNode node in formNode.Descendants("div").FirstOrDefault(x => x.GetAttributeValue("class", "") == "smiley" || x.GetAttributeValue("class","") == "dynamic_smilies")?.Descendants("img"))
+            {
+                var url = node.GetAttributeValue("src", "");
+                var tag = node.GetAttributeValue("title", "");
+                if (!string.IsNullOrEmpty(url) && !string.IsNullOrEmpty(tag))
+                {
+                    var smiley = new Smiley(url, tag);
+                    smileys.Add(smiley);
+                }
+            }
+            
+            
             //Debug.WriteLine("Parsing OK");
 
             //foreach (KeyValuePair<string, string> entry in formInputs)
@@ -142,7 +155,8 @@ namespace Hfr.Helpers
                 SubmitUrl = submitUrl,
                 Data = formInputs,
                 idxTopic = 0,
-                Intent = package.Intent
+                Intent = package.Intent,
+                Smileys = smileys
             };
         }
 
