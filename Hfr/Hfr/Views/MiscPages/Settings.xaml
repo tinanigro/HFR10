@@ -69,10 +69,10 @@
                                       VerticalAlignment="Center"
                                       Margin="{StaticResource DefaultMarginBottom}" />
                         </StackPanel>
-                        
+
                         <StackPanel x:Name="UISettingsGrid"
                                     Width="320">
-                        <TextBlock x:Name="UIHeader"
+                            <TextBlock x:Name="UIHeader"
                                    Text="Interface utilisateur"
                                    Style="{StaticResource SubtitleTextBlockStyle}"
                                    Margin="{StaticResource DefaultMarginBottom}" />
@@ -86,12 +86,20 @@
                                       IsOn="{Binding DisplayPrivateChatsByDefault, Mode=TwoWay}"
                                       OnContent="Oui"
                                       OffContent="Non" />
-                        <ToggleSwitch x:Name="AvatarStyleToggl" 
+                            <ToggleSwitch x:Name="AvatarStyleToggl" 
                                       Header="Style des avatars"
                                       IsOn="{Binding SquareAvatarStylePreferred, Mode=TwoWay}"
                                       Margin="{StaticResource DefaultMarginBottom}"
                                       OffContent="Cercle Windows 10 style"
                                       OnContent="Carré oldschool" />
+                            <Slider Header="Transparence des en-têtes des posts"
+                                    Minimum="0"
+                                    Maximum="1"
+                                    Value="{Binding PostHeaderTransparencyPreferred, Mode=TwoWay}"
+                                    SmallChange="0.1"
+                                    StepFrequency="0.1"
+                                    HorizontalAlignment="Left"
+                                    Width="300" />
                             <Slider Header="Taille de la police"                                    
                                     Minimum="{Binding MinimumFontSize}"
                                     Maximum="{Binding MaximumFontSize}"
