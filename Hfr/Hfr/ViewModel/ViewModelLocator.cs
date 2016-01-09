@@ -51,6 +51,7 @@ namespace Hfr.ViewModel
             SimpleIoc.Default.Register<SubCategoryViewModel>();
             SimpleIoc.Default.Register<TopicViewModel>();
             SimpleIoc.Default.Register<SettingsViewModel>();
+            SimpleIoc.Default.Register<PrivateChatViewModel>();
         }
 
         public static MainViewModel Main
@@ -73,8 +74,10 @@ namespace Hfr.ViewModel
 
         public static TopicViewModel Topic => ServiceLocator.Current.GetInstance<TopicViewModel>();
 
-        public static SettingsViewModel Settings => ServiceLocator.Current.GetInstance<SettingsViewModel>();
+        public static PrivateChatViewModel PrivateChat => ServiceLocator.Current.GetInstance<PrivateChatViewModel>();
 
+        public static SettingsViewModel Settings => ServiceLocator.Current.GetInstance<SettingsViewModel>();
+        
         public static NavigationService NavigationService
         {
             get { return ServiceLocator.Current.GetInstance<NavigationService>(); }

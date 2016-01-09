@@ -35,6 +35,9 @@ namespace Hfr.Views.MainPages
                 case View.CategoriesList:
                     CategoriesPanel.Navigate(view);
                     break;
+                case View.PrivateChat:
+                    MessagesList.Navigate(view);
+                    break;
             }
         }
     }

@@ -7,6 +7,8 @@
         Editor,
         Settings,
         CategoriesList,
-        CategoryTopicsList
+        CategoryTopicsList,
+        PrivateChatsList,
+        PrivateChat
     }
 }

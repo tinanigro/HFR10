@@ -65,7 +65,8 @@
                        TextWrapping="NoWrap"
                        TextTrimming="CharacterEllipsis"
                        FontWeight="Normal"
-                       FontSize="15" />
+                       FontSize="15"
+                       Foreground="{Binding Foreground}"/>
             <TextBlock Grid.Column="2"
                        Grid.Row="1"
                        Text="{Binding Poster}"

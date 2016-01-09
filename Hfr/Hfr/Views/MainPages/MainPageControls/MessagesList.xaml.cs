@@ -1,4 +1,6 @@
 ﻿using Windows.UI.Xaml.Controls;
+using Hfr.Model;
+using Hfr.Views.MainPages.MainPageControls.PrivateChatsViews;
 
 namespace Hfr.Views.MainPages.MainPageControls
 {
@@ -7,10 +9,20 @@ namespace Hfr.Views.MainPages.MainPageControls
         public MessagesList()
         {
             this.InitializeComponent();
+            Navigate(View.PrivateChatsList);
         }
-        private void SemanticZoom_OnViewChangeCompleted(object sender, SemanticZoomViewChangedEventArgs e)
+
+        public void Navigate(View view)
         {
-            ChatsZoomeOutListView.ItemsSource = PrivateChatsCvs.View.CollectionGroups;
+            switch (view)
+            {
+                case View.PrivateChatsList:
+                    NavigationFrame.Navigate(typeof(PrivateChatsList));
+                    break;
+                case View.PrivateChat:
+                    NavigationFrame.Navigate(typeof(PrivateChat));
+                    break;
+            }
         }
     }
 }

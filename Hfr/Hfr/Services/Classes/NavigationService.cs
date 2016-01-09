@@ -123,6 +123,7 @@ namespace Hfr.Services.Classes
                     break;
                 case View.CategoryTopicsList:
                 case View.CategoriesList:
+                case View.PrivateChat:
                     ((MainPage)App.NavigationFrame.Content)?.Navigate(page);
                     break;
                 default:

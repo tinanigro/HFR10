@@ -101,6 +101,7 @@
     <Compile Include="Commands\Editor\DeleteMessageCommand.cs" />
     <Compile Include="Commands\Editor\PickAndUploadImgCommand.cs" />
     <Compile Include="Commands\Editor\SmileyChosenCommand.cs" />
+    <Compile Include="Commands\PrivateChats\OpenPrivateChat.cs" />
     <Compile Include="Commands\Settings\Accounts\ConnectCommand.cs" />
     <Compile Include="Commands\Editor\SubmitMessageCommand.cs" />
     <Compile Include="Commands\Editor\CancelMessageCommand.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="ViewModel\EditorViewModel.cs" />
     <Compile Include="Utilities\Strings.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\PrivateChatViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\SubCategoryViewModel.cs" />
     <Compile Include="ViewModel\TopicViewModel.cs" />
@@ -203,6 +205,12 @@
     </Compile>
     <Compile Include="Views\MainPages\MainPageControls\MessagesList.xaml.cs">
       <DependentUpon>MessagesList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainPages\MainPageControls\PrivateChatsViews\PrivateChat.xaml.cs">
+      <DependentUpon>PrivateChat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainPages\MainPageControls\PrivateChatsViews\PrivateChatsList.xaml.cs">
+      <DependentUpon>PrivateChatsList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPages\MainPageControls\TopicList.xaml.cs">
       <DependentUpon>TopicList.xaml</DependentUpon>
@@ -349,6 +357,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPages\MainPageControls\MessagesList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainPages\MainPageControls\PrivateChatsViews\PrivateChat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainPages\MainPageControls\PrivateChatsViews\PrivateChatsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
