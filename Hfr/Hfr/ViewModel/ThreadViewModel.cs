@@ -9,51 +9,53 @@ using Hfr.Commands.Topic;
 using Hfr.Helpers;
 using Hfr.Model;
 using Hfr.Models;
+using Hfr.Models.Threads;
 
 namespace Hfr.ViewModel
 {
-    public class TopicViewModel : ViewModelBase
+    public delegate void ThreadReadyToBeDisplayed(Thread thread);
+    public class ThreadViewModel : ViewModelBase
     {
         #region private props
-        private int _selectedTopic;
-        private bool _isTopicLoading;
+        private int _selectedThread;
+        private bool _isThreadLoading;
         #endregion
         #region private fields
         #endregion
         #region public props      
 
-        public bool IsTopicLoading
+        public bool IsThreadLoading
         {
-            get { return _isTopicLoading;}
+            get { return _isThreadLoading; }
             set
             {
-                Set(ref _isTopicLoading, value); 
+                Set(ref _isThreadLoading, value);
                 RaisePropertyChanged(nameof(TopicLoadingVisibility));
             }
         }
 
-        public Visibility TopicLoadingVisibility => IsTopicLoading ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility TopicLoadingVisibility => IsThreadLoading ? Visibility.Visible : Visibility.Collapsed;
 
-        public int SelectedTopic
+        public int SelectedThread
         {
-            get { return _selectedTopic; }
+            get { return _selectedThread; }
             set
             {
-                Set(ref _selectedTopic, value);
-                if (TopicVisible)
+                Set(ref _selectedThread, value);
+                if (ThreadVisible)
                 {
                     Loc.NavigationService.ShowBackButtonIfCanGoBack();
-                    RaisePropertyChanged(nameof(CurrentTopic));
+                    RaisePropertyChanged(nameof(CurrentThread));
                 }
                 if (value == -1)
                 {
                     // No topic displayed, reset webview
-                    UpdateTopicWebView(null);
+                    UpdateThreadWebView(null);
                 }
             }
         }
 
-        public Topic CurrentTopic
+        public Thread CurrentThread
         {
             get
             {
@@ -61,26 +63,26 @@ namespace Hfr.ViewModel
                 {
                     return new Topic()
                     {
-                        TopicName = "TU DesignTime"
+                        ThreadName = "TU DesignTime"
                     };
                 }
-                if (!Loc.Main.Topics.Any() || SelectedTopic == -1) return null;
-                else if (SelectedTopic > -1 && SelectedTopic < Loc.Main.Topics.Count)
-                    return Loc.Main.Topics[(int)SelectedTopic];
+                if (!Loc.Main.Threads.Any() || SelectedThread == -1) return null;
+                else if (SelectedThread > -1 && SelectedThread < Loc.Main.Threads.Count)
+                    return Loc.Main.Threads[(int)SelectedThread];
                 else
                 {
-                    SelectedTopic = 0;
-                    return Loc.Main.Topics[(int)SelectedTopic];
+                    SelectedThread = 0;
+                    return Loc.Main.Threads[(int)SelectedThread];
                 }
             }
         }
 
-        public bool TopicVisible
+        public bool ThreadVisible
         {
             get
             {
                 Loc.Main.TriggerUIAdapter();
-                return CurrentTopic != null;
+                return CurrentThread != null;
             }
         }
         #endregion
@@ -89,21 +91,21 @@ namespace Hfr.ViewModel
         #endregion
 
         #region commands
-        public ChangeTopicPageCommand ChangeTopicPageCommand { get; } = new ChangeTopicPageCommand();
-        public RefreshTopicCommand RefreshTopicCommand { get; } = new RefreshTopicCommand();
+        public ChangeThreadPageCommand ChangeThreadPageCommand { get; } = new ChangeThreadPageCommand();
+        public RefreshThreadCommand RefreshThreadCommand { get; } = new RefreshThreadCommand();
         public ShowEditorCommand ShowEditorCommand { get; } = new ShowEditorCommand();
         #endregion
 
         #region events
-        public event TopicReadyToBeDisplayed TopicReadyToBeDisplayed;
+        public event ThreadReadyToBeDisplayed ThreadReadyToBeDisplayed;
         #endregion
 
         #region methods
-        public void UpdateTopicWebView(Topic topic)
+        public void UpdateThreadWebView(Thread thread)
         {
-            TopicReadyToBeDisplayed?.Invoke(topic);
-            if (topic != null)
-            Task.Run(async () => await DrapFetcher.GetDraps(Loc.Settings.FollowedTopicType));
+            ThreadReadyToBeDisplayed?.Invoke(thread);
+            if (thread != null && thread is Topic)
+                Task.Run(async () => await DrapFetcher.GetDraps(Loc.Settings.FollowedTopicType));
         }
 
         public async Task RefreshPage(EditorIntent editorIntent)
@@ -115,7 +117,7 @@ namespace Hfr.ViewModel
                     case EditorIntent.New:
                     case EditorIntent.Quote:
                     case EditorIntent.MultiQuote:
-                        CurrentTopic.TopicCurrentPage = CurrentTopic.TopicNbPage;
+                        CurrentThread.ThreadCurrentPage = CurrentThread.ThreadNbPage;
                         break;
                     case EditorIntent.Edit:
                     case EditorIntent.Delete:
@@ -124,9 +126,8 @@ namespace Hfr.ViewModel
                         break;
                 }
             });
-            await Task.Run(async () => await TopicFetcher.GetPosts(CurrentTopic));
+            await Task.Run(async () => await ThreadFetcher.GetPosts(CurrentThread));
         }
         #endregion
-
     }
 }

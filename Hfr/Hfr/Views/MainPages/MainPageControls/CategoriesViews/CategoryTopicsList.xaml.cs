@@ -20,9 +20,9 @@ namespace Hfr.Views.MainPages.MainPageControls.CategoriesViews
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CategoryTopicsList : Page
+    public sealed partial class CategoryThreadsList : Page
     {
-        public CategoryTopicsList()
+        public CategoryThreadsList()
         {
             this.InitializeComponent();
         }

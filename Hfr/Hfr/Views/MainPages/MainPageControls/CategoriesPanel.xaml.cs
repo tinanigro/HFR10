@@ -20,8 +20,8 @@ namespace Hfr.Views.MainPages.MainPageControls
                 case View.CategoriesList:
                     NavigationFrame.Navigate(typeof(CategoriesList));
                     break;
-                case View.CategoryTopicsList:
-                    NavigationFrame.Navigate(typeof (CategoryTopicsList));
+                case View.CategoryThreadsList:
+                    NavigationFrame.Navigate(typeof (CategoryThreadsList));
                     break;
             }
         }

@@ -8,40 +8,40 @@ using Hfr.Helpers;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Hfr.Commands.Topics
+namespace Hfr.Commands.Threads
 {
     public class OpenTopicCommand : Command
     {
         public override void Execute(object parameter)
         {
-            Model.Topic topic = null;
+            Models.Threads.Topic topic = null;
             if (parameter is ItemClickEventArgs)
             {
                 var itemClick = parameter as ItemClickEventArgs;
-                topic = itemClick.ClickedItem as Model.Topic;
+                topic = itemClick.ClickedItem as Models.Threads.Topic;
             }
-            else if (parameter is Model.Topic)
+            else if (parameter is Models.Threads.Topic)
             {
-                topic = (Model.Topic)parameter;
+                topic = (Models.Threads.Topic)parameter;
             }
             else if (parameter is IDictionary)
             {
                 var elements = (Dictionary<object, object>)parameter;
-                topic = elements["topic"] as Model.Topic;
+                topic = elements["topic"] as Models.Threads.Topic;
                 var desiredPage = elements["page"]?.ToString();
                 var desiredPageValue = 0;
                 if (!int.TryParse(desiredPage, out desiredPageValue)) return;
-                topic.TopicCurrentPage = desiredPageValue;
+                topic.ThreadCurrentPage = desiredPageValue;
             }
 
             if (topic == null) return;
 
-            if (!Loc.Main.Topics.Any())
-                Loc.Main.Topics.Add(topic);
-            else Loc.Main.Topics[0] = topic;
-            Loc.Topic.SelectedTopic = 0;
+            if (!Loc.Main.Threads.Any())
+                Loc.Main.Threads.Add(topic);
+            else Loc.Main.Threads[0] = topic;
+            Loc.Thread.SelectedThread = 0;
 
-            Task.Run(async () => await TopicFetcher.GetPosts(Loc.Topic.CurrentTopic));
+            Task.Run(async () => await ThreadFetcher.GetPosts(Loc.Thread.CurrentThread));
 
             if (Loc.NavigationService.CurrentView != View.Main)
                 Loc.NavigationService.Navigate(View.Main);

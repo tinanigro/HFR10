@@ -14,12 +14,48 @@
             <RowDefinition Height="68" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <shellControls:Header HeaderContent="{Binding CurrentPrivateChat.Subject}">
+        <shellControls:Header HeaderContent="Message privé">
             <shellControls:Header.RightContent>
                 <AppBarButton Icon="Clear"
-                              Command="{Binding Source={StaticResource Locator}, Path=NavigationService.NavigateToCategoriesList}" />
+                              Command="{Binding Source={StaticResource Locator}, Path=NavigationService.NavigateToPrivateChatsList}" />
             </shellControls:Header.RightContent>
         </shellControls:Header>
-
+        <Grid Grid.Row="1"
+              Padding="{StaticResource DefaultMarginLeft}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Style="{StaticResource SubheaderTextBlockStyle}"
+                       VerticalAlignment="Center"
+                       Text="{Binding CurrentPrivateChat.ThreadName}"
+                       TextWrapping="NoWrap"
+                       TextTrimming="CharacterEllipsis"
+                       FontSize="22"
+                       Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"
+                       Margin="0,12" />
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center">
+                <TextBlock VerticalAlignment="Center"
+                           Text="{Binding CurrentPrivateChat.ThreadCurrentPage}"
+                           FontSize="28"
+                           FontWeight="Light"
+                           Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"
+                           Margin="0,12" />
+                <AppBarButton Icon="Back"
+                              IsCompact="True"
+                              Command="{Binding ChangeThreadsListPageInSubCatCommand}"
+                              CommandParameter="-"
+                              VerticalAlignment="Center" />
+                <AppBarButton Icon="Forward"
+                              IsCompact="True"
+                              Command="{Binding ChangeThreadsListPageInSubCatCommand}"
+                              CommandParameter="+"
+                              VerticalAlignment="Center" />
+            </StackPanel>
+        </Grid>
+        
     </Grid>
 </Page>

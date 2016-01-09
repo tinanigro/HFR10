@@ -9,46 +9,47 @@ using Hfr.ViewModel;
 using Hfr.Models;
 using System.Threading.Tasks;
 using Hfr.Helpers;
+using Hfr.Models.Threads;
 
 namespace Hfr.Views.MainPages
 {
-    public sealed partial class TopicView : UserControl
+    public sealed partial class ThreadView : UserControl
     {
-        public TopicView()
+        public ThreadView()
         {
             InitializeComponent();
-            this.Loaded += TopicView_Loaded;
-            this.Unloaded += TopicView_Unloaded;
+            this.Loaded += ThreadView_Loaded;
+            this.Unloaded += ThreadView_Unloaded;
         }
 
-        private void TopicView_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void ThreadView_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            TopicWebView.NavigationCompleted += TopicWebViewOnNavigationCompleted;
-            Loc.Topic.TopicReadyToBeDisplayed += CurrentTopic_TopicReadyToBeDisplayed;
+            ThreadWebView.NavigationCompleted += ThreadWebViewOnNavigationCompleted;
+            Loc.Thread.ThreadReadyToBeDisplayed += CurrentThread_ThreadReadyToBeDisplayed;
             Loc.Editor.EditorCancelledMessage += Editor_EditorCancelledMessage;
         }
 
         private async void Editor_EditorCancelledMessage()
         {
-            await TopicWebView.InvokeScriptAsync("resetAllMultiQuotes", new string[0]);
+            await ThreadWebView.InvokeScriptAsync("resetAllMultiQuotes", new string[0]);
         }
 
-        private void TopicView_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void ThreadView_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            TopicWebView.NavigationCompleted -= TopicWebViewOnNavigationCompleted;
-            Loc.Topic.TopicReadyToBeDisplayed -= CurrentTopic_TopicReadyToBeDisplayed;
+            ThreadWebView.NavigationCompleted -= ThreadWebViewOnNavigationCompleted;
+            Loc.Thread.ThreadReadyToBeDisplayed -= CurrentThread_ThreadReadyToBeDisplayed;
             Loc.Editor.EditorCancelledMessage -= Editor_EditorCancelledMessage;
         }
 
-        private void CurrentTopic_TopicReadyToBeDisplayed(Topic topic)
+        private void CurrentThread_ThreadReadyToBeDisplayed(Thread thread)
         {
-            if (topic != null)
-                TopicWebView.Navigate(Strings.TopicPageCacheUri);
+            if (thread != null)
+                ThreadWebView.Navigate(Strings.TopicPageCacheUri);
             else
-                TopicWebView.NavigateToString("");
+                ThreadWebView.NavigateToString("");
         }
 
-        private async void TopicWebViewOnNavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        private async void ThreadWebViewOnNavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
             if (args.Uri == null) return;
             if (args.Uri.AbsoluteUri.Contains($"{Strings.WebSiteCacheFileName}#")) return;
@@ -78,19 +79,19 @@ namespace Hfr.Views.MainPages
             }
             else
             {
-                if (!string.IsNullOrEmpty(Loc.Topic.CurrentTopic?.TopicReponseId))
+                if (Loc.Thread.CurrentThread?.ThreadBookmarkId > 0)
                 {
-                    await ScrollTo(Loc.Topic.CurrentTopic.TopicReponseId);
+                    await ScrollTo(Loc.Thread.CurrentThread.ThreadBookmarkId.ToString());
                 }
             }
         }
 
         async Task ScrollTo(string anchor)
         {
-            await TopicWebView.InvokeScriptAsync("scrollTo", new string[1] { anchor });
+            await ThreadWebView.InvokeScriptAsync("scrollTo", new string[1] { anchor });
         }
 
-        private async void TopicWebView_OnNavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
+        private async void ThreadWebView_OnNavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
             if (args.Uri != null && args.Uri.AbsoluteUri.StartsWith(Strings.LocalUriPrefix))
             {
@@ -101,8 +102,8 @@ namespace Hfr.Views.MainPages
                     var postId = decoder.FirstOrDefault(x => x.Name == "postId")?.Value;
                     if (!string.IsNullOrEmpty(postId))
                     {
-                        var package = new EditorPackage(EditorIntent.Quote, Loc.Topic.CurrentTopic.TopicNewPostUriForm + $"&numrep={postId}");
-                        Loc.Topic.ShowEditorCommand.Execute(package);
+                        var package = new EditorPackage(EditorIntent.Quote, Loc.Thread.CurrentThread.ThreadNewPostUriForm + $"&numrep={postId}");
+                        Loc.Thread.ShowEditorCommand.Execute(package);
                     }
                 }
                 else if (args.Uri.AbsoluteUri.Contains("deleteFromMultiQuote"))
@@ -111,7 +112,7 @@ namespace Hfr.Views.MainPages
                     var postId = decoder.FirstOrDefault(x => x.Name == "postId")?.Value;
                     if (!string.IsNullOrEmpty(postId))
                     {
-                        var package = new EditorPackage(EditorIntent.MultiQuote, Loc.Topic.CurrentTopic.TopicNewPostUriForm + $"&numrep={postId}");
+                        var package = new EditorPackage(EditorIntent.MultiQuote, Loc.Thread.CurrentThread.ThreadNewPostUriForm + $"&numrep={postId}");
                         await Loc.Editor.RemoveQuoteFromMultiQuote(package);
                     }
                 }
@@ -121,8 +122,8 @@ namespace Hfr.Views.MainPages
                     var postId = decoder.FirstOrDefault(x => x.Name == "postId")?.Value;
                     if (!string.IsNullOrEmpty(postId))
                     {
-                        var package = new EditorPackage(EditorIntent.MultiQuote, Loc.Topic.CurrentTopic.TopicNewPostUriForm + $"&numrep={postId}");
-                        Loc.Topic.ShowEditorCommand.Execute(package);
+                        var package = new EditorPackage(EditorIntent.MultiQuote, Loc.Thread.CurrentThread.ThreadNewPostUriForm + $"&numrep={postId}");
+                        Loc.Thread.ShowEditorCommand.Execute(package);
                     }
                 }
                 else if (args.Uri.AbsoluteUri.Contains("edit"))
@@ -131,8 +132,8 @@ namespace Hfr.Views.MainPages
                     var postId = decoder.FirstOrDefault(x => x.Name == "postId")?.Value;
                     if (!string.IsNullOrEmpty(postId))
                     {
-                        var package = new EditorPackage(EditorIntent.Edit, Loc.Topic.CurrentTopic.TopicNewPostUriForm + $"&numreponse={postId}");
-                        Loc.Topic.ShowEditorCommand.Execute(package);
+                        var package = new EditorPackage(EditorIntent.Edit, Loc.Thread.CurrentThread.ThreadNewPostUriForm + $"&numreponse={postId}");
+                        Loc.Thread.ShowEditorCommand.Execute(package);
                     }
                 }
                 else

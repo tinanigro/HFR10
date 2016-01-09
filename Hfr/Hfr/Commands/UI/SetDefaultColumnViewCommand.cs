@@ -13,7 +13,7 @@ namespace Hfr.Commands.UI
     {
         public override void Execute(object parameter)
         {
-            MainColumn column = MainColumn.TopicsList;
+            MainColumn column = MainColumn.ThreadsList;
             if (parameter is MainColumn)
             {
                 column = (MainColumn) parameter;

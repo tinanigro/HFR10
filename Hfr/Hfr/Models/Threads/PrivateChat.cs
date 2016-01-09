@@ -1,28 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI;
+using Windows.UI.Text;
 using Windows.UI.Xaml.Media;
+using GalaSoft.MvvmLight;
+using Hfr.Helpers;
 using Hfr.ViewModel;
 
-namespace Hfr.Models
+namespace Hfr.Models.Threads
 {
-    public class PrivateChat
+    public class PrivateChat : Thread
     {
-        public string Subject { get; set; }
-        public string Poster { get; set; }
-        public bool NewMsg { get; set; }
-        public DateTime DateTime { get; set; }
-
-        public string DateTimeString => DateTime.ToString("g", new CultureInfo("fr-FR"));
-        public SolidColorBrush Foreground
+        public override SolidColorBrush Foreground
         {
             get
             {
-                if (NewMsg)
+                if (ThreadHasNewPost)
                 {
                     return (SolidColorBrush)App.Current.Resources["SystemControlHighlightAltListAccentMediumBrush"];
                 }
@@ -31,6 +24,11 @@ namespace Hfr.Models
                 else
                     return new SolidColorBrush(Colors.Black);
             }
+        }
+
+        public override FontWeight FontWeight
+        {
+            get { return FontWeights.Normal; }
         }
     }
 }

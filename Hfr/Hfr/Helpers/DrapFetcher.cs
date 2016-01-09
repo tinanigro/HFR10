@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Hfr.Models.Threads;
 
 namespace Hfr.Helpers
 {
@@ -68,43 +69,6 @@ namespace Hfr.Helpers
             await ThreadUI.Invoke(() => Loc.Main.AccountManager.CurrentAccount.UserId = userID);
             Loc.Main.AccountManager.UpdateCurrentAccountInDB();
 
-            int i = 0;
-            string[] favorisTopicNames = htmlDoc.DocumentNode.Descendants("a")
-                .Where(x =>
-                    x.GetAttributeValue("class", "") == "cCatTopic" &&
-                    x.GetAttributeValue("title", "").Contains("Sujet"))
-                    .Select(y => y.InnerText).ToArray();
-
-            string[] favorisTopicNumberOfPages = htmlDoc.DocumentNode.Descendants("td")
-                .Where(x => x.GetAttributeValue("class", "") == "sujetCase4")
-                .Select(y => y.InnerText).ToArray();
-
-            string[] favorisTopicUri = htmlDoc.DocumentNode.Descendants("a")
-                .Where(x =>
-                    x.GetAttributeValue("class", "") == "cCatTopic" &&
-                    x.GetAttributeValue("title", "").Contains("Sujet"))
-                    .Select(y => y.GetAttributeValue("href", "")).ToArray();
-            
-            string[] favorisLastPost = htmlDoc.DocumentNode.Descendants("td")
-                .Where(x => x.GetAttributeValue("class", "").Contains("sujetCase9"))
-                .Select(y => y.InnerText).ToArray();
-
-            string[] favorisIsHot = htmlDoc.DocumentNode.Descendants("img")
-                .Where(x => x.GetAttributeValue("alt", "") == "Off" ||
-                    x.GetAttributeValue("alt", "") == "On")
-                    .Select(y => y.GetAttributeValue("alt", "")).ToArray();
-
-            string[] favorisBalise = htmlDoc.DocumentNode.Descendants("a")
-                .Where(x => x.GetAttributeValue("href", "").Contains("#t"))
-                .Select(y => y.GetAttributeValue("href", "")).ToArray();
-
-            //Debug.WriteLine(string.Join("\n\r", favorisBalise));
-
-            string[] mpArray =
-                htmlDoc.DocumentNode.Descendants("a").Where(x => x.GetAttributeValue("class", "") == "red")
-                .Select(y => y.InnerText).ToArray();
-
-
             /* DG */
             stopwatch.Stop();
             Debug.WriteLine("Bench Middle: " + stopwatch.ElapsedTicks +
@@ -113,110 +77,54 @@ namespace Hfr.Helpers
             stopwatch.Start();
             /* DG */
 
-            int j = 0;
+            var messagesArray = ThreadHelper.GetPostNodesFromHtmlDoc(htmlDoc);
+            if (messagesArray == null) return null;
+
             var topics = new ObservableCollection<Topic>();
-            foreach (string line in favorisTopicNames)
+            foreach (var msg in messagesArray)
             {
-                if (favorisIsHot[i] == "On")
-                {
-                    var numberOfPagesTopicLine = favorisTopicNumberOfPages[i] != "&nbsp;"
-                        ? int.Parse(favorisTopicNumberOfPages[i])
-                        : 1;
+                var sujetCase10 = ThreadHelper.GetSujetCase10(msg);
+                var id = ThreadHelper.GetIdFromSujetCase10Node(sujetCase10);
+                var catId = ThreadHelper.GetCatIdFromSujetCase10Node(sujetCase10);
 
-                    var firstTopicCatId =
-                        WebUtility.HtmlDecode(favorisBalise[j]).IndexOf("&cat=", StringComparison.Ordinal) +
-                        "&cat=".Length;
-                    var lastTopicCatId = WebUtility.HtmlDecode(favorisBalise[j])
-                        .IndexOf("&", firstTopicCatId, StringComparison.Ordinal);
-                    int topicCatId;
-                    int.TryParse(
-                        WebUtility.HtmlDecode(favorisBalise[j])
-                            .Substring(firstTopicCatId, lastTopicCatId - firstTopicCatId), out topicCatId);
+                var sujetCase9 = ThreadHelper.GetSujetCase9(msg);
+                var threadLastPostDateTime = ThreadHelper.GetDateTimeLastPostFromNode(sujetCase9);
+                var lastPoster = ThreadHelper.ThreadLastPostMemberPseudo(sujetCase9);
 
-                    var firstTopicSubCatId =
-                        WebUtility.HtmlDecode(favorisBalise[j])
-                            .IndexOf("&subcat=", StringComparison.Ordinal) + "&subcat=".Length;
-                    var lastTopicSubCatId = WebUtility.HtmlDecode(favorisBalise[j])
-                        .IndexOf("&", firstTopicSubCatId, StringComparison.Ordinal);
-                    var topicSubCatId = WebUtility.HtmlDecode(favorisBalise[j])
-                        .Substring(firstTopicSubCatId, lastTopicSubCatId - firstTopicSubCatId);
+                var isNew = ThreadHelper.NewPost(msg);
 
-                    var firstTopicId =
-                        WebUtility.HtmlDecode(favorisBalise[j]).IndexOf("&post=", StringComparison.Ordinal) +
-                        "&post=".Length;
-                    var lastTopicId = WebUtility.HtmlDecode(favorisBalise[j])
-                        .LastIndexOf("&page", StringComparison.Ordinal);
-                    var topicId = WebUtility.HtmlDecode(favorisBalise[j])
-                        .Substring(firstTopicId, lastTopicId - firstTopicId);
+                var subject = ThreadHelper.ThreadName(msg);
+                subject = ThreadNameHelper.Shorten(subject);
 
-                    var firstReponseId =
-                        WebUtility.HtmlDecode(favorisBalise[j]).IndexOf("#t", StringComparison.Ordinal) +
-                        "#t".Length;
-                    var lastReponseId = WebUtility.HtmlDecode(favorisBalise[j]).Length;
-                    var reponseId = "rep" +
-                                       WebUtility.HtmlDecode(favorisBalise[j])
-                                           .Substring(firstReponseId, lastReponseId - firstReponseId);
+                var nbPage = ThreadHelper.GetNbPageFromNode(msg);
+                var author = ThreadHelper.ThreadAuthor(msg);
+                var threadUrl = msg.Descendants("td").FirstOrDefault(x => x.GetAttributeValue("class", "") == "sujetCase5")?.FirstChild?.GetAttributeValue("href", "")?.CleanFromWeb();
 
-                    var firstPageNumber =
-                        WebUtility.HtmlDecode(favorisBalise[j]).IndexOf("&page=", StringComparison.Ordinal) +
-                        "&page=".Length;
-                    var lastPageNumber = WebUtility.HtmlDecode(favorisBalise[j])
-                        .LastIndexOf("&p=", StringComparison.Ordinal);
-                    var pageNumber = int.Parse(WebUtility.HtmlDecode(favorisBalise[j])
-                        .Substring(firstPageNumber, lastPageNumber - firstPageNumber));
+                var subCatId = ThreadHelper.GetSubCatId(threadUrl);
+                var rep = ThreadHelper.GetBookmarkId(threadUrl);
+                var currentPage = ThreadHelper.GetCurrentPage(threadUrl);
+                
+                var topic = new Topic();
+                topic.ThreadId = id;
+                topic.ThreadName = subject;
+                topic.ThreadUri = threadUrl;
+                topic.ThreadAuthor = author;
+                topic.ThreadHasNewPost = isNew;
+                topic.ThreadLastPostDate = threadLastPostDateTime;
+                topic.ThreadLastPostMemberPseudo = lastPoster;
+                topic.ThreadNbPage = nbPage;
 
-                    // URL du flag
-                    var drapURI = WebUtility.HtmlDecode(favorisBalise[j]);
+                topic.ThreadCurrentPage = currentPage;
+                topic.ThreadBookmarkId = rep;
+                topic.TopicCatId = catId;
+                topic.TopicSubCatId = subCatId;
 
-                    // Formatage topic name
-                    string topicNameFav = TopicNameHelper.Shorten(WebUtility.HtmlDecode(line));
-
-                    // Conversion date
-                    string favorisSingleLastPostTimeString =
-                        Regex.Replace(
-                            Regex.Replace(WebUtility.HtmlDecode(favorisLastPost[i].Substring(0, 28)), "à",
-                                ""), "-", "/");
-                    DateTime favorisSingleLastPostDt;
-                    favorisSingleLastPostDt = DateTime.Parse(favorisSingleLastPostTimeString,
-                        new CultureInfo("fr-FR"));
-                    double favorisSingleLastPostTime;
-                    favorisSingleLastPostTime = Convert.ToDouble(favorisSingleLastPostDt.ToFileTime());
-
-                    // Nom du dernier posteur
-                    string favorisLastPostUser =
-                        WebUtility.HtmlDecode(favorisLastPost[i].Substring(28,
-                            favorisLastPost[i].Length - 28));
-
-                    // Temps depuis dernier post
-                    TimeSpan timeSpent;
-                    timeSpent = DateTime.Now.Subtract(favorisSingleLastPostDt);
-                    string favorisLastPostText = TopicNameHelper.TimeSinceLastReadMsg(timeSpent, favorisLastPostUser);
-
-                    topics.Add(new Topic()
-                    {
-                        TopicName = topicNameFav,
-                        TopicCatId = topicCatId,
-                        TopicSubCatId = topicSubCatId,
-                        TopicId = topicId,
-                        TopicCatName = HFRCats.PlainNameFromId(topicCatId),
-                        TopicLastPostDate = favorisSingleLastPostTime,
-                        TopicLastPost = favorisLastPostText,
-                        TopicLastPostTimeSpan = timeSpent,
-                        TopicNbPage = numberOfPagesTopicLine,
-                        TopicCurrentPage = pageNumber,
-                        TopicReponseId = reponseId,
-                        TopicIndexCategory = HFRCats.GetHFRIndexFromId(topicCatId),
-                        TopicDrapURI = drapURI,
-                    });
-                    j++;
-                }
-                i++;
+                topics.Add(topic);
             }
 
             /* DG */
             stopwatch.Stop();
-            Debug.WriteLine("Bench End: " + stopwatch.ElapsedTicks +
-            " mS: " + stopwatch.ElapsedMilliseconds);
+            Debug.WriteLine("Bench End: " + stopwatch.ElapsedTicks + " mS: " + stopwatch.ElapsedMilliseconds);
             /* DG */
 
             Debug.WriteLine("Drapeaux fetched");

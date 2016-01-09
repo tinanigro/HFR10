@@ -13,14 +13,14 @@ using Hfr.Helpers;
 using Hfr.Model;
 using Hfr.Services;
 using Windows.UI.Xaml;
-using Hfr.Commands.Topics;
+using Hfr.Commands.Threads;
 using Hfr.Commands.UI;
 using Hfr.Models;
+using Hfr.Models.Threads;
 using Hfr.Utilities;
 
 namespace Hfr.ViewModel
 {
-    public delegate void TopicReadyToBeDisplayed(Topic topic);
     public class MainViewModel : ViewModelBase
     {
         #region private properties 
@@ -30,7 +30,7 @@ namespace Hfr.ViewModel
         private bool _privateChatsLoading;
 
         private MainColumn _mainColumn;
-        private bool _firstColumnAndTopicVisible;
+        private bool _firstColumnAndThreadVisible;
         private bool _allColumnsVisible;
         private bool _twoColumnsVisible;
         private bool _topicListColumnVisible;
@@ -45,7 +45,7 @@ namespace Hfr.ViewModel
             set
             {
                 Set(ref _drapeauxLoading, value);
-                RaisePropertyChanged(nameof(LoadingTopicsList));
+                RaisePropertyChanged(nameof(LoadingThreadsList));
             }
         }
 
@@ -69,7 +69,7 @@ namespace Hfr.ViewModel
             }
         }
 
-        public Visibility LoadingTopicsList => IsDrapeauxLoading ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility LoadingThreadsList => IsDrapeauxLoading ? Visibility.Visible : Visibility.Collapsed;
 
         public Visibility LoadingPrivateChatsList => IsPrivateChatsLoading ? Visibility.Visible : Visibility.Collapsed;
         #endregion
@@ -80,7 +80,7 @@ namespace Hfr.ViewModel
         private IEnumerable<IGrouping<string, Topic>> _favorisGrouped;
 
         private IEnumerable<IGrouping<string, PrivateChat>> _privateChatsGrouped;
-        private ObservableCollection<Topic> _topics = new ObservableCollection<Topic>();
+        private ObservableCollection<Thread> _topics = new ObservableCollection<Thread>();
 
         #endregion
         #region public fields
@@ -140,7 +140,7 @@ namespace Hfr.ViewModel
             set { Set(ref _privateChatsGrouped, value); }
         }
 
-        public ObservableCollection<Topic> Topics
+        public ObservableCollection<Thread> Threads
         {
             get { return _topics; }
             set { Set(ref _topics, value); }
@@ -150,10 +150,10 @@ namespace Hfr.ViewModel
 
         public AccountManager AccountManager { get { return _accountManager; } set { Set(ref _accountManager, value); } }
 
-        public bool FirstColumnAndTopicVisible
+        public bool FirstColumnAndThreadVisible
         {
-            get { return _firstColumnAndTopicVisible; }
-            set { Set(ref _firstColumnAndTopicVisible, value); }
+            get { return _firstColumnAndThreadVisible; }
+            set { Set(ref _firstColumnAndThreadVisible, value); }
         }
 
         public bool AllColumnsVisible
@@ -199,7 +199,7 @@ namespace Hfr.ViewModel
             set { Set(ref _privateChatsColumnVisible, value); }
         }
 
-        public bool TopicViewColumnVisible
+        public bool ThreadViewColumnVisible
         {
             get { return _topicViewColumnVisible; }
             set { Set(ref _topicViewColumnVisible, value); }
@@ -222,8 +222,8 @@ namespace Hfr.ViewModel
         #region methods
         public void TriggerUIAdapter()
         {
-            TopicViewColumnVisible = false;
-            FirstColumnAndTopicVisible = false;
+            ThreadViewColumnVisible = false;
+            FirstColumnAndThreadVisible = false;
             AllColumnsVisible = false;
             TwoColumnsVisible = false;
 
@@ -233,16 +233,16 @@ namespace Hfr.ViewModel
 
             // TODO : Use UI logic here instead of lazy loading it into properties.
             var width = Window.Current.Bounds.Width;
-            if (Loc.Topic.CurrentTopic != null)
+            if (Loc.Thread.CurrentThread != null)
             {
                 DisplayPrivateChatsInsteadOfCategoriesVisible = false;
                 if (width < Strings.PortraitWidth)
                 {
-                    TopicViewColumnVisible = true;
+                    ThreadViewColumnVisible = true;
                 }
                 else
                 {
-                    FirstColumnAndTopicVisible = true;
+                    FirstColumnAndThreadVisible = true;
                 }
             }
             else
@@ -251,7 +251,7 @@ namespace Hfr.ViewModel
                 {
                     switch (DefaultColumn)
                     {
-                        case MainColumn.TopicsList:
+                        case MainColumn.ThreadsList:
                             TopicListColumnVisible = true;
                             break;
                         case MainColumn.CategoriesList:

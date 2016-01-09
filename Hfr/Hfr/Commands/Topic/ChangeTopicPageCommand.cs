@@ -5,7 +5,7 @@ using Hfr.ViewModel;
 
 namespace Hfr.Commands.Topic
 {
-    public class ChangeTopicPageCommand : Command
+    public class ChangeThreadPageCommand : Command
     {
         public override void Execute(object parameter)
         {
@@ -13,30 +13,30 @@ namespace Hfr.Commands.Topic
             if (parameter is string)
             {
                 var action = (string)parameter;
-                if (action == "+" && Loc.Topic.CurrentTopic.TopicCurrentPage < Loc.Topic.CurrentTopic.TopicNbPage)
+                if (action == "+" && Loc.Thread.CurrentThread.ThreadCurrentPage < Loc.Thread.CurrentThread.ThreadNbPage)
                 {
-                    Loc.Topic.CurrentTopic.TopicCurrentPage = Loc.Topic.CurrentTopic.TopicCurrentPage + 1;
+                    Loc.Thread.CurrentThread.ThreadCurrentPage = Loc.Thread.CurrentThread.ThreadCurrentPage + 1;
                 }
-                else if (action == "-" && Loc.Topic.CurrentTopic.TopicCurrentPage > 1)
+                else if (action == "-" && Loc.Thread.CurrentThread.ThreadCurrentPage > 1)
                 {
-                    Loc.Topic.CurrentTopic.TopicCurrentPage = Loc.Topic.CurrentTopic.TopicCurrentPage - 1;
+                    Loc.Thread.CurrentThread.ThreadCurrentPage = Loc.Thread.CurrentThread.ThreadCurrentPage - 1;
                 }
                 else if (action == Strings.Last)
                 {
-                    Loc.Topic.CurrentTopic.TopicCurrentPage = Loc.Topic.CurrentTopic.TopicNbPage;
+                    Loc.Thread.CurrentThread.ThreadCurrentPage = Loc.Thread.CurrentThread.ThreadNbPage;
                 }
                 else if (action == Strings.First)
                 {
-                    Loc.Topic.CurrentTopic.TopicCurrentPage = 1;
+                    Loc.Thread.CurrentThread.ThreadCurrentPage = 1;
                 }
                 else if (!string.IsNullOrEmpty(action))
                 {
                     int index = -1;
                     if (!int.TryParse(action, out index)) return;
-                    if (index == 0 || index > Loc.Topic.CurrentTopic.TopicNbPage) return;
-                    Loc.Topic.CurrentTopic.TopicCurrentPage = index;
+                    if (index == 0 || index > Loc.Thread.CurrentThread.ThreadNbPage) return;
+                    Loc.Thread.CurrentThread.ThreadCurrentPage = index;
                 }
-                Task.Run(() => TopicFetcher.GetPosts(Loc.Topic.CurrentTopic));
+                Task.Run(() => ThreadFetcher.GetPosts(Loc.Thread.CurrentThread));
             }
         }
     }

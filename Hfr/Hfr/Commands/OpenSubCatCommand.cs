@@ -17,8 +17,8 @@ namespace Hfr.Commands
             {
                 var subcat = itemClick.ClickedItem as SubCategory;
                 Loc.SubCategory.CurrentSubCategory = subcat;
-                Loc.NavigationService.Navigate(View.CategoryTopicsList);
-                Task.Run(() => CatFetcher.GetTopics(subcat));
+                Loc.NavigationService.Navigate(View.CategoryThreadsList);
+                Task.Run(() => CatFetcher.GetThreads(subcat));
             }
         }
     }

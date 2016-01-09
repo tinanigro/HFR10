@@ -1,10 +1,10 @@
 ﻿using Windows.UI.Xaml.Controls;
 
-namespace Hfr.Views.MainPages.MainPageControls.TopicsViews
+namespace Hfr.Views.MainPages.MainPageControls.ThreadsViews
 {
-    public sealed partial class FollowedTopicsList : UserControl
+    public sealed partial class FollowedThreadsList : UserControl
     {
-        public FollowedTopicsList()
+        public FollowedThreadsList()
         {
             this.InitializeComponent();
         }

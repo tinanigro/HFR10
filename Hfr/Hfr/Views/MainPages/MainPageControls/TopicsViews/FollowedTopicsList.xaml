@@ -1,8 +1,8 @@
 ﻿<UserControl
-    x:Class="Hfr.Views.MainPages.MainPageControls.TopicsViews.FollowedTopicsList"
+    x:Class="Hfr.Views.MainPages.MainPageControls.ThreadsViews.FollowedThreadsList"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Hfr.Views.MainPages.MainPageControls.TopicsViews"
+    xmlns:local="using:Hfr.Views.MainPages.MainPageControls.ThreadsViews"
              xmlns:customControls="using:Hfr.CustomControls"
              xmlns:triggers="using:WinRT.Triggers"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"

@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Hfr.Helpers
 {
-    public class TopicNameHelper
+    public class ThreadNameHelper
     {
         public static string Shorten(string input)
         {

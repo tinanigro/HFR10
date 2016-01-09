@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Hfr.Model;
 using Hfr.Models;
+using Hfr.Models.Threads;
 using Hfr.Utilities;
 using Hfr.ViewModel;
 using HtmlAgilityPack;
@@ -75,20 +76,20 @@ namespace Hfr.Helpers
             return subcategories;
         }
 
-        public static async Task GetTopics(SubCategory subcat)
+        public static async Task GetThreads(SubCategory subcat)
         {
             Debug.WriteLine($"Fetching topics from {subcat.Name}");
-            var topics = await FetchTopics(subcat);
+            var topics = await FetchThreads(subcat);
             Debug.WriteLine("Updating UI with topics from cat");
             await ThreadUI.Invoke(() =>
             {
-                Loc.SubCategory.Topics = topics;
+                Loc.SubCategory.Threads = topics;
             });
         }
 
-        static async Task<List<Topic>> FetchTopics(SubCategory subCategory)
+        static async Task<List<Topic>> FetchThreads(SubCategory subCategory)
         {
-            var url = subCategory.Url.Replace("liste_sujet-1", $"liste_sujet-{Loc.SubCategory.TopicsPage}");
+            var url = subCategory.Url.Replace("liste_sujet-1", $"liste_sujet-{Loc.SubCategory.ThreadsPage}");
             
             var html = await HttpClientHelper.Get(url);
 
@@ -103,34 +104,25 @@ namespace Hfr.Helpers
             var topics = new List<Topic>();
             foreach (var topicNode in topicNodes)
             {
-                var topicName = topicNode.Descendants("a").FirstOrDefault(x => x.GetAttributeValue("class", "") == "cCatTopic").InnerText.CleanFromWeb();
-                var topicAuthor = topicNode.Descendants("td").FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("sujetCase6")).InnerText.CleanFromWeb();
+                var subject = ThreadHelper.ThreadName(topicNode);
+                subject = ThreadNameHelper.Shorten(subject);
 
-                var topicPageNode = topicNode.Descendants("td").FirstOrDefault(x => x.GetAttributeValue("class", "") == "sujetCase4").InnerText;
-                var topicPage = 1;
-                if (!string.IsNullOrEmpty(topicPageNode))
-                {
-                    int.TryParse(topicPageNode, out topicPage);
-                    if (topicPage == 0)
-                        topicPage = 1;
-                }
-                
+                var author = ThreadHelper.ThreadAuthor(topicNode);
+                var nbPage = ThreadHelper.GetNbPageFromNode(topicNode);
+
                 var sujetCase3Node = topicNode.Descendants("td").FirstOrDefault(x => x.GetAttributeValue("class", "") == "sujetCase3");
-
                 var topicUrl = sujetCase3Node.Descendants("a").FirstOrDefault(x => x.GetAttributeValue("href", "").StartsWith("/hfr/")).GetAttributeValue("href","");
-
                 var topicIsStickyNodes = sujetCase3Node.Descendants("img");
                 var topicIsSticky = topicIsStickyNodes.FirstOrDefault(x => x.GetAttributeValue("src", "").Contains("flechesticky"));
                 var topicIsClosed = topicIsStickyNodes.FirstOrDefault(x=>x.GetAttributeValue("alt", "") == "closed");
                 
-
                 var topic = new Topic();
-                topic.TopicName = topicName;
-                topic.TopicAuthor = topicAuthor;
+                topic.ThreadName = subject;
+                topic.ThreadAuthor = author;
                 topic.TopicIsSticky = topicIsSticky != null;
                 topic.TopicIsClosed = topicIsClosed != null;
-                topic.TopicNbPage = topicPage;
-                topic.TopicDrapURI = topicUrl;
+                topic.ThreadNbPage = nbPage;
+                topic.ThreadUri = topicUrl;
 
                 topics.Add(topic);
             }

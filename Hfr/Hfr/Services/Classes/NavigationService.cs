@@ -60,9 +60,9 @@ namespace Hfr.Services.Classes
             switch (CurrentView)
             {
                 case View.Main:
-                    if (Loc.Topic.TopicVisible)
+                    if (Loc.Thread.ThreadVisible)
                     {
-                        Loc.Topic.SelectedTopic = -1;
+                        Loc.Thread.SelectedThread = -1;
                     }
                     break;
                 case View.Editor:
@@ -73,7 +73,7 @@ namespace Hfr.Services.Classes
                     _navigationFrame.GoBack();
                     CurrentView = View.Main;
                     break;
-                case View.CategoryTopicsList:
+                case View.CategoryThreadsList:
                     ((MainPage)App.NavigationFrame.Content)?.Navigate(View.CategoriesList);
                     CurrentView = View.CategoriesList;
                     break;
@@ -89,9 +89,9 @@ namespace Hfr.Services.Classes
             switch (CurrentView)
             {
                 case View.Main:
-                    return Loc.Topic.TopicVisible;
+                    return Loc.Thread.ThreadVisible;
                 case View.Editor:
-                case View.CategoryTopicsList:
+                case View.CategoryThreadsList:
                     return true;
                 default:
                     return _navigationFrame.CanGoBack;
@@ -106,7 +106,7 @@ namespace Hfr.Services.Classes
                     _navigationFrame.Navigate(typeof(ConnectPage));
                     break;
                 case View.Main:
-                    if (CurrentView == View.CategoryTopicsList)
+                    if (CurrentView == View.CategoryThreadsList || CurrentView == View.PrivateChat)
                     {
 
                     }
@@ -121,9 +121,9 @@ namespace Hfr.Services.Classes
                 case View.Settings:
                     _navigationFrame.Navigate(typeof(Settings));
                     break;
-                case View.CategoryTopicsList:
+                case View.CategoryThreadsList:
                 case View.CategoriesList:
-                case View.PrivateChat:
+                case View.PrivateChatsList:
                     ((MainPage)App.NavigationFrame.Content)?.Navigate(page);
                     break;
                 default:
@@ -142,5 +142,6 @@ namespace Hfr.Services.Classes
         public Page CurrentPage { get { return _navigationFrame.Content as Page; } }
         public GoBackCommand GoBackCommand { get; } = new GoBackCommand();
         public NavigateToCategoriesList NavigateToCategoriesList { get; } = new NavigateToCategoriesList();
+        public NavigateToPrivateChatsList NavigateToPrivateChatsList { get; } = new NavigateToPrivateChatsList();
     }
 }

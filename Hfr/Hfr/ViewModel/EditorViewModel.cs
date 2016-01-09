@@ -202,7 +202,7 @@ namespace Hfr.ViewModel
                     Loc.NavigationService.GoBack();
                     _isBusy = false;
                 });
-                await Loc.Topic.RefreshPage(CurrentEditor.Intent);
+                await Loc.Thread.RefreshPage(CurrentEditor.Intent);
             }
             else
             {

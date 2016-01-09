@@ -2,7 +2,7 @@
 {
     public enum MainColumn
     {
-        TopicsList,
+        ThreadsList,
         CategoriesList,
         PrivateChats
     }

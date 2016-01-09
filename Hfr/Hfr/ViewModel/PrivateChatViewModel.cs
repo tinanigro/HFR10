@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight;
 using Hfr.Commands.PrivateChats;
 using Hfr.Models;
+using Hfr.Models.Threads;
 
 namespace Hfr.ViewModel
 {

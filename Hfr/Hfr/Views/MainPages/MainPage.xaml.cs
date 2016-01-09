@@ -31,11 +31,12 @@ namespace Hfr.Views.MainPages
         {
             switch (view)
             {
-                case View.CategoryTopicsList:
+                case View.CategoryThreadsList:
                 case View.CategoriesList:
                     CategoriesPanel.Navigate(view);
                     break;
                 case View.PrivateChat:
+                case View.PrivateChatsList:
                     MessagesList.Navigate(view);
                     break;
             }

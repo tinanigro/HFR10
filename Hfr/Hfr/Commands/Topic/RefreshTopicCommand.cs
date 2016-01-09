@@ -9,11 +9,11 @@ using Hfr.ViewModel;
 
 namespace Hfr.Commands.Topic
 {
-    public class RefreshTopicCommand : Command
+    public class RefreshThreadCommand : Command
     {
         public override void Execute(object parameter)
         {
-            Task.Run(async () => await TopicFetcher.GetPosts(Loc.Topic.CurrentTopic));
+            Task.Run(async () => await ThreadFetcher.GetPosts(Loc.Thread.CurrentThread));
         }
     }
 }

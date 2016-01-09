@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:shellControls="using:Hfr.Views.ShellControls"
-             xmlns:topicsViews="using:Hfr.Views.MainPages.MainPageControls.TopicsViews"
+             xmlns:topicsViews="using:Hfr.Views.MainPages.MainPageControls.ThreadsViews"
              mc:Ignorable="d"
              DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
 
@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <shellControls:Header HeaderContent="Topics">
+        <shellControls:Header HeaderContent="Threads">
             <shellControls:Header.LeftContent>
                 <SymbolIcon Symbol="Flag" />
             </shellControls:Header.LeftContent>
@@ -24,10 +24,10 @@
             </shellControls:Header.RightContent>
         </shellControls:Header>
 
-        <topicsViews:FollowedTopicsList Grid.Row="1" />
+        <topicsViews:FollowedThreadsList Grid.Row="1" />
 
         <StackPanel Grid.Row="1"
-                    Visibility="{Binding LoadingTopicsList}"
+                    Visibility="{Binding LoadingThreadsList}"
                     VerticalAlignment="Center">
             <ProgressRing IsActive="True"
                           Height="100"

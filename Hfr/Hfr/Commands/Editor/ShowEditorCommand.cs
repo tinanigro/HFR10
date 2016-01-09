@@ -15,7 +15,7 @@ namespace Hfr.Commands.Editor
             {
                 // We assume it's a New Answer in the Current Topic
                 Loc.NavigationService.Navigate(View.Editor);
-                await Loc.Editor.OnNavigatedTo(new EditorPackage(EditorIntent.New, Loc.Topic.CurrentTopic.TopicNewPostUriForm));
+                await Loc.Editor.OnNavigatedTo(new EditorPackage(EditorIntent.New, Loc.Thread.CurrentThread.ThreadNewPostUriForm));
             }
             else if (parameter is EditorPackage)
             {

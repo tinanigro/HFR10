@@ -15,7 +15,7 @@
                                     Source="{Binding}" />
                         <mb:Binding Tag="page"
                                     Source="{Binding}"
-                                    Path="TopicFirstPage"/>
+                                    Path="ThreadFirstPage"/>
                     </mb:MultiBinding>
                 </mb:MultiBindings>
             </mb:MultiBindingLinker.Attach>
@@ -29,7 +29,7 @@
                                     Tag="topic" />
                         <mb:Binding Tag="page" 
                                     Source="{Binding}"
-                                    Path="TopicNbPage"/>
+                                    Path="ThreadNbPage"/>
                     </mb:MultiBinding>
                 </mb:MultiBindings>
             </mb:MultiBindingLinker.Attach>

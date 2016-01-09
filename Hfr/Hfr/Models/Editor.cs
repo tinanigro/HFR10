@@ -26,7 +26,7 @@ namespace Hfr.Model
         public Dictionary<String, String> Data { get; set; }
 
         public IEnumerable<Smiley> Smileys { get; set; }
-        public int idxTopic; //Topic index in MainViewModel <Topics>
+        public int idxTopic; //Topic index in MainViewModel <Threads>
         
         public string Text
         {

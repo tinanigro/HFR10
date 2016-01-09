@@ -23,22 +23,22 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <TextBlock Grid.ColumnSpan="3"
-                   Text="{Binding TopicName}"
+                   Text="{Binding ThreadName}"
                    TextWrapping="NoWrap"
                    TextTrimming="CharacterEllipsis"
                    FontWeight="Normal"
                    FontSize="15"
-                   ToolTipService.ToolTip="{Binding TopicName}" />
+                   ToolTipService.ToolTip="{Binding ThreadName}" />
         <TextBlock Grid.Row="1"
-                   Text="{Binding TopicLastPost}"
+                   Text="{Binding ThreadLastPostText}"
                    Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
                    VerticalAlignment="Bottom" />
 
         <TextBlock Grid.Column="2"
                    Grid.Row="1">
-                <Run Text="{Binding TopicCurrentPage}"
+                <Run Text="{Binding ThreadCurrentPage}"
                      Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" />
-                <Run Text="{Binding TopicNbPage}"
+                <Run Text="{Binding ThreadNbPage}"
                      FontSize="18"
                      FontWeight="Light"
                      Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />

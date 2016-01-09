@@ -4,10 +4,11 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using GalaSoft.MvvmLight;
 using Hfr.Commands;
-using Hfr.Commands.Topics;
+using Hfr.Commands.Threads;
 using Hfr.Helpers;
 using Hfr.Model;
 using Hfr.Models;
+using Hfr.Models.Threads;
 
 namespace Hfr.ViewModel
 {
@@ -43,11 +44,11 @@ namespace Hfr.ViewModel
             set
             {
                 Set(ref _currentSubCategory, value);
-                TopicsPage = 1;
+                ThreadsPage = 1;
             }
         }
 
-        public uint TopicsPage
+        public uint ThreadsPage
         {
             get { return _topicsPage;}
             set { Set(ref _topicsPage, value); }
@@ -81,7 +82,7 @@ namespace Hfr.ViewModel
             }
         }
 
-        public List<Topic> Topics
+        public List<Topic> Threads
         {
             get { return _topics; }
             set { Set(ref _topics, value); }
@@ -91,8 +92,8 @@ namespace Hfr.ViewModel
         #region commands
         public OpenSubCatCommand OpenSubCatCommand { get; } = new OpenSubCatCommand();
 
-        public ChangeTopicsListPageInSubCatCommand ChangeTopicsListPageInSubCatCommand { get; } =
-            new ChangeTopicsListPageInSubCatCommand();
+        public ChangeThreadsListPageInSubCatCommand ChangeThreadsListPageInSubCatCommand { get; } =
+            new ChangeThreadsListPageInSubCatCommand();
         #endregion
 
         #region methods

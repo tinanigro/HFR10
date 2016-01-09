@@ -13,33 +13,29 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI.Xaml.Media;
+using Hfr.Models.Threads;
 
 namespace Hfr.Helpers
 {
-    public static class TopicFetcher
+    public static class ThreadFetcher
     {
-        public static async Task GetPosts(Topic currentTopic)
+        public static async Task GetPosts(Thread currentThread)
         {
             Debug.WriteLine("Fetching Posts");
-            await Fetch(currentTopic);
+            await Fetch(currentThread);
             Debug.WriteLine("Updating UI with new Posts list");
         }
 
-        public static async Task Fetch(Topic currentTopic)
+        public static async Task Fetch(Thread currentThread)
         {
             await ThreadUI.Invoke(() =>
             {
-                Loc.Topic.IsTopicLoading = true;
+                Loc.Thread.IsThreadLoading = true;
             });
 
-            var html = await HttpClientHelper.Get(currentTopic.TopicDrapURI);
+            var html = await HttpClientHelper.Get(currentThread.ThreadUri);
             if (string.IsNullOrEmpty(html)) return;
-
-            await ThreadUI.Invoke(() =>
-            {
-                Loc.Topic.CurrentTopic.Html = html;
-            });
-
+            
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 
@@ -68,10 +64,9 @@ namespace Hfr.Helpers
 
             await ThreadUI.Invoke(() =>
             {
-                Loc.Topic.CurrentTopic.TopicNbPage = nbPage;
-                Loc.Topic.CurrentTopic.TopicCurrentPage = currentPage;
+                Loc.Thread.CurrentThread.ThreadNbPage = nbPage;
+                Loc.Thread.CurrentThread.ThreadCurrentPage = currentPage;
             });
-
 
             var postNodes =
                 htmlDoc.DocumentNode.Descendants("table")
@@ -210,7 +205,7 @@ namespace Hfr.Helpers
 
             // Get URL of the new post form
             var url = htmlDoc.DocumentNode.Descendants("form").FirstOrDefault(x => x.GetAttributeValue("id", "") == "repondre_form").GetAttributeValue("action", "");
-            currentTopic.TopicNewPostUriForm = WebUtility.HtmlDecode(url);
+            currentThread.ThreadNewPostUriForm = WebUtility.HtmlDecode(url);
 
             TempHTMLTopic = BodyTemplate.Replace("%%MESSAGES%%", TempHTMLMessagesList);
 
@@ -248,9 +243,9 @@ namespace Hfr.Helpers
 
             await ThreadUI.Invoke(() =>
             {
-                Loc.Topic.UpdateTopicWebView(currentTopic);
+                Loc.Thread.UpdateThreadWebView(currentThread);
 
-                Loc.Topic.IsTopicLoading = false;
+                Loc.Thread.IsThreadLoading = false;
             });
         }
     }
