@@ -49,11 +49,8 @@ namespace Hfr.Helpers
             foreach (var msg in messagesArray)
             {
                 var isNewNode = msg.Descendants("td").FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("sujetCase1"));
-                var isMsgNew = false;
-                if (isNewNode.GetAttributeValue("class", "").Contains("cBackCouleurTab2"))
-                {
-                    isMsgNew = true;
-                }
+                bool isMsgNew = isNewNode.FirstChild.Name == "img" && isNewNode.FirstChild.GetAttributeValue("alt","") == "On";
+
                 var subject = msg.Descendants("a").FirstOrDefault(x => x.GetAttributeValue("class", "") == "cCatTopic").InnerText.CleanFromWeb();
                 var lastMsgNode = msg.Descendants("td").FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("sujetCase9")).FirstChild;
 
