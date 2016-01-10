@@ -55,7 +55,7 @@
                               CommandParameter="+" />
                 <AppBarButton Label="Répondre"
                               Icon="Add"
-                              Command="{Binding ShowEditorCommand}"/>
+                              Command="{Binding ShowEditorCommand}" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Icon="Refresh"
@@ -70,7 +70,7 @@
                               Label="Page :"
                               Icon="Accept"
                               Command="{Binding ChangeThreadPageCommand}"
-                              CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"/>
+                              CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" />
                 <AppBarButton Label="Dernière page"
                               Command="{Binding ChangeThreadPageCommand}"
                               CommandParameter="{Binding Source={StaticResource Strings}, Path=Last}" />

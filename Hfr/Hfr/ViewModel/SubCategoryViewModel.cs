@@ -50,7 +50,7 @@ namespace Hfr.ViewModel
 
         public uint ThreadsPage
         {
-            get { return _topicsPage;}
+            get { return _topicsPage; }
             set { Set(ref _topicsPage, value); }
         }
         #endregion

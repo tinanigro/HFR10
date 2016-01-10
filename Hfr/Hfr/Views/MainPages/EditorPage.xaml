@@ -8,6 +8,7 @@
       xmlns:triggers="using:WinRT.Triggers"
       DataContext="{Binding Source={StaticResource Locator}, Path=Editor}"
       mc:Ignorable="d">
+
     <Page.BottomAppBar>
         <CommandBar Background="{ThemeResource SystemControlForegroundAccentBrush}"
                     RequestedTheme="Dark">
