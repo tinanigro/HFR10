@@ -180,10 +180,11 @@
                          ScrollViewer.VerticalScrollBarVisibility="Visible" />
             </Grid>
         </Grid>
-        <ProgressBar Grid.Row="1"
-                     IsIndeterminate="True"
-                     Visibility="{Binding IsBusyScreenVisible}" />
 
+        <shellControls:LoadingControl Grid.Row="1"
+                                      IsScreenActive="{Binding IsBusyScreenVisible}"
+                                      LoadingMessage="Chargement de l'éditeur" />
+        
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="MainEditorCommandBarStates">
                 <VisualState x:Name="Minimum">

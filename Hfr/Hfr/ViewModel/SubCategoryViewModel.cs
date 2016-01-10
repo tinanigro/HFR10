@@ -85,7 +85,11 @@ namespace Hfr.ViewModel
         public List<Topic> Threads
         {
             get { return _topics; }
-            set { Set(ref _topics, value); }
+            set
+            {
+                Set(ref _topics, value);
+                IsCategoriesLoading = false;
+            }
         }
         #endregion
 

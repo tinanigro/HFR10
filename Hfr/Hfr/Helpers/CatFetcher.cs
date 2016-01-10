@@ -8,6 +8,7 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using Hfr.Model;
 using Hfr.Models;
 using Hfr.Models.Threads;
@@ -78,6 +79,7 @@ namespace Hfr.Helpers
 
         public static async Task GetThreads(SubCategory subcat)
         {
+            await ThreadUI.Invoke(() => Loc.SubCategory.IsCategoriesLoading = true);
             Debug.WriteLine($"Fetching topics from {subcat.Name}");
             var topics = await FetchThreads(subcat);
             Debug.WriteLine("Updating UI with topics from cat");

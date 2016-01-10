@@ -26,18 +26,8 @@
 
         <topicsViews:FollowedThreadsList Grid.Row="1" />
 
-        <StackPanel Grid.Row="1"
-                    Visibility="{Binding LoadingThreadsList}"
-                    VerticalAlignment="Center">
-            <ProgressRing IsActive="True"
-                          Height="100"
-                          Width="100"
-                          VerticalAlignment="Center"
-                          Margin="0,-50,0,0" />
-            <TextBlock Text="Chargements des topics"
-                       Style="{StaticResource SubtitleTextBlockStyle}"
-                       Margin="0,12,0,0"
-                       HorizontalAlignment="Center" />
-        </StackPanel>
+        <shellControls:LoadingControl Grid.Row="1"
+                                      IsScreenActive="{Binding LoadingThreadsList}"
+                                      LoadingMessage="Chargements des topics" />
     </Grid>
 </UserControl>

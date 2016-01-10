@@ -34,10 +34,10 @@
                  x:FieldModifier="public"
                  Grid.Row="1"
                  NavigationStarting="ThreadWebView_OnNavigationStarting"
-                 DefaultBackgroundColor="{ThemeResource SystemChromeMediumColor}"/>
-        <ProgressBar Grid.Row="1"
-                     IsIndeterminate="True"
-                     Visibility="{Binding TopicLoadingVisibility}" />
+                 DefaultBackgroundColor="{ThemeResource SystemChromeMediumColor}" />
+        <shellControls:LoadingControl Grid.Row="1" 
+                                      IsScreenActive="{Binding TopicLoadingVisibility}" 
+                                      LoadingMessage="Loading thread"/>
         <CommandBar Grid.Row="2"
                     Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
             <CommandBar.PrimaryCommands>
