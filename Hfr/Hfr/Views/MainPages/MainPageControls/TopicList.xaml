@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <shellControls:Header HeaderContent="Threads">
+        <shellControls:Header HeaderContent="Topics">
             <shellControls:Header.LeftContent>
                 <SymbolIcon Symbol="Flag" />
             </shellControls:Header.LeftContent>
