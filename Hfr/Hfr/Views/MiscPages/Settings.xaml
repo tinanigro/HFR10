@@ -121,7 +121,7 @@
                                Margin="{StaticResource DefaultMargin}">
                     <Run Text="HFR10"
                          FontSize="28" />
-                    <Run Text="Alpha 7 v1.7"
+                    <Run Text="Beta 8 v1.8"
                          Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
                     <LineBreak />
                     <Run Text="par la communauté HFR"
