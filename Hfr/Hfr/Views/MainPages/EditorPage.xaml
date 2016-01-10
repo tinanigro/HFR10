@@ -106,31 +106,165 @@
                                         Click="IncludeMiniPic" />
                             </StackPanel>
                             <ToggleSwitch x:Name="IncludeImgUrlLink"
-                                          OnContent="Avec lien" 
-                                          OffContent="Sans lien"/>
+                                          OnContent="Avec lien"
+                                          OffContent="Sans lien" />
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
             </Grid>
-            <TextBox x:Name="MessageTextBlock"
-                     Grid.Column="1"
-                     PlaceholderText="Ecrivez votre message ici ..."
-                     VerticalAlignment="Stretch"
-                     Padding="16"
-                     VerticalContentAlignment="Top"
-                     MinHeight="250"
-                     Style="{StaticResource TransparentTextBoxStyle}"
-                     Text="{Binding CurrentEditor.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     TextWrapping="Wrap"
-                     AcceptsReturn="True"
-                     SelectionStart="{Binding SelectionStart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     ScrollViewer.VerticalScrollBarVisibility="Visible" />
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <CommandBar>
+                    <CommandBar.PrimaryCommands>
+                        <AppBarButton x:Name="BoldAppBarButton"
+                                      Icon="Bold" 
+                                      Label="Gras"
+                                      Click="InsertSnippet_Click"
+                                      Tag="b"/>
+                        <AppBarButton x:Name="ItalicAppBarButton"
+                                      Icon="Italic"
+                                      Label="Italique"
+                                      Click="InsertSnippet_Click" 
+                                      Tag="i"/>
+                        <AppBarButton x:Name="UnderlineAppBarButton"
+                                      Icon="Underline"
+                                      Label="Souligné"
+                                      Click="InsertSnippet_Click" 
+                                      Tag="u"/>
+                        <AppBarButton x:Name="RemoveAppBarButton"
+                                      Icon="Remove"
+                                      Label="Barré"
+                                      Click="InsertSnippet_Click" 
+                                      Tag="strike"/>
+                        <AppBarButton x:Name="ViewAppBarButton"
+                                      Icon="View"
+                                      Label="Spoiler"
+                                      Click="InsertSnippet_Click" 
+                                      Tag="spoiler"/>
+                        <AppBarButton x:Name="LinkAppBarButton"
+                                      Icon="Link"
+                                      Label="Lien"
+                                      Click="InsertSnippet_Click" 
+                                      Tag="url"/>
+                    </CommandBar.PrimaryCommands>
+                    <CommandBar.SecondaryCommands>
+                        <AppBarButton x:Name="RemoveAppBarButtonMore"
+                                      Label="Barré"
+                                      Click="InsertSnippet_Click" 
+                                      Tag="strike"/>
+                        <AppBarButton x:Name="ViewAppBarButtonMore"
+                                      Label="Spoiler"
+                                      Click="InsertSnippet_Click" 
+                                      Tag="spoiler"/>
+                        <AppBarButton x:Name="LinkAppBarButtonMore"
+                                      Label="Lien"
+                                      Click="InsertSnippet_Click" 
+                                      Tag="url"/>
+                    </CommandBar.SecondaryCommands>
+                </CommandBar>
+                <TextBox x:Name="MessageTextBlock"
+                         Grid.Row="1"
+                         PlaceholderText="Ecrivez votre message ici ..."
+                         VerticalAlignment="Stretch"
+                         Padding="16"
+                         VerticalContentAlignment="Top"
+                         MinHeight="250"
+                         Style="{StaticResource TransparentTextBoxStyle}"
+                         Text="{Binding CurrentEditor.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         SelectionStart="{Binding SelectionStart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         ScrollViewer.VerticalScrollBarVisibility="Visible" />
+            </Grid>
         </Grid>
         <ProgressBar Grid.Row="1"
                      IsIndeterminate="True"
                      Visibility="{Binding IsBusyScreenVisible}" />
 
         <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="MainEditorCommandBarStates">
+                <VisualState x:Name="Minimum">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="BoldAppBarButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="ItalicAppBarButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="UnderlineAppBarButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="RemoveAppBarButton.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="ViewAppBarButton.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="LinkAppBarButton.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="RemoveAppBarButtonMore.Visibility"
+                                Value="Visible" />
+                        <Setter Target="ViewAppBarButtonMore.Visibility"
+                                Value="Visible" />
+                        <Setter Target="LinkAppBarButtonMore.Visibility"
+                                Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Medium">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="400" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="BoldAppBarButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="ItalicAppBarButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="UnderlineAppBarButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="RemoveAppBarButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="ViewAppBarButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="LinkAppBarButton.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="RemoveAppBarButtonMore.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="ViewAppBarButtonMore.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="LinkAppBarButtonMore.Visibility"
+                                Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Normal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource PortraitWidth}" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="BoldAppBarButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="ItalicAppBarButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="UnderlineAppBarButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="RemoveAppBarButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="ViewAppBarButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="LinkAppBarButton.Visibility"
+                                Value="Visible" />
+                        <Setter Target="RemoveAppBarButtonMore.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="ViewAppBarButtonMore.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="LinkAppBarButtonMore.Visibility"
+                                Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
             <VisualStateGroup>
                 <VisualState x:Name="MainEditorVisible">
                     <VisualState.StateTriggers>
@@ -142,6 +276,8 @@
                                 Value="0" />
                         <Setter Target="SecondColumnDefinition.Width"
                                 Value="*" />
+                        <Setter Target="ExtraEditorButton.Visibility"
+                                Value="Visible" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="ExtraEditorVisible">
@@ -154,6 +290,8 @@
                                 Value="*" />
                         <Setter Target="SecondColumnDefinition.Width"
                                 Value="0" />
+                        <Setter Target="ExtraEditorButton.Visibility"
+                                Value="Visible" />
                     </VisualState.Setters>
                 </VisualState>
 
@@ -167,6 +305,8 @@
                                 Value="*" />
                         <Setter Target="SecondColumnDefinition.Width"
                                 Value="2*" />
+                        <Setter Target="ExtraEditorButton.Visibility"
+                                Value="Collapsed" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

@@ -122,5 +122,18 @@ namespace Hfr.Views.MainPages
             MessageTextBlock.SelectionStart += text.Length;
             MessageTextBlock.Focus(FocusState.Keyboard);
         }
+
+        private void InsertSnippet_Click(object sender, RoutedEventArgs e)
+        {
+            var snippet = ((FrameworkElement) sender).Tag?.ToString();
+            if (string.IsNullOrEmpty(snippet)) return;
+            var beginSnippet = "[" + snippet + "]";
+            var endSnippet = "[/" + snippet + "]";
+            var selectedText = MessageTextBlock.SelectedText;
+            InsertInMessageTextBlock(beginSnippet);
+            InsertInMessageTextBlock(endSnippet);
+            MessageTextBlock.SelectionStart -= endSnippet.Length;
+            InsertInMessageTextBlock(selectedText);
+        }
     }
 }
