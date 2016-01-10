@@ -17,8 +17,9 @@
                               Command="{Binding DeleteMessageCommand}"
                               ClickMode="Press"
                               Visibility="{Binding IsEditUIVisible}" />
-                <AppBarToggleButton Icon="Emoji"
-                                    Label="Smileys"
+                <AppBarToggleButton x:Name="ExtraEditorButton"
+                                    Icon="PreviewLink"
+                                    Label="Plus d'options"
                                     IsChecked="{Binding ShowSmileyUI, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <AppBarButton Icon="Cancel"
                               Label="Annuler"
