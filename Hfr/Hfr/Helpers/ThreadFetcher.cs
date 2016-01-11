@@ -141,12 +141,18 @@ namespace Hfr.Helpers
                 // Content
                 var contentHtml = postNode.Descendants("div").FirstOrDefault(x => x.GetAttributeValue("id", "").Contains("para"));
 
+                Regex Youtube = new Regex("youtu(?:\\.be|be\\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)");
                 var youtubeEntries = contentHtml.Descendants("a").Where(x => x.GetAttributeValue("href", "").Contains("www.youtube.com") || x.GetAttributeValue("href","").Contains("//youtu.be"));
                 foreach (var youtubeEntry in youtubeEntries)
                 {
                     var videoUrl = youtubeEntry.GetAttributeValue("href", "");
-                    videoUrl = "tubecast:link=" + WebUtility.UrlEncode(videoUrl);
-                    youtubeEntry.SetAttributeValue("href", videoUrl);
+                    Match youtubeMatch = Youtube.Match(videoUrl);
+
+                    if (youtubeMatch.Success)
+                    { 
+                        videoUrl = "vnd.youtube:" + youtubeMatch.Groups[1].Value;
+                        youtubeEntry.SetAttributeValue("href", videoUrl);
+                    }
                 }
                 
                 var content = contentHtml.InnerHtml;

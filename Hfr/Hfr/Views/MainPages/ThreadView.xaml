@@ -37,7 +37,7 @@
                  DefaultBackgroundColor="{ThemeResource SystemChromeMediumColor}" />
         <shellControls:LoadingControl Grid.Row="1" 
                                       IsScreenActive="{Binding TopicLoadingVisibility}" 
-                                      LoadingMessage="Loading thread"/>
+                                      LoadingMessage="Chargement des messages"/>
         <CommandBar Grid.Row="2"
                     Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
             <CommandBar.PrimaryCommands>
