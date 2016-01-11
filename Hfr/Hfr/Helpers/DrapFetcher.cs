@@ -98,7 +98,12 @@ namespace Hfr.Helpers
 
                 var nbPage = ThreadHelper.GetNbPageFromNode(msg);
                 var author = ThreadHelper.ThreadAuthor(msg);
+
                 var threadUrl = msg.Descendants("td").FirstOrDefault(x => x.GetAttributeValue("class", "") == "sujetCase5")?.FirstChild?.GetAttributeValue("href", "")?.CleanFromWeb();
+                // For Favorites page where we are already in the last post, the star/flag icon is missing so we go to the last post
+                if (string.IsNullOrEmpty(threadUrl))
+                    threadUrl = msg.Descendants("td").FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("sujetCase9"))?.FirstChild?.GetAttributeValue("href", "")?.CleanFromWeb();
+
 
                 var subCatId = ThreadHelper.GetSubCatId(threadUrl);
                 var rep = ThreadHelper.GetBookmarkId(threadUrl);
