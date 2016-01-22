@@ -115,7 +115,7 @@
                         <Setter Target="PasswordTextBox.IsEnabled"
                                 Value="False" />
                         <Setter Target="ConnectButton.Content"
-                                Value="Connecting" /> 
+                                Value="Connexion en cours" /> 
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

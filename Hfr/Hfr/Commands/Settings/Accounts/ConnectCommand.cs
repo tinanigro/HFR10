@@ -27,7 +27,7 @@ namespace Hfr.Commands.Settings.Accounts
             if (Loc.Main.AccountManager.Accounts.FirstOrDefault(x => x.Pseudo == Loc.Main.AccountManager.CurrentAccount.Pseudo) != null) return;
             await ThreadUI.Invoke(() =>
             {
-                Loc.Main.AccountManager.CurrentAccount.ConnectionErrorStatus = "Connecting";
+                Loc.Main.AccountManager.CurrentAccount.ConnectionErrorStatus = "Connexion en cours";
                 Loc.Main.AccountManager.CurrentAccount.IsConnecting = true;
             });
 
@@ -68,7 +68,7 @@ namespace Hfr.Commands.Settings.Accounts
                         await md.ShowAsync();
                     }
                     Loc.Main.AccountManager.CurrentAccount.IsConnecting = false;
-                    Loc.Main.AccountManager.CurrentAccount.ConnectionErrorStatus = "Login succeeded";
+                    Loc.Main.AccountManager.CurrentAccount.ConnectionErrorStatus = "Connecté avec succès";
                     Loc.NavigationService.Navigate(View.Main);
                 });
             }
@@ -77,7 +77,7 @@ namespace Hfr.Commands.Settings.Accounts
                 await ThreadUI.Invoke(() =>
                 {
                     Loc.Main.AccountManager.CurrentAccount.IsConnecting = false;
-                    Loc.Main.AccountManager.CurrentAccount.ConnectionErrorStatus = "Login failed";
+                    Loc.Main.AccountManager.CurrentAccount.ConnectionErrorStatus = "Erreur de connexion";
                     ToastHelper.Simple("Echec de la connexion");
                 });
                 Debug.WriteLine("Login failed");
