@@ -84,6 +84,6 @@
 
         <shellControls:LoadingControl Grid.Row="2"
                                       IsScreenActive="{Binding LoadingCategoriesList}"
-                                      LoadingMessage="Chargements des topics" />
+                                      LoadingMessage="Chargement des topics" />
     </Grid>
 </Page>

@@ -41,7 +41,7 @@ namespace Hfr.Services
                     await ThreadUI.Invoke(() =>
                     {
                         Loc.NavigationService.Navigate(View.Connect);
-                        Loc.Main.AccountManager.CurrentAccount.ConnectionErrorStatus = "Connecting";
+                        Loc.Main.AccountManager.CurrentAccount.ConnectionErrorStatus = "Connexion en cours";
                         Loc.Main.AccountManager.CurrentAccount.IsConnecting = true;
                     });
                     bool success = await CurrentAccount.BeginAuthentication(false);
