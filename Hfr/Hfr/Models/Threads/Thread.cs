@@ -51,7 +51,11 @@ namespace Hfr.Models.Threads
 
         public TimeSpan ThreadLastPostTimeSpan
         {
-            get { return DateTime.Now.Subtract(ThreadLastPostDate); }
+            get
+            {
+                var currentTimeInFrance = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("Romance Standard Time"));
+                return currentTimeInFrance.Subtract(ThreadLastPostDate);
+            }
         }
 
         public string ThreadLastPostText
