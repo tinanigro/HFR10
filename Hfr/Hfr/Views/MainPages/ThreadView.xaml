@@ -53,14 +53,14 @@
                               IsEnabled="{Binding CurrentThread.CanGoForward}"
                               Command="{Binding ChangeThreadPageCommand}"
                               CommandParameter="+" />
+                <AppBarButton Icon="Refresh"
+                              Label="Rafraîchir"
+                              Command="{Binding RefreshThreadCommand}" />
                 <AppBarButton Label="Répondre"
                               Icon="Add"
                               Command="{Binding ShowEditorCommand}" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Icon="Refresh"
-                              Label="Rafraîchir"
-                              Command="{Binding RefreshThreadCommand}" />
                 <AppBarButton x:Name="FirstPageButton"
                               Label="Première page"
                               Command="{Binding ChangeThreadPageCommand}"
