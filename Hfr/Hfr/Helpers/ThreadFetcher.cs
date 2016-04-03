@@ -111,7 +111,11 @@ namespace Hfr.Helpers
                 
                 // Pseudo
                 var pseudo = postNode.Descendants("b").FirstOrDefault(x => x.GetAttributeValue("class", "") == "s2").InnerText.CleanFromWeb();
-
+                if (Loc.Settings.IgnoreListMembersList.Contains(pseudo))
+                {
+                    Debug.WriteLine("Post form member in Ignore list, switching to next post");
+                    continue;
+                }
                 // Mood
                 var mood = postNode.Descendants("span").FirstOrDefault(x=>x.GetAttributeValue("class","") == "MoodStatus")?.InnerText.CleanFromWeb();
 

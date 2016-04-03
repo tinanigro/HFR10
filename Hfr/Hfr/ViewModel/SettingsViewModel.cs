@@ -18,6 +18,7 @@ namespace Hfr.ViewModel
         private bool _isAppThemeDark;
         private double _fontSizePreferred;
         private double _postHeaderTransparencyPreferred;
+        private string _ignoreListMembers;
         #endregion
 
         #region public properties        
@@ -162,7 +163,7 @@ namespace Hfr.ViewModel
                 {
                     _postHeaderTransparencyPreferred = (double)postHeaderTransparency;
                 }
-                
+
                 return _postHeaderTransparencyPreferred;
             }
             set
@@ -175,6 +176,30 @@ namespace Hfr.ViewModel
 
         public Visibility SquareAvatarVisible { get { return _squareAvatarStylePreferred ? Visibility.Visible : Visibility.Collapsed; } }
         public Visibility CircleAvatarVisible { get { return _squareAvatarStylePreferred ? Visibility.Collapsed : Visibility.Visible; } }
+
+        public string IgnoreListMembers
+        {
+            get
+            {
+                var list = ApplicationSettingsHelper.ReadSettingsValue(nameof(IgnoreListMembers), false);
+                if (list == null)
+                {
+                    _ignoreListMembers = string.Empty;
+                }
+                else
+                {
+                    _ignoreListMembers = list.ToString();
+                }
+                return _ignoreListMembers;
+            }
+            set
+            {
+                if (_ignoreListMembers == value) return;
+                Set(ref _ignoreListMembers, value);
+                ApplicationSettingsHelper.SaveSettingsValue(nameof(IgnoreListMembers), value, false);
+                RaisePropertyChanged(nameof(IgnoreListMembersList));
+            }
+        }
         #endregion
         #region public fields
 
@@ -189,6 +214,11 @@ namespace Hfr.ViewModel
                     FollowedTopicType.Lus
                 };
             }
+        }
+
+        public IEnumerable<string> IgnoreListMembersList
+        {
+            get { return _ignoreListMembers?.Split(';'); }
         }
         #endregion
         #region methods

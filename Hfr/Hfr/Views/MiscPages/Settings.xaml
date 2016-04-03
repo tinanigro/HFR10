@@ -109,7 +109,15 @@
                                     HorizontalAlignment="Left"
                                     Width="300"/>
                             <TextBlock Text="Ce paramètre ne sera pas synchronisé"
-                                       Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" />
+                                       Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                                       Margin="{StaticResource DefaultMarginBottom}" />
+                            <TextBox Header="Ignore List"
+                                     Text="{Binding IgnoreListMembers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Margin="{StaticResource DefaultMarginBottom}"
+                                     Style="{StaticResource TransparentTextBoxStyle}"/>
+                            <TextBlock Text="Pseudos séparés par un point virgule"
+                                       Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                                       Margin="{StaticResource DefaultMarginBottom}" />
                         </StackPanel>
                     </RelativePanel>
                 </ScrollViewer>
