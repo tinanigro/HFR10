@@ -111,7 +111,7 @@ namespace Hfr.Helpers
                 
                 // Pseudo
                 var pseudo = postNode.Descendants("b").FirstOrDefault(x => x.GetAttributeValue("class", "") == "s2").InnerText.CleanFromWeb();
-                if (Loc.Settings.IgnoreListMembersList.Contains(pseudo))
+                if (Loc.Settings.IgnoreListMembersList != null && Loc.Settings.IgnoreListMembersList.Contains(pseudo))
                 {
                     Debug.WriteLine("Post form member in Ignore list, switching to next post");
                     continue;
