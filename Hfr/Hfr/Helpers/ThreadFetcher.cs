@@ -21,6 +21,7 @@ namespace Hfr.Helpers
     {
         public static async Task GetPosts(Thread currentThread)
         {
+            App.TelemetryClient.TrackEvent("Fetch topic posts");
             Debug.WriteLine("Fetching Posts");
             await Fetch(currentThread);
             Debug.WriteLine("Updating UI with new Posts list");

@@ -27,11 +27,19 @@ namespace Hfr.Views.MainPages
             ThreadWebView.NavigationCompleted += ThreadWebViewOnNavigationCompleted;
             Loc.Thread.ThreadReadyToBeDisplayed += CurrentThread_ThreadReadyToBeDisplayed;
             Loc.Editor.EditorCancelledMessage += Editor_EditorCancelledMessage;
+            App.TelemetryClient.TrackPageView(nameof(ThreadView));
         }
 
         private async void Editor_EditorCancelledMessage()
         {
-            await ThreadWebView.InvokeScriptAsync("resetAllMultiQuotes", new string[0]);
+            try
+            {
+                await ThreadWebView.InvokeScriptAsync("resetAllMultiQuotes", new string[0]);
+            }
+            catch (Exception e)
+            {
+                App.TelemetryClient.TrackException(e);
+            }
         }
 
         private void ThreadView_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
