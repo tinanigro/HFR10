@@ -21,7 +21,8 @@ namespace Hfr.Helpers
                 {
                     Loc.Editor.MultiQuoteTemporaryContent = "";
                 }
-                Loc.Editor.MultiQuoteTemporaryContent += await FetchMessageContent(package);
+                var temp = await FetchMessageContent(package);
+                Loc.Editor.MultiQuoteTemporaryContent += temp;
                 Loc.Editor.MultiQuoteTemporaryContent += Environment.NewLine;
             }
             else
