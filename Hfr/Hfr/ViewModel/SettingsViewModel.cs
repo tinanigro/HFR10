@@ -16,6 +16,7 @@ namespace Hfr.ViewModel
         private bool _displayPrivateChatsByDefault;
         private bool _squareAvatarStylePreferred;
         private bool _isAppThemeDark;
+        private bool _tubecastEnabled;
         private double _fontSizePreferred;
         private double _postHeaderTransparencyPreferred;
         private string _ignoreListMembers;
@@ -174,8 +175,28 @@ namespace Hfr.ViewModel
             }
         }
 
-        public Visibility SquareAvatarVisible { get { return _squareAvatarStylePreferred ? Visibility.Visible : Visibility.Collapsed; } }
-        public Visibility CircleAvatarVisible { get { return _squareAvatarStylePreferred ? Visibility.Collapsed : Visibility.Visible; } }
+        public bool TubecastEnabled
+        {
+            get
+            {
+                var tubecast = ApplicationSettingsHelper.ReadSettingsValue(nameof(TubecastEnabled), false);
+                if (tubecast == null)
+                {
+                    _tubecastEnabled = false;
+                }
+                else
+                {
+                    _tubecastEnabled = (bool)tubecast;
+                }
+                return _tubecastEnabled;
+            }
+            set
+            {
+                if (_tubecastEnabled == value) return;
+                ApplicationSettingsHelper.SaveSettingsValue(nameof(TubecastEnabled), value, false);
+                Set(ref _tubecastEnabled, value);
+            }
+        }
 
         public string IgnoreListMembers
         {
@@ -200,6 +221,11 @@ namespace Hfr.ViewModel
                 RaisePropertyChanged(nameof(IgnoreListMembersList));
             }
         }
+
+
+        public Visibility SquareAvatarVisible => _squareAvatarStylePreferred ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility CircleAvatarVisible => _squareAvatarStylePreferred ? Visibility.Collapsed : Visibility.Visible; 
+
         #endregion
         #region public fields
 

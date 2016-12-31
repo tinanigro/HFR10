@@ -57,17 +57,34 @@
                             </RelativePanel>
                         </StackPanel>
 
-                        <StackPanel x:Name="TopicSettingsGrid"
+                        <StackPanel x:Name="FeatureSettingsGrid"
                                     Width="320">
+                            <TextBlock Text="Fonctionnalités"
+                                       Style="{StaticResource SubtitleTextBlockStyle}"
+                                       Margin="{StaticResource DefaultMarginBottom}" />
                             <TextBlock x:Name="TopicSettingsHeader"
                                        Text="Type de topics"
-                                       Style="{StaticResource SubtitleTextBlockStyle}"
+                                       Style="{StaticResource BodyTextBlockStyle}"
                                        Margin="{StaticResource DefaultMarginBottom}" />
                             <ComboBox x:Name="FollowedTopicTypeComboBox"
                                       ItemsSource="{Binding FollowedTopicTypes}"
                                       SelectedItem="{Binding FollowedTopicType, Mode=TwoWay}"
                                       VerticalAlignment="Center"
                                       Margin="{StaticResource DefaultMarginBottom}" />
+                            <TextBlock Text="Ignore List"
+                                       Style="{StaticResource BodyTextBlockStyle}"
+                                       Margin="{StaticResource DefaultMarginBottom}" />
+                            <TextBox Text="{Binding IgnoreListMembers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource TransparentTextBoxStyle}" />
+                            <TextBlock Text="Pseudos séparés par un point virgule"
+                                       Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                                       Margin="{StaticResource DefaultMarginBottom}" />
+
+                            <ToggleSwitch Header="Liens Youtube"
+                                          OnContent="Tubecast"
+                                          OffContent="Navigateur web"
+                                          IsOn="{Binding TubecastEnabled, Mode=TwoWay}"
+                                          Margin="{StaticResource DefaultMarginBottom}" />
                         </StackPanel>
 
                         <StackPanel x:Name="UISettingsGrid"
@@ -111,13 +128,6 @@
                             <TextBlock Text="Ce paramètre ne sera pas synchronisé"
                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
                                        Margin="{StaticResource DefaultMarginBottom}" />
-                            <TextBox Header="Ignore List"
-                                     Text="{Binding IgnoreListMembers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                     Margin="{StaticResource DefaultMarginBottom}"
-                                     Style="{StaticResource TransparentTextBoxStyle}"/>
-                            <TextBlock Text="Pseudos séparés par un point virgule"
-                                       Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
-                                       Margin="{StaticResource DefaultMarginBottom}" />
                         </StackPanel>
                     </RelativePanel>
                 </ScrollViewer>
@@ -158,10 +168,10 @@
                     <VisualState.Setters>
                         <Setter Target="AccountManagementGrid.(RelativePanel.AlignTopWithPanel)"
                                 Value="True" />
-                        <Setter Target="TopicSettingsGrid.(RelativePanel.Below)"
+                        <Setter Target="FeatureSettingsGrid.(RelativePanel.Below)"
                                 Value="AccountManagementGrid" />
                         <Setter Target="UISettingsGrid.(RelativePanel.Below)"
-                                Value="TopicSettingsGrid" />
+                                Value="FeatureSettingsGrid" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="TwoColumns">
@@ -171,7 +181,7 @@
                     <VisualState.Setters>
                         <Setter Target="AccountManagementGrid.(RelativePanel.AlignTopWithPanel)"
                                 Value="True" />
-                        <Setter Target="TopicSettingsGrid.(RelativePanel.Below)"
+                        <Setter Target="FeatureSettingsGrid.(RelativePanel.Below)"
                                 Value="AccountManagementGrid" />
                         <Setter Target="UISettingsGrid.(RelativePanel.RightOf)"
                                 Value="AccountManagementGrid" />
@@ -184,10 +194,10 @@
                     <VisualState.Setters>
                         <Setter Target="AccountManagementGrid.(RelativePanel.AlignTopWithPanel)"
                                 Value="True" />
-                        <Setter Target="TopicSettingsGrid.(RelativePanel.RightOf)"
+                        <Setter Target="FeatureSettingsGrid.(RelativePanel.RightOf)"
                                 Value="AccountManagementGrid" />
                         <Setter Target="UISettingsGrid.(RelativePanel.RightOf)"
-                                Value="TopicSettingsGrid" />
+                                Value="FeatureSettingsGrid" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

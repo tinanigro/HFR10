@@ -146,20 +146,23 @@ namespace Hfr.Helpers
                 // Content
                 var contentHtml = postNode.Descendants("div").FirstOrDefault(x => x.GetAttributeValue("id", "").Contains("para"));
 
-                Regex Youtube = new Regex("youtu(?:\\.be|be\\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)");
-                var youtubeEntries = contentHtml.Descendants("a").Where(x => x.GetAttributeValue("href", "").Contains("www.youtube.com") || x.GetAttributeValue("href","").Contains("//youtu.be"));
-                foreach (var youtubeEntry in youtubeEntries)
+                if (Loc.Settings.TubecastEnabled)
                 {
-                    var videoUrl = youtubeEntry.GetAttributeValue("href", "");
-                    Match youtubeMatch = Youtube.Match(videoUrl);
+                    var youtubeRegex = new Regex("youtu(?:\\.be|be\\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)");
+                    var youtubeEntries = contentHtml.Descendants("a").Where(x => x.GetAttributeValue("href", "").Contains("www.youtube.com") || x.GetAttributeValue("href", "").Contains("//youtu.be"));
+                    foreach (var youtubeEntry in youtubeEntries)
+                    {
+                        var videoUrl = youtubeEntry.GetAttributeValue("href", "");
+                        Match youtubeMatch = youtubeRegex.Match(videoUrl);
 
-                    if (youtubeMatch.Success)
-                    { 
-                        videoUrl = "vnd.youtube:" + youtubeMatch.Groups[1].Value;
-                        youtubeEntry.SetAttributeValue("href", videoUrl);
+                        if (youtubeMatch.Success)
+                        {
+                            videoUrl = "vnd.youtube:" + youtubeMatch.Groups[1].Value;
+                            youtubeEntry.SetAttributeValue("href", videoUrl);
+                        }
                     }
                 }
-                
+
                 var content = contentHtml.InnerHtml;
                 int lastPostText = content.IndexOf("<div style=\"clear: both;\"> </div>", StringComparison.Ordinal);
                 if (lastPostText == -1)
