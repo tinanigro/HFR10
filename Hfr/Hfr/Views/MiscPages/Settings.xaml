@@ -75,7 +75,12 @@
                                        Style="{StaticResource BodyTextBlockStyle}"
                                        Margin="{StaticResource DefaultMarginBottom}" />
                             <TextBox Text="{Binding IgnoreListMembers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{StaticResource TransparentTextBoxStyle}" />
+                                     Style="{StaticResource TransparentTextBoxStyle}"
+                                     Margin="{StaticResource DefaultMarginRight}"
+                                     HorizontalAlignment="Left"
+                                     TextWrapping="Wrap"
+                                     MaxWidth="250"
+                                     MinWidth="150"/>
                             <TextBlock Text="Pseudos séparés par un point virgule"
                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
                                        Margin="{StaticResource DefaultMarginBottom}" />
