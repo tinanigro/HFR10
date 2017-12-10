@@ -2,7 +2,7 @@
 {
     public static class HFRUrl
     {
-        public static readonly string ForumUrl = "http://forum.hardware.fr";
+        public static readonly string ForumUrl = "https://forum.hardware.fr";
         public static readonly string ConnectUrl = "/login_validation.php?config=hfr.inc";
         
         public static readonly string DrapsUrl = "/forum1f.php?owntopic=1";
