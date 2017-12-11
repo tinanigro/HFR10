@@ -1,19 +1,19 @@
 ﻿{
   "dependencies": {
-    "HtmlAgilityPack": "1.4.9",
-    "Microsoft.ApplicationInsights": "1.2.3",
+    "HtmlAgilityPack": "1.6.7",
+    "Microsoft.ApplicationInsights": "2.4.0",
     "Microsoft.ApplicationInsights.PersistenceChannel": "1.2.3",
     "Microsoft.ApplicationInsights.WindowsApps": "1.1.1",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
-    "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.0.3",
-    "MvvmLightLibs": "5.2.0",
-    "Newtonsoft.Json": "8.0.1",
-    "NotificationsExtensions.Win10": "10586.0.0",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.4",
+    "Microsoft.Xaml.Behaviors.Uwp.Managed": "2.0.0",
+    "MvvmLightLibs": "5.3.0",
+    "Newtonsoft.Json": "10.0.3",
+    "NotificationsExtensions.Win10": "14332.0.2",
     "WinRTTriggers": "1.6.0",
-    "XamlAnimatedGif": "1.0.7"
+    "XamlAnimatedGif": "1.1.10"
   },
   "frameworks": {
-    "uap10.0": {}
+    "uap10.0.14393": {}
   },
   "runtimes": {
     "win10-arm": {},

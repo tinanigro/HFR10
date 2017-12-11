@@ -1,0 +1,7 @@
+MainPackage=D:\cto\code\HFR10\Hfr\Hfr\bin\ARM\Release\Hfr_1.9.25.0_ARM.appx
+SymbolPackage=D:\cto\code\HFR10\Hfr\Hfr\AppPackages\Hfr_1.9.25.0_Test\Hfr_1.9.25.0_ARM.appxsym
+ResourcePack=D:\cto\code\HFR10\Hfr\Hfr\bin\ARM\Release\Hfr_1.9.25.0_language-fr.appx
+ResourcePack=D:\cto\code\HFR10\Hfr\Hfr\bin\ARM\Release\Hfr_1.9.25.0_scale-100.appx
+ResourcePack=D:\cto\code\HFR10\Hfr\Hfr\bin\ARM\Release\Hfr_1.9.25.0_scale-125.appx
+ResourcePack=D:\cto\code\HFR10\Hfr\Hfr\bin\ARM\Release\Hfr_1.9.25.0_scale-150.appx
+ResourcePack=D:\cto\code\HFR10\Hfr\Hfr\bin\ARM\Release\Hfr_1.9.25.0_scale-400.appx
