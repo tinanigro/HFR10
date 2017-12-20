@@ -105,6 +105,9 @@ namespace Hfr.Services.Classes
                 case View.Connect:
                     _navigationFrame.Navigate(typeof(ConnectPage));
                     break;
+                case View.DrapsPage:
+                    _navigationFrame.Navigate(typeof(DrapsPage));
+                    break;
                 case View.Main:
                     if (CurrentView == View.CategoryThreadsList || CurrentView == View.PrivateChat)
                     {
@@ -114,6 +117,9 @@ namespace Hfr.Services.Classes
                     {
                         _navigationFrame.Navigate(typeof(MainPage));
                     }
+                    break;
+                case View.ThreadTab:
+                    _navigationFrame.Navigate(typeof(ThreadTab));
                     break;
                 case View.Editor:
                     _shell.NavigateExtraFrame(typeof(EditorPage), parameter);

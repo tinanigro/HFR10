@@ -67,8 +67,7 @@ namespace Hfr.Commands.Settings.Accounts
                     {
                         await md.ShowAsync();
                     }
-                    Loc.Main.AccountManager.CurrentAccount.IsConnecting = false;
-                    Loc.Main.AccountManager.CurrentAccount.ConnectionErrorStatus = "Connecté avec succès";
+                    Loc.Main.ConnectedCallback();
                     Loc.NavigationService.Navigate(View.Main);
                 });
             }

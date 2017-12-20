@@ -1,4 +1,5 @@
 ﻿using System;
+using Windows.ApplicationModel.Core;
 using Windows.Graphics.Display;
 using Windows.UI;
 using Windows.UI.ViewManagement;
@@ -18,8 +19,13 @@ namespace Hfr.Helpers
             }
             else
             {
+                var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+                coreTitleBar.ExtendViewIntoTitleBar = true;
+
                 var titleBar = ApplicationView.GetForCurrentView().TitleBar;
-                titleBar.ButtonBackgroundColor = titleBar.BackgroundColor = (Color?)App.Current.Resources["SystemAccentColor"];
+                titleBar.ButtonForegroundColor = Windows.UI.Colors.Black;
+                titleBar.ButtonBackgroundColor = Windows.UI.Colors.Transparent;
+
             }
         }
 

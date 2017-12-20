@@ -34,7 +34,7 @@ namespace Hfr
             this.UnhandledException += App_UnhandledException;
         }
 
-        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
         {
             TelemetryClient.TrackException(e.Exception, new Dictionary<string, string>()
             {
@@ -58,12 +58,12 @@ namespace Hfr
             {
                 AppShell = new Shell();
                 App.AppShell.GoToDarkTheme(Loc.Settings.IsApplicationThemeDark);
+                Loc.Main.AccountManager = new AccountManager();
                 Loc.NavigationService.Initialize();
                 ThreadUI.setDispatcher(NavigationFrame.Dispatcher);
                 AppViewHelper.SetAppView();
                 Window.Current.Activate();
 
-                Loc.Main.AccountManager = new AccountManager();
 
                 AppShell.Language = ApplicationLanguages.Languages[0];
 

@@ -10,8 +10,7 @@
       DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
       mc:Ignorable="d">
 
-    <Grid x:Name="RootGrid"
-          Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+    <Grid x:Name="RootGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
@@ -42,10 +41,6 @@
             <mainPageControls:MessagesList x:Name="MessagesList"
                                            Grid.Column="4"
                                            Visibility="Collapsed" />
-            <local:ThreadView x:Name="TopicGrid"
-                             Grid.Column="2"
-                             Grid.ColumnSpan="3"
-                             Visibility="Collapsed" />
 
         </Grid>
         <CommandBar x:Name="MainCommandBar"
@@ -109,8 +104,6 @@
                     </VisualState.StateTriggers>
 
                     <VisualState.Setters>
-                        <Setter Target="TopicGrid.Visibility"
-                                Value="Collapsed" />
                         <Setter Target="CategoriesPanel.Visibility"
                                 Value="Visible" />
                         <Setter Target="ThreadsList.Visibility"
@@ -127,8 +120,6 @@
                     </VisualState.StateTriggers>
 
                     <VisualState.Setters>
-                        <Setter Target="TopicGrid.Visibility"
-                                Value="Collapsed" />
                         <Setter Target="CategoriesPanel.Visibility"
                                 Value="Visible" />
                         <Setter Target="ThreadsList.Visibility"
@@ -149,8 +140,6 @@
                     </VisualState.StateTriggers>
 
                     <VisualState.Setters>
-                        <Setter Target="TopicGrid.Visibility"
-                                Value="Collapsed" />
                         <Setter Target="CategoriesPanel.Visibility"
                                 Value="Collapsed" />
                         <Setter Target="ThreadsList.Visibility"
@@ -179,8 +168,6 @@
                                 Value="Visible" />
                         <Setter Target="CategoriesPanelButton.Visibility"
                                 Value="Visible" />
-                        <Setter Target="TopicGrid.Visibility"
-                                Value="Collapsed" />
                         <Setter Target="CategoriesPanel.Visibility"
                                 Value="Collapsed" />
                         <Setter Target="ThreadsList.Visibility"
@@ -205,8 +192,6 @@
                                 Value="Visible" />
                         <Setter Target="CategoriesPanelButton.Visibility"
                                 Value="Visible" />
-                        <Setter Target="TopicGrid.Visibility"
-                                Value="Collapsed" />
                         <Setter Target="CategoriesPanel.Visibility"
                                 Value="Visible" />
                         <Setter Target="CategoriesPanel.(Grid.Column)"
@@ -233,8 +218,6 @@
                                 Value="Visible" />
                         <Setter Target="CategoriesPanelButton.Visibility"
                                 Value="Visible" />
-                        <Setter Target="TopicGrid.Visibility"
-                                Value="Collapsed" />
                         <Setter Target="CategoriesPanel.Visibility"
                                 Value="Collapsed" />
                         <Setter Target="ThreadsList.Visibility"
@@ -247,50 +230,6 @@
                                 Value="0" />
                         <Setter Target="SecondColumnDefinition.Width"
                                 Value="0" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="ThreadViewVisible">
-                    <VisualState.StateTriggers>
-                        <StateTrigger IsActive="{Binding ThreadViewColumnVisible}" />
-                    </VisualState.StateTriggers>
-
-                    <VisualState.Setters>
-                        <Setter Target="TopicGrid.Visibility"
-                                Value="Visible" />
-                        <Setter Target="CategoriesPanel.Visibility"
-                                Value="Collapsed" />
-                        <Setter Target="ThreadsList.Visibility"
-                                Value="Collapsed" />
-                        <Setter Target="MessagesList.Visibility"
-                                Value="Collapsed" />
-                        <Setter Target="MainCommandBar.Visibility"
-                                Value="Collapsed" />
-                        <Setter Target="TopicGrid.(Grid.Column)"
-                                Value="0" />
-                        <Setter Target="ThirdColumnDefinition.Width"
-                                Value="0" />
-                        <Setter Target="SecondColumnDefinition.Width"
-                                Value="0" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="FirstColumnAndThreadVisible">
-                    <VisualState.StateTriggers>
-                        <StateTrigger IsActive="{Binding FirstColumnAndThreadVisible}" />
-                    </VisualState.StateTriggers>
-
-                    <VisualState.Setters>
-                        <Setter Target="FirstColumnDefinition.Width"
-                                Value="2*" />
-                        <Setter Target="TopicGrid.Visibility"
-                                Value="Visible" />
-                        <Setter Target="ThreadsList.Visibility"
-                                Value="Visible" />
-                        <Setter Target="CategoriesPanel.Visibility"
-                                Value="Collapsed" />
-                        <Setter Target="MessagesList.Visibility"
-                                Value="Collapsed" />
-                        <Setter Target="MainCommandBar.Visibility"
-                                Value="Collapsed" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

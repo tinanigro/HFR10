@@ -42,19 +42,79 @@
     </UserControl.Resources>
 
     <Grid>
-        <Frame x:Name="NavigationFrame"
-               x:FieldModifier="public"
-               Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <Frame.ContentTransitions>
-                <TransitionCollection>
-                    <NavigationThemeTransition>
-                        <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                            <DrillInNavigationTransitionInfo />
-                        </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                    </NavigationThemeTransition>
-                </TransitionCollection>
-            </Frame.ContentTransitions>
-        </Frame>
+        <NavigationView x:Name="NavView"
+            ItemInvoked="NavView_ItemInvoked"
+            SelectionChanged="NavView_SelectionChanged"
+            Loaded="NavView_Loaded"
+            OpenPaneLength="280"
+            CompactModeThresholdWidth="500"
+            ExpandedModeThresholdWidth="720">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="Dashboard"
+                                    Tag="dashboard">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE10F;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItemSeparator />
+                <NavigationViewItem Icon="People"
+                                    Content="Topics"
+                                    Tag="topics" />
+                <NavigationViewItem Icon="Street"
+                                    Content="Catégories"
+                                    Tag="categories" />
+                <NavigationViewItem Icon="Mail"
+                                    Content="Messages privés"
+                                    Tag="message privés" />
+            </NavigationView.MenuItems>
+            <NavigationView.HeaderTemplate>
+                <DataTemplate>
+                    <Grid Padding="24,24,0,0"
+                          Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <CommandBar Grid.Column="1"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    DefaultLabelPosition="Right"
+                                    Background="Transparent">
+                            <AppBarButton Label="Refresh"
+                                          Icon="Refresh" />
+                            <AppBarButton Label="Import"
+                                          Icon="Import" />
+                        </CommandBar>
+                    </Grid>
+                </DataTemplate>
+            </NavigationView.HeaderTemplate>
+
+            <NavigationView.PaneFooter>
+                <NavigationViewItem DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
+                                    Content="{Binding AccountManager.CurrentAccount.Pseudo}"
+                                    Tag="topics">
+                    <NavigationViewItem.Icon>
+                        <BitmapIcon UriSource="{Binding AccountManager.CurrentAccount.AvatarId, Converter={StaticResource AvatarIdToUrlConverter}}" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.PaneFooter>
+
+
+            <Frame x:Name="NavigationFrame"
+                   x:FieldModifier="public"
+                   Padding="24"
+                   Background="{ThemeResource SystemControlChromeLowAcrylicWindowBrush}">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition>
+                            <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                <DrillInNavigationTransitionInfo />
+                            </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                        </NavigationThemeTransition>
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+            </Frame>
+        </NavigationView>
 
         <Grid x:Name="ExtraPaneGrid"
               Visibility="Collapsed">

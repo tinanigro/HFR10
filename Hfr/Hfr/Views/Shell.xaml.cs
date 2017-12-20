@@ -1,4 +1,5 @@
-﻿using Hfr.Views.MiscPages;
+﻿using Hfr.ViewModel;
+using Hfr.Views.MiscPages;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -72,5 +73,62 @@ namespace Hfr.Views
             ExtraPaneGrid.Visibility = Visibility.Collapsed;
             ExtraPageFrame.Navigate(typeof(BlankPage));
         }
+
+        #region navview
+
+        private void NavView_Loaded(object sender, RoutedEventArgs e)
+        {
+            // set the initial SelectedItem 
+            foreach (NavigationViewItemBase item in NavView.MenuItems)
+            {
+                if (item is NavigationViewItem && item.Tag.ToString() == "dashboard")
+                {
+                    NavView.SelectedItem = item;
+                    break;
+                }
+            }
+        }
+
+        private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        {
+            if (args.IsSettingsInvoked)
+            {
+                Navigate("settings");
+            }
+            else
+            {
+                Navigate(args.InvokedItem.ToString().ToLower());
+            }
+        }
+
+        private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            if (args.IsSettingsSelected)
+            {
+                Navigate("settings");
+            }
+            else
+            {
+                NavigationViewItem item = args.SelectedItem as NavigationViewItem;
+                Navigate(item.Tag.ToString().ToLower());
+            }
+        }
+
+        void Navigate(string view)
+        {
+            switch (view)
+            {
+                case "dashboard":
+                    Loc.NavigationService.Navigate(Model.View.Main);
+                    break;
+                case "topics":
+                    Loc.NavigationService.Navigate(Model.View.DrapsPage);
+                    break;
+                case "settings":
+                    Loc.NavigationService.Navigate(Model.View.Settings);
+                    break;
+            }
+        }
+        #endregion
     }
 }

@@ -43,8 +43,7 @@ namespace Hfr.Commands.Threads
 
             Task.Run(async () => await ThreadFetcher.GetPosts(Loc.Thread.CurrentThread));
 
-            if (Loc.NavigationService.CurrentView != View.Main)
-                Loc.NavigationService.Navigate(View.Main);
+            Loc.NavigationService.Navigate(View.ThreadTab);
         }
     }
 }

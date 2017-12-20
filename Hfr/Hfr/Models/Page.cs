@@ -9,6 +9,8 @@
         CategoriesList,
         CategoryThreadsList,
         PrivateChatsList,
-        PrivateChat
+        PrivateChat,
+        DrapsPage,
+        ThreadTab
     }
 }

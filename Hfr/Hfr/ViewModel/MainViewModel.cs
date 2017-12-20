@@ -300,6 +300,13 @@ namespace Hfr.ViewModel
             }
         }
 
+        public void ConnectedCallback()
+        {
+            AccountManager.CurrentAccount.IsConnecting = false;
+            AccountManager.CurrentAccount.ConnectionErrorStatus = "Connecté avec succès";
+            RaisePropertyChanged(nameof(AccountManager));
+        }
+
         internal void ShowContextForMessage(object parameter)
         {
             Debug.WriteLine("VM ContextMessageCommand param=" + parameter);
